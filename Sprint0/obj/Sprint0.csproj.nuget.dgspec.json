@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\VS Projects\\Sprint0\\Sprint0\\Sprint0.csproj": {}
+    "C:\\Users\\Thatr\\Source\\Repos\\NickJohn547745\\CSE3902\\Sprint0\\Sprint0.csproj": {}
   },
   "projects": {
-    "E:\\VS Projects\\Sprint0\\Sprint0\\Sprint0.csproj": {
+    "C:\\Users\\Thatr\\Source\\Repos\\NickJohn547745\\CSE3902\\Sprint0\\Sprint0.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\VS Projects\\Sprint0\\Sprint0\\Sprint0.csproj",
+        "projectUniqueName": "C:\\Users\\Thatr\\Source\\Repos\\NickJohn547745\\CSE3902\\Sprint0\\Sprint0.csproj",
         "projectName": "Sprint0",
-        "projectPath": "E:\\VS Projects\\Sprint0\\Sprint0\\Sprint0.csproj",
+        "projectPath": "C:\\Users\\Thatr\\Source\\Repos\\NickJohn547745\\CSE3902\\Sprint0\\Sprint0.csproj",
         "packagesPath": "C:\\Users\\Thatr\\.nuget\\packages\\",
-        "outputPath": "E:\\VS Projects\\Sprint0\\Sprint0\\obj\\",
+        "outputPath": "C:\\Users\\Thatr\\Source\\Repos\\NickJohn547745\\CSE3902\\Sprint0\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Programming\\Microsoft Visual Studio\\Shared\\NuGetPackages",

@@ -1,7 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"E:/VS Projects/Sprint0/Sprint0/Content/ball.png","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.2538322
-"E:/VS Projects/Sprint0/Sprint0/Content/earth.png","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/earth.xnb","TextureProcessor","Texture2DContent",52980,133301,0.0180691
-"E:/VS Projects/Sprint0/Sprint0/Content/MarioAtlas.png","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/MarioAtlas.xnb","TextureProcessor","Texture2DContent",916,12885,0.2610374
-"E:/VS Projects/Sprint0/Sprint0/Content/Score.spritefont","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2068,70687,0.4246393
-"E:/VS Projects/Sprint0/Sprint0/Content/shuttle.png","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/shuttle.xnb","TextureProcessor","Texture2DContent",9105,125045,0.0162798
-"E:/VS Projects/Sprint0/Sprint0/Content/stars.jpg","E:/VS Projects/Sprint0/Sprint0/Content/bin/DesktopGL/Content/stars.xnb","TextureProcessor","Texture2DContent",150614,1920085,0.0787196
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/ball.png","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.235145
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/earth.png","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/earth.xnb","TextureProcessor","Texture2DContent",52980,133301,0.0119673
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/MarioAtlas.png","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/MarioAtlas.xnb","TextureProcessor","Texture2DContent",916,12885,0.0060721
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/Score.spritefont","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2068,70687,0.2084402
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/shuttle.png","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/shuttle.xnb","TextureProcessor","Texture2DContent",9105,125045,0.0101169
+"C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/stars.jpg","C:/Users/Thatr/Source/Repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/stars.xnb","TextureProcessor","Texture2DContent",150614,1920085,0.102746
