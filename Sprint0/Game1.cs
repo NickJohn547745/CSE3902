@@ -1,165 +1,69 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System;
-using System.Diagnostics;
-using System.Collections;
+using Microsoft.Xna.Framework.Input;
+using sprint0.Commands;
+using sprint0.Controllers;
+using sprint0.Interfaces;
 
-namespace Sprint0
-{
-    public class Game1 : Game
-    {
-        private List<IController> controllerList;
-        private List<DrawableSprite> spriteList;
-        private List<DrawableText> textList;
+namespace sprint0;
 
-        static string creditString = "Sprites from: http://www.mariouniverse.com.com\nProgram Made By: Nicholas Johnson\n";
+public class Game1 : Game {
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    public List<IController> Controllers { get; set; }
 
-        private int currentSpriteIndex = 0;
+    public Texture2D Spritesheet;
+    private SpriteFont Spritefont;
+    private ISprite Credits;
 
-        public GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+    public ISprite CurrentSprite { get; set; }
 
-        public Game1()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.ApplyChanges();
+    public Game1() {
+        _graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = "Content";
+        IsMouseVisible = true;
+    }
 
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-        }
+    protected override void Initialize() {
+        // TODO: Add your initialization logic here
 
-        protected override void Initialize()
-        {
-            /* Setup & initialize list of controllers */
-            controllerList = new List<IController>();
-            controllerList.Add(new KeyboardController());
-            controllerList.Add(new MouseController());
+        base.Initialize();
+    }
 
-            /* Setup & initialize list of sprites starting @ center */
-            spriteList = new List<DrawableSprite>();
-            textList = new List<DrawableText>();
-            
-            base.Initialize();
-        }
+    protected override void LoadContent() {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        Spritesheet = Content.Load<Texture2D>("smb_mario_sheet");
+        Spritefont = Content.Load<SpriteFont>("Arial");
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+        Controllers = new List<IController>();
+        IController keyboard = new KeyboardController();
+        keyboard.BindCommand(Keys.D0, new Command0());
+        keyboard.BindCommand(Keys.D1, new Command1());
+        keyboard.BindCommand(Keys.D2, new Command2());
+        keyboard.BindCommand(Keys.D3, new Command3());
+        keyboard.BindCommand(Keys.D4, new Command4());
+        Controllers.Add(keyboard);
+        Controllers.Add(new MouseController());
 
-            for (int i = 0; i < 5; i++)
-            {
-                DrawableSprite playerSprite = new DrawableSprite(this, Content.Load<Texture2D>("MarioAtlas"), 2, 2);
-                spriteList.Add(playerSprite);
-                playerSprite.SetGraphicsDM(graphics);
-                playerSprite.EnqueueLocation(Drawable.Locations.Center);
-            }
+        CurrentSprite = new StationaryStaticSprite(Spritesheet);
 
-            spriteList[0].SetAnimationStatus(false);
-            spriteList[0].SetMobileStatus(false);
+        Credits = new TextSprite(Spritefont);
+    }
 
-            spriteList[1].SetAnimationStatus(true);
-            spriteList[1].SetMobileStatus(false);
+    protected override void Update(GameTime gameTime) {
+        Controllers.ForEach(controller => controller.Update(this));
 
-            spriteList[2].SetAnimationStatus(false);
-            spriteList[2].SetMobileStatus(true);
-            spriteList[2].EnqueueLocation(Drawable.Locations.CenterRight);
-            spriteList[2].EnqueueLocation(Drawable.Locations.Center);
-            spriteList[2].EnqueueLocation(Drawable.Locations.CenterLeft);
+        base.Update(gameTime);
+    }
 
-            spriteList[3].SetAnimationStatus(true);
-            spriteList[3].SetMobileStatus(true);
-            spriteList[3].EnqueueLocation(Drawable.Locations.CenterTop);
-            spriteList[3].EnqueueLocation(Drawable.Locations.Center);
-            spriteList[3].EnqueueLocation(Drawable.Locations.CenterBottom);
+    protected override void Draw(GameTime gameTime) {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
 
+        CurrentSprite.Draw(_spriteBatch, Vector2.One, Color.White);
+        Credits.Draw(_spriteBatch, new Vector2(140, 360), Color.White);
 
-            SpriteFont font = Content.Load<SpriteFont>("Score");
-
-            for (int i = 0; i < 5; i++)
-            {
-                textList.Add(new DrawableText(this, font, creditString));
-                textList[i].SetGraphicsDM(graphics);
-            }
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            IDrawable currentSprite = spriteList[currentSpriteIndex];
-            currentSprite.Update(gameTime);
-
-            IDrawable textSprite = textList[0];
-            textSprite.Update(gameTime);
-
-            foreach (IController controller in controllerList)
-            {
-                controller.Update();
-
-                Dictionary<string, int> controllerContents = controller.ControllerContents;
-
-                if (controller.IsKeyboardController)
-                {
-                    if (controllerContents["D0"] == 1) Exit();
-                    else if (controllerContents["Esc"] == 1) Exit();
-                    else if (controllerContents["D1"] == 1) currentSpriteIndex = 0;
-                    else if (controllerContents["D2"] == 1) currentSpriteIndex = 1;
-                    else if (controllerContents["D3"] == 1) currentSpriteIndex = 2;
-                    else if (controllerContents["D4"] == 1) currentSpriteIndex = 3;
-                }
-                else
-                { // Current controller is of type 'MouseController'
-                    if (controllerContents["RightMB"] == 1) Exit();
-                    if (controllerContents["LeftMB"] == 1)
-                    { // Left mouse button is clicked
-
-                        //Get the coordinates of the cursor
-                        int xPos = controllerContents["PosX"],
-                            yPos = controllerContents["PosY"];
-
-                        if (xPos >= (graphics.PreferredBackBufferWidth / 2))
-                        { // Mouse is on the Right-Half of the window
-                            if (yPos >= (graphics.PreferredBackBufferHeight / 2)) 
-                                currentSpriteIndex = 3; // Mouse is in the Bottom-Right quadrant
-                            else 
-                                currentSpriteIndex = 1; // Mouse is in the Top-Right quadrant
-                        } else
-                        { // Mouse is on the Left-Half of the window
-                            if (yPos >= (graphics.PreferredBackBufferHeight / 2)) 
-                                currentSpriteIndex = 2; // Mouse is in the Bottom-Left quadrant
-                            else 
-                                currentSpriteIndex = 0; // Mouse is in the Top-Left quadrant
-                        }
-                    }
-                }
-            }
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            DrawableSprite currentSprite = spriteList[currentSpriteIndex];
-            currentSprite.Draw();
-
-            DrawableText textSprite = textList[0];
-            textSprite.Draw();
-
-            base.Draw(gameTime);
-        }
-
-        public GraphicsDeviceManager GetGraphicsDM()
-        {
-            return graphics;
-        }
-
-        public SpriteBatch GetSpriteBatch()
-        {
-            return spriteBatch;
-        }
+        base.Draw(gameTime);
     }
 }
