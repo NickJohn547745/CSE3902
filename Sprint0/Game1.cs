@@ -40,7 +40,6 @@ public class Game1 : Game {
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
         keyboard.BindCommand(Keys.D0, new Command0());
-        keyboard.BindCommand(Keys.Escape, new Command0());
         keyboard.BindCommand(Keys.D1, new Command1());
         keyboard.BindCommand(Keys.D2, new Command2());
         keyboard.BindCommand(Keys.D3, new Command3());
