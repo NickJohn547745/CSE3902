@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace sprint0.Interfaces
 {
-    public interface IEnemy
+    public interface IPlayer
     {
         void SetHealth(int health);
 
         int GetHealth();
 
-        int GetAttackDamage();
+        // action methods such as this may not be necessary
+        void Jump();
+
+        void Move(int distance);
 
         void Update(GameTime gameTime);
 
