@@ -28,9 +28,9 @@ namespace sprint0
 
         /*
          * Add create Block functions when classes have been made
-        public ISprite CreateBlockSprite()
+        public IBlock CreateBlock()
         {
-            return new BlockSprite();
+            return new Block();
         }
         */
     }
