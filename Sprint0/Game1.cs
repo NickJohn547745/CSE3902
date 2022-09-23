@@ -39,11 +39,11 @@ public class Game1 : Game {
 
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
-        keyboard.BindCommand(Keys.D0, new Command0());
-        keyboard.BindCommand(Keys.D1, new Command1());
-        keyboard.BindCommand(Keys.D2, new Command2());
-        keyboard.BindCommand(Keys.D3, new Command3());
-        keyboard.BindCommand(Keys.D4, new Command4());
+        keyboard.BindCommand(Keys.D0, new QuitCommand());
+        keyboard.BindCommand(Keys.D1, new StationaryStaticCommand());
+        keyboard.BindCommand(Keys.D2, new StationaryAnimatedCommand());
+        keyboard.BindCommand(Keys.D3, new MovingStaticCommand());
+        keyboard.BindCommand(Keys.D4, new MovingAnimatedCommand());
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
