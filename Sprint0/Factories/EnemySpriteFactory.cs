@@ -28,7 +28,7 @@ namespace sprint0
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 2, spriteSheet.Height));
 
-            return new EnemySprite(spriteSheet, frameSources, 6);
+            return new EnemySprite(spriteSheet, frameSources, 6, 2);
         }
         
     }

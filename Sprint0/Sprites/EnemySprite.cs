@@ -18,8 +18,9 @@ namespace sprint0.Sprites
         private int delayCount;
         private int frame;
         private int frameCount;
+        private float scale;
 
-        public EnemySprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay)
+        public EnemySprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay, float scale)
         {
             this.spriteSheet = spriteSheet;
             this.frameSources = frameSources;
@@ -27,12 +28,13 @@ namespace sprint0.Sprites
             frame = 0;
             frameCount = frameSources.Count;
             delayCount = 0;
+            this.scale = scale;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
 
-            spriteBatch.Draw(spriteSheet, position, frameSources[frame], Color.White);
+            spriteBatch.Draw(spriteSheet, position, frameSources[frame], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             // delay change in frames
             delayCount++;
