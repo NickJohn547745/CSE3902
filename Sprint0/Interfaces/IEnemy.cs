@@ -16,6 +16,8 @@ namespace sprint0.Interfaces
 
         int GetAttackDamage();
 
+        Vector2 GetPosition();
+
         void Update(GameTime gameTime);
 
         void Draw(SpriteBatch spriteBatch);

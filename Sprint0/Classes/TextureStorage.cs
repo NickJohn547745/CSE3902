@@ -17,7 +17,10 @@ namespace sprint0.Classes
 
         public static void LoadAllTextures(ContentManager content)
         {
-            LoadItemTextures(content);
+            
+            spritesheets = new Dictionary<String, Texture2D>();
+            // commented out because item textures not present
+            //LoadItemTextures(content);
             LoadEnemyTextures(content);
         }
         private static void LoadItemTextures(ContentManager content)
