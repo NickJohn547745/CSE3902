@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace sprint0;
 public interface ITile
 {
-    public void Update(GameTime gameTime);
+    void Update(GameTime gameTime);
 
-    public void Draw(SpriteBatch spriteBatch);
+    void Draw(SpriteBatch spriteBatch);
 }
