@@ -18,7 +18,7 @@ namespace sprint0.Interfaces
 
         Vector2 GetPosition();
 
-        void Update(GameTime gameTime);
+        void Update(GameTime gameTime, Game1 game);
 
         void Draw(SpriteBatch spriteBatch);
     }

@@ -15,13 +15,16 @@ public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
-    public List<IEnemy> Enemies { get; set; }
+    public List<IEnemy> Enemies { get; private set; }
 
     private int EnemyIndex;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
     private ISprite Credits;
+    private int WindowWidth;
+    private int WindowHeight;
+    
 
     public ISprite CurrentSprite { get; set; }
 
@@ -29,6 +32,16 @@ public class Game1 : Game {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+    }
+
+    public int GetWindowWidth()
+    {
+        return WindowWidth;
+    }
+
+    public int GetWindowHeight()
+    {
+        return WindowHeight;
     }
 
     public void CycleEnemyForward()
@@ -57,6 +70,9 @@ public class Game1 : Game {
 protected override void Initialize() {
         // TODO: Add your initialization logic here
 
+        WindowWidth = _graphics.PreferredBackBufferWidth;
+        WindowHeight = _graphics.PreferredBackBufferHeight;
+
         base.Initialize();
     }
 
@@ -83,7 +99,7 @@ protected override void Initialize() {
 
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(new Vector2 (_graphics.PreferredBackBufferWidth * 3 / 4, _graphics.PreferredBackBufferHeight * 3 / 4));
+        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25));
         Enemies.Add(stalfos);
 
         CurrentSprite = new StationaryStaticSprite(Spritesheet);
@@ -93,6 +109,7 @@ protected override void Initialize() {
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
+        Enemies[EnemyIndex].Update(gameTime, this);
 
         base.Update(gameTime);
     }
