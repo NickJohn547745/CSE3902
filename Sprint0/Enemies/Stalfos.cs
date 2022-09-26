@@ -56,7 +56,7 @@ namespace sprint0.Enemies
             Random rand = new Random();
 
             // randomly choose movement direction
-            switch (rand.Next(0, 3))
+            switch (rand.Next(0, 4))
             {
                 case 0:
                     // move up
