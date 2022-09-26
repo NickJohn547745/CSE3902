@@ -50,6 +50,8 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.S, new MoveDownCommand());
         keyboard.BindCommand(Keys.D, new MoveRightCommand());
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
+        keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
+        keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 

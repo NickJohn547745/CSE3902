@@ -39,6 +39,10 @@ public class PlayerFacingUpState : IPlayerState {
     public void TakeDamage() {
         throw new System.NotImplementedException();
     }
+    
+    public void SwordAttack() {
+        player.playerState = new PlayerSwordUpState(player);
+    }
 
     public void MoveUp() {
         currentFrame++;

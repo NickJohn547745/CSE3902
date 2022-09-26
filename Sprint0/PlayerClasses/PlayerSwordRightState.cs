@@ -6,13 +6,13 @@ using sprint0.Interfaces;
 
 namespace sprint0.PlayerClasses; 
 
-public class PlayerFacingRightState : IPlayerState {
+public class PlayerSwordRightState : IPlayerState {
     private Player player;
     private int animationFrame = 0;
     private int currentFrame = 0;
-    private const int FramesPerAnimationChange = 5;
+    private const int FramesPerAnimationChange = 3;
 
-    public PlayerFacingRightState(Player player) {
+    public PlayerSwordRightState(Player player) {
         this.player = player;
         animationFrame = 0;
         currentFrame = 0;
@@ -23,15 +23,19 @@ public class PlayerFacingRightState : IPlayerState {
             currentFrame = 0;
             animationFrame++;
         }
-        
+
+        currentFrame++;
 
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetWalkingSideSprite(animationFrame);
-        Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
+        Rectangle texturePos = PlayerSpriteFactory.GetSwordSideSprite(animationFrame);
+        Rectangle pos = new Rectangle(player.xPos, player.yPos, texturePos.Width*4, texturePos.Height*4);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+
+        if (animationFrame == 4) {
+            player.playerState = new PlayerFacingRightState(player);
+        }
     }
-    
 
     public void Update() {
         throw new System.NotImplementedException();
@@ -40,25 +44,24 @@ public class PlayerFacingRightState : IPlayerState {
     public void TakeDamage() {
         throw new System.NotImplementedException();
     }
-    
+
     public void SwordAttack() {
-        player.playerState = new PlayerSwordRightState(player);
+        // Already in sword attack state
     }
 
     public void MoveUp() {
-        player.playerState = new PlayerFacingUpState(player);
+        // Can't move during sword animation
     }
 
     public void MoveDown() {
-        player.playerState = new PlayerFacingDownState(player);
+        // Can't move during sword animation
     }
 
     public void MoveLeft() {
-        player.playerState = new PlayerFacingLeftState(player);
+        // Can't move during sword animation
     }
 
     public void MoveRight() {
-        currentFrame++;
-        player.xPos = player.xPos + 1;
+        // Can't move during sword animation
     }
 }

@@ -40,6 +40,10 @@ public class PlayerFacingDownState : IPlayerState {
         throw new System.NotImplementedException();
     }
 
+    public void SwordAttack() {
+        player.playerState = new PlayerSwordDownState(player);
+    }
+
     public void MoveUp() {
         player.playerState = new PlayerFacingUpState(player);
     }

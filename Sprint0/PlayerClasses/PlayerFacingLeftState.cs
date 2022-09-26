@@ -26,7 +26,7 @@ public class PlayerFacingLeftState : IPlayerState {
         
 
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetWalkingLeftSprite(animationFrame);
+        Rectangle texturePos = PlayerSpriteFactory.GetWalkingSideSprite(animationFrame);
         Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
@@ -39,6 +39,10 @@ public class PlayerFacingLeftState : IPlayerState {
 
     public void TakeDamage() {
         throw new System.NotImplementedException();
+    }
+    
+    public void SwordAttack() {
+        player.playerState = new PlayerSwordLeftState(player);
     }
 
     public void MoveUp() {

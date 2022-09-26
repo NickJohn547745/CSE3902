@@ -14,6 +14,7 @@ namespace sprint0.Interfaces
         void MoveDown();
         void MoveLeft();
         void MoveRight();
+        void SwordAttack();
 
     }
 }

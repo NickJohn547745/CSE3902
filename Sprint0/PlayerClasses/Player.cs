@@ -43,4 +43,8 @@ public class Player : IPlayer {
     public void MoveRight() {
         playerState.MoveRight();
     }
+
+    public void SwordAttack() {
+        playerState.SwordAttack();
+    }
 }

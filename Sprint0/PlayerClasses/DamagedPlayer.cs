@@ -52,4 +52,8 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.MoveRight();
     }
     
+    public void SwordAttack() {
+        decoratedPlayer.SwordAttack();
+    }
+    
 }
