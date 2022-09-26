@@ -92,6 +92,7 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.D4, new MovingAnimatedCommand());
         keyboard.BindCommand(Keys.O, new EnemyCycleBackwardCommand());
         keyboard.BindCommand(Keys.P, new EnemyCycleForwardCommand());
+        keyboard.BindCommand(Keys.R, new ResetGameCommand());
 
 
         Controllers.Add(keyboard);
