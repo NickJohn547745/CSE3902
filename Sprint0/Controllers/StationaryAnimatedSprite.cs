@@ -8,8 +8,14 @@ public class StationaryAnimatedSprite : ISprite {
     private Texture2D texture;
     private int frame = 0;
     private int direction = 1;
+    private Vector2 position;
 
-    private Rectangle[] spriteLocations = {new Rectangle(209, 122, 16, 31), new Rectangle(389, 128, 16, 21), new Rectangle(362, 122, 16, 32) };
+    private Rectangle[] spriteLocations = 
+        {   new Rectangle(0, 0, 24, 32), 
+            new Rectangle(25, 0, 24, 32),
+            new Rectangle(0, 33, 24, 32),
+            new Rectangle(25, 33, 24, 32)
+        };
     /* Frame 1
      * Top Left: (209, 122)
      * Bottom Right: (225, 153)
@@ -40,5 +46,24 @@ public class StationaryAnimatedSprite : ISprite {
         spriteBatch.Draw(texture, view, spriteLocations[frame/30], color);
         spriteBatch.End();
         frame += direction;
+    }
+    public void MoveRight()
+    {
+        position.X++;
+    }
+
+    public void MoveLeft()
+    {
+        position.X--;
+    }
+
+    public void MoveUp()
+    {
+        position.Y--;
+    }
+
+    public void MoveDown()
+    {
+        position.Y++;
     }
 }

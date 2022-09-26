@@ -5,6 +5,7 @@ namespace sprint0.Controllers;
 
 public class MovingStaticSprite : ISprite {
     private Texture2D texture;
+    private Vector2 position;
     private int frame = 0;
     private int direction = -1;
 
@@ -23,9 +24,28 @@ public class MovingStaticSprite : ISprite {
         Rectangle view = new Rectangle(380, 260-frame, 28, 26);
         
         spriteBatch.Begin();
-        spriteBatch.Draw(texture, view, new Rectangle(0, 16, 14, 13), color);
+        spriteBatch.Draw(texture, view, new Rectangle(0, 0, 24, 32), color);
         spriteBatch.End();
         
         frame += direction;
+    }
+    public void MoveRight()
+    {
+        position.X++;
+    }
+
+    public void MoveLeft()
+    {
+        position.X--;
+    }
+
+    public void MoveUp()
+    {
+        position.Y--;
+    }
+
+    public void MoveDown()
+    {
+        position.Y++;
     }
 }

@@ -3,9 +3,8 @@ using sprint0.Interfaces;
 
 namespace sprint0.Commands; 
 
-public class Command4 : ICommand {
-    
+public class StationaryStaticCommand : ICommand{
     public void Execute(Game1 game) {
-        game.CurrentSprite = new MovingAnimatedSprite(game.Spritesheet);
+        game.CurrentSprite = new StationaryStaticSprite(game.Spritesheet);
     }
 }

@@ -1,47 +1,57 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Drawing;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace sprint0.Controllers;
 
 public class MovingAnimatedSprite : ISprite {
     private Texture2D texture;
-    private int delay = 0;
-    private int animationFrame = 0;
-    private int xPos = 400;
+    private Vector2 position = new Vector2(0, 0);
+    private int frame = 0;
 
     private Rectangle[] spriteLocations =
-        { new Rectangle(90, 53, 16, 30), new Rectangle(121, 52, 14, 31), new Rectangle(150, 52, 17, 32) };
+        {   new Rectangle(0, 0, 15, 16),
+            new Rectangle(0, 16, 15, 16)
+        };
 
-    /*
-     * (90, 53) 16w, 30h
-     * (121, 52) 14w, 31h
-     * (150, 52) 17w, 32h
-     */
-    public MovingAnimatedSprite(Texture2D tex) {
+    public MovingAnimatedSprite(Texture2D tex)
+    {
         texture = tex;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color) {
-        if (xPos < -16) {
-            xPos = 800;
-        }
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
+    {
+        Rectangle view = new Rectangle((int)this.position.X, (int)this.position.Y, 24, 32);
 
-        if (animationFrame == 3) {
-            animationFrame = 0;
-        }
-
-        Rectangle view = new Rectangle(xPos, 240 + (32 - spriteLocations[animationFrame].Height) * 2,
-            spriteLocations[animationFrame].Width * 2,
-            spriteLocations[animationFrame].Height * 2);
+        if (frame / 30 > 1)
+            frame = 0;
 
         spriteBatch.Begin();
-        spriteBatch.Draw(texture, view, spriteLocations[animationFrame], color);
+        spriteBatch.Draw(texture, view, spriteLocations[frame / 30], color);
         spriteBatch.End();
-        if (delay == 5) {
-            animationFrame += 1;
-            xPos -= 5;
-            delay = -1;
-        }
-        delay++;
+
+        frame++;
+    }
+    
+    public void MoveRight()
+    {
+        position.X++;
+    }
+
+    public void MoveLeft()
+    {
+        position.X--;
+    }
+
+    public void MoveUp()
+    {
+        position.Y--;
+    }
+
+    public void MoveDown()
+    {
+        position.Y++;
     }
 }

@@ -12,141 +12,178 @@ namespace sprint0.Classes
 {
     public class TextureStorage
     {
-        private static Dictionary<String, Texture2D> spritesheets;
-        private static ContentManager content;
-
-        public static void LoadAllTextures(ContentManager content)
+        private Dictionary<String, Texture2D> spritesheets = new Dictionary<string, Texture2D>();
+        private ContentManager content;
+        public TextureStorage(ContentManager content)
         {
-            LoadItemTextures(content);
-            LoadEnemyTextures(content);
+            this.content = content;
         }
-        private static void LoadItemTextures(ContentManager content)
+        public void LoadAllTextures()
         {
-            spritesheets["compassSpritesheet"] = content.Load<Texture2D>("Spritesheets/compass");
-            spritesheets["mapSpritesheet"] = content.Load<Texture2D>("Spritesheets/map");
-            spritesheets["keySpritesheet"] = content.Load<Texture2D>("Spritesheets/key");
-            spritesheets["heartcontainerSpritesheet"] = content.Load<Texture2D>("Spritesheets/heartcontainer");
-            spritesheets["triforceSpritesheet"] = content.Load<Texture2D>("Spritesheets/triforce");
-            spritesheets["boomerangSpritesheet"] = content.Load<Texture2D>("Spritesheets/boomerang");
-            spritesheets["bowSpritesheet"] = content.Load<Texture2D>("Spritesheets/bow");
-            spritesheets["heartSpritesheet"] = content.Load<Texture2D>("Spritesheets/heart");
-            spritesheets["rupeeSpritesheet"] = content.Load<Texture2D>("Spritesheets/rupee");
-            spritesheets["arrowSpritesheet"] = content.Load<Texture2D>("Spritesheets/arrow");
-            spritesheets["bombSpritesheet"] = content.Load<Texture2D>("Spritesheets/bomb");
-            spritesheets["fairySpritesheet"] = content.Load<Texture2D>("Spritesheets/fairy");
-            spritesheets["clockSpritesheet"] = content.Load<Texture2D>("Spritesheets/clock");
-        }
-        private static void LoadEnemyTextures(ContentManager content)
-        {
-            spritesheets["keeseSpritesheet"] = content.Load<Texture2D>("Spritesheets/keese");
-            spritesheets["stalfosSpritesheet"] = content.Load<Texture2D>("Spritesheets/stalfos");
-            spritesheets["goriyaSpritesheet"] = content.Load<Texture2D>("Spritesheets/goriya");
-            spritesheets["gelSpritesheet"] = content.Load<Texture2D>("Spritesheets/gel");
-            spritesheets["zolSpritesheet"] = content.Load<Texture2D>("Spritesheets/zol");
-            spritesheets["wallmasterSpritesheet"] = content.Load<Texture2D>("Spritesheets/wallmaster");
-            spritesheets["trapSpritesheet"] = content.Load<Texture2D>("Spritesheets/trap");
-            spritesheets["aquamentusSpritesheet"] = content.Load<Texture2D>("Spritesheets/aquamentus");
-            spritesheets["fireballSpritesheet"] = content.Load<Texture2D>("Spritesheets/fireball");
-            spritesheets["enemycloudSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemycloud");
-            spritesheets["enemyexplosionSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemyexplosion");
+            LoadMainTextures();
+            LoadItemTextures();
+            LoadEnemyTextures();
+            LoadOtherTextures();
         }
 
-        public static Texture2D GetCompassSpritesheet()
+        
+        private void LoadMainTextures()
+        {
+            String prefix = "Spritesheets/Main/";
+
+            spritesheets["linkSpritesheet"] = content.Load<Texture2D>(prefix + "link");
+        }
+
+        private void LoadItemTextures()
+        {
+            String prefix = "Spritesheets/Items/";
+
+            spritesheets["compassSpritesheet"] = content.Load<Texture2D>(prefix + "compass");
+            spritesheets["mapSpritesheet"] = content.Load<Texture2D>(prefix + "map");
+            spritesheets["keySpritesheet"] = content.Load<Texture2D>(prefix + "key");
+            spritesheets["heartcontainerSpritesheet"] = content.Load<Texture2D>(prefix + "heartcontainer");
+            spritesheets["triforceSpritesheet"] = content.Load<Texture2D>(prefix + "triforce");
+            spritesheets["boomerangSpritesheet"] = content.Load<Texture2D>(prefix + "boomerang");
+            spritesheets["bowSpritesheet"] = content.Load<Texture2D>(prefix + "bow");
+            spritesheets["heartSpritesheet"] = content.Load<Texture2D>(prefix + "heart");
+            spritesheets["rupeeSpritesheet"] = content.Load<Texture2D>(prefix + "rupee");
+            spritesheets["arrowSpritesheet"] = content.Load<Texture2D>(prefix + "arrow");
+            spritesheets["bombSpritesheet"] = content.Load<Texture2D>(prefix + "bomb");
+            spritesheets["fairySpritesheet"] = content.Load<Texture2D>(prefix + "fairy");
+            spritesheets["clockSpritesheet"] = content.Load<Texture2D>(prefix + "clock");
+        }
+        private void LoadEnemyTextures()
+        {
+            String prefix = "Spritesheets/Enemies/";
+
+            spritesheets["keeseSpritesheet"] = content.Load<Texture2D>(prefix + "keese");
+            spritesheets["stalfosSpritesheet"] = content.Load<Texture2D>(prefix + "stalfos");
+            spritesheets["goriyaSpritesheet"] = content.Load<Texture2D>(prefix + "goriya");
+            spritesheets["gelSpritesheet"] = content.Load<Texture2D>(prefix + "gel");
+            spritesheets["zolSpritesheet"] = content.Load<Texture2D>(prefix + "zol");
+            spritesheets["wallmasterSpritesheet"] = content.Load<Texture2D>(prefix + "wallmaster");
+            spritesheets["trapSpritesheet"] = content.Load<Texture2D>(prefix + "trap");
+            spritesheets["aquamentusSpritesheet"] = content.Load<Texture2D>(prefix + "aquamentus");
+            spritesheets["fireballSpritesheet"] = content.Load<Texture2D>(prefix + "fireball");
+        }
+        private void LoadOtherTextures()
+        {
+            String prefix = "Spritesheets/Other/";
+
+            spritesheets["enemycloudSpritesheet"] = content.Load<Texture2D>(prefix + "enemycloud");
+            spritesheets["enemyexplosionSpritesheet"] = content.Load<Texture2D>(prefix + "enemyexplosion");
+            spritesheets["outerborderSpritesheet"] = content.Load<Texture2D>(prefix + "outerborder");
+            spritesheets["doorsSpritesheet"] = content.Load<Texture2D>(prefix + "doors");
+        }
+
+        public Texture2D GetLinkSpritesheet()
+        {
+            return spritesheets["linkSpritesheet"];
+        }
+        public Texture2D GetCompassSpritesheet()
         {
             return spritesheets["compassSpritesheet"];
         }
-        public static Texture2D GetMapSpritesheet()
+        public Texture2D GetMapSpritesheet()
         {
             return spritesheets["mapSpritesheet"];
         }
-        public static Texture2D GetKeySpritesheet()
+        public Texture2D GetKeySpritesheet()
         {
             return spritesheets["keySpritesheet"];
         }
-        public static Texture2D GetHeartcontainerSpritesheet()
+        public Texture2D GetHeartcontainerSpritesheet()
         {
             return spritesheets["heartcontainerSpritesheet"];
         }
-        public static Texture2D GetTriforceSpritesheet()
+        public Texture2D GetTriforceSpritesheet()
         {
             return spritesheets["triforceSpritesheet"];
         }
-        public static Texture2D GetBoomerangSpritesheet()
+        public Texture2D GetBoomerangSpritesheet()
         {
             return spritesheets["boomerangSpritesheet"];
         }
-        public static Texture2D GetBowSpritesheet()
+        public Texture2D GetBowSpritesheet()
         {
             return spritesheets["bowSpritesheet"];
         }
-        public static Texture2D GetHeartSpritesheet()
+        public Texture2D GetHeartSpritesheet()
         {
             return spritesheets["heartSpritesheet"];
         }
-        public static Texture2D GetRupeeSpritesheet()
+        public Texture2D GetRupeeSpritesheet()
         {
             return spritesheets["rupeeSpritesheet"];
         }
-        public static Texture2D GetArrowSpritesheet()
+        public Texture2D GetArrowSpritesheet()
         {
             return spritesheets["arrowSpritesheet"];
         }
-        public static Texture2D GetBombSpritesheet()
+        public Texture2D GetBombSpritesheet()
         {
             return spritesheets["bombSpritesheet"];
         }
-        public static Texture2D GetFairySpritesheet()
+        public Texture2D GetFairySpritesheet()
         {
             return spritesheets["fairySpritesheet"];
         }
-        public static Texture2D GetClockSpritesheet()
+        public Texture2D GetClockSpritesheet()
         {
             return spritesheets["clockSpritesheet"];
         }
 
-        public static Texture2D GetKeeseSpritesheet()
+        public Texture2D GetKeeseSpritesheet()
         {
             return spritesheets["keeseSpritesheet"];
         }
-        public static Texture2D GetStalfosSpritesheet()
+        public Texture2D GetStalfosSpritesheet()
         {
             return spritesheets["stalfosSpritesheet"];
         }
-        public static Texture2D GetGoriyaSpritesheet()
+        public Texture2D GetGoriyaSpritesheet()
         {
             return spritesheets["goriyaSpritesheet"];
         }
-        public static Texture2D GetgelSpritesheet()
+        public Texture2D GetgelSpritesheet()
         {
             return spritesheets["gelSpritesheet"];
         }
-        public static Texture2D GetzolSpritesheet()
+        public Texture2D GetzolSpritesheet()
         {
             return spritesheets["zolSpritesheet"];
         }
-        public static Texture2D GetWallmasterSpritesheet()
+        public Texture2D GetWallmasterSpritesheet()
         {
             return spritesheets["wallmasterSpritesheet"];
         }
-        public static Texture2D GetTrapSpritesheet()
+        public Texture2D GetTrapSpritesheet()
         {
             return spritesheets["trapSpritesheet"];
         }
-        public static Texture2D GetAquamentusSpritesheet()
+        public Texture2D GetAquamentusSpritesheet()
         {
             return spritesheets["aquamentusSpritesheet"];
         }
-        public static Texture2D GetFireballSpritesheet()
+        public Texture2D GetFireballSpritesheet()
         {
             return spritesheets["fireballSpritesheet"];
         }
-        public static Texture2D GetEnemycloudSpritesheet()
+        public Texture2D GetEnemycloudSpritesheet()
         {
             return spritesheets["enemycloudSpritesheet"];
         }
-        public static Texture2D GetEnemyexplosionSpritesheet()
+        public Texture2D GetEnemyexplosionSpritesheet()
         {
             return spritesheets["enemyexplosionSpritesheet"];
+        }
+        public Texture2D GetOuterborderSpritesheet()
+        {
+            return spritesheets["outerborderSpritesheet"];
+        }
+        public Texture2D GetDoorsSpritesheet()
+        {
+            return spritesheets["doorsSpritesheet"];
         }
     }
 }
