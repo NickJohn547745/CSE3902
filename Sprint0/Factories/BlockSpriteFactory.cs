@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 
-namespace sprint0
+namespace sprint0.Factories
 {
     public class BlockSpriteFactory
     {
