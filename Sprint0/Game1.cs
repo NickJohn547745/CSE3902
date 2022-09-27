@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
+using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
 
@@ -15,10 +16,16 @@ public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
+    public List<IEnemy> Enemies { get; private set; }
+
+    private int EnemyIndex;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
     private ISprite Credits;
+    private int WindowWidth;
+    private int WindowHeight;
+    
 
     public IPlayer Player;
 
@@ -30,8 +37,44 @@ public class Game1 : Game {
         IsMouseVisible = true;
     }
 
-    protected override void Initialize() {
+    public int GetWindowWidth()
+    {
+        return WindowWidth;
+    }
+
+    public int GetWindowHeight()
+    {
+        return WindowHeight;
+    }
+
+    public void CycleEnemyForward()
+    {
+        EnemyIndex++;
+
+        // keep index in bounds
+        if (EnemyIndex >= Enemies.Count)
+        {
+            EnemyIndex = 0;
+        }
+    }
+
+    public void CycleEnemyBackward()
+    {
+        EnemyIndex--;
+
+        // keep index in bounds
+        if (EnemyIndex < 0)
+        {
+            EnemyIndex = Enemies.Count - 1;
+        }
+    }
+    
+
+protected override void Initialize() {
         // TODO: Add your initialization logic here
+
+        WindowWidth = _graphics.PreferredBackBufferWidth;
+        WindowHeight = _graphics.PreferredBackBufferHeight;
 
         base.Initialize();
     }
@@ -43,8 +86,11 @@ public class Game1 : Game {
         
         TextureStorage.LoadAllTextures(Content);
 
+        TextureStorage.LoadAllTextures(Content);
+
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
+        
         keyboard.BindCommand(Keys.D0, new Command0());
         keyboard.BindCommand(Keys.W, new MoveUpCommand());
         keyboard.BindCommand(Keys.S, new MoveDownCommand());
@@ -52,8 +98,14 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
+        
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
+
+        Enemies = new List<IEnemy>();
+        EnemyIndex = 0;
+        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25));
+        Enemies.Add(stalfos);
 
         CurrentSprite = new StationaryStaticSprite(Spritesheet);
 
@@ -64,12 +116,14 @@ public class Game1 : Game {
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
+        Enemies[EnemyIndex].Update(gameTime, this);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime) {
         GraphicsDevice.Clear(Color.CornflowerBlue);
+        
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
         _spriteBatch.End();

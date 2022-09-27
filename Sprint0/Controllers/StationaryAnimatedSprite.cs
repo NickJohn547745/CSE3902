@@ -24,7 +24,7 @@ public class StationaryAnimatedSprite : ISprite {
         this.texture = tex;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 position) {
         if (frame == 75) {
             direction = -1;
         }
@@ -36,9 +36,9 @@ public class StationaryAnimatedSprite : ISprite {
         Rectangle view = new Rectangle(380, 280 + (32 - spriteLocations[frame / 30].Height)*2, spriteLocations[frame / 30].Width * 2,
             spriteLocations[frame / 30].Height * 2);
         
-        spriteBatch.Begin();
-        spriteBatch.Draw(texture, view, spriteLocations[frame/30], color);
-        spriteBatch.End();
+
+        spriteBatch.Draw(texture, view, spriteLocations[frame/30], Color.White);
+
         frame += direction;
     }
 }

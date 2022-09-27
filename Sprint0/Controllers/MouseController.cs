@@ -14,10 +14,10 @@ public class MouseController : IController {
     //private Dictionary<Rectangle, ICommand> regions = new Dictionary<Rectangle, ICommand>();
 
     public MouseController() {
-        regions[0] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 0, 400, 240), new Command1());
-        regions[1] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 0, 400, 240), new Command2());
-        regions[2] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 240, 400, 240), new Command3());
-        regions[3] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 240, 400, 240), new Command4());
+        regions[0] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 0, 400, 240), new StationaryStaticCommand());
+        regions[1] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 0, 400, 240), new StationaryAnimatedCommand());
+        regions[2] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 240, 400, 240), new MovingStaticCommand());
+        regions[3] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 240, 400, 240), new MovingAnimatedCommand());
     }
     public void BindCommand(Keys key, ICommand command) {
         
