@@ -25,7 +25,6 @@ public class Player : IPlayer {
     }
 
     public void TakeDamage() {
-        
     }
 
     public void MoveUp() {
