@@ -6,7 +6,7 @@ using sprint0.Sprites;
 using sprint0.Interfaces;
 using System.Collections.Generic;
 
-namespace sprint0
+namespace sprint0.Factories
 {
     public class EnemySpriteFactory
     {
