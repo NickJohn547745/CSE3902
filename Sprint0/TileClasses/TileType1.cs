@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace sprint0.TileClasses
     {
 
         public Vector2 Location { get; set; }
+        Texture2D texture;
 
 
         public TileType1()
@@ -26,7 +28,10 @@ namespace sprint0.TileClasses
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            texture = TextureStorage.getTilesSpritesheet();
+           /* Rectangle texturePos = TileSpriteFactory.GetTile1Sprite();
+            spriteBatch.Draw(texture, texturePos)
+           */
         }
     }
 }
