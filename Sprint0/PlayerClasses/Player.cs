@@ -46,4 +46,14 @@ public class Player : IPlayer {
     public void SwordAttack() {
         playerState.SwordAttack();
     }
+
+    public void NextItem()
+    {
+        
+    }
+
+    //public void switchitem(int item)
+    //{
+    //    curritem = items[item]
+    //}
 }

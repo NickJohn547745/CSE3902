@@ -68,6 +68,16 @@ public class Game1 : Game {
             EnemyIndex = Enemies.Count - 1;
         }
     }
+
+    public void PreviousItem()
+    {
+        this.PreviousItem();
+    }
+
+    public void NextItem()
+    {
+        this.NextItem();
+    }
     
 
 protected override void Initialize() {
@@ -98,6 +108,8 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
+        keyboard.BindCommand(Keys.I, new NextItemCommand());
+        keyboard.BindCommand(Keys.U, new PreviousItemCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
