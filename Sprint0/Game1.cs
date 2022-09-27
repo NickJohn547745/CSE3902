@@ -91,7 +91,7 @@ protected override void Initialize() {
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
         
-        keyboard.BindCommand(Keys.D0, new Command0());
+        keyboard.BindCommand(Keys.D0, new QuitCommand());
         keyboard.BindCommand(Keys.W, new MoveUpCommand());
         keyboard.BindCommand(Keys.S, new MoveDownCommand());
         keyboard.BindCommand(Keys.D, new MoveRightCommand());
@@ -127,9 +127,14 @@ protected override void Initialize() {
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
         _spriteBatch.End();
-        CurrentSprite.Draw(_spriteBatch, Vector2.One, Color.White);
-        Credits.Draw(_spriteBatch, new Vector2(140, 360), Color.White);
+        CurrentSprite.Draw(_spriteBatch, Vector2.One);
+        Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
         base.Draw(gameTime);
+    }
+
+    public void reset()
+    {
+
     }
 }

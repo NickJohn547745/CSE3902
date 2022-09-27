@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework.Graphics;
+
 namespace sprint0.Interfaces; 
 
 public interface ILinkState {

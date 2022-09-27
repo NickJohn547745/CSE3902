@@ -35,9 +35,10 @@ public class StationaryAnimatedSprite : ISprite {
 
         Rectangle view = new Rectangle(380, 280 + (32 - spriteLocations[frame / 30].Height)*2, spriteLocations[frame / 30].Width * 2,
             spriteLocations[frame / 30].Height * 2);
-        
 
+        spriteBatch.Begin();
         spriteBatch.Draw(texture, view, spriteLocations[frame/30], Color.White);
+        spriteBatch.End();
 
         frame += direction;
     }

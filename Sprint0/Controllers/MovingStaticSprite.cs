@@ -21,9 +21,11 @@ public class MovingStaticSprite : ISprite {
         }
 
         Rectangle view = new Rectangle(380, 260-frame, 28, 26);
-        
+
+        spriteBatch.Begin();
         spriteBatch.Draw(texture, view, new Rectangle(0, 16, 14, 13), Color.White);
-        
+        spriteBatch.End();
+
         frame += direction;
     }
 }

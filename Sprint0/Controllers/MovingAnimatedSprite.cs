@@ -34,8 +34,11 @@ public class MovingAnimatedSprite : ISprite {
             spriteLocations[animationFrame].Width * 2,
             spriteLocations[animationFrame].Height * 2);
 
+        spriteBatch.Begin();
         spriteBatch.Draw(texture, view, spriteLocations[animationFrame], Color.White);
-        if (delay == 5) {
+        spriteBatch.End();
+        
+        if(delay == 5) {
             animationFrame += 1;
             xPos -= 5;
             delay = -1;

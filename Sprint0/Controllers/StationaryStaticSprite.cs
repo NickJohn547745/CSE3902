@@ -12,9 +12,10 @@ public class StationaryStaticSprite : ISprite {
 
     public void Draw(SpriteBatch spriteBatch, Vector2 position) {
         Rectangle sourceRectangle = new Rectangle(211,0, 13, 16);
-        
-        spriteBatch.Draw(texture, new Rectangle(380, 260, 26, 32), sourceRectangle, Color.White);
 
+        spriteBatch.Begin();
+        spriteBatch.Draw(texture, new Rectangle(380, 260, 26, 32), sourceRectangle, Color.White);
+        spriteBatch.End();
     }
 
 }

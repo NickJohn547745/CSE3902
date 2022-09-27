@@ -10,8 +10,8 @@ public class ResetGameCommand : ICommand {
         myG = game;
     }
 
-    public void Execute()
+    public void Execute(Game1 game)
     {
-        myG.reset();
+        game.reset();
     }
 }
