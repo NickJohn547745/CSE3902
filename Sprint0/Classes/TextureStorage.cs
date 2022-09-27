@@ -97,7 +97,7 @@ namespace sprint0.Classes
         {
             enemycloudSpritesheet = content.Load<Texture2D>("Spritesheets/enemycloud");
             enemyexplosionSpritesheet = content.Load<Texture2D>("Spritesheets/enemyexplosion");
-            tilesSpritesheet = content.Load<Texture2D>("SPritesheets/tiles");
+            tilesSpritesheet = content.Load<Texture2D>("Spritesheets/tiles");
         }
 
         public static Texture2D GetPlayerSpritesheet()
