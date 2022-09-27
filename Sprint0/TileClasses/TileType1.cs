@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sprint0.Classes
+namespace sprint0.TileClasses
 {
     public class TileType1 : ITile
     {
@@ -18,7 +18,7 @@ namespace sprint0.Classes
         public void Update(GameTime gameTime)
         {
 
-        } 
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

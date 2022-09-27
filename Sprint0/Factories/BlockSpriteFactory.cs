@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Interfaces;
+using sprint0.TileClasses;
 
 namespace sprint0
 {
