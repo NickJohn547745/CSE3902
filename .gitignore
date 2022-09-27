@@ -1,4 +1,6 @@
 .vs/
-bin/
-obj/
+Sprint0/bin/
+Sprint0/obj/
 .DS_Store
+sprint0/
+Sprint0/Content/obj

@@ -11,7 +11,7 @@ public class MovingStaticSprite : ISprite {
     public MovingStaticSprite(Texture2D tex) {
         this.texture = tex;
     }
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 position) {
         if (frame == 90) {
             direction = -1;
         }
@@ -22,9 +22,7 @@ public class MovingStaticSprite : ISprite {
 
         Rectangle view = new Rectangle(380, 260-frame, 28, 26);
         
-        spriteBatch.Begin();
-        spriteBatch.Draw(texture, view, new Rectangle(0, 16, 14, 13), color);
-        spriteBatch.End();
+        spriteBatch.Draw(texture, view, new Rectangle(0, 16, 14, 13), Color.White);
         
         frame += direction;
     }

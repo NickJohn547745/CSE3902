@@ -2,44 +2,27 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sprint0.Classes
 {
     public class TextureStorage
     {
-        private static Dictionary<String, Texture2D> spritesheets;
-        private static ContentManager content;
+        private static Dictionary<String, Texture2D> spritesheets = new Dictionary<string, Texture2D>();
 
         public static void LoadAllTextures(ContentManager content)
         {
             LoadItemTextures(content);
             LoadEnemyTextures(content);
             LoadTileTextures(content);
+            LoadPlayerTextures(content);
         }
         private static void LoadItemTextures(ContentManager content)
         {
-            spritesheets["compassSpritesheet"] = content.Load<Texture2D>("Spritesheets/compass");
-            spritesheets["mapSpritesheet"] = content.Load<Texture2D>("Spritesheets/map");
-            spritesheets["keySpritesheet"] = content.Load<Texture2D>("Spritesheets/key");
-            spritesheets["heartcontainerSpritesheet"] = content.Load<Texture2D>("Spritesheets/heartcontainer");
-            spritesheets["triforceSpritesheet"] = content.Load<Texture2D>("Spritesheets/triforce");
-            spritesheets["boomerangSpritesheet"] = content.Load<Texture2D>("Spritesheets/boomerang");
-            spritesheets["bowSpritesheet"] = content.Load<Texture2D>("Spritesheets/bow");
-            spritesheets["heartSpritesheet"] = content.Load<Texture2D>("Spritesheets/heart");
-            spritesheets["rupeeSpritesheet"] = content.Load<Texture2D>("Spritesheets/rupee");
-            spritesheets["arrowSpritesheet"] = content.Load<Texture2D>("Spritesheets/arrow");
-            spritesheets["bombSpritesheet"] = content.Load<Texture2D>("Spritesheets/bomb");
-            spritesheets["fairySpritesheet"] = content.Load<Texture2D>("Spritesheets/fairy");
-            spritesheets["clockSpritesheet"] = content.Load<Texture2D>("Spritesheets/clock");
+           
         }
         private static void LoadEnemyTextures(ContentManager content)
         {
-            spritesheets["keeseSpritesheet"] = content.Load<Texture2D>("Spritesheets/keese");
+            /* spritesheets["keeseSpritesheet"] = content.Load<Texture2D>("Spritesheets/keese");
             spritesheets["stalfosSpritesheet"] = content.Load<Texture2D>("Spritesheets/stalfos");
             spritesheets["goriyaSpritesheet"] = content.Load<Texture2D>("Spritesheets/goriya");
             spritesheets["gelSpritesheet"] = content.Load<Texture2D>("Spritesheets/gel");
@@ -49,17 +32,17 @@ namespace sprint0.Classes
             spritesheets["aquamentusSpritesheet"] = content.Load<Texture2D>("Spritesheets/aquamentus");
             spritesheets["fireballSpritesheet"] = content.Load<Texture2D>("Spritesheets/fireball");
             spritesheets["enemycloudSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemycloud");
-            spritesheets["enemyexplosionSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemyexplosion");
+            spritesheets["enemyexplosionSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemyexplosion"); */
         }
         private static void LoadTileTextures(ContentManager content)
         {
             spritesheets["tilesSpritesheet"] = content.Load<Texture2D>("Spriteshees/tiles");
         }
 
-        public static Texture2D GetCompassSpritesheet()
-        {
-            return spritesheets["compassSpritesheet"];
+        private static void LoadPlayerTextures(ContentManager content) {
+            spritesheets["linkSpritesheet"] = content.Load<Texture2D>("Spritesheets/LinkSpritesheet");
         }
+        
         public static Texture2D GetMapSpritesheet()
         {
             return spritesheets["mapSpritesheet"];
@@ -157,6 +140,9 @@ namespace sprint0.Classes
         public static Texture2D getTilesSpritesheet()
         {
             return spritesheets["tilesSpritesheet"];
+
+        public static Texture2D GetPlayerSpritesheet() {
+            return spritesheets["linkSpritesheet"];
         }
     }
 }

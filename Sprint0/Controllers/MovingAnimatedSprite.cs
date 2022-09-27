@@ -21,7 +21,7 @@ public class MovingAnimatedSprite : ISprite {
         texture = tex;
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 position) {
         if (xPos < -16) {
             xPos = 800;
         }
@@ -34,9 +34,7 @@ public class MovingAnimatedSprite : ISprite {
             spriteLocations[animationFrame].Width * 2,
             spriteLocations[animationFrame].Height * 2);
 
-        spriteBatch.Begin();
-        spriteBatch.Draw(texture, view, spriteLocations[animationFrame], color);
-        spriteBatch.End();
+        spriteBatch.Draw(texture, view, spriteLocations[animationFrame], Color.White);
         if (delay == 5) {
             animationFrame += 1;
             xPos -= 5;

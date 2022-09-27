@@ -9,10 +9,10 @@ public class TextSprite : ISprite {
     public TextSprite(SpriteFont font) {
         this.font = font;
     }
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color) {
+    public void Draw(SpriteBatch spriteBatch, Vector2 position) {
         
-        spriteBatch.Begin();
-        spriteBatch.DrawString(font, "Credits\nProgram Made By: Nathan Rogers\nSprites From: www.mariomayhem.com", position, color);
-        spriteBatch.End();
+
+        spriteBatch.DrawString(font, "Credits\nProgram Made By: Nathan Rogers\nSprites From: www.mariomayhem.com", position, Color.White);
+
     }
 }
