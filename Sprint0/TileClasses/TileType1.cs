@@ -11,8 +11,8 @@ namespace sprint0.TileClasses
     public class TileType1 : ITile
     {
 
-        public int xPos { get; set; }
-        public int yPos { get; set; }
+        public Vector2 Location { get; set; }
+
 
         public TileType1()
         {
