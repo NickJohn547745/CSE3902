@@ -62,42 +62,48 @@ namespace sprint0.Classes
         }
         private static void LoadPlayerTextures()
         {
-            playerSpritesheet = content.Load<Texture2D>("Spritesheets/LinkSpritesheet");
+            String prefix = "Spritesheets/Main/";
+            playerSpritesheet = content.Load<Texture2D>(prefix + "LinkSpritesheet");
         }
         private static void LoadItemTextures()
         {
-            /* compassSpritesheet = content.Load<Texture2D>("Spritesheets/compass");
-            mapSpritesheet = content.Load<Texture2D>("Spritesheets/map");
-            keySpritesheet = content.Load<Texture2D>("Spritesheets/key");
-            heartcontainerSpritesheet = content.Load<Texture2D>("Spritesheets/heartcontainer");
-            triforceSpritesheet = content.Load<Texture2D>("Spritesheets/triforce");
-            boomerangSpritesheet = content.Load<Texture2D>("Spritesheets/boomerang");
-            bowSpritesheet = content.Load<Texture2D>("Spritesheets/bow");
-            heartSpritesheet = content.Load<Texture2D>("Spritesheets/heart");
-            rupeeSpritesheet = content.Load<Texture2D>("Spritesheets/rupee");
-            arrowSpritesheet = content.Load<Texture2D>("Spritesheets/arrow");
-            bombSpritesheet = content.Load<Texture2D>("Spritesheets/bomb");
-            fairySpritesheet = content.Load<Texture2D>("Spritesheets/fairy");
-            clockSpritesheet = content.Load<Texture2D>("Spritesheets/clock"); */
+            String prefix = "Spritesheets/Items/";
+
+            compassSpritesheet = content.Load<Texture2D>(prefix + "compass");
+            mapSpritesheet = content.Load<Texture2D>(prefix + "map");
+            keySpritesheet = content.Load<Texture2D>(prefix + "key");
+            heartcontainerSpritesheet = content.Load<Texture2D>(prefix + "heartcontainer");
+            triforceSpritesheet = content.Load<Texture2D>(prefix + "triforce");
+            boomerangSpritesheet = content.Load<Texture2D>(prefix + "boomerang");
+            bowSpritesheet = content.Load<Texture2D>(prefix + "bow");
+            heartSpritesheet = content.Load<Texture2D>(prefix + "heart");
+            rupeeSpritesheet = content.Load<Texture2D>(prefix + "rupee");
+            arrowSpritesheet = content.Load<Texture2D>(prefix + "arrow");
+            bombSpritesheet = content.Load<Texture2D>(prefix + "bomb");
+            fairySpritesheet = content.Load<Texture2D>(prefix + "fairy");
+            clockSpritesheet = content.Load<Texture2D>(prefix + "clock");
         }
         private static void LoadEnemyTextures()
         {
-            keeseSpritesheet = content.Load<Texture2D>("Spritesheets/keese");
-            stalfosSpritesheet = content.Load<Texture2D>("Spritesheets/stalfos");
-            goriyaSpritesheet = content.Load<Texture2D>("Spritesheets/goriya");
-            gelSpritesheet = content.Load<Texture2D>("Spritesheets/gel");
-            zolSpritesheet = content.Load<Texture2D>("Spritesheets/zol");
-            wallmasterSpritesheet = content.Load<Texture2D>("Spritesheets/wallmaster");
-            trapSpritesheet = content.Load<Texture2D>("Spritesheets/trap");
-            aquamentusSpritesheet = content.Load<Texture2D>("Spritesheets/aquamentus");
-            fireballSpritesheet = content.Load<Texture2D>("Spritesheets/fireball");
+            String prefix = "Spritesheets/Enemies/";
+            keeseSpritesheet = content.Load<Texture2D>(prefix + "keese");
+            stalfosSpritesheet = content.Load<Texture2D>(prefix + "stalfos");
+            goriyaSpritesheet = content.Load<Texture2D>(prefix + "goriya");
+            gelSpritesheet = content.Load<Texture2D>(prefix + "gel");
+            zolSpritesheet = content.Load<Texture2D>(prefix + "zol");
+            wallmasterSpritesheet = content.Load<Texture2D>(prefix + "wallmaster");
+            trapSpritesheet = content.Load<Texture2D>(prefix + "trap");
+            aquamentusSpritesheet = content.Load<Texture2D>(prefix + "aquamentus");
+            fireballSpritesheet = content.Load<Texture2D>(prefix + "fireball");
         }
 
         private static void LoadOtherTextures()
         {
-            enemycloudSpritesheet = content.Load<Texture2D>("Spritesheets/enemycloud");
-            enemyexplosionSpritesheet = content.Load<Texture2D>("Spritesheets/enemyexplosion");
-            tilesSpritesheet = content.Load<Texture2D>("Spritesheets/tiles");
+            String prefix = "Spritesheets/Others/";
+
+            enemycloudSpritesheet = content.Load<Texture2D>(prefix + "enemycloud");
+            enemyexplosionSpritesheet = content.Load<Texture2D>(prefix + "enemyexplosion");
+            tilesSpritesheet = content.Load<Texture2D>(prefix + "tiles");
         }
 
         public static Texture2D GetPlayerSpritesheet()
