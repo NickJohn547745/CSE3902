@@ -19,6 +19,7 @@ namespace sprint0.Classes
         {
             LoadItemTextures(content);
             LoadEnemyTextures(content);
+            LoadTileTextures(content);
         }
         private static void LoadItemTextures(ContentManager content)
         {
@@ -49,6 +50,10 @@ namespace sprint0.Classes
             spritesheets["fireballSpritesheet"] = content.Load<Texture2D>("Spritesheets/fireball");
             spritesheets["enemycloudSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemycloud");
             spritesheets["enemyexplosionSpritesheet"] = content.Load<Texture2D>("Spritesheets/enemyexplosion");
+        }
+        private static void LoadTileTextures(ContentManager content)
+        {
+            spritesheets["tilesSpritesheet"] = content.Load<Texture2D>("Spriteshees/tiles");
         }
 
         public static Texture2D GetCompassSpritesheet()
@@ -147,6 +152,11 @@ namespace sprint0.Classes
         public static Texture2D GetEnemyexplosionSpritesheet()
         {
             return spritesheets["enemyexplosionSpritesheet"];
+        }
+
+        public static Texture2D getTilesSpritesheet()
+        {
+            return spritesheets["tilesSpritesheet"];
         }
     }
 }

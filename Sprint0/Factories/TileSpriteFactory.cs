@@ -6,28 +6,23 @@ using sprint0.TileClasses;
 
 namespace sprint0
 {
-    public class BlockSpriteFactory
+    public class TileSpriteFactory
     {
 
-        private Texture2D blockSpriteSheet;
+        private Texture2D tileSpriteSheet;
         // any other textures needed
 
-        private static BlockSpriteFactory instance = new BlockSpriteFactory();
+        private static TileSpriteFactory instance = new TileSpriteFactory();
 
-        public static BlockSpriteFactory Instance
+        public static TileSpriteFactory Instance
         {
             get { return instance; }
         }
 
-        private BlockSpriteFactory()
+        private TileSpriteFactory()
         {
+            this.tileSpriteSheet = TextureStorage.getTilesSpritesheet();
         }
-
-        public void LoadAllTextures(ContentManager content)
-        {
-            blockSpriteSheet = content.Load<Texture2D>("Block");
-        }
-
         
         public ITile CreateTileType1()
         {
