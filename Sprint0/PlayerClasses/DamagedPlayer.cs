@@ -1,13 +1,16 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
+using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
 public class DamagedPlayer : IPlayer {
     private Game1 game;
     private IPlayer decoratedPlayer;
-    private int timer = 1000;
+    private int timer = 60;
 
     public DamagedPlayer(IPlayer decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
@@ -21,7 +24,11 @@ public class DamagedPlayer : IPlayer {
     public int yPos { get; set; }
 
     public void Draw(SpriteBatch spriteBatch) {
-        throw new System.NotImplementedException();
+        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
+        Rectangle texturePos = PlayerSpriteFactory.GetDamagedSprite();
+        Rectangle pos = new Rectangle(decoratedPlayer.xPos, decoratedPlayer.yPos, texturePos.Width*4, texturePos.Height*4);
+        
+        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }
 
     public void Update() {
@@ -54,6 +61,10 @@ public class DamagedPlayer : IPlayer {
     
     public void SwordAttack() {
         decoratedPlayer.SwordAttack();
+    }
+
+    public void UseAbility(AbilityTypes abilityType) {
+        
     }
     
 }

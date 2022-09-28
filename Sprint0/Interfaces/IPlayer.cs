@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.Interfaces
 {
@@ -15,6 +16,7 @@ namespace sprint0.Interfaces
         void MoveLeft();
         void MoveRight();
         void SwordAttack();
+        void UseAbility(AbilityTypes abilityType);
 
     }
 }

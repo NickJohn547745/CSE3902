@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
+using sprint0.Commands;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
@@ -19,30 +21,28 @@ public class PlayerSwordDownState : IPlayerState {
     }
     
     public void Draw(SpriteBatch spriteBatch) {
+        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
+        Rectangle texturePos = PlayerSpriteFactory.GetSwordDownSprite(animationFrame);
+        Rectangle pos = new Rectangle(player.xPos, player.yPos, texturePos.Width*4, texturePos.Height*4);
+        
+        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+    }
+
+    public void Update() {
         if (currentFrame > FramesPerAnimationChange) {
             currentFrame = 0;
             animationFrame++;
         }
 
         currentFrame++;
-
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetSwordDownSprite(animationFrame);
-        Rectangle pos = new Rectangle(player.xPos, player.yPos, texturePos.Width*4, texturePos.Height*4);
         
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
-
         if (animationFrame == 4) {
             player.playerState = new PlayerFacingDownState(player);
         }
     }
 
-    public void Update() {
-        throw new System.NotImplementedException();
-    }
-
     public void TakeDamage() {
-        throw new System.NotImplementedException();
+        
     }
 
     public void SwordAttack() {
@@ -63,6 +63,10 @@ public class PlayerSwordDownState : IPlayerState {
 
     public void MoveRight() {
         // Can't move during sword animation
+    }
+    
+    public void UseAbility(AbilityTypes abilityType) {
+        
     }
     
 }

@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.Interfaces; 
 
@@ -11,4 +12,5 @@ public interface IPlayerState {
     void MoveLeft();
     void MoveRight();
     void SwordAttack();
+    void UseAbility(AbilityTypes abilityType);
 }

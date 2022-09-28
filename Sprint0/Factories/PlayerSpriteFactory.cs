@@ -82,6 +82,30 @@ public class PlayerSpriteFactory {
         };
         return spritePositions[frame % spritePositions.Count];
     }
+
+    public static Rectangle GetAbilityDownSprite() {
+        return new Rectangle(107, 11, 16, 16);
+    }
+    public static Rectangle GetAbilityUpSprite() {
+        return new Rectangle(141, 11, 16, 16);
+    }
+    public static Rectangle GetAbilitySideSprite() {
+        return new Rectangle(124, 11, 16, 16);
+    }
+
+    public static Rectangle GetDamagedSprite() {
+        return new Rectangle(1, 249, 16, 16);
+    }
+
+    public static Rectangle GetBombSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(129, 185, 8, 16),
+            new Rectangle(138, 185, 16, 16),
+            new Rectangle(155, 185, 16, 16),
+            new Rectangle(173, 185, 16, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
     
     
 

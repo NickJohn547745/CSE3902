@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\evans\\Source\\Repos\\NickJohn547745\\CSE3902\\sprint0\\sprint0.csproj": {}
+    "/Users/nathan/Desktop/Programming/school/CSE3902/CSE3902/Sprint0/Sprint0.csproj": {}
   },
   "projects": {
-    "C:\\Users\\evans\\Source\\Repos\\NickJohn547745\\CSE3902\\sprint0\\sprint0.csproj": {
+    "/Users/nathan/Desktop/Programming/school/CSE3902/CSE3902/Sprint0/Sprint0.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\evans\\Source\\Repos\\NickJohn547745\\CSE3902\\sprint0\\sprint0.csproj",
+        "projectUniqueName": "/Users/nathan/Desktop/Programming/school/CSE3902/CSE3902/Sprint0/Sprint0.csproj",
         "projectName": "sprint0",
-        "projectPath": "C:\\Users\\evans\\Source\\Repos\\NickJohn547745\\CSE3902\\sprint0\\sprint0.csproj",
-        "packagesPath": "C:\\Users\\evans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\evans\\Source\\Repos\\NickJohn547745\\CSE3902\\sprint0\\obj\\",
+        "projectPath": "/Users/nathan/Desktop/Programming/school/CSE3902/CSE3902/Sprint0/Sprint0.csproj",
+        "packagesPath": "/Users/nathan/.nuget/packages/",
+        "outputPath": "/Users/nathan/Desktop/Programming/school/CSE3902/CSE3902/Sprint0/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\evans\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/nathan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }

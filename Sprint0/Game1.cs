@@ -110,6 +110,7 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.I, new NextItemCommand());
         keyboard.BindCommand(Keys.U, new PreviousItemCommand());
+        keyboard.BindCommand(Keys.D1, new UseBombCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
@@ -129,6 +130,8 @@ protected override void Initialize() {
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
         Enemies[EnemyIndex].Update(gameTime, this);
+        
+        Player.Update();
 
         base.Update(gameTime);
     }
@@ -139,8 +142,6 @@ protected override void Initialize() {
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
         _spriteBatch.End();
-        CurrentSprite.Draw(_spriteBatch, Vector2.One);
-        Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
         base.Draw(gameTime);
     }

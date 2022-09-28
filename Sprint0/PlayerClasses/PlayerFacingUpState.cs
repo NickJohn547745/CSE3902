@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
@@ -19,12 +20,6 @@ public class PlayerFacingUpState : IPlayerState {
     }
     
     public void Draw(SpriteBatch spriteBatch) {
-        if (currentFrame > FramesPerAnimationChange) {
-            currentFrame = 0;
-            animationFrame++;
-        }
-        
-
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetWalkingUpSprite(animationFrame);
         Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
@@ -33,7 +28,10 @@ public class PlayerFacingUpState : IPlayerState {
     }
 
     public void Update() {
-        throw new System.NotImplementedException();
+        if (currentFrame > FramesPerAnimationChange) {
+            currentFrame = 0;
+            animationFrame++;
+        }
     }
 
     public void TakeDamage() {
@@ -59,5 +57,12 @@ public class PlayerFacingUpState : IPlayerState {
 
     public void MoveRight() {
         player.playerState = new PlayerFacingRightState(player);
+    }
+    
+    public void UseAbility(AbilityTypes abilityType) {
+        if(abilityType == AbilityTypes.Bomb){
+            player.AbilityManager.UseBomb(player.xPos, player.yPos - 16*player.ScaleFactor);
+        }
+        player.playerState = new PlayerAbilityUpState(player);
     }
 }
