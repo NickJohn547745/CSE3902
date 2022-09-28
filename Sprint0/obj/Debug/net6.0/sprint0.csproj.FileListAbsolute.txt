@@ -95,8 +95,8 @@ C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\Cont
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\Content\Spritesheets\tiles.xnb
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\Content\stars.xnb
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\sprint0.exe
-C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\sprint0.deps.json
-C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\sprint0.runtimeconfig.json
+C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\Sprint0\bin\Debug\net6.0\sprint0.deps.json
+C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\Sprint0\bin\Debug\net6.0\sprint0.runtimeconfig.json
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\sprint0.dll
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\sprint0.pdb
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\bin\Debug\net6.0\MonoGame.Framework.dll
@@ -113,9 +113,9 @@ C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\spri
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.AssemblyInfoInputs.cache
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.AssemblyInfo.cs
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.csproj.CoreCompileInputs.cache
-C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.csproj.CopyComplete
+C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\Sprint0\obj\Debug\net6.0\sprint0.csproj.CopyComplete
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.dll
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\refint\sprint0.dll
 C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.pdb
-C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\sprint0.genruntimeconfig.cache
-C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\sprint0\obj\Debug\net6.0\ref\sprint0.dll
+C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\Sprint0\obj\Debug\net6.0\sprint0.genruntimeconfig.cache
+C:\Users\Thatr\source\repos\NickJohn547745\CSE3902\Sprint0\obj\Debug\net6.0\ref\sprint0.dll

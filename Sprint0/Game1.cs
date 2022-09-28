@@ -9,6 +9,7 @@ using sprint0.Controllers;
 using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
+using sprint0.TileClasses;
 
 namespace sprint0;
 
@@ -19,6 +20,9 @@ public class Game1 : Game {
     public List<IEnemy> Enemies { get; private set; }
 
     private int EnemyIndex;
+    private int elapsedMsecs = 0;
+
+    private Queue<TileType> tileQueue = new Queue<TileType>();
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
@@ -119,6 +123,17 @@ protected override void Initialize() {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
+        tileQueue.Enqueue(new TileType1());
+        tileQueue.Enqueue(new TileType2());
+        tileQueue.Enqueue(new TileType3());
+        tileQueue.Enqueue(new TileType4());
+        tileQueue.Enqueue(new TileType5());
+        tileQueue.Enqueue(new TileType6());
+        tileQueue.Enqueue(new TileType7());
+        tileQueue.Enqueue(new TileType8());
+        tileQueue.Enqueue(new TileType9());
+        tileQueue.Enqueue(new TileType10());
+
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
         IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25));
@@ -146,6 +161,17 @@ protected override void Initialize() {
         _spriteBatch.End();
         CurrentSprite.Draw(_spriteBatch, Vector2.One);
         Credits.Draw(_spriteBatch, new Vector2(140, 360));
+
+        elapsedMsecs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+        TileType tile = tileQueue.Peek();
+        if (elapsedMsecs > 400)
+        {
+            tile = tileQueue.Dequeue();
+            tileQueue.Enqueue(tile);
+            elapsedMsecs = 0;
+        }
+        tile.Draw(_spriteBatch);
 
         base.Draw(gameTime);
     }

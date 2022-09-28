@@ -28,6 +28,42 @@ namespace sprint0
         {
             return new TileType1();
         }
+        public ITile CreateTileType2()
+        {
+            return new TileType2();
+        }
+        public ITile CreateTileType3()
+        {
+            return new TileType3();
+        }
+        public ITile CreateTileType4()
+        {
+            return new TileType4();
+        }
+        public ITile CreateTileType5()
+        {
+            return new TileType5();
+        }
+        public ITile CreateTileType6()
+        {
+            return new TileType6();
+        }
+        public ITile CreateTileType7()
+        {
+            return new TileType7();
+        }
+        public ITile CreateTileType8()
+        {
+            return new TileType8();
+        }
+        public ITile CreateTileType9()
+        {
+            return new TileType9();
+        }
+        public ITile CreateTileType10()
+        {
+            return new TileType10();
+        }
 
         /*
          * Add create Block functions when classes have been made

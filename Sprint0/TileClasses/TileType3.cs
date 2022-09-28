@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace sprint0.TileClasses
 {
-    public class TileType1 : TileType
+    public class TileType3 : TileType
     {
-        public TileType1()
+        public TileType3()
         {
             this.SetLocation(1000, 360);
-            this.SetTextureCoords(0, 0);
+            this.SetTextureCoords(2, 0);
         }
     }
 }
