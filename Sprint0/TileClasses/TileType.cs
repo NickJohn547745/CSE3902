@@ -27,9 +27,7 @@ namespace sprint0.TileClasses
             Rectangle sourceRect = new Rectangle(16 * col, 16 * row, 16, 16);
             Rectangle destRect = new Rectangle(Location, new Point(64, 64));
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
-            spriteBatch.End();
         }
 
         internal void SetTextureCoords(int col, int row)

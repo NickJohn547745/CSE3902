@@ -8,6 +8,7 @@ using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Enemies;
+using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
@@ -19,14 +20,14 @@ public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
-    public List<IEnemy> Enemies { get; private set; }
 
-    private int EnemyIndex;
+    public List<IEnemy> EnemyList { get; private set; }
+    public List<ITile> TileList { get; private set; }
+    public List<IItem> ItemList { get; private set; }
 
-    private TileType[] tileList = new TileType[10];
-    public int TileIndex = 0;
-    private ItemType[] itemList = new ItemType[13];
-    public int itemIndex = 0;
+    private int currentEnemyIndex = 0;
+    private int currentTileIndex = 0;
+    private int currentItemIndex = 0;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
@@ -61,38 +62,54 @@ public class Game1 : Game {
 
     public void CycleEnemyForward()
     {
-        EnemyIndex++;
+        currentEnemyIndex++;
 
-        // keep index in bounds
-        if (EnemyIndex >= Enemies.Count)
-        {
-            EnemyIndex = 0;
-        }
+        int remainder = (currentEnemyIndex % EnemyList.Count);
+        currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
     }
 
     public void CycleEnemyBackward()
     {
-        EnemyIndex--;
+        currentEnemyIndex--;
 
-        // keep index in bounds
-        if (EnemyIndex < 0)
-        {
-            EnemyIndex = Enemies.Count - 1;
-        }
+        int remainder = (currentEnemyIndex % EnemyList.Count);
+        currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
     }
 
     public void PreviousItem()
     {
-        //this.PreviousItem();
+        currentItemIndex--;
+
+        int remainder = (currentItemIndex % ItemList.Count);
+        currentItemIndex = (remainder < 0) ? (ItemList.Count + remainder) : remainder;
     }
 
     public void NextItem()
     {
-        //this.NextItem();
-    }
-    
+        currentItemIndex++;
 
-protected override void Initialize() {
+        int remainder = (currentItemIndex % ItemList.Count);
+        currentItemIndex = (remainder < 0) ? (ItemList.Count + remainder) : remainder;
+    }
+
+    public void PreviousTile()
+    {
+        currentTileIndex--;
+
+        int remainder = (currentTileIndex % TileList.Count);
+        currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+    }
+
+    public void NextTile()
+    {
+        currentTileIndex++;
+
+        int remainder = (currentTileIndex % TileList.Count);
+        currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+    }
+
+
+    protected override void Initialize() {
         // TODO: Add your initialization logic here
 
         WindowWidth = _graphics.PreferredBackBufferWidth;
@@ -128,35 +145,35 @@ protected override void Initialize() {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
-        tileList[0] = new TileType1();
-        tileList[1] = new TileType2();
-        tileList[2] = new TileType3();
-        tileList[3] = new TileType4();
-        tileList[4] = new TileType5();
-        tileList[5] = new TileType6();
-        tileList[6] = new TileType7();
-        tileList[7] = new TileType8();
-        tileList[8] = new TileType9();
-        tileList[9] = new TileType10();
+        TileList = new List<ITile>();
+        TileList.Add(new TileType1());
+        TileList.Add(new TileType2());
+        TileList.Add(new TileType3());
+        TileList.Add(new TileType4());
+        TileList.Add(new TileType5());
+        TileList.Add(new TileType6());
+        TileList.Add(new TileType7());
+        TileList.Add(new TileType8());
+        TileList.Add(new TileType9());
+        TileList.Add(new TileType10());
 
-        itemList[0] = new Arrow();
-        itemList[1] = new Bomb();
-        itemList[2] = new Boomerang();
-        itemList[3] = new Bow();
-        itemList[4] = new Clock();
-        itemList[5] = new Compass();
-        itemList[6] = new Fairy();
-        itemList[7] = new Heart();
-        itemList[8] = new HeartContainer();
-        itemList[9] = new Key();
-        itemList[10] = new Map();
-        itemList[11] = new Rupee();
-        itemList[12] = new Triforce();
+        ItemList = new List<IItem>();
+        ItemList.Add(new Arrow());
+        ItemList.Add(new Bomb());
+        ItemList.Add(new Boomerang());
+        ItemList.Add(new Bow());
+        ItemList.Add(new Clock());
+        ItemList.Add(new Compass());
+        ItemList.Add(new Fairy());
+        ItemList.Add(new Heart());
+        ItemList.Add(new HeartContainer());
+        ItemList.Add(new Key());
+        ItemList.Add(new Map());
+        ItemList.Add(new Rupee());
+        ItemList.Add(new Triforce());
 
-        Enemies = new List<IEnemy>();
-        EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25));
-        Enemies.Add(stalfos);
+        EnemyList = new List<IEnemy>();
+        EnemyList.Add(new Stalfos(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25)));
 
         CurrentSprite = new StationaryStaticSprite(Spritesheet);
 
@@ -167,7 +184,8 @@ protected override void Initialize() {
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
-        Enemies[EnemyIndex].Update(gameTime, this);
+
+        EnemyList[currentEnemyIndex].Update(gameTime, this);
 
         base.Update(gameTime);
     }
@@ -175,23 +193,22 @@ protected override void Initialize() {
     protected override void Draw(GameTime gameTime) {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
         Player.Draw(_spriteBatch);
-        _spriteBatch.End();
-        CurrentSprite.Draw(_spriteBatch, Vector2.One);
+
+        EnemyList[currentEnemyIndex].Draw(_spriteBatch);
+        TileList[currentTileIndex].Draw(_spriteBatch);
+        ItemList[currentItemIndex].Draw(_spriteBatch);
+
         Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
-        int tRemainder = (TileIndex % 10);
-        TileType tile = tileList[(tRemainder < 0) ? (10 + tRemainder) : tRemainder];
-        tile.Draw(_spriteBatch);
-
-        int iRemainder = (itemIndex % 13);
-        ItemType item = itemList[(iRemainder < 0) ? (13 + iRemainder) : iRemainder];
-        item.Draw(_spriteBatch);
-
         base.Draw(gameTime);
-    }
 
+        _spriteBatch.End();
+
+        CurrentSprite.Draw(_spriteBatch, Vector2.One);
+    }
     public void reset()
     {
 

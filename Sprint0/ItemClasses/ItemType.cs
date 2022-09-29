@@ -22,9 +22,7 @@ namespace sprint0.ItemClasses
         {
             Rectangle destRect = new Rectangle(Location, new Point(sourceRect.Width * 6, sourceRect.Height * 6));
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
-            spriteBatch.End();
         }
 
         internal void SetLocation(int x, int y)

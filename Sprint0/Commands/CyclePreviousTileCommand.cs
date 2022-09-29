@@ -13,7 +13,7 @@ namespace sprint0.Commands
         {
             if (keyState == IController.KeyState.Pressed)
             {
-                game.TileIndex--;
+                game.PreviousTile();
             }
         }
     }
