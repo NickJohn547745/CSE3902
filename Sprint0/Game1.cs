@@ -206,8 +206,6 @@ public class Game1 : Game {
         base.Draw(gameTime);
 
         _spriteBatch.End();
-
-        CurrentSprite.Draw(_spriteBatch, Vector2.One);
     }
     public void reset()
     {
