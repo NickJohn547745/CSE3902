@@ -11,7 +11,7 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Stalfos : IEnemy
+    public class Keese : IEnemy
     {
 
         private int health;
@@ -23,11 +23,11 @@ namespace sprint0.Enemies
         private EnemySprite sprite;
 
 
-        public Stalfos(Vector2 position, float speed)
+        public Keese(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             this.speed = speed;
             velocity = new Vector2(1, 0);
         }
@@ -55,33 +55,11 @@ namespace sprint0.Enemies
         private void ChooseDirection()
         {
             Random rand = new Random();
+            Random rand2 = new Random();
 
             // randomly choose movement direction
-            switch (rand.Next(0, 4))
-            {
-                case 0:
-                    // move up
-                    velocity.Y = -1;
-                    velocity.X = 0;
-                    break;
-                case 1:
-                    // move left
-                    velocity.Y = 0;
-                    velocity.X = -1;
-                    break;
-                case 2:
-                    // move right
-                    velocity.Y = 0;
-                    velocity.X = 1;
-                    break;
-                case 3:
-                    // move down
-                    velocity.Y = 1;
-                    velocity.X = 0;
-                    break;
-                default:
-                    break;    
-            }
+            velocity.X = rand.Next(-1, 2) % 2;
+            velocity.Y = rand2.Next(-1, 2) % 2;
         }
 
         public void Update(GameTime gameTime, Game1 game)
