@@ -9,9 +9,12 @@ namespace sprint0.Commands
 {
     public class CycleForwardTileCommand : ICommand
     {
-        public void Execute(Game1 game)
+        public void Execute(Game1 game, IController.KeyState keyState)
         {
-            // game.Tile.NextTile();
+            if (keyState == IController.KeyState.Pressed)
+            {
+                game.TileIndex++;
+            }        
         }
     }
 }

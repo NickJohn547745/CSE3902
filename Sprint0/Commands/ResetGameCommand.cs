@@ -10,8 +10,9 @@ public class ResetGameCommand : ICommand {
         myG = game;
     }
 
-    public void Execute(Game1 game)
+    public void Execute(Game1 game, IController.KeyState keyState)
     {
-        game.reset();
+        if (keyState == IController.KeyState.Pressed)
+            game.reset();
     }
 }

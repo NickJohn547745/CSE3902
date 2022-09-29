@@ -5,7 +5,9 @@ namespace sprint0.Commands;
 
 public class MovingStaticCommand : ICommand {
 
-    public void Execute(Game1 game) {
-        game.CurrentSprite = new MovingStaticSprite(game.Spritesheet);
+    public void Execute(Game1 game, IController.KeyState keyState)
+    {
+        if (keyState == IController.KeyState.Pressed)
+            game.CurrentSprite = new MovingStaticSprite(game.Spritesheet);
     }
 }

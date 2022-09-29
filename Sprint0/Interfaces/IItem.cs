@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,7 @@ namespace sprint0.Interfaces
 {
     public interface IItem
     {
-        void SetBaseDurability(int maxDurability);
-        int GetBaseDurability();
-
-        void SetBasePower(int basePower);
-        int GetBasePower();
-
-        void Update(GameTime gameTime);
+        Point Location { get; set; }
+        void Draw(SpriteBatch spriteBatch);
     }
 }

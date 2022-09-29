@@ -11,7 +11,7 @@ public class ChooseItemCommand : ICommand {
         myP = player;
     }
 
-    public void Execute(Game1 game)
+    public void Execute(Game1 game, IController.KeyState keyState)
     {
 
     }

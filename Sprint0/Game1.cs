@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,6 +9,7 @@ using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Enemies;
 using sprint0.Interfaces;
+using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 
@@ -20,16 +22,17 @@ public class Game1 : Game {
     public List<IEnemy> Enemies { get; private set; }
 
     private int EnemyIndex;
-    private int elapsedMsecs = 0;
 
-    private Queue<TileType> tileQueue = new Queue<TileType>();
+    private TileType[] tileList = new TileType[10];
+    public int TileIndex = 0;
+    private ItemType[] itemList = new ItemType[13];
+    public int itemIndex = 0;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
     private ISprite Credits;
     private int WindowWidth;
     private int WindowHeight;
-    
 
     public IPlayer Player;
 
@@ -80,12 +83,12 @@ public class Game1 : Game {
 
     public void PreviousItem()
     {
-        this.PreviousItem();
+        //this.PreviousItem();
     }
 
     public void NextItem()
     {
-        this.NextItem();
+        //this.NextItem();
     }
     
 
@@ -117,22 +120,38 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
-        keyboard.BindCommand(Keys.I, new NextItemCommand());
-        keyboard.BindCommand(Keys.U, new PreviousItemCommand());
-        
+        keyboard.BindCommand(Keys.I, new CycleForwardItemCommand());
+        keyboard.BindCommand(Keys.U, new CyclePreviousItemCommand());
+        keyboard.BindCommand(Keys.T, new CycleForwardTileCommand());
+        keyboard.BindCommand(Keys.Y, new CyclePreviousTileCommand());
+
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
-        tileQueue.Enqueue(new TileType1());
-        tileQueue.Enqueue(new TileType2());
-        tileQueue.Enqueue(new TileType3());
-        tileQueue.Enqueue(new TileType4());
-        tileQueue.Enqueue(new TileType5());
-        tileQueue.Enqueue(new TileType6());
-        tileQueue.Enqueue(new TileType7());
-        tileQueue.Enqueue(new TileType8());
-        tileQueue.Enqueue(new TileType9());
-        tileQueue.Enqueue(new TileType10());
+        tileList[0] = new TileType1();
+        tileList[1] = new TileType2();
+        tileList[2] = new TileType3();
+        tileList[3] = new TileType4();
+        tileList[4] = new TileType5();
+        tileList[5] = new TileType6();
+        tileList[6] = new TileType7();
+        tileList[7] = new TileType8();
+        tileList[8] = new TileType9();
+        tileList[9] = new TileType10();
+
+        itemList[0] = new Arrow();
+        itemList[1] = new Bomb();
+        itemList[2] = new Boomerang();
+        itemList[3] = new Bow();
+        itemList[4] = new Clock();
+        itemList[5] = new Compass();
+        itemList[6] = new Fairy();
+        itemList[7] = new Heart();
+        itemList[8] = new HeartContainer();
+        itemList[9] = new Key();
+        itemList[10] = new Map();
+        itemList[11] = new Rupee();
+        itemList[12] = new Triforce();
 
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
@@ -162,16 +181,13 @@ protected override void Initialize() {
         CurrentSprite.Draw(_spriteBatch, Vector2.One);
         Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
-        elapsedMsecs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-        TileType tile = tileQueue.Peek();
-        if (elapsedMsecs > 400)
-        {
-            tile = tileQueue.Dequeue();
-            tileQueue.Enqueue(tile);
-            elapsedMsecs = 0;
-        }
+        int tRemainder = (TileIndex % 9);
+        TileType tile = tileList[(tRemainder < 0) ? (9 + tRemainder) : tRemainder];
         tile.Draw(_spriteBatch);
+
+        int iRemainder = (itemIndex % 9);
+        ItemType item = itemList[(iRemainder < 0) ? (9 + iRemainder) : iRemainder];
+        item.Draw(_spriteBatch);
 
         base.Draw(gameTime);
     }

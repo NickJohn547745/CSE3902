@@ -8,6 +8,9 @@ public class KeyboardController : IController {
 
     private Dictionary<Keys, ICommand> keyMappings;
 
+    private KeyboardState currentState;
+    private KeyboardState previousState;
+
     public KeyboardController() {
         keyMappings = new Dictionary<Keys, ICommand>();
     }
@@ -17,10 +20,29 @@ public class KeyboardController : IController {
     }
 
     public void Update(Game1 game) {
-        Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-		
-        foreach (Keys key in pressedKeys){
-            keyMappings[key].Execute(game);
+        previousState = currentState;
+        currentState = Keyboard.GetState();
+        
+        foreach (Keys key in keyMappings.Keys) {
+            keyMappings[key].Execute(game, GetKeyState(key));
         } 
+    }
+
+    private IController.KeyState GetKeyState(Keys key)
+    {
+        IController.KeyState result = IController.KeyState.Pressed;
+
+        if (currentState.IsKeyDown(key))
+        {
+            result = IController.KeyState.KeyDown;
+            if (previousState.IsKeyUp(key))
+                result = IController.KeyState.Pressed;
+        } else
+        {
+            result = IController.KeyState.KeyUp;
+            if (previousState.IsKeyDown(key))
+                result = IController.KeyState.Released;
+        }
+        return result;
     }
 }
