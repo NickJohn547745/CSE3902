@@ -30,7 +30,7 @@ public class KeyboardController : IController {
 
     private IController.KeyState GetKeyState(Keys key)
     {
-        IController.KeyState result = IController.KeyState.Pressed;
+        IController.KeyState result;
 
         if (currentState.IsKeyDown(key))
         {

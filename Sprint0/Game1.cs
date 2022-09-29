@@ -181,12 +181,12 @@ protected override void Initialize() {
         CurrentSprite.Draw(_spriteBatch, Vector2.One);
         Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
-        int tRemainder = (TileIndex % 9);
-        TileType tile = tileList[(tRemainder < 0) ? (9 + tRemainder) : tRemainder];
+        int tRemainder = (TileIndex % 10);
+        TileType tile = tileList[(tRemainder < 0) ? (10 + tRemainder) : tRemainder];
         tile.Draw(_spriteBatch);
 
-        int iRemainder = (itemIndex % 9);
-        ItemType item = itemList[(iRemainder < 0) ? (9 + iRemainder) : iRemainder];
+        int iRemainder = (itemIndex % 13);
+        ItemType item = itemList[(iRemainder < 0) ? (13 + iRemainder) : iRemainder];
         item.Draw(_spriteBatch);
 
         base.Draw(gameTime);
