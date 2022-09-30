@@ -15,16 +15,14 @@ public class Player : IPlayer {
     public int ScaleFactor;
     
 
-    public int xPos { get; set; }
-    public int yPos { get; set; }
+    public Vector2 Position { get; set; }
 
     public Player() {
         playerState = new PlayerFacingUpState(this);
         AbilityManager = new PlayerAbilityManager(this);
         PlayerHealth = 6;
         ScaleFactor = 4;
-        this.xPos = 150;
-        this.yPos = 150;
+        Position = new Vector2(150);
     }
 
     public void Draw(SpriteBatch spriteBatch) {

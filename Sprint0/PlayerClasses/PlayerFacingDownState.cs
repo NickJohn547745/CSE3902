@@ -23,7 +23,7 @@ public class PlayerFacingDownState : IPlayerState {
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetWalkingDownSprite(animationFrame);
-        Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
+        Rectangle pos = new Rectangle((int)player.Position.X, (int)player.Position.Y, 64, 64);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }
@@ -49,7 +49,7 @@ public class PlayerFacingDownState : IPlayerState {
 
     public void MoveDown() {
         currentFrame++;
-        player.yPos++;
+        player.Position = Vector2.Add(player.Position, new Vector2(0, 1));
     }
 
     public void MoveLeft() {
@@ -61,7 +61,7 @@ public class PlayerFacingDownState : IPlayerState {
     }
     
     public void UseAbility(AbilityTypes abilityType) {
-        player.AbilityManager.UseAbility(abilityType, player.xPos, player.yPos + 16*player.ScaleFactor, Direction.Down);
+        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(8*player.ScaleFactor, 16*player.ScaleFactor)), new Vector2(0, 1));
         player.playerState = new PlayerAbilityDownState(player);
     }
 }

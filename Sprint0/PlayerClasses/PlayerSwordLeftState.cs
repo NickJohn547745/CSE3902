@@ -22,7 +22,7 @@ public class PlayerSwordLeftState : IPlayerState {
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetSwordSideSprite(animationFrame);
-        Rectangle pos = new Rectangle(player.xPos-(texturePos.Width - 16)*4, player.yPos, texturePos.Width*4, texturePos.Height*4);
+        Rectangle pos = new Rectangle((int)player.Position.X-(texturePos.Width - 16)*4, (int)player.Position.Y, texturePos.Width*4, texturePos.Height*4);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
     }

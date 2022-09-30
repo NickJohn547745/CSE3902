@@ -6,8 +6,7 @@ namespace sprint0.Interfaces
 {
     public interface IPlayer
     {
-        int xPos { get; set; }
-        int yPos { get; set; }
+        Vector2 Position {get; set;}
         void Draw(SpriteBatch spriteBatch);
         void Update();
         void TakeDamage();

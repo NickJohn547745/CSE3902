@@ -4,32 +4,36 @@ using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Utils;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace sprint0.PlayerClasses.Abilities; 
 
 public class MagicalBoomerang : IAbility {
     private Player player;
-    private int xPos;
-    private int yPos;
 
     private int frameCounter = 0;
     private int animationFrame = 0;
     
     private Direction direction;
+    private Vector2 Velocity;
+    private Vector2 Acceleration;
+    
+    public Vector2 Position { get; set; }
+    private Vector2 initialPosition;
 
-    public MagicalBoomerang(Player player,int xPos, int yPos, Direction direction) {
+    public MagicalBoomerang(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.direction = direction;
+        Position = position;
+        initialPosition = Position;
+        Velocity = Vector2.Multiply(velocity, new Vector2((float)9));
+        Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.1));
     }
     
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetMagicalBoomerangSprite(animationFrame);
-        Rectangle pos = new Rectangle(xPos, yPos, texturePos.Width*player.ScaleFactor, texturePos.Height*player.ScaleFactor);
-        
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+
+        spriteBatch.Draw(sprite, Position, texturePos, Color.White, 0, new Vector2((float)texturePos.Width/2,(float)texturePos.Height/2), player.ScaleFactor, SpriteEffects.None, 0);
     }
     
     public void Update() {
@@ -38,20 +42,11 @@ public class MagicalBoomerang : IAbility {
             animationFrame++;
         }
         
-        if (direction == Direction.Down) {
-            yPos += 3;
-        }
-        else if (direction == Direction.Up) {
-            yPos -= 3;
-        }
-        else if (direction == Direction.Left) {
-            xPos -= 3;
-        }
-        else if (direction == Direction.Right) {
-            xPos += 3;
-        }
+        Velocity = Vector2.Add(Velocity, Acceleration);
 
-        if (frameCounter == 60) {
+        Position = Vector2.Add(Position, Velocity);
+
+        if(Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20) {
             player.AbilityManager.RemoveCurrentAbility();
         }
     }

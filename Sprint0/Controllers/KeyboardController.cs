@@ -21,6 +21,6 @@ public class KeyboardController : IController {
 		
         foreach (Keys key in pressedKeys){
             keyMappings[key].Execute(game);
-        } 
+        }
     }
 }

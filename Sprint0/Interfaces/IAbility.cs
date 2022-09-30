@@ -1,9 +1,11 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace sprint0.Interfaces; 
 
 public interface IAbility {
-    public void Update();
+    Vector2 Position { get; set; }
+    void Update();
 
-    public void Draw(SpriteBatch spriteBatch);
+    void Draw(SpriteBatch spriteBatch);
 }

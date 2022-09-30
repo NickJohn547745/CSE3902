@@ -8,24 +8,21 @@ namespace sprint0.PlayerClasses.Abilities;
 
 public class Bomb : IAbility {
     private Player player;
-    private int xPos;
-    private int yPos;
+    public Vector2 Position { get; set; }
 
     private int frameCounter = 0;
     private int animationFrame = 0;
 
-    public Bomb(Player player,int xPos, int yPos) {
+    public Bomb(Player player, Vector2 position) {
         this.player = player;
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.Position = position;
     }
     
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetBombSprite(animationFrame);
-        Rectangle pos = new Rectangle(xPos, yPos, texturePos.Width*player.ScaleFactor, texturePos.Height*player.ScaleFactor);
-        
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+
+        spriteBatch.Draw(sprite, Position, texturePos, Color.White, 0, new Vector2((float)texturePos.Width/2,(float)texturePos.Height/2), player.ScaleFactor, SpriteEffects.None, 0);
     }
 
     public void Update() {

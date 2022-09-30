@@ -18,7 +18,7 @@ public class PlayerAbilityUpState : IPlayerState {
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetAbilityUpSprite();
-        Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
+        Rectangle pos = new Rectangle((int)player.Position.X, (int)player.Position.Y, 64, 64);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }

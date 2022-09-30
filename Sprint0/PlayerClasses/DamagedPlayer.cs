@@ -20,13 +20,12 @@ public class DamagedPlayer : IPlayer {
         game.Player = decoratedPlayer;
     }
 
-    public int xPos { get; set; }
-    public int yPos { get; set; }
+    public Vector2 Position { get; set; }
 
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetDamagedSprite();
-        Rectangle pos = new Rectangle(decoratedPlayer.xPos, decoratedPlayer.yPos, texturePos.Width*4, texturePos.Height*4);
+        Rectangle pos = new Rectangle((int)decoratedPlayer.Position.X, (int)decoratedPlayer.Position.Y, texturePos.Width*4, texturePos.Height*4);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }

@@ -23,7 +23,7 @@ public class PlayerFacingRightState : IPlayerState {
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
         Rectangle texturePos = PlayerSpriteFactory.GetWalkingSideSprite(animationFrame);
-        Rectangle pos = new Rectangle(player.xPos, player.yPos, 64, 64);
+        Rectangle pos = new Rectangle((int)player.Position.X, (int)player.Position.Y, 64, 64);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }
@@ -58,11 +58,11 @@ public class PlayerFacingRightState : IPlayerState {
 
     public void MoveRight() {
         currentFrame++;
-        player.xPos = player.xPos + 1;
+        player.Position = Vector2.Add(player.Position, new Vector2(1, 0));
     }
     
     public void UseAbility(AbilityTypes abilityType) {
-        player.AbilityManager.UseAbility(abilityType,player.xPos + 16*player.ScaleFactor, player.yPos, Direction.Right);
+        player.AbilityManager.UseAbility(abilityType,Vector2.Add(player.Position, new Vector2(16*player.ScaleFactor, 8*player.ScaleFactor)), new Vector2(1, 0));
         player.playerState = new PlayerAbilityRightState(player);
     }
 }
