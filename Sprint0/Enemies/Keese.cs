@@ -11,48 +11,20 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Keese : IEnemy
+    public class Keese : Enemy
     {
-
-        private int health;
-        private int damage;
-        private Vector2 position;
-        private Vector2 initPosition;
-        private float speed;
-        private Vector2 velocity;
-        private EnemySprite sprite;
-
 
         public Keese(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
+            this.sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             this.speed = speed;
-            velocity = new Vector2(1, 0);
+            this.velocity = Vector2.Zero;
+            this.frameDelay = 2;
         }
 
-        public void SetHealth(int health)
-        {
-            this.health = health;
-        }
-
-        public int GetHealth()
-        {
-            return this.health;
-        }
-
-        public int GetAttackDamage()
-        {
-            return this.damage;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-
-        private void ChooseDirection()
+        protected override void Behavior()
         {
             Random rand = new Random();
             Random rand2 = new Random();
@@ -61,28 +33,5 @@ namespace sprint0.Enemies
             velocity.X = rand.Next(-1, 2) % 2;
             velocity.Y = rand2.Next(-1, 2) % 2;
         }
-
-        public void Update(GameTime gameTime, Game1 game)
-        {
-            // change direction every 2 seconds
-            if (gameTime.TotalGameTime.Seconds % 2 == 0)
-            {
-                ChooseDirection();
-            }
-
-            position += speed * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (position.X < 0 || position.Y < 0 || position.X > game.GetWindowWidth() || position.Y > game.GetWindowHeight())
-            {
-                position = initPosition;
-            }
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            sprite.Draw(spriteBatch, position);
-        }
-
     }
 }
