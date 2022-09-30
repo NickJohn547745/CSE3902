@@ -107,6 +107,25 @@ public class PlayerSpriteFactory {
         return spritePositions[frame % spritePositions.Count];
     }
     
+    public static Rectangle GetWoodenBoomerangSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(64, 185, 8, 16),
+            new Rectangle(73, 185, 8, 16),
+            new Rectangle(82, 185, 8, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
+    
+    public static Rectangle GetMagicalBoomerangSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(91, 185, 8, 16),
+            new Rectangle(100, 185, 8, 16),
+            new Rectangle(109, 185, 8, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
+    
+    
     
 
 }

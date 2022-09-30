@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
+using sprint0.Utils;
 
 namespace sprint0.PlayerClasses.Abilities; 
 
@@ -26,13 +27,23 @@ public class PlayerAbilityManager {
         
     }
 
-    public void UseBomb(int startX, int startY) {
+    public void UseAbility(AbilityTypes abilityType, int startX, int startY, Direction direction) {
         if (currentAbility == null) {
-            currentAbility = new Bomb(player, startX, startY);
+            switch (abilityType) {
+                case AbilityTypes.Bomb:
+                    currentAbility = new Bomb(player, startX, startY);
+                    break;
+                case AbilityTypes.WoodenBoomerang:
+                    currentAbility = new WoodenBoomerang(player, startX, startY, direction);
+                    break;
+                case AbilityTypes.MagicalBoomerang:
+                    currentAbility = new MagicalBoomerang(player, startX, startY, direction);
+                    break;
+            }
         }
     }
 
-    public void RemoveBomb() {
+    public void RemoveCurrentAbility() {
         currentAbility = null;
     }
 

@@ -22,7 +22,6 @@ public class Game1 : Game {
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
-    private ISprite Credits;
     private int WindowWidth;
     private int WindowHeight;
     
@@ -111,6 +110,8 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.I, new NextItemCommand());
         keyboard.BindCommand(Keys.U, new PreviousItemCommand());
         keyboard.BindCommand(Keys.D1, new UseBombCommand());
+        keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand());
+        keyboard.BindCommand(Keys.D3, new UseMagicalBoomerangCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
@@ -123,8 +124,6 @@ protected override void Initialize() {
         CurrentSprite = new StationaryStaticSprite(Spritesheet);
 
         Player = new Player();
-
-        Credits = new TextSprite(Spritefont);
     }
 
     protected override void Update(GameTime gameTime) {

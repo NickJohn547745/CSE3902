@@ -4,6 +4,7 @@ using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
+using sprint0.Utils;
 
 namespace sprint0.PlayerClasses; 
 
@@ -60,9 +61,7 @@ public class PlayerFacingDownState : IPlayerState {
     }
     
     public void UseAbility(AbilityTypes abilityType) {
-        if(abilityType == AbilityTypes.Bomb){
-            player.AbilityManager.UseBomb(player.xPos, player.yPos + 16*player.ScaleFactor);
-        }
+        player.AbilityManager.UseAbility(abilityType, player.xPos, player.yPos + 16*player.ScaleFactor, Direction.Down);
         player.playerState = new PlayerAbilityDownState(player);
     }
 }

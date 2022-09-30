@@ -3,43 +3,55 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Utils;
 
 namespace sprint0.PlayerClasses.Abilities; 
 
-public class Bomb : IAbility {
+public class WoodenBoomerang : IAbility {
     private Player player;
     private int xPos;
     private int yPos;
 
-    private int frameCounter = 0;
-    private int animationFrame = 0;
+    private int frameCounter;
+    private int animationFrame;
 
-    public Bomb(Player player,int xPos, int yPos) {
+    private Direction direction;
+
+    public WoodenBoomerang(Player player,int xPos, int yPos, Direction direction) {
         this.player = player;
         this.xPos = xPos;
         this.yPos = yPos;
+        this.direction = direction;
     }
     
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetBombSprite(animationFrame);
+        Rectangle texturePos = PlayerSpriteFactory.GetWoodenBoomerangSprite(animationFrame);
         Rectangle pos = new Rectangle(xPos, yPos, texturePos.Width*player.ScaleFactor, texturePos.Height*player.ScaleFactor);
         
         spriteBatch.Draw(sprite, pos,texturePos, Color.White);
     }
-
+    
     public void Update() {
         frameCounter++;
-        if (frameCounter == 20) {
-            animationFrame = 1;
+        if (frameCounter % 5 == 0) {
+            animationFrame++;
         }
-        else if (frameCounter == 25) {
-            animationFrame = 2;
+
+        if (direction == Direction.Down) {
+            yPos += 3;
         }
-        else if (frameCounter == 30) {
-            animationFrame = 3;
+        else if (direction == Direction.Up) {
+            yPos -= 3;
         }
-        else if (frameCounter == 35) {
+        else if (direction == Direction.Left) {
+            xPos -= 3;
+        }
+        else if (direction == Direction.Right) {
+            xPos += 3;
+        }
+
+        if (frameCounter == 60) {
             player.AbilityManager.RemoveCurrentAbility();
         }
     }
