@@ -28,7 +28,7 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 2, spriteSheet.Height));
 
-            return new EnemySprite(spriteSheet, frameSources, 6, 2);
+            return new EnemySprite(spriteSheet, frameSources, 6, 5);
         }
         public EnemySprite CreateKeeseSprite()
         {
@@ -37,7 +37,7 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
             frameSources.Add(new Rectangle(spriteSheet.Width / 2 + 1, 0, spriteSheet.Width / 2, spriteSheet.Height));
 
-            return new EnemySprite(spriteSheet, frameSources, 6, 2);
+            return new EnemySprite(spriteSheet, frameSources, 6, 5);
         }
 
     }

@@ -117,11 +117,7 @@ protected override void Initialize() {
         IEnemy keese = new Keese(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
         Enemies.Add(keese);
 
-        CurrentSprite = new StationaryStaticSprite(Spritesheet);
-
         Player = new Player();
-
-        Credits = new TextSprite(Spritefont);
     }
 
     protected override void Update(GameTime gameTime) {
@@ -138,8 +134,6 @@ protected override void Initialize() {
         Player.Draw(_spriteBatch);
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Draw(_spriteBatch);
         _spriteBatch.End();
-        CurrentSprite.Draw(_spriteBatch, Vector2.One);
-        Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
         base.Draw(gameTime);
     }
