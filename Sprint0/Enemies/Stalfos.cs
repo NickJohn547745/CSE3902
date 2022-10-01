@@ -11,48 +11,20 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Stalfos : IEnemy
+    public class Stalfos : Enemy
     {
 
-        private int health;
-        private int damage;
-        private Vector2 position;
-        private Vector2 initPosition;
-        private Vector2 speed;
-        private Vector2 velocity;
-        private EnemySprite sprite;
-
-
-        public Stalfos(Vector2 position, Vector2 speed)
+        public Stalfos(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            this.sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
-            velocity = new Vector2(1, 0);
+            this.velocity = new Vector2(1, 0);
+            this.frameDelay = 2;
         }
 
-        public void SetHealth(int health)
-        {
-            this.health = health;
-        }
-
-        public int GetHealth()
-        {
-            return this.health;
-        }
-
-        public int GetAttackDamage()
-        {
-            return this.damage;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return position;
-        }
-
-        private void ChooseDirection()
+        protected override void Behavior()
         {
             Random rand = new Random();
 
@@ -61,51 +33,27 @@ namespace sprint0.Enemies
             {
                 case 0:
                     // move up
-                    velocity.Y = -1;
-                    velocity.X = 0;
+                    this.velocity.Y = -1;
+                    this.velocity.X = 0;
                     break;
                 case 1:
                     // move left
-                    velocity.Y = 0;
-                    velocity.X = -1;
+                    this.velocity.Y = 0;
+                    this.velocity.X = -1;
                     break;
                 case 2:
                     // move right
-                    velocity.Y = 0;
-                    velocity.X = 1;
+                    this.velocity.Y = 0;
+                    this.velocity.X = 1;
                     break;
                 case 3:
                     // move down
-                    velocity.Y = 1;
-                    velocity.X = 0;
+                    this.velocity.Y = 1;
+                    this.velocity.X = 0;
                     break;
                 default:
                     break;    
             }
         }
-
-        public void Update(GameTime gameTime, Game1 game)
-        {
-            // change direction every 2 seconds
-            if (gameTime.TotalGameTime.Seconds % 2 == 0)
-            {
-                ChooseDirection();
-            }
-
-            position.X += speed.X * velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            position.Y += speed.Y * velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (position.X < 0 || position.Y < 0 || position.X > game.GetWindowWidth() || position.Y > game.GetWindowHeight())
-            {
-                position = initPosition;
-            }
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            sprite.Draw(spriteBatch, position);
-        }
-
     }
 }
