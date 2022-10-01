@@ -9,7 +9,7 @@ using sprint0.Interfaces;
 
 namespace sprint0.Sprites
 {
-    public class EnemySprite : ISprite
+    public class BasicEnemySprite : ISprite
     {
         
         private Texture2D spriteSheet;
@@ -20,7 +20,7 @@ namespace sprint0.Sprites
         private int frameCount;
         private float scale;
 
-        public EnemySprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay, float scale)
+        public BasicEnemySprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay, float scale)
         {
             this.spriteSheet = spriteSheet;
             this.frameSources = frameSources;
@@ -34,16 +34,24 @@ namespace sprint0.Sprites
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
 
-            spriteBatch.Draw(spriteSheet, position, frameSources[frame], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameSources.Count], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             // delay change in frames
             delayCount++;
-            if (delayCount % delay == 0)
-            {
-                frame++;
-                if (frame >= frameCount) frame = 0;
-            }
+            if (delayCount % delay == 0) frame++;
 
+        }
+
+        /*
+         * able to change frame rotation
+        */
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 rotation)
+        {
+            spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameSources.Count], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+
+            // delay change in frames
+            delayCount++;
+            if (delayCount % delay == 0) frame++;
         }
     }
 }

@@ -11,17 +11,20 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Stalfos : Enemy
+    public class Goriya: Enemy
     {
 
-        public Stalfos(Vector2 position, float speed)
+        private IEnemyState EnemyState { get; set; }
+        public Boolean stop { get; set; }
+
+        public Goriya(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
-            this.sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
             this.velocity = Vector2.Zero;
             this.frameDelay = 2;
+            //EnemyState = new GoriyaFacingLeftState(this);
         }
 
         protected override void Behavior()
@@ -33,23 +36,31 @@ namespace sprint0.Enemies
             {
                 case 0:
                     // move up
-                    this.velocity = new Vector2(0, -1);
+
                     break;
                 case 1:
                     // move left
-                    this.velocity = new Vector2(-1, 0);
+
                     break;
                 case 2:
                     // move right
-                    this.velocity = new Vector2(1, 0);
+
                     break;
                 case 3:
                     // move down
-                    this.velocity = new Vector2(0, 1);
+
                     break;
                 default:
-                    break;    
+                    break;
             }
+
+            EnemyState.Update();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            sprite.Draw(spriteBatch, this.position, new Vector2(-1, 1));
+
         }
     }
 }

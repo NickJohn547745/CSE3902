@@ -30,8 +30,7 @@ namespace sprint0.Enemies
             Random rand2 = new Random();
 
             // randomly choose movement direction
-            velocity.X = rand.Next(-1, 2) % 2;
-            velocity.Y = rand2.Next(-1, 2) % 2;
+            velocity = new Vector2 (rand.Next(-1, 2) % 2, rand2.Next(-1, 2) % 2);
         }
     }
 }

@@ -19,11 +19,10 @@ public class Game1 : Game {
     public List<IController> Controllers { get; set; }
     public List<IEnemy> Enemies { get; private set; }
 
-    private int EnemyIndex;
+    public int EnemyIndex;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
-    private ISprite Credits;
     private int WindowWidth;
     private int WindowHeight;
     
@@ -110,11 +109,12 @@ protected override void Initialize() {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
+        Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
+        IEnemy stalfos = new Stalfos(enemySpawn, 25);
         Enemies.Add(stalfos);
-        IEnemy keese = new Keese(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
+        IEnemy keese = new Keese(enemySpawn, 25);
         Enemies.Add(keese);
 
         Player = new Player();

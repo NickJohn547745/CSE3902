@@ -15,34 +15,14 @@ namespace sprint0.Enemies
     {
 
         protected int health;
-        protected int maxHealth;
-        protected int damage;
+        protected int maxHealth { get; set; }
+        protected int damage { get; set; }
         protected int frameDelay;
-        protected Vector2 position;
+        protected Vector2 position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
-        protected Vector2 velocity;
-        protected EnemySprite sprite;
-
-        public void SetHealth(int health)
-        {
-            this.health = health;
-        }
-
-        public int GetHealth()
-        {
-            return this.health;
-        }
-
-        public int GetAttackDamage()
-        {
-            return this.damage;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return this.position;
-        }
+        public Vector2 velocity { get; set; }
+        public BasicEnemySprite sprite { get; set; }
 
         protected abstract void Behavior();
 
@@ -62,7 +42,7 @@ namespace sprint0.Enemies
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, position);
         }
