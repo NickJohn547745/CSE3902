@@ -32,6 +32,18 @@ namespace sprint0.Factories
 
             return new BasicProjectileSprite(spriteSheet, frameSources, 6, 5);
         }
-        
+
+        public Sprite CreateAquamentusProjectileSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetFireballSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+            frameSources.Add(new Rectangle(0, 2, 8, 11));
+            frameSources.Add(new Rectangle(8, 2, 8, 11));
+            frameSources.Add(new Rectangle(0, 18, 8, 11));
+            frameSources.Add(new Rectangle(8, 18, 8, 11));
+
+            return new BasicProjectileSprite(spriteSheet, frameSources, 6, 5);
+        }
+
     }
 }

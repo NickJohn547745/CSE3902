@@ -15,6 +15,9 @@ using sprint0.Projectiles;
 namespace sprint0;
 
 public class Game1 : Game {
+
+    private const float enemySpeed = 75;
+
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
@@ -112,19 +115,21 @@ protected override void Initialize() {
         Controllers.Add(new MouseController());
 
         Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
+        Vector2 bossSpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight / 2);
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new StalfosEnemy(enemySpawn, 75);
+        IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
         Enemies.Add(stalfos);
-        IEnemy keese = new KeeseEnemy(enemySpawn, 75);
+        IEnemy keese = new KeeseEnemy(enemySpawn, enemySpeed);
         Enemies.Add(keese);
-        IEnemy goriya = new GoriyaEnemy(enemySpawn, 75);
+        IEnemy goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
         Enemies.Add(goriya);
-        IEnemy zol = new ZolEnemy(enemySpawn, 75);
+        IEnemy zol = new ZolEnemy(enemySpawn, enemySpeed);
         Enemies.Add(zol);
         IEnemy oldMan = new OldManNPC(enemySpawn);
         Enemies.Add(oldMan);
-        Enemies.Add(zol);
+        IEnemy aquamentus = new AquamentusBoss(bossSpawn, enemySpeed);
+        Enemies.Add(aquamentus);
 
         Player = new Player();
         

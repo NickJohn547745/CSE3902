@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/aquamentus.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/aquamentus.xnb","TextureProcessor","Texture2DContent",1207,14341,0.147156
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/goriya.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/goriya.xnb","TextureProcessor","Texture2DContent",612,5269,0.1287695
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/goriyaprojectile.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/goriyaprojectile.xnb","TextureProcessor","Texture2DContent",292,1941,0.1282676
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/oldMan.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/oldMan.xnb","TextureProcessor","Texture2DContent",182,1109,0.1259015

@@ -15,6 +15,9 @@ namespace sprint0.Projectiles
 {
     public class GoriyaProjectile : Projectile
     {
+        private const int goriyaProjSpeed = 200;
+        private const int goriyaProjDelay = 1;
+
         private GoriyaStateMachine goriya;
         private Boolean returnThrow;
 
@@ -24,8 +27,8 @@ namespace sprint0.Projectiles
             this.position = position;
             sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
             this.velocity = velocity;
-            speed = 200;
-            delay = 1;
+            speed = goriyaProjSpeed;
+            delay = goriyaProjDelay;
             goriya = thrower;
             returnThrow = false;
         }
@@ -59,7 +62,7 @@ namespace sprint0.Projectiles
             // reverse velocity after 2 seconds
             if (!returnThrow &&  (xMax || yMax)) 
             {
-                velocity *= new Vector2(-1, -1);
+                velocity *= -1;
                 returnThrow = true;
             }
  

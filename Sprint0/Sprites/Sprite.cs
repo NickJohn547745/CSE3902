@@ -32,7 +32,6 @@ namespace sprint0.Sprites
 
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-
             spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameSources.Count], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 
             // delay change in frames

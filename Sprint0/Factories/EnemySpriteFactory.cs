@@ -30,6 +30,7 @@ namespace sprint0.Factories
 
             return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
         }
+
         public Sprite CreateKeeseSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetKeeseSpritesheet();
@@ -86,6 +87,17 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width, spriteSheet.Height));
 
             return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
+        }
+        public Sprite CreateAquamentusSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetAquamentusSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+            frameSources.Add(new Rectangle(1, 0, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            frameSources.Add(new Rectangle(1, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
+
+            return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
         }
     }
 }
