@@ -187,3 +187,5 @@ C:\Users\wrb20\source\repos\CSE3902\sprint0\obj\Debug\net6.0\refint\sprint0.dll
 C:\Users\wrb20\source\repos\CSE3902\sprint0\obj\Debug\net6.0\sprint0.pdb
 C:\Users\wrb20\source\repos\CSE3902\sprint0\obj\Debug\net6.0\sprint0.genruntimeconfig.cache
 C:\Users\wrb20\source\repos\CSE3902\sprint0\obj\Debug\net6.0\ref\sprint0.dll
+C:\Users\wrb20\source\repos\CSE3902\sprint0\bin\Debug\net6.0\Content\Spritesheets\Others\NPCs.xnb
+C:\Users\wrb20\source\repos\CSE3902\sprint0\bin\Debug\net6.0\Content\Spritesheets\Enemies\oldMan.xnb

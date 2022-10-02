@@ -77,5 +77,15 @@ namespace sprint0.Factories
 
             return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
         }
+
+        public Sprite CreateOldManNPCSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetOldManSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+
+            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width, spriteSheet.Height));
+
+            return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
+        }
     }
 }
