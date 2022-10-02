@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,6 +33,11 @@ public class Game1 : Game {
 
     public Game1() {
         _graphics = new GraphicsDeviceManager(this);
+
+        _graphics.PreferredBackBufferWidth = 1280;
+        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.ApplyChanges();
+
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
@@ -46,26 +52,14 @@ public class Game1 : Game {
         return WindowHeight;
     }
 
-    public void CycleEnemyForward()
+    public void NextEnemy()
     {
         EnemyIndex++;
-
-        // keep index in bounds
-        if (EnemyIndex >= Enemies.Count)
-        {
-            EnemyIndex = 0;
-        }
     }
 
-    public void CycleEnemyBackward()
+    public void PreviousEnemy()
     {
         EnemyIndex--;
-
-        // keep index in bounds
-        if (EnemyIndex < 0)
-        {
-            EnemyIndex = Enemies.Count - 1;
-        }
     }
 
     public void PreviousItem()
@@ -115,14 +109,18 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.D4, new UseWoodenArrowCommand());
         keyboard.BindCommand(Keys.D5, new UseSilverArrowCommand());
         keyboard.BindCommand(Keys.D6, new UseFireballCommand());
+        keyboard.BindCommand(Keys.O, new PreviousEnemyCommand());
+        keyboard.BindCommand(Keys.P, new NextEnemyCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25));
+        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
         Enemies.Add(stalfos);
+        IEnemy keese = new Keese(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
+        Enemies.Add(keese);
 
         CurrentSprite = new StationaryStaticSprite(Spritesheet);
 
@@ -131,10 +129,8 @@ protected override void Initialize() {
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
-        Enemies[EnemyIndex].Update(gameTime, this);
-        
+        Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Update(gameTime, this);
         Player.Update();
-
         base.Update(gameTime);
     }
 
@@ -143,6 +139,7 @@ protected override void Initialize() {
         
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
+        Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);

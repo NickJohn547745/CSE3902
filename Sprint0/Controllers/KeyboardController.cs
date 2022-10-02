@@ -20,7 +20,8 @@ public class KeyboardController : IController {
         Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
 		
         foreach (Keys key in pressedKeys){
-            keyMappings[key].Execute(game);
-        }
+            // handle unbound keys
+            if (keyMappings.ContainsKey(key)) keyMappings[key].Execute(game);
+        } 
     }
 }
