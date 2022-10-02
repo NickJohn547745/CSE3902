@@ -124,6 +124,24 @@ public class PlayerSpriteFactory {
         };
         return spritePositions[frame % spritePositions.Count];
     }
+
+    public static Rectangle GetWoodenArrowSprite(int direction) {
+        if (direction == 0) {
+            return new Rectangle(1, 185, 8, 16);
+        }
+        return new Rectangle(10, 185, 16, 16);
+    }
+    
+    public static Rectangle GetSilverArrowSprite(int direction) {
+        if (direction == 0) {
+            return new Rectangle(27, 185, 8, 16);
+        }
+        return new Rectangle(36, 185, 16, 16);
+    }
+    
+    public static Rectangle GetFireballSprite() {
+        return new Rectangle(191, 185, 16, 16);
+    }
     
     
     

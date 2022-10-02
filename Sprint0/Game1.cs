@@ -112,6 +112,9 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.D1, new UseBombCommand());
         keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand());
         keyboard.BindCommand(Keys.D3, new UseMagicalBoomerangCommand());
+        keyboard.BindCommand(Keys.D4, new UseWoodenArrowCommand());
+        keyboard.BindCommand(Keys.D5, new UseSilverArrowCommand());
+        keyboard.BindCommand(Keys.D6, new UseFireballCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());

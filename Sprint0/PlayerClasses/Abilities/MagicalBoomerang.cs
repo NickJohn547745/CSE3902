@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
-using sprint0.Utils;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace sprint0.PlayerClasses.Abilities; 
@@ -14,7 +13,6 @@ public class MagicalBoomerang : IAbility {
     private int frameCounter = 0;
     private int animationFrame = 0;
     
-    private Direction direction;
     private Vector2 Velocity;
     private Vector2 Acceleration;
     
