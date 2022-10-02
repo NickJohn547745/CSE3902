@@ -21,7 +21,7 @@ namespace sprint0.Factories
         {
         }
          
-        public BasicEnemySprite CreateStalfosSprite()
+        public Sprite CreateStalfosSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetStalfosSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -30,7 +30,7 @@ namespace sprint0.Factories
 
             return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
         }
-        public BasicEnemySprite CreateKeeseSprite()
+        public Sprite CreateKeeseSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetKeeseSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -40,50 +40,31 @@ namespace sprint0.Factories
             return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
         }
 
-        public BasicEnemySprite CreateGoriyaFacingUpStateSprite()
+        public Sprite CreateGoriyaFacingUpStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
-            List<Rectangle> frameSources = new List<Rectangle>();
-            //frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height / 2));
-            frameSources.Add(new Rectangle(spriteSheet.Width / 2 , 0, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            Rectangle frameSource = new Rectangle(20, 1, 15, 15);
 
-
-            //frameSources.Add(new Rectangle(0, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
-            //frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
-
-            return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
+            return new FrameFlipEnemySprite(spriteSheet, frameSource, 8, 5);
         }
 
-        public BasicEnemySprite CreateGoriyaFacingDownStateSprite()
+        public Sprite CreateGoriyaFacingDownStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
-            List<Rectangle> frameSources = new List<Rectangle>();
-            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            Rectangle frameSource = new Rectangle(1, 1, 15, 15);
 
-            return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
+            return new FrameFlipEnemySprite(spriteSheet, frameSource, 8, 5);
         }
 
-        public BasicEnemySprite CreateGoriyaFacingRightStateSprite()
+        public Sprite CreateGoriyaFacingSideStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
 
-            frameSources.Add(new Rectangle(0, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
-            frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
+            frameSources.Add(new Rectangle(1, 19, 15, 15));
+            frameSources.Add(new Rectangle(19, 20, 16, 15));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
+            return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
         }
-
-        public BasicEnemySprite CreateGoriyaFacingLeftStateSprite()
-        {
-            Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
-            List<Rectangle> frameSources = new List<Rectangle>();
-
-            frameSources.Add(new Rectangle(0, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
-            frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
-
-            return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
-        }
-
     }
 }

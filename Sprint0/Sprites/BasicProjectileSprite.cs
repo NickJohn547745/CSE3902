@@ -9,9 +9,9 @@ using sprint0.Interfaces;
 
 namespace sprint0.Sprites
 {
-    public class BasicEnemySprite : Sprite
+    public class BasicProjectileSprite : Sprite
     {
-        public BasicEnemySprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay, float scale)
+        public BasicProjectileSprite(Texture2D spriteSheet, List<Rectangle> frameSources, int delay, float scale)
         {
             this.spriteSheet = spriteSheet;
             this.frameSources = frameSources;

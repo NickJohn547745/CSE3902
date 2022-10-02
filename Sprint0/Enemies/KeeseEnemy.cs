@@ -11,26 +11,29 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Keese : Enemy
+    public class KeeseEnemy : Enemy
     {
-
-        public Keese(Vector2 position, float speed)
+        private int previous = 1;
+        public KeeseEnemy(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
             this.sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             this.speed = speed;
-            this.velocity = Vector2.Zero;
-            this.frameDelay = 2;
+            this.velocity = Vector2.One;
+            this.delay = 40;
         }
 
-        protected override void Behavior()
+        protected override void Behavior(GameTime gameTime, Game1 game)
         {
             Random rand = new Random();
             Random rand2 = new Random();
 
             // randomly choose movement direction
-            velocity = new Vector2 (rand.Next(-1, 2) % 2, rand2.Next(-1, 2) % 2);
+            int x = rand.Next(-1, 2) % 2;
+            int y = rand2.Next(-1, 2) % 2;
+            if (x == 0 && y == 0) x = previous *= -1;
+            velocity = new Vector2 (x, y);
         }
     }
 }

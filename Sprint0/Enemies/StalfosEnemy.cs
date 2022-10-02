@@ -11,20 +11,20 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Stalfos : Enemy
+    public class StalfosEnemy : Enemy
     {
 
-        public Stalfos(Vector2 position, float speed)
+        public StalfosEnemy(Vector2 position, float speed)
         {
             this.initPosition = position;
             this.position = position;
             this.sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
             this.velocity = Vector2.Zero;
-            this.frameDelay = 2;
+            this.delay = 20;
         }
 
-        protected override void Behavior()
+        protected override void Behavior(GameTime gameTime, Game1 game)
         {
             Random rand = new Random();
 

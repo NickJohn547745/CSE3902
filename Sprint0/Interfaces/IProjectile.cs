@@ -6,7 +6,7 @@ namespace sprint0.Interfaces;
 public interface IProjectile {
     public Rectangle GetPosition();
 
-    public void Update(GameTime gameTime);
+    public void Update(GameTime gameTime, Game1 game);
 
     public void Draw(SpriteBatch spriteBatch);
 }

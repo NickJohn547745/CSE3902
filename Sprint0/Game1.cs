@@ -10,6 +10,7 @@ using sprint0.Controllers;
 using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
+using sprint0.Projectiles;
 
 namespace sprint0;
 
@@ -18,6 +19,7 @@ public class Game1 : Game {
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
     public List<IEnemy> Enemies { get; private set; }
+    public List<IProjectile> Projectiles { get; private set; }
 
     public int EnemyIndex;
 
@@ -112,18 +114,24 @@ protected override void Initialize() {
         Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(enemySpawn, 25);
+        IEnemy stalfos = new StalfosEnemy(enemySpawn, 75);
         Enemies.Add(stalfos);
-        IEnemy keese = new Keese(enemySpawn, 25);
+        IEnemy keese = new KeeseEnemy(enemySpawn, 75);
         Enemies.Add(keese);
-
+        IEnemy goriya = new GoriyaEnemy(enemySpawn, 75);
+        Enemies.Add(goriya);
         Player = new Player();
+
+        Projectiles = new List<IProjectile>();
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Update(gameTime, this);
-
+        foreach (IProjectile projectile in Projectiles)
+        {
+            projectile.Update(gameTime, this);
+        }
         base.Update(gameTime);
     }
 
@@ -133,6 +141,13 @@ protected override void Initialize() {
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Draw(_spriteBatch);
+        foreach (IProjectile projectile in Projectiles)
+        {
+            if (Enemies[Math.Abs(EnemyIndex % Enemies.Count)].GetType() == typeof(GoriyaEnemy) || projectile.GetType() != typeof(GoriyaProjectile))
+            {
+                projectile.Draw(_spriteBatch);
+            }    
+        }
         _spriteBatch.End();
 
         base.Draw(gameTime);
