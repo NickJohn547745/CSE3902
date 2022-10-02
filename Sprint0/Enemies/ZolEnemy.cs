@@ -11,17 +11,16 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class StalfosEnemy : Enemy
+    public class ZolEnemy : Enemy
     {
-
-        public StalfosEnemy(Vector2 position, float speed)
+        public ZolEnemy(Vector2 position, float speed)
         {
             initPosition = position;
             this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             this.speed = speed;
-            velocity = Vector2.Zero;
-            delay = 20;
+            velocity = Vector2.One;
+            delay = 40;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -29,7 +28,7 @@ namespace sprint0.Enemies
             Random rand = new Random();
 
             // randomly choose movement direction
-            switch (rand.Next(0, 4))
+            switch (rand.Next(0, 6))
             {
                 case 0:
                     // move up
@@ -47,8 +46,13 @@ namespace sprint0.Enemies
                     // move down
                     velocity = new Vector2(0, 1);
                     break;
+                case 4:
+                case 5:
+                    // stop
+                    velocity = Vector2.Zero;
+                    break;
                 default:
-                    break;    
+                    break;
             }
         }
     }

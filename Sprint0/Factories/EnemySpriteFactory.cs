@@ -66,5 +66,16 @@ namespace sprint0.Factories
 
             return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
         }
+
+        public Sprite CreateZolSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetZolSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+
+            frameSources.Add(new Rectangle(2, 0, 12, spriteSheet.Height));
+            frameSources.Add(new Rectangle(16, 0, 15, spriteSheet.Height));
+
+            return new BasicEnemySprite(spriteSheet, frameSources, 8, 5);
+        }
     }
 }

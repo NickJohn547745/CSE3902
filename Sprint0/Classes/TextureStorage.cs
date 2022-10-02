@@ -179,11 +179,11 @@ namespace sprint0.Classes
             return goriyaSpritesheet;
         }
 
-        public static Texture2D GetgelSpritesheet()
+        public static Texture2D GetGelSpritesheet()
         {
             return gelSpritesheet;
         }
-        public static Texture2D GetzolSpritesheet()
+        public static Texture2D GetZolSpritesheet()
         {
             return zolSpritesheet;
         }

@@ -120,6 +120,8 @@ protected override void Initialize() {
         Enemies.Add(keese);
         IEnemy goriya = new GoriyaEnemy(enemySpawn, 75);
         Enemies.Add(goriya);
+        IEnemy zol = new ZolEnemy(enemySpawn, 75);
+        Enemies.Add(zol);
         Player = new Player();
 
         Projectiles = new List<IProjectile>();

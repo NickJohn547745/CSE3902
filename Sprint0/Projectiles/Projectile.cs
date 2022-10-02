@@ -25,9 +25,9 @@ public abstract class Projectile : IProjectile {
 
     public virtual void Update(GameTime gameTime, Game1 game)
     {
-        this.position += this.speed * this.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        position += speed * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (gameTime.TotalGameTime.Seconds % this.delay == 0)
+        if (gameTime.TotalGameTime.Seconds % delay == 0)
         {
             Behavior(game);
         }
