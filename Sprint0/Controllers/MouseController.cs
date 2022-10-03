@@ -10,14 +10,10 @@ namespace sprint0.Controllers;
 public class MouseController : IController {
     private Point mousePosition;
 
-    private Tuple<Rectangle, ICommand>[] regions = new Tuple<Rectangle, ICommand>[4];
+    private Tuple<Rectangle, ICommand>[] regions = new Tuple<Rectangle, ICommand>[0];
     //private Dictionary<Rectangle, ICommand> regions = new Dictionary<Rectangle, ICommand>();
 
     public MouseController() {
-        regions[0] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 0, 400, 240), new StationaryStaticCommand());
-        regions[1] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 0, 400, 240), new StationaryAnimatedCommand());
-        regions[2] = new Tuple<Rectangle, ICommand>(new Rectangle(0, 240, 400, 240), new MovingStaticCommand());
-        regions[3] = new Tuple<Rectangle, ICommand>(new Rectangle(400, 240, 400, 240), new MovingAnimatedCommand());
     }
     public void BindCommand(Keys key, ICommand command) {
         

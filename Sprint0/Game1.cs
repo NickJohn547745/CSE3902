@@ -175,8 +175,6 @@ public class Game1 : Game {
         EnemyList = new List<IEnemy>();
         EnemyList.Add(new Stalfos(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25)));
 
-        CurrentSprite = new StationaryStaticSprite(Spritesheet);
-
         Player = new Player();
 
         Credits = new TextSprite(Spritefont);

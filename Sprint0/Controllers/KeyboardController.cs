@@ -22,9 +22,16 @@ public class KeyboardController : IController {
     public void Update(Game1 game) {
         previousState = currentState;
         currentState = Keyboard.GetState();
+
+        Keys[] pressedKeys = currentState.GetPressedKeys();
         
-        foreach (Keys key in keyMappings.Keys) {
-            keyMappings[key].Execute(game, GetKeyState(key));
+        foreach (Keys key in pressedKeys) {
+            if (keyMappings.ContainsKey(key)) {
+                IController.KeyState keyState = GetKeyState(key);
+                keyMappings[key].CommandData = new Commands.CommandData(keyState);
+
+                keyMappings[key].Execute(game);
+            }
         } 
     }
 
