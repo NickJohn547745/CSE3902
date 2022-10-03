@@ -1,5 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
+##### Date: October 2, 2022
 
 # Sprint2:
 
