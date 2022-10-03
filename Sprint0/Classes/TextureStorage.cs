@@ -41,7 +41,9 @@ namespace sprint0.Classes
             wallmasterSpritesheet,
             trapSpritesheet,
             aquamentusSpritesheet,
-            fireballSpritesheet;
+            fireballSpritesheet,
+            goriyaProjectileSpritesheet,
+            oldManSpritesheet;
 
         // Other Spritesheets
         private static Texture2D
@@ -95,6 +97,8 @@ namespace sprint0.Classes
             trapSpritesheet = content.Load<Texture2D>(prefix + "trap");
             aquamentusSpritesheet = content.Load<Texture2D>(prefix + "aquamentus");
             fireballSpritesheet = content.Load<Texture2D>(prefix + "fireball");
+            goriyaProjectileSpritesheet = content.Load<Texture2D>(prefix + "goriyaprojectile");
+            oldManSpritesheet = content.Load<Texture2D>(prefix + "oldMan");
         }
 
         private static void LoadOtherTextures()
@@ -176,11 +180,12 @@ namespace sprint0.Classes
         {
             return goriyaSpritesheet;
         }
-        public static Texture2D GetgelSpritesheet()
+
+        public static Texture2D GetGelSpritesheet()
         {
             return gelSpritesheet;
         }
-        public static Texture2D GetzolSpritesheet()
+        public static Texture2D GetZolSpritesheet()
         {
             return zolSpritesheet;
         }
@@ -211,6 +216,16 @@ namespace sprint0.Classes
         public static Texture2D GetTilesSpritesheet()
         {
             return tilesSpritesheet;
+        }
+
+        public static Texture2D GetGoriyaProjectileSpritesheet()
+        {
+            return goriyaProjectileSpritesheet;
+        }
+
+        public static Texture2D GetOldManSpritesheet()
+        {
+            return oldManSpritesheet;
         }
     }
 }

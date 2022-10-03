@@ -11,20 +11,20 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public class Stalfos : Enemy
+    public class StalfosEnemy : Enemy
     {
 
-        public Stalfos(Vector2 position, float speed)
+        public StalfosEnemy(Vector2 position, float speed)
         {
-            this.initPosition = position;
+            initPosition = position;
             this.position = position;
-            this.sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
+            sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
-            this.velocity = new Vector2(1, 0);
-            this.frameDelay = 2;
+            velocity = Vector2.Zero;
+            delay = 20;
         }
 
-        protected override void Behavior()
+        protected override void Behavior(GameTime gameTime, Game1 game)
         {
             Random rand = new Random();
 
@@ -33,23 +33,19 @@ namespace sprint0.Enemies
             {
                 case 0:
                     // move up
-                    this.velocity.Y = -1;
-                    this.velocity.X = 0;
+                    velocity = new Vector2(0, -1);
                     break;
                 case 1:
                     // move left
-                    this.velocity.Y = 0;
-                    this.velocity.X = -1;
+                    velocity = new Vector2(-1, 0);
                     break;
                 case 2:
                     // move right
-                    this.velocity.Y = 0;
-                    this.velocity.X = 1;
+                    velocity = new Vector2(1, 0);
                     break;
                 case 3:
                     // move down
-                    this.velocity.Y = 1;
-                    this.velocity.X = 0;
+                    velocity = new Vector2(0, 1);
                     break;
                 default:
                     break;    

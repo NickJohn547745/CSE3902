@@ -10,20 +10,24 @@ using sprint0.Controllers;
 using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
+using sprint0.Projectiles;
 
 namespace sprint0;
 
 public class Game1 : Game {
+
+    private const float enemySpeed = 75;
+
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
     public List<IEnemy> Enemies { get; private set; }
+    public List<IProjectile> Projectiles { get; private set; }
 
-    private int EnemyIndex;
+    public int EnemyIndex;
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
-    private ISprite Credits;
     private int WindowWidth;
     private int WindowHeight;
     
@@ -110,24 +114,36 @@ protected override void Initialize() {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
+        Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
+        Vector2 bossSpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight / 2);
         Enemies = new List<IEnemy>();
         EnemyIndex = 0;
-        IEnemy stalfos = new Stalfos(new Vector2 (WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
+        IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
         Enemies.Add(stalfos);
-        IEnemy keese = new Keese(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), 25);
+        IEnemy keese = new KeeseEnemy(enemySpawn, enemySpeed);
         Enemies.Add(keese);
-
-        CurrentSprite = new StationaryStaticSprite(Spritesheet);
+        IEnemy goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
+        Enemies.Add(goriya);
+        IEnemy zol = new ZolEnemy(enemySpawn, enemySpeed);
+        Enemies.Add(zol);
+        IEnemy oldMan = new OldManNPC(enemySpawn);
+        Enemies.Add(oldMan);
+        IEnemy aquamentus = new AquamentusBoss(bossSpawn, enemySpeed);
+        Enemies.Add(aquamentus);
 
         Player = new Player();
+        
 
-        Credits = new TextSprite(Spritefont);
+        Projectiles = new List<IProjectile>();
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Update(gameTime, this);
-
+        foreach (IProjectile projectile in Projectiles)
+        {
+            projectile.Update(gameTime, this);
+        }
         base.Update(gameTime);
     }
 
@@ -137,9 +153,14 @@ protected override void Initialize() {
         _spriteBatch.Begin();
         Player.Draw(_spriteBatch);
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Draw(_spriteBatch);
+        foreach (IProjectile projectile in Projectiles)
+        {
+            if (Enemies[Math.Abs(EnemyIndex % Enemies.Count)].GetType() == typeof(GoriyaEnemy) || projectile.GetType() != typeof(GoriyaProjectile))
+            {
+                projectile.Draw(_spriteBatch);
+            }    
+        }
         _spriteBatch.End();
-        CurrentSprite.Draw(_spriteBatch, Vector2.One);
-        Credits.Draw(_spriteBatch, new Vector2(140, 360));
 
         base.Draw(gameTime);
     }
