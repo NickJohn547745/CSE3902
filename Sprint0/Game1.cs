@@ -130,7 +130,8 @@ public class Game1 : Game {
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
         
-        keyboard.BindCommand(Keys.D0, new QuitCommand());
+        keyboard.BindCommand(Keys.Q, new QuitCommand());
+        keyboard.BindCommand(Keys.R, new ResetGameCommand());
         keyboard.BindCommand(Keys.W, new MoveUpCommand());
         keyboard.BindCommand(Keys.S, new MoveDownCommand());
         keyboard.BindCommand(Keys.D, new MoveRightCommand());
