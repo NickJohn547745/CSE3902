@@ -8,10 +8,10 @@ using sprint0.PlayerClasses.Abilities;
 namespace sprint0.PlayerClasses; 
 
 public class PlayerAbilityLeftState : IPlayerState {
-    private Player player;
+    private IPlayer player;
     private int frameCount;
     
-    public PlayerAbilityLeftState(Player player) {
+    public PlayerAbilityLeftState(IPlayer player) {
         this.player = player;
         frameCount = 21;
     }
@@ -26,12 +26,8 @@ public class PlayerAbilityLeftState : IPlayerState {
     public void Update() {
         frameCount--;
         if (frameCount == 0) {
-            player.playerState = new PlayerFacingLeftState(player);
+            player.PlayerState = new PlayerFacingLeftState(player);
         }
-    }
-
-    public void TakeDamage() {
-        throw new System.NotImplementedException();
     }
 
     public void MoveUp() {

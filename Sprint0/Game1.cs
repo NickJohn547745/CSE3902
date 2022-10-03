@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -111,6 +110,7 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.D6, new UseFireballCommand());
         keyboard.BindCommand(Keys.O, new PreviousEnemyCommand());
         keyboard.BindCommand(Keys.P, new NextEnemyCommand());
+        keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());

@@ -8,10 +8,10 @@ using sprint0.PlayerClasses.Abilities;
 namespace sprint0.PlayerClasses; 
 
 public class PlayerAbilityUpState : IPlayerState {
-    private Player player;
+    private IPlayer player;
     private int frameCount;
     
-    public PlayerAbilityUpState(Player player) {
+    public PlayerAbilityUpState(IPlayer player) {
         this.player = player;
         frameCount = 21;
     }
@@ -26,12 +26,8 @@ public class PlayerAbilityUpState : IPlayerState {
     public void Update() {
         frameCount--;
         if (frameCount == 0) {
-            player.playerState = new PlayerFacingUpState(player);
+            player.PlayerState = new PlayerFacingUpState(player);
         }
-    }
-
-    public void TakeDamage() {
-        throw new System.NotImplementedException();
     }
 
     public void MoveUp() {

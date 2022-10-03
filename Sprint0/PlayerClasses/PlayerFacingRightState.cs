@@ -8,12 +8,12 @@ using sprint0.PlayerClasses.Abilities;
 namespace sprint0.PlayerClasses; 
 
 public class PlayerFacingRightState : IPlayerState {
-    private Player player;
+    private IPlayer player;
     private int animationFrame = 0;
     private int currentFrame = 0;
     private const int FramesPerAnimationChange = 5;
 
-    public PlayerFacingRightState(Player player) {
+    public PlayerFacingRightState(IPlayer player) {
         this.player = player;
         animationFrame = 0;
         currentFrame = 0;
@@ -35,24 +35,20 @@ public class PlayerFacingRightState : IPlayerState {
         }
     }
 
-    public void TakeDamage() {
-        throw new System.NotImplementedException();
-    }
-    
     public void SwordAttack() {
-        player.playerState = new PlayerSwordRightState(player);
+        player.PlayerState = new PlayerSwordRightState(player);
     }
 
     public void MoveUp() {
-        player.playerState = new PlayerFacingUpState(player);
+        player.PlayerState = new PlayerFacingUpState(player);
     }
 
     public void MoveDown() {
-        player.playerState = new PlayerFacingDownState(player);
+        player.PlayerState = new PlayerFacingDownState(player);
     }
 
     public void MoveLeft() {
-        player.playerState = new PlayerFacingLeftState(player);
+        player.PlayerState = new PlayerFacingLeftState(player);
     }
 
     public void MoveRight() {
@@ -61,7 +57,7 @@ public class PlayerFacingRightState : IPlayerState {
     }
     
     public void UseAbility(AbilityTypes abilityType) {
-        player.AbilityManager.UseAbility(abilityType,Vector2.Add(player.Position, new Vector2(16*player.ScaleFactor, 8*player.ScaleFactor)), new Vector2(1, 0));
-        player.playerState = new PlayerAbilityRightState(player);
+        player.AbilityManager.UseAbility(abilityType,Vector2.Add(player.Position, new Vector2(16*4, 8*4)), new Vector2(1, 0));
+        player.PlayerState = new PlayerAbilityRightState(player);
     }
 }

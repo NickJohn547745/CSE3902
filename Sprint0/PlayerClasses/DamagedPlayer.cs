@@ -11,16 +11,22 @@ public class DamagedPlayer : IPlayer {
     private Game1 game;
     private IPlayer decoratedPlayer;
     private int timer = 60;
+    
+    public Vector2 Position { get; set; }
+    public int Health { get; set; }
+    public IPlayerState PlayerState { get; set; }
+    public PlayerAbilityManager AbilityManager { get; }
 
     public DamagedPlayer(IPlayer decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         this.game = game;
+        PlayerState = decoratedPlayer.PlayerState;
+        Position = decoratedPlayer.Position;
+        AbilityManager = this.decoratedPlayer.AbilityManager;
     }
     void RemoveDecorator() {
         game.Player = decoratedPlayer;
     }
-
-    public Vector2 Position { get; set; }
 
     public void Draw(SpriteBatch spriteBatch) {
         Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
@@ -38,7 +44,7 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.Update();
     }
 
-    public void TakeDamage() {
+    public void TakeDamage(Game1 player) {
         // Do nothing since player just took damage
     }
 
@@ -63,7 +69,7 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void UseAbility(AbilityTypes abilityType) {
-        
+        decoratedPlayer.UseAbility(abilityType);
     }
     
 }

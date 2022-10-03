@@ -6,61 +6,58 @@ using sprint0.PlayerClasses.Abilities;
 namespace sprint0.PlayerClasses; 
 
 public class Player : IPlayer {
-    public IPlayerState playerState;
-
-    public PlayerAbilityManager AbilityManager;
-
-    public int PlayerHealth;
-
     public int ScaleFactor;
-    
 
     public Vector2 Position { get; set; }
+    public int Health { get; set; }
+    public IPlayerState PlayerState { get; set; }
+    public PlayerAbilityManager AbilityManager { get; }
 
     public Player() {
-        playerState = new PlayerFacingUpState(this);
+        PlayerState = new PlayerFacingUpState(this);
         AbilityManager = new PlayerAbilityManager(this);
-        PlayerHealth = 6;
+        Health = 6;
         ScaleFactor = 4;
         Position = new Vector2(150);
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
-        playerState.Draw(spriteBatch);
+    public void Draw(SpriteBatch spriteBatch) { 
+        PlayerState.Draw(spriteBatch);
         AbilityManager.Draw(spriteBatch);
     }
 
     public void Update() {
-        playerState.Update();
+        PlayerState.Update();
         AbilityManager.Update();
     }
 
-    public void TakeDamage() {
-        
+    public void TakeDamage(Game1 game) {
+        Health--;
+        game.Player = new DamagedPlayer(this, game);
     }
 
     public void MoveUp() {
-        playerState.MoveUp();
+        PlayerState.MoveUp();
     }
 
     public void MoveDown() {
-        playerState.MoveDown();
+        PlayerState.MoveDown();
     }
 
     public void MoveLeft() {
-        playerState.MoveLeft();
+        PlayerState.MoveLeft();
     }
 
     public void MoveRight() {
-        playerState.MoveRight();
+        PlayerState.MoveRight();
     }
 
     public void SwordAttack() {
-        playerState.SwordAttack();
+        PlayerState.SwordAttack();
     }
 
     public void UseAbility(AbilityTypes abilityType) {
-        playerState.UseAbility(abilityType);
+        PlayerState.UseAbility(abilityType);
     }
 
 }

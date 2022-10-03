@@ -8,12 +8,12 @@ using sprint0.PlayerClasses.Abilities;
 namespace sprint0.PlayerClasses; 
 
 public class PlayerSwordUpState : IPlayerState {
-    private Player player;
+    private IPlayer player;
     private int animationFrame = 0;
     private int currentFrame = 0;
     private const int FramesPerAnimationChange = 3;
 
-    public PlayerSwordUpState(Player player) {
+    public PlayerSwordUpState(IPlayer player) {
         this.player = player;
         animationFrame = 0;
         currentFrame = 0;
@@ -36,12 +36,8 @@ public class PlayerSwordUpState : IPlayerState {
         currentFrame++;
         
         if (animationFrame == 4) {
-            player.playerState = new PlayerFacingUpState(player);
+            player.PlayerState = new PlayerFacingUpState(player);
         }
-    }
-
-    public void TakeDamage() {
-        throw new System.NotImplementedException();
     }
 
     public void SwordAttack() {
