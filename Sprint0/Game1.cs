@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -25,9 +24,7 @@ public class Game1 : Game {
     public List<IProjectile> Projectiles { get; private set; }
 
     public int EnemyIndex;
-
-    public Texture2D Spritesheet;
-    private SpriteFont Spritefont;
+    
     private int WindowWidth;
     private int WindowHeight;
     
@@ -89,9 +86,7 @@ protected override void Initialize() {
 
     protected override void LoadContent() {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        Spritesheet = Content.Load<Texture2D>("smb_mario_sheet");
-        Spritefont = Content.Load<SpriteFont>("Arial");
-        
+
         TextureStorage.LoadAllTextures(Content);
 
         TextureStorage.LoadAllTextures(Content);
@@ -108,8 +103,15 @@ protected override void Initialize() {
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.I, new NextItemCommand());
         keyboard.BindCommand(Keys.U, new PreviousItemCommand());
+        keyboard.BindCommand(Keys.D1, new UseBombCommand());
+        keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand());
+        keyboard.BindCommand(Keys.D3, new UseMagicalBoomerangCommand());
+        keyboard.BindCommand(Keys.D4, new UseWoodenArrowCommand());
+        keyboard.BindCommand(Keys.D5, new UseSilverArrowCommand());
+        keyboard.BindCommand(Keys.D6, new UseFireballCommand());
         keyboard.BindCommand(Keys.O, new PreviousEnemyCommand());
         keyboard.BindCommand(Keys.P, new NextEnemyCommand());
+        keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand());
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
@@ -140,6 +142,7 @@ protected override void Initialize() {
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
         Enemies[Math.Abs(EnemyIndex % Enemies.Count)].Update(gameTime, this);
+        Player.Update();
         foreach (IProjectile projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
