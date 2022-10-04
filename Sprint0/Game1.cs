@@ -256,8 +256,6 @@ public class Game1 : Game {
     }
     public void reset()
     {
-        int width = GetWindowWidth();
-        int height = GetWindowHeight();
 
         currentEnemyIndex = 0;
         currentTileIndex = 0;
