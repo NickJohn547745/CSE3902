@@ -15,6 +15,7 @@ namespace sprint0.Enemies
     {
         public OldManNPC(Vector2 position)
         {
+            this.initPosition = position;
             this.position = position;
             sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
             velocity = Vector2.Zero;
