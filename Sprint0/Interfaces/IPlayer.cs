@@ -12,6 +12,7 @@ namespace sprint0.Interfaces
         PlayerAbilityManager AbilityManager { get; }
         void Draw(SpriteBatch spriteBatch);
         void Update();
+        void Reset();
         void TakeDamage(Game1 game);
         void MoveUp();
         void MoveDown();

@@ -8,6 +8,7 @@ namespace sprint0.PlayerClasses;
 public class Player : IPlayer {
     public int ScaleFactor;
 
+    private Vector2 initPosition;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public IPlayerState PlayerState { get; set; }
@@ -19,6 +20,7 @@ public class Player : IPlayer {
         Health = 6;
         ScaleFactor = 4;
         Position = new Vector2(150);
+        initPosition = Position;
     }
 
     public void Draw(SpriteBatch spriteBatch) { 
@@ -29,6 +31,12 @@ public class Player : IPlayer {
     public void Update() {
         PlayerState.Update();
         AbilityManager.Update();
+    }
+
+    public void Reset()
+    {
+        Position = initPosition;
+        PlayerState = new PlayerFacingUpState(this);
     }
 
     public void TakeDamage(Game1 game) {

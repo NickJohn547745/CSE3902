@@ -43,6 +43,11 @@ namespace sprint0.Enemies
             delayCount++;
         }
 
+        public void Reset()
+        {
+            position = initPosition;
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, position);
