@@ -253,6 +253,8 @@ public class Game1 : Game {
     }
     public void reset()
     {
-
-    }
+        currentEnemyIndex = 0;
+        currentTileIndex = 0;
+        currentItemIndex = 0;
+}
 }
