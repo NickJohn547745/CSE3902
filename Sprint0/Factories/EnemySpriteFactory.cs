@@ -98,6 +98,7 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
 
             return new BasicEnemySprite(spriteSheet, frameSources, 6, 5);
+
         }
     }
 }

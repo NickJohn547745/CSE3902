@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace sprint0.Commands
 {
-    public class CyclePreviousTyleCommand : ICommand
+    public class PreviousTileCommand : ICommand
     {
+        public CommandData CommandData { get; set; }
         public void Execute(Game1 game)
         {
-            // game.Tile.PreviousTile();
+            if (CommandData.KeyState == IController.KeyState.Pressed)
+            {
+                game.PreviousTile();
+            }
         }
     }
 }

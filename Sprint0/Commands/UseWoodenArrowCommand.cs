@@ -3,8 +3,14 @@ using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.Commands; 
 
-public class UseWoodenArrowCommand : ICommand{
-    public void Execute(Game1 game) {
-        game.Player.UseAbility(AbilityTypes.WoodenArrow);
+public class UseWoodenArrowCommand : ICommand
+{
+    public CommandData CommandData { get; set; }
+    public void Execute(Game1 game)
+    {
+        if (CommandData.KeyState == IController.KeyState.Pressed)
+        {
+            game.Player.UseAbility(AbilityTypes.WoodenArrow);
+        }
     }
 }

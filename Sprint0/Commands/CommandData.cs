@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace sprint0.Commands
 {
-    public class CycleForwardTileCommand : ICommand
+    public class CommandData
     {
-        public void Execute(Game1 game)
+        public IController.KeyState KeyState = IController.KeyState.KeyUp;
+        public CommandData(IController.KeyState keyState)
         {
-            // game.Tile.NextTile();
+            KeyState = keyState;
         }
     }
 }

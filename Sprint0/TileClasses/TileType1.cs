@@ -9,29 +9,12 @@ using System.Threading.Tasks;
 
 namespace sprint0.TileClasses
 {
-    public class TileType1 : ITile
+    public class TileType1 : TileType
     {
-
-        public Vector2 Location { get; set; }
-        Texture2D texture;
-
-
         public TileType1()
         {
-
-        }
-
-        public void Update(GameTime gameTime)
-        {
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            texture = TextureStorage.GetTilesSpritesheet();
-            /* Rectangle texturePos = TileSpriteFactory.GetTile1Sprite();
-             spriteBatch.Draw(texture, texturePos)
-            */
+            this.SetLocation(1000, 360);
+            this.SetTextureCoords(0, 0);
         }
     }
 }

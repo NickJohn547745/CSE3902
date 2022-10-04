@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace sprint0;
 public interface ITile
 {
-    Vector2 Location { get; set; }
+    Point Location { get; set; }
 
     void Update(GameTime gameTime);
 
