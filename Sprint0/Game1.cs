@@ -38,7 +38,7 @@ public class Game1 : Game {
     private SpriteFont Spritefont;
     private int WindowWidth;
     private int WindowHeight;
-    
+
 
     public IPlayer Player;
     public ISprite CurrentSprite { get; set; }
@@ -203,7 +203,7 @@ public class Game1 : Game {
         EnemyList.Add(aquamentus);
 
         Player = new Player();
-        
+
         Projectiles = new List<IProjectile>();
     }
 
@@ -253,8 +253,18 @@ public class Game1 : Game {
     }
     public void reset()
     {
+        int width = GetWindowWidth();
+        int height = GetWindowHeight();
+
         currentEnemyIndex = 0;
         currentTileIndex = 0;
         currentItemIndex = 0;
-}
+
+        Player.Reset();
+
+        foreach (IEnemy enemy in EnemyList)
+        {
+            enemy.Reset();
+        }
+    }
 }

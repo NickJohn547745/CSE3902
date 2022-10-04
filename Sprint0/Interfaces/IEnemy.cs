@@ -13,5 +13,7 @@ namespace sprint0.Interfaces
         void Update(GameTime gameTime, Game1 game);
 
         void Draw(SpriteBatch spriteBatch);
+
+        void Reset();
     }
 }
