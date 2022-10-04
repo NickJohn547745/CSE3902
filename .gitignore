@@ -1,6 +1,7 @@
 .vs/
 .DS_Store
-Sprint0/bin/Debug/
-Sprint0/bin/Release/
-Sprint0/Content/bin/
-Sprint0/Content/obj/
+*.mgcontent
+*.xnb
+bin/
+obj/
+.idea/

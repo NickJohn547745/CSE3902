@@ -25,7 +25,6 @@ public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
-
     public List<IEnemy> EnemyList { get; private set; }
     public List<ITile> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
@@ -39,6 +38,7 @@ public class Game1 : Game {
     private SpriteFont Spritefont;
     private int WindowWidth;
     private int WindowHeight;
+    
 
     public IPlayer Player;
     public ISprite CurrentSprite { get; set; }
@@ -124,9 +124,7 @@ public class Game1 : Game {
 
     protected override void LoadContent() {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        Spritesheet = Content.Load<Texture2D>("smb_mario_sheet");
-        Spritefont = Content.Load<SpriteFont>("Arial");
-        
+
         TextureStorage.LoadAllTextures(Content);
 
         TextureStorage.LoadAllTextures(Content);
@@ -148,7 +146,15 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.U, new PreviousItemCommand());
         keyboard.BindCommand(Keys.O, new PreviousEnemyCommand());
         keyboard.BindCommand(Keys.P, new NextEnemyCommand());
+        keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand());
 
+        keyboard.BindCommand(Keys.D1, new UseBombCommand());
+        keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand());
+        keyboard.BindCommand(Keys.D3, new UseMagicalBoomerangCommand());
+        keyboard.BindCommand(Keys.D4, new UseWoodenArrowCommand());
+        keyboard.BindCommand(Keys.D5, new UseSilverArrowCommand());
+        keyboard.BindCommand(Keys.D6, new UseFireballCommand());
+        
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
@@ -211,6 +217,12 @@ public class Game1 : Game {
             projectile.Update(gameTime, this);
         }
 
+        EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].Update(gameTime, this);
+        Player.Update();
+        foreach (IProjectile projectile in Projectiles)
+        {
+            projectile.Update(gameTime, this);
+        }
         base.Update(gameTime);
     }
 

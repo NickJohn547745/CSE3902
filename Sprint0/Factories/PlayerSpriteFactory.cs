@@ -82,6 +82,67 @@ public class PlayerSpriteFactory {
         };
         return spritePositions[frame % spritePositions.Count];
     }
+
+    public static Rectangle GetAbilityDownSprite() {
+        return new Rectangle(107, 11, 16, 16);
+    }
+    public static Rectangle GetAbilityUpSprite() {
+        return new Rectangle(141, 11, 16, 16);
+    }
+    public static Rectangle GetAbilitySideSprite() {
+        return new Rectangle(124, 11, 16, 16);
+    }
+
+    public static Rectangle GetDamagedSprite() {
+        return new Rectangle(1, 249, 16, 16);
+    }
+
+    public static Rectangle GetBombSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(129, 185, 8, 16),
+            new Rectangle(138, 185, 16, 16),
+            new Rectangle(155, 185, 16, 16),
+            new Rectangle(173, 185, 16, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
+    
+    public static Rectangle GetWoodenBoomerangSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(64, 185, 8, 16),
+            new Rectangle(73, 185, 8, 16),
+            new Rectangle(82, 185, 8, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
+    
+    public static Rectangle GetMagicalBoomerangSprite(int frame) {
+        List<Rectangle> spritePositions = new List<Rectangle> {
+            new Rectangle(91, 185, 8, 16),
+            new Rectangle(100, 185, 8, 16),
+            new Rectangle(109, 185, 8, 16)
+        };
+        return spritePositions[frame % spritePositions.Count];
+    }
+
+    public static Rectangle GetWoodenArrowSprite(int direction) {
+        if (direction == 0) {
+            return new Rectangle(1, 185, 8, 16);
+        }
+        return new Rectangle(10, 185, 16, 16);
+    }
+    
+    public static Rectangle GetSilverArrowSprite(int direction) {
+        if (direction == 0) {
+            return new Rectangle(27, 185, 8, 16);
+        }
+        return new Rectangle(36, 185, 16, 16);
+    }
+    
+    public static Rectangle GetFireballSprite() {
+        return new Rectangle(191, 185, 16, 16);
+    }
+    
     
     
 

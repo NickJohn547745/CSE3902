@@ -8,7 +8,7 @@ public class PreviousEnemyCommand : ICommand {
     {
         if (CommandData.KeyState == IController.KeyState.Pressed)
         {
-            game.PreviousEnemy();
-        }
+        game.PreviousEnemy();
     }
+}
 }
