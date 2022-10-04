@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Xna.Framework;
@@ -13,10 +14,14 @@ using sprint0.Interfaces;
 using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
+using sprint0.Projectiles;
 
 namespace sprint0;
 
 public class Game1 : Game {
+
+    private const float enemySpeed = 75;
+
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
@@ -24,6 +29,7 @@ public class Game1 : Game {
     public List<IEnemy> EnemyList { get; private set; }
     public List<ITile> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
+    public List<IProjectile> Projectiles { get; private set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
@@ -31,12 +37,10 @@ public class Game1 : Game {
 
     public Texture2D Spritesheet;
     private SpriteFont Spritefont;
-    private ISprite Credits;
     private int WindowWidth;
     private int WindowHeight;
 
     public IPlayer Player;
-
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -60,7 +64,7 @@ public class Game1 : Game {
         return WindowHeight;
     }
 
-    public void CycleEnemyForward()
+    public void NextEnemy()
     {
         currentEnemyIndex++;
 
@@ -68,7 +72,7 @@ public class Game1 : Game {
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
     }
 
-    public void CycleEnemyBackward()
+    public void PreviousEnemy()
     {
         currentEnemyIndex--;
 
@@ -138,10 +142,12 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
-        keyboard.BindCommand(Keys.I, new CycleForwardItemCommand());
-        keyboard.BindCommand(Keys.U, new CyclePreviousItemCommand());
-        keyboard.BindCommand(Keys.T, new CycleForwardTileCommand());
-        keyboard.BindCommand(Keys.Y, new CyclePreviousTileCommand());
+        keyboard.BindCommand(Keys.T, new NextTileCommand());
+        keyboard.BindCommand(Keys.Y, new PreviousTileCommand());
+        keyboard.BindCommand(Keys.I, new NextItemCommand());
+        keyboard.BindCommand(Keys.U, new PreviousItemCommand());
+        keyboard.BindCommand(Keys.O, new PreviousEnemyCommand());
+        keyboard.BindCommand(Keys.P, new NextEnemyCommand());
 
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
@@ -173,18 +179,37 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
+        Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
+        Vector2 bossSpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight / 2);
+
         EnemyList = new List<IEnemy>();
-        EnemyList.Add(new Stalfos(new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4), new Vector2(25, 25)));
+        IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
+        EnemyList.Add(stalfos);
+        IEnemy keese = new KeeseEnemy(enemySpawn, enemySpeed);
+        EnemyList.Add(keese);
+        IEnemy goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
+        EnemyList.Add(goriya);
+        IEnemy zol = new ZolEnemy(enemySpawn, enemySpeed);
+        EnemyList.Add(zol);
+        IEnemy oldMan = new OldManNPC(enemySpawn);
+        EnemyList.Add(oldMan);
+        IEnemy aquamentus = new AquamentusBoss(bossSpawn, enemySpeed);
+        EnemyList.Add(aquamentus);
 
         Player = new Player();
-
-        Credits = new TextSprite(Spritefont);
+        
+        Projectiles = new List<IProjectile>();
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
         EnemyList[currentEnemyIndex].Update(gameTime, this);
+
+        foreach (IProjectile projectile in Projectiles)
+        {
+            projectile.Update(gameTime, this);
+        }
 
         base.Update(gameTime);
     }
@@ -200,7 +225,15 @@ public class Game1 : Game {
         TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
-        Credits.Draw(_spriteBatch, new Vector2(140, 360));
+        //Credits.Draw(_spriteBatch, new Vector2(140, 360));
+
+        foreach (IProjectile projectile in Projectiles)
+        {
+            if (EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].GetType() == typeof(GoriyaEnemy) || projectile.GetType() != typeof(GoriyaProjectile))
+            {
+                projectile.Draw(_spriteBatch);
+            }    
+        }
 
         base.Draw(gameTime);
 

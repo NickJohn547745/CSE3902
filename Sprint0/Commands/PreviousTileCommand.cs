@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace sprint0.Commands
 {
-    public class CyclePreviousTileCommand : ICommand
+    public class PreviousTileCommand : ICommand
     {
         public CommandData CommandData { get; set; }
         public void Execute(Game1 game)

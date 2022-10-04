@@ -10,9 +10,6 @@ namespace sprint0.Controllers;
 public class MouseController : IController {
     private Point mousePosition;
 
-    private Tuple<Rectangle, ICommand>[] regions = new Tuple<Rectangle, ICommand>[0];
-    //private Dictionary<Rectangle, ICommand> regions = new Dictionary<Rectangle, ICommand>();
-
     public MouseController() {
     }
     public void BindCommand(Keys key, ICommand command) {
@@ -28,11 +25,7 @@ public class MouseController : IController {
         }
 
         if (mouseInfo.LeftButton == ButtonState.Pressed) {
-            foreach (var (region, command) in regions) {
-                if (region.Contains(mousePosition)) {
-                    command.Execute(game);
-                }
-            }
+          
         }
 
     }
