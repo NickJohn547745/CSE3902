@@ -138,6 +138,10 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.S, new MoveDownCommand());
         keyboard.BindCommand(Keys.D, new MoveRightCommand());
         keyboard.BindCommand(Keys.A, new MoveLeftCommand());
+        keyboard.BindCommand(Keys.Up, new MoveUpCommand());
+        keyboard.BindCommand(Keys.Down, new MoveDownCommand());
+        keyboard.BindCommand(Keys.Right, new MoveRightCommand());
+        keyboard.BindCommand(Keys.Left, new MoveLeftCommand());
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand());
         keyboard.BindCommand(Keys.T, new NextTileCommand());
@@ -186,7 +190,6 @@ public class Game1 : Game {
         ItemList.Add(new Triforce());
 
         Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
-        Vector2 bossSpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight / 2);
 
         EnemyList = new List<IEnemy>();
         IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
@@ -199,7 +202,7 @@ public class Game1 : Game {
         EnemyList.Add(zol);
         IEnemy oldMan = new OldManNPC(enemySpawn);
         EnemyList.Add(oldMan);
-        IEnemy aquamentus = new AquamentusBoss(bossSpawn, enemySpeed);
+        IEnemy aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
         EnemyList.Add(aquamentus);
 
         Player = new Player();
