@@ -10,7 +10,7 @@ public interface IController {
         KeyDown,
         KeyUp
     }
-    public void BindCommand(Keys key, ICommand command);
+    public void BindCommand(Keys key, ICommand command, KeyState keyState);
 
     public void Update(Game1 game);
 

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using sprint0.Commands;
@@ -12,7 +10,7 @@ public class MouseController : IController {
 
     public MouseController() {
     }
-    public void BindCommand(Keys key, ICommand command) {
+    public void BindCommand(Keys key, ICommand command, IController.KeyState keyState) {
         
     }
 
