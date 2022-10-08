@@ -49,7 +49,12 @@ namespace sprint0.Classes
         private static Texture2D
             enemycloudSpritesheet,
             enemyexplosionSpritesheet,
-            tilesSpritesheet;
+            tilesSpritesheet,
+            wallsSpritesheet,
+            topDoorsSpritesheet,
+            rightDoorsSpritesheet,
+            bottomDoorsSpritesheet,
+            leftDoorsSpritesheet;
 
         private static ContentManager content;
 
@@ -108,6 +113,11 @@ namespace sprint0.Classes
             enemycloudSpritesheet = content.Load<Texture2D>(prefix + "enemycloud");
             enemyexplosionSpritesheet = content.Load<Texture2D>(prefix + "enemyexplosion");
             tilesSpritesheet = content.Load<Texture2D>(prefix + "tiles");
+            wallsSpritesheet = content.Load<Texture2D>(prefix + "walls");
+            topDoorsSpritesheet = content.Load<Texture2D>(prefix + "topDoors");
+            rightDoorsSpritesheet = content.Load<Texture2D>(prefix + "rightDoors");
+            bottomDoorsSpritesheet = content.Load<Texture2D>(prefix + "bottomDoors");
+            leftDoorsSpritesheet = content.Load<Texture2D>(prefix + "leftDoors");
         }
 
         public static Texture2D GetPlayerSpritesheet()
@@ -216,6 +226,26 @@ namespace sprint0.Classes
         public static Texture2D GetTilesSpritesheet()
         {
             return tilesSpritesheet;
+        }
+        public static Texture2D GetWallsSpritesheet()
+        {
+            return wallsSpritesheet;
+        }
+        public static Texture2D GetTopDoorsSpritesheet()
+        {
+            return topDoorsSpritesheet;
+        }
+        public static Texture2D GetRightDoorsSpritesheet()
+        {
+            return rightDoorsSpritesheet;
+        }
+        public static Texture2D GetBottomDoorsSpritesheet()
+        {
+            return bottomDoorsSpritesheet;
+        }
+        public static Texture2D GetLeftDoorsSpritesheet()
+        {
+            return leftDoorsSpritesheet;
         }
 
         public static Texture2D GetGoriyaProjectileSpritesheet()
