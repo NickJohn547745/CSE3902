@@ -44,6 +44,7 @@ namespace sprint0.Enemies
             } else if (!goriyaStateMachine.boomerangThrown)
             {
                 game.Projectiles.Remove(goriyaStateMachine.boomerang);
+                goriyaStateMachine.boomerang = null;
 
                 // change direction
                 goriyaStateMachine.ChangeDirection();

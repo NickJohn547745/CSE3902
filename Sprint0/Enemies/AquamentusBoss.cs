@@ -10,7 +10,7 @@ namespace sprint0.Enemies
         private const int behaviorDelay = 60;
         private const int fireBallShoot = 3;
         private const int fireBallOffsetY = 30;
-        private const float fireBallDirection = 2 / 3;
+        private const float fireBallDirection = (float) 2/3;
         private const int randBound = 3;
 
         private int fireBallTracker;
