@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
+using sprint0.Projectiles;
 using sprint0.Sprites;
 using System.Collections.Generic;
 
@@ -8,9 +9,29 @@ namespace sprint0.Factories
 {
     public class ProjectileSpriteFactory
     {
+        private const int GoriyaProjectileX1 = 1;
+        private const int GoriyaProjectileX2 = 9;
+        private const int GoriyaProjectileX3 = 19;
+        private const int GoriyaProjectileY1 = 4;
+        private const int GoriyaProjectileY2 = 4;
+        private const int GoriyaProjectileY3 = 6;
+        private const int GoriyaProjectileWidth1 = 5;
+        private const int GoriyaProjectileWidth2 = 8;
+        private const int GoriyaProjectileWidth3 = 7;
+        private const int GoriyaProjectileHeight1 = 8;
+        private const int GoriyaProjectileHeight2 = 8;
+        private const int GoriyaProjectileHeight3 = 5;
+        private const int GoriyaProjectileDelay = 6;
+        private const int GoriyaProjectileScale = 5;
 
-        //private Texture2D projectileSpriteSheet;
-        // any other textures needed
+        private const int AquamentusProjectileX = 8;
+        private const int AquamentusProjectileY1 = 2;
+        private const int AquamentusProjectileY2 = 18;
+        private const int AquamentusProjectileWidth = 8;
+        private const int AquamentusProjectileHeight = 11;
+        private const int AquamentusProjectileDelay = 6;
+        private const int AquamentusProjectileScale = 5;
+
 
         private static ProjectileSpriteFactory instance = new ProjectileSpriteFactory();
 
@@ -26,23 +47,23 @@ namespace sprint0.Factories
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaProjectileSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
-            frameSources.Add(new Rectangle(1, 4, 5, 8));
-            frameSources.Add(new Rectangle(9, 4, 8, 8));
-            frameSources.Add(new Rectangle(19, 6, 7, 5));
+            frameSources.Add(new Rectangle(GoriyaProjectileX1, GoriyaProjectileY1, GoriyaProjectileWidth1, GoriyaProjectileHeight1));
+            frameSources.Add(new Rectangle(GoriyaProjectileX2, GoriyaProjectileY2, GoriyaProjectileWidth2, GoriyaProjectileHeight2));
+            frameSources.Add(new Rectangle(GoriyaProjectileX3, GoriyaProjectileY3, GoriyaProjectileWidth3, GoriyaProjectileHeight3));
 
-            return new BasicProjectileSprite(spriteSheet, frameSources, 6, 5);
+            return new BasicProjectileSprite(spriteSheet, frameSources, GoriyaProjectileDelay, GoriyaProjectileScale);
         }
 
         public Sprite CreateAquamentusProjectileSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetFireballSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
-            frameSources.Add(new Rectangle(0, 2, 8, 11));
-            frameSources.Add(new Rectangle(8, 2, 8, 11));
-            frameSources.Add(new Rectangle(0, 18, 8, 11));
-            frameSources.Add(new Rectangle(8, 18, 8, 11));
+            frameSources.Add(new Rectangle(0, AquamentusProjectileY1, AquamentusProjectileWidth, AquamentusProjectileHeight));
+            frameSources.Add(new Rectangle(AquamentusProjectileX, AquamentusProjectileY1, AquamentusProjectileWidth, AquamentusProjectileHeight));
+            frameSources.Add(new Rectangle(0, AquamentusProjectileY2, AquamentusProjectileWidth, AquamentusProjectileHeight));
+            frameSources.Add(new Rectangle(AquamentusProjectileX, AquamentusProjectileY2, AquamentusProjectileWidth, AquamentusProjectileHeight));
 
-            return new BasicProjectileSprite(spriteSheet, frameSources, 6, 5);
+            return new BasicProjectileSprite(spriteSheet, frameSources, AquamentusProjectileDelay, AquamentusProjectileScale);
         }
 
     }

@@ -13,6 +13,11 @@ namespace sprint0.Enemies
 {
     public class ZolEnemy : Enemy
     {
+        private const int behaviorDelay = 40;
+        private const int randBound = 6;
+
+        private Dictionary<int, Vector2> directionChoice;
+
         public ZolEnemy(Vector2 position, float speed)
         {
             initPosition = position;
@@ -20,7 +25,15 @@ namespace sprint0.Enemies
             sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             this.speed = speed;
             velocity = Vector2.One;
-            delay = 40;
+            delay = behaviorDelay;
+
+            directionChoice = new Dictionary<int, Vector2>();
+            directionChoice.Add(0, new Vector2(0, -1));
+            directionChoice.Add(1, new Vector2(-1, 0));
+            directionChoice.Add(2, new Vector2(1, 0));
+            directionChoice.Add(3, new Vector2(0, 1));
+            directionChoice.Add(4, Vector2.Zero);
+            directionChoice.Add(5, Vector2.Zero);
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -28,32 +41,9 @@ namespace sprint0.Enemies
             Random rand = new Random();
 
             // randomly choose movement direction
-            switch (rand.Next(0, 6))
-            {
-                case 0:
-                    // move up
-                    velocity = new Vector2(0, -1);
-                    break;
-                case 1:
-                    // move left
-                    velocity = new Vector2(-1, 0);
-                    break;
-                case 2:
-                    // move right
-                    velocity = new Vector2(1, 0);
-                    break;
-                case 3:
-                    // move down
-                    velocity = new Vector2(0, 1);
-                    break;
-                case 4:
-                case 5:
-                    // stop
-                    velocity = Vector2.Zero;
-                    break;
-                default:
-                    break;
-            }
+            int direction = rand.Next(0, randBound);
+            if (directionChoice.ContainsKey(direction)) velocity = directionChoice[direction];
+            
         }
     }
 }

@@ -14,17 +14,19 @@ namespace sprint0.Enemies
 {
     public class GoriyaStateMachine
     {
+        private const int directionChange = 4;
+
         public GoriyaEnemy goriya { get; set; }
         public enum Direction { Up, Down, Left, Right};
         public Direction goriyaDirection { get; private set; }
         public SpriteEffects spriteEffect { get; private set; }
-        public Boolean boomerangThrown { get; set; }
+        public bool boomerangThrown { get; set; }
         public GoriyaProjectile boomerang { get; set; }
 
         public GoriyaStateMachine(GoriyaEnemy goriya)
         {
             this.goriya = goriya;            
-            this.boomerangThrown = false;
+            boomerangThrown = false;
             spriteEffect = SpriteEffects.None;
         }
 
@@ -33,7 +35,7 @@ namespace sprint0.Enemies
                 Random rand = new Random();
 
                 // randomly choose direction
-                switch (rand.Next(0, 4))
+                switch (rand.Next(0, directionChange))
                 {
                     case 0:
                         // move up

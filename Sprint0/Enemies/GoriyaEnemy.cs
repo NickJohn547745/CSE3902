@@ -14,6 +14,9 @@ namespace sprint0.Enemies
 {
     public class GoriyaEnemy: Enemy
     {
+        private const int behaviorDelay = 40;
+        private const int directionChange = 4;
+
         private GoriyaStateMachine goriyaStateMachine;
         private int boomerangTracker;
 
@@ -23,7 +26,7 @@ namespace sprint0.Enemies
             this.position = position;
             this.speed = speed;
             velocity = Vector2.Zero;
-            delay = 40;
+            delay = behaviorDelay;
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
@@ -32,7 +35,7 @@ namespace sprint0.Enemies
         protected override void Behavior(GameTime gameTime, Game1 game)
         {
             // change direction 4 times
-            if (boomerangTracker % 4 == 0)
+            if (boomerangTracker % directionChange == 0)
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
@@ -41,6 +44,7 @@ namespace sprint0.Enemies
             } else if (!goriyaStateMachine.boomerangThrown)
             {
                 game.Projectiles.Remove(goriyaStateMachine.boomerang);
+                goriyaStateMachine.boomerang = null;
 
                 // change direction
                 goriyaStateMachine.ChangeDirection();
