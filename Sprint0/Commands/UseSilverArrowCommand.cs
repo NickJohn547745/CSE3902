@@ -5,12 +5,8 @@ namespace sprint0.Commands;
 
 public class UseSilverArrowCommand : ICommand
 {
-    public CommandData CommandData { get; set; }
     public void Execute(Game1 game)
     {
-        if (CommandData.KeyState == IController.KeyState.Pressed)
-        {
-            game.Player.UseAbility(AbilityTypes.SilverArrow);
-        }
+        game.Player.UseAbility(AbilityTypes.SilverArrow);
     }
 }
