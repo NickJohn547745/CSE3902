@@ -234,6 +234,10 @@ public class Game1 : Game {
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
+        _spriteBatch.Draw(TextureStorage.GetWallsSpritesheet(), 
+                          _graphics.GraphicsDevice.PresentationParameters.Bounds,
+                          Color.White);
+
         Player.Draw(_spriteBatch);
 
         EnemyList[currentEnemyIndex].Draw(_spriteBatch);
