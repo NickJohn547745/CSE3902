@@ -15,22 +15,32 @@ namespace sprint0.Factories
 
         private const int KeeseDelay = 6;
         private const float KeeseScale = 5;
+        private const int KeeseWidth = 16;
+        private const int KeeseHeight1 = 8;
+        private const int KeeseHeight2 = 10;
+        private const int KeeseX1 = 0;
+        private const int KeeseX2 = 16;
+        private const int KeeseY = 4;
+        
 
         private const int GoriyaDelay = 8;
         private const float GoriyaScale = 5;
         private const int GoriyaWidth = 15;
         private const int GoriyaHeight = 15;
         private const int GoriyaUpX = 20;
+        private const int GoriyaUpY = 1;
+        private const int GoriyaDownX = 1;
+        private const int GoriyaDownY = 1;
         private const int GoriyaSideY1 = 19;
         private const int GoriyaSideY2 = 20;
+        private const int GoriyaSideX1 = 1;
         private const int GoriyaSideX2 = 19;
 
         private const int ZolDelay = 8;
         private const float ZolScale = 5;
-        private const int ZolX1 = 2;
+        private const int ZolX1 = 0;
         private const int ZolX2 = 16;
-        private const int ZolWidth1 = 12;
-        private const int ZolWidth2 = 15;
+        private const int ZolWidth = 15;
 
         private const int OldManDelay = 2;
         private const float OldManScale = 5;
@@ -63,8 +73,8 @@ namespace sprint0.Factories
         {
             Texture2D spriteSheet = TextureStorage.GetKeeseSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
-            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
-            frameSources.Add(new Rectangle(spriteSheet.Width / 2 + 1, 0, spriteSheet.Width / 2, spriteSheet.Height));
+            frameSources.Add(new Rectangle(KeeseX1, KeeseY, KeeseWidth, KeeseHeight1));
+            frameSources.Add(new Rectangle(KeeseX2, KeeseY, KeeseWidth, KeeseHeight2));
 
             return new BasicEnemySprite(spriteSheet, frameSources, KeeseDelay, KeeseScale);
         }
@@ -72,7 +82,7 @@ namespace sprint0.Factories
         public Sprite CreateGoriyaFacingUpStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
-            Rectangle frameSource = new Rectangle(GoriyaUpX, 1, GoriyaWidth, GoriyaHeight);
+            Rectangle frameSource = new Rectangle(GoriyaUpX, GoriyaUpY, GoriyaWidth, GoriyaHeight);
 
             return new FrameFlipEnemySprite(spriteSheet, frameSource, GoriyaDelay, GoriyaScale);
         }
@@ -80,7 +90,7 @@ namespace sprint0.Factories
         public Sprite CreateGoriyaFacingDownStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
-            Rectangle frameSource = new Rectangle(1, 1, GoriyaWidth, GoriyaHeight);
+            Rectangle frameSource = new Rectangle(GoriyaDownX, GoriyaDownY, GoriyaWidth, GoriyaHeight);
 
             return new FrameFlipEnemySprite(spriteSheet, frameSource, GoriyaDelay, GoriyaScale);
         }
@@ -90,7 +100,7 @@ namespace sprint0.Factories
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
 
-            frameSources.Add(new Rectangle(1, GoriyaSideY1, GoriyaWidth, GoriyaHeight));
+            frameSources.Add(new Rectangle(GoriyaSideX1, GoriyaSideY1, GoriyaWidth, GoriyaHeight));
             frameSources.Add(new Rectangle(GoriyaSideX2, GoriyaSideY2, GoriyaWidth, GoriyaHeight));
 
             return new BasicEnemySprite(spriteSheet, frameSources, GoriyaDelay, GoriyaScale);
@@ -101,8 +111,8 @@ namespace sprint0.Factories
             Texture2D spriteSheet = TextureStorage.GetZolSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
 
-            frameSources.Add(new Rectangle(ZolX1, 0, ZolWidth1, spriteSheet.Height));
-            frameSources.Add(new Rectangle(ZolX2, 0, ZolWidth2, spriteSheet.Height));
+            frameSources.Add(new Rectangle(ZolX1, 0, ZolWidth, spriteSheet.Height));
+            frameSources.Add(new Rectangle(ZolX2, 0, ZolWidth, spriteSheet.Height));
 
             return new BasicEnemySprite(spriteSheet, frameSources, ZolDelay, ZolScale);
         }
