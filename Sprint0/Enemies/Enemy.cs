@@ -43,14 +43,19 @@ namespace sprint0.Enemies
             delayCount++;
         }
 
-        public void Reset()
+        public Rectangle GetHitBox()
         {
-            position = initPosition;
+            return new Rectangle((int) position.X, (int) position.Y, sprite.GetWidth(), sprite.GetHeight());
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             sprite.Draw(spriteBatch, position);
+        }
+
+        public void Reset()
+        {
+            position = initPosition;
         }
 
     }

@@ -12,6 +12,8 @@ namespace sprint0.Interfaces
     {
         void Update(GameTime gameTime, Game1 game);
 
+        Rectangle GetHitBox();
+
         void Draw(SpriteBatch spriteBatch);
 
         void Reset();
