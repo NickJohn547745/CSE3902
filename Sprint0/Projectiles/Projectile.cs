@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.Sprites;
+using System;
 
 namespace sprint0.Interfaces; 
 
@@ -28,7 +29,10 @@ public abstract class Projectile : ICollidable {
         }
     }
 
+    public void Collide(Type type, ICollidable.Edge edge)
+    {
 
+    }
 
     public Rectangle GetHitBox()
     {

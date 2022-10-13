@@ -43,6 +43,11 @@ namespace sprint0.Enemies
             delayCount++;
         }
 
+        public void Collide(Type type, ICollidable.Edge edge)
+        {
+
+        }
+
         public Rectangle GetHitBox()
         {
             return new Rectangle((int) position.X, (int) position.Y, sprite.GetWidth(), sprite.GetHeight());

@@ -15,12 +15,40 @@ namespace sprint0.Classes
             return source1.GetHitBox().X.CompareTo(source2.GetHitBox().X);
         }
 
-        private void CollisionResponse(ICollidable obj1, ICollidable obj2)
+        /*
+         * Determine which side of obj is colliding with current; respond accordingly
+        */
+        private void CollisionResponse(ICollidable current, ICollidable obj)
         {
-            
+            int currentLeft = current.GetHitBox().X;
+            int currentTop = current.GetHitBox().Y;
+            int objTop = obj.GetHitBox().Y;
+            int currentBottom = current.GetHitBox().Y + current.GetHitBox().Height;
+            int objRight = obj.GetHitBox().X + obj.GetHitBox().Width;
+            int objBottom = obj.GetHitBox().Y + obj.GetHitBox().Height;
 
+            ICollidable.Edge currentEdge = ICollidable.Edge.Left;
+            ICollidable.Edge objEdge = ICollidable.Edge.Right;
 
+            // determine which edge it collides with the most
+            int sideOverlap = Math.Abs(objRight - currentLeft);
 
+            // guaranteed to be left side collision with current
+            // can't be right since only objects to the left of current are in Active list
+
+            // bottom of obj collide with top of current
+            if (objBottom > currentTop && objBottom - currentTop > sideOverlap)
+            {
+                currentEdge = ICollidable.Edge.Top;
+                objEdge = ICollidable.Edge.Bottom;
+            } else if (objTop < currentBottom && currentBottom - objTop > sideOverlap)
+            {
+                currentEdge = ICollidable.Edge.Bottom;
+                objEdge = ICollidable.Edge.Top;
+            }
+
+            current.Collide(obj.GetType(), currentEdge);
+            obj.Collide(current.GetType(), objEdge);
         }
 
         public void DetectCollisions(List<ICollidable> collidables)
@@ -54,9 +82,6 @@ namespace sprint0.Classes
 
                 active.Add(collidables[i]);
             }
-
-
         }
-
     }
 }

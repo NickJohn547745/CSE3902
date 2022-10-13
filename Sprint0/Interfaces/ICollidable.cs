@@ -12,7 +12,7 @@ namespace sprint0.Interfaces
     {
         public enum Edge {Top, Bottom, Left, Right };
 
-        //public void Collide(ICollidable, ICollidable.Edge edge);
+        public void Collide(Type type, ICollidable.Edge edge);
 
         Rectangle GetHitBox();
 
