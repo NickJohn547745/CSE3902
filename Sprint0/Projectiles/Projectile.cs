@@ -5,7 +5,7 @@ using sprint0.Sprites;
 
 namespace sprint0.Interfaces; 
 
-public abstract class Projectile : IProjectile {
+public abstract class Projectile : ICollidable {
 
     public int damage { get; set; }
     protected float start;
@@ -15,11 +15,6 @@ public abstract class Projectile : IProjectile {
     protected float speed;
     public Vector2 velocity { get; set; }
     public Sprite sprite { get; set; }
-
-    public Rectangle GetPosition()
-    {
-        throw new System.NotImplementedException();
-    }
 
     protected abstract void Behavior(Game1 game);
 
@@ -33,8 +28,20 @@ public abstract class Projectile : IProjectile {
         }
     }
 
+
+
+    public Rectangle GetHitBox()
+    {
+        return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
+    }
+
     public virtual void Draw(SpriteBatch spriteBatch)
     {
         sprite.Draw(spriteBatch, position);
+    }
+
+    public void Reset()
+    {
+        // temp
     }
 }

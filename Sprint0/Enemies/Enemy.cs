@@ -11,7 +11,7 @@ using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public abstract class Enemy : IEnemy
+    public abstract class Enemy : ICollidable
     {
         public int health { get; set; }
         public int maxHealth { get; private set; }

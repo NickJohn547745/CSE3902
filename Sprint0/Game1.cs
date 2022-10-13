@@ -25,17 +25,15 @@ public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public List<IController> Controllers { get; set; }
-    public List<IEnemy> EnemyList { get; private set; }
+    public List<ICollidable> EnemyList { get; private set; }
     public List<ITile> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
-    public List<IProjectile> Projectiles { get; private set; }
+    public List<ICollidable> Projectiles { get; private set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
     private int currentItemIndex = 0;
 
-    public Texture2D Spritesheet;
-    private SpriteFont Spritefont;
     private int WindowWidth;
     private int WindowHeight;
 
@@ -191,23 +189,23 @@ public class Game1 : Game {
 
         Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
 
-        EnemyList = new List<IEnemy>();
-        IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
+        EnemyList = new List<ICollidable>();
+        ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(stalfos);
-        IEnemy keese = new KeeseEnemy(enemySpawn, enemySpeed);
+        ICollidable keese = new KeeseEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(keese);
-        IEnemy goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
+        ICollidable goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(goriya);
-        IEnemy zol = new ZolEnemy(enemySpawn, enemySpeed);
+        ICollidable zol = new ZolEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(zol);
-        IEnemy oldMan = new OldManNPC(enemySpawn);
+        ICollidable oldMan = new OldManNPC(enemySpawn);
         EnemyList.Add(oldMan);
-        IEnemy aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
+        ICollidable aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
         EnemyList.Add(aquamentus);
 
         Player = new Player();
 
-        Projectiles = new List<IProjectile>();
+        Projectiles = new List<ICollidable>();
     }
 
     protected override void Update(GameTime gameTime) {
@@ -215,14 +213,14 @@ public class Game1 : Game {
 
         EnemyList[currentEnemyIndex].Update(gameTime, this);
 
-        foreach (IProjectile projectile in Projectiles)
+        foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
 
         EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].Update(gameTime, this);
         Player.Update();
-        foreach (IProjectile projectile in Projectiles)
+        foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
@@ -244,14 +242,9 @@ public class Game1 : Game {
         TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
-        //Credits.Draw(_spriteBatch, new Vector2(140, 360));
-
-        foreach (IProjectile projectile in Projectiles)
+        foreach (ICollidable projectile in Projectiles)
         {
-            if (EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].GetType() == typeof(GoriyaEnemy) || projectile.GetType() != typeof(GoriyaProjectile))
-            {
-                projectile.Draw(_spriteBatch);
-            }    
+                projectile.Draw(_spriteBatch);  
         }
 
         base.Draw(gameTime);
@@ -267,7 +260,7 @@ public class Game1 : Game {
 
         Player.Reset();
 
-        foreach (IEnemy enemy in EnemyList)
+        foreach (ICollidable enemy in EnemyList)
         {
             enemy.Reset();
         }
