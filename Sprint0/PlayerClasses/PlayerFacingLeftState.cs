@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
+using sprint0.Enemies;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
@@ -31,7 +31,31 @@ public class PlayerFacingLeftState : IPlayerState {
 
     public void Collide(Type type, ICollidable.Edge edge)
     {
-
+        if (type == typeof(Projectile) || type == typeof(Enemy))
+        {
+           // damage player and put in takenDamage state
+        }
+        else if (type == typeof(ITile))
+        {
+            // change numbers, but prevent player from moving through tiles
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    player.Position += new Vector2(0, -200);
+                    break;
+                case ICollidable.Edge.Right:
+                    player.Position += new Vector2(-200, 0);
+                    break;
+                case ICollidable.Edge.Left:
+                    player.Position += new Vector2(200, 0);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    player.Position += new Vector2(0, 200);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -54,7 +78,7 @@ public class PlayerFacingLeftState : IPlayerState {
 
     public void MoveLeft() {
         currentFrame++;
-        player.Position = Vector2.Add(player.Position, new Vector2(-1, 0));
+        player.Position = Vector2.Add(player.Position, new Vector2(-IPlayerState.playerSpeed, 0));
     }
 
     public void MoveRight() {

@@ -23,12 +23,12 @@ namespace sprint0.Sprites
 
         public virtual int GetWidth()
         {
-            return frameSources[frame % frameCount].Width;
+            return (int) (scale * frameSources[frame % frameCount].Width);
         }
 
         public virtual int GetHeight()
         {
-            return frameSources[frame % frameCount].Height;
+            return (int) (scale * frameSources[frame % frameCount].Height);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect)
@@ -44,6 +44,7 @@ namespace sprint0.Sprites
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, int currentFrame, SpriteEffects spriteEffect)
         {
             spriteBatch.Draw(spriteSheet, position, frameSources[currentFrame % frameCount], Color.White, 0f, origin, scale, spriteEffect, 0f);
+            frame = currentFrame;
         }
     }
 }

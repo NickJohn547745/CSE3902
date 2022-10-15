@@ -27,7 +27,7 @@ public class PlayerAbilityDownState : IPlayerState {
 
     public void Collide(Type type, ICollidable.Edge edge)
     {
-
+        
     }
 
     public void Update() {

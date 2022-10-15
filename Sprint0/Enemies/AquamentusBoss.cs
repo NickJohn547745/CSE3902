@@ -24,6 +24,7 @@ namespace sprint0.Enemies
             sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             delay = behaviorDelay;
             fireBallTracker = 1;
+            health = 8;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -36,9 +37,9 @@ namespace sprint0.Enemies
             {
                 Vector2 fireBallSpawn = position;
                 fireBallSpawn.Y += fireBallOffsetY;
-                game.Projectiles.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, fireBallDirection)));
-                game.Projectiles.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                game.Projectiles.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -fireBallDirection))); 
+                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, fireBallDirection)));
+                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
+                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -fireBallDirection))); 
             }
             fireBallTracker++;
         }

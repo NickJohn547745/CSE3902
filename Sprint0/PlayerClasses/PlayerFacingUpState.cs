@@ -30,7 +30,7 @@ public class PlayerFacingUpState : IPlayerState {
 
     public void Collide(Type type, ICollidable.Edge edge)
     {
-        // add behavior later
+
     }
 
     public void Update() {
@@ -46,7 +46,7 @@ public class PlayerFacingUpState : IPlayerState {
 
     public void MoveUp() {
         currentFrame++;
-        player.Position = Vector2.Add(player.Position, new Vector2(0, -1));
+        player.Position = Vector2.Add(player.Position, new Vector2(0, -IPlayerState.playerSpeed));
     }
 
     public void MoveDown() {

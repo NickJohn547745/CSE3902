@@ -20,7 +20,7 @@ namespace sprint0;
 
 public class Game1 : Game {
 
-    private const float enemySpeed = 75;
+    private const float enemySpeed = 50;
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -66,18 +66,22 @@ public class Game1 : Game {
 
     public void NextEnemy()
     {
+        CollidableList.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex++;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
+        CollidableList.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousEnemy()
     {
+        CollidableList.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex--;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
+        CollidableList.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousItem()
@@ -200,7 +204,7 @@ public class Game1 : Game {
         EnemyList.Add(goriya);
         ICollidable zol = new ZolEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(zol);
-        ICollidable oldMan = new OldManNPC(enemySpawn);
+        ICollidable oldMan = new OldManNPC(Vector2.One * 200);
         EnemyList.Add(oldMan);
         ICollidable aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
         EnemyList.Add(aquamentus);
@@ -210,25 +214,25 @@ public class Game1 : Game {
         Projectiles = new List<ICollidable>();
 
         CollidableList = new List<ICollidable>();
-        CollidableList.AddRange(EnemyList);
+        //CollidableList.Add(keese);
         CollidableList.Add(Player);
 
-        CollisionManager = new CollisionManager();
+        CollisionManager = new CollisionManager(CollidableList);
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
-        CollisionManager.DetectCollisions(CollidableList);
+        CollisionManager.Update(gameTime, this);
 
-        EnemyList[currentEnemyIndex].Update(gameTime, this);
+        //EnemyList[currentEnemyIndex].Update(gameTime, this);
 
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
 
-        Player.Update(gameTime, this);
+        //Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
@@ -245,9 +249,9 @@ public class Game1 : Game {
                           _graphics.GraphicsDevice.PresentationParameters.Bounds,
                           Color.White);
 
-        Player.Draw(_spriteBatch);
-
-        EnemyList[currentEnemyIndex].Draw(_spriteBatch);
+        //Player.Draw(_spriteBatch);
+        CollisionManager.Draw(_spriteBatch);
+        //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
         TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 

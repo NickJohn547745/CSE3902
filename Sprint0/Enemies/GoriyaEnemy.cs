@@ -30,6 +30,7 @@ namespace sprint0.Enemies
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
+            health = 3;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -39,11 +40,11 @@ namespace sprint0.Enemies
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
-                game.Projectiles.Add(goriyaStateMachine.boomerang);
+                game.CollidableList.Add(goriyaStateMachine.boomerang);
                 boomerangTracker++;
             } else if (!goriyaStateMachine.boomerangThrown)
             {
-                game.Projectiles.Remove(goriyaStateMachine.boomerang);
+                game.CollidableList.Remove(goriyaStateMachine.boomerang);
                 goriyaStateMachine.boomerang = null;
 
                 // change direction

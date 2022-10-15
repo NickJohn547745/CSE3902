@@ -15,7 +15,7 @@ namespace sprint0.Projectiles
 {
     public class GoriyaProjectile : Projectile
     {
-        private const int goriyaProjSpeed = 200;
+        private const int goriyaProjSpeed = 100;
         private const int goriyaProjDelay = 1;
 
         private GoriyaStateMachine goriya;
@@ -38,13 +38,13 @@ namespace sprint0.Projectiles
             Boolean output = false;
             if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Up)
             {
-                output = position.Y >= initPosition.Y;
+                output = position.Y >= initPosition.Y - goriya.goriya.sprite.GetHeight();
             } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Down)
             {
                 output = position.Y <= initPosition.Y + goriya.goriya.sprite.GetHeight();
             } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Left)
             {
-                output = position.X >= initPosition.X - goriya.goriya.sprite.GetWidth();
+                output = position.X >= initPosition.X;
             }
             else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Right)
             {
@@ -56,8 +56,8 @@ namespace sprint0.Projectiles
 
         protected override void Behavior(Game1 game)
         {
-            Boolean xMax = Math.Abs(position.X - initPosition.X) >= speed;
-            Boolean yMax = Math.Abs(position.Y - initPosition.Y) >= speed;
+            Boolean xMax = Math.Abs(position.X - initPosition.X) >= speed * 2;
+            Boolean yMax = Math.Abs(position.Y - initPosition.Y) >= speed * 2;
 
             // reverse velocity after 2 seconds
             if (!returnThrow &&  (xMax || yMax)) 

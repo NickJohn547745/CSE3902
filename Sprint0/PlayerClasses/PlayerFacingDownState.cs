@@ -30,7 +30,31 @@ public class PlayerFacingDownState : IPlayerState {
 
     public void Collide(Type type, ICollidable.Edge edge)
     {
+        if (type == typeof(Projectile))
+        {
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    player.Position += new Vector2(0, -200);
+                    break;
+                case ICollidable.Edge.Right:
+                    player.Position += new Vector2(-200, 0);
+                    break;
+                case ICollidable.Edge.Left:
+                    player.Position += new Vector2(200, 0);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    player.Position += new Vector2(0, 200);
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (type == typeof(ITile))
+        {
 
+
+        }
     }
 
     public void Update() {
@@ -50,7 +74,7 @@ public class PlayerFacingDownState : IPlayerState {
 
     public void MoveDown() {
         currentFrame++;
-        player.Position = Vector2.Add(player.Position, new Vector2(0, 1));
+        player.Position = Vector2.Add(player.Position, new Vector2(0, IPlayerState.playerSpeed));
     }
 
     public void MoveLeft() {

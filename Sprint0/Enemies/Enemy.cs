@@ -54,16 +54,16 @@ namespace sprint0.Enemies
                 switch (edge)
                 {
                     case ICollidable.Edge.Top:
-                        position = new Vector2(0, 0);
+                        position += new Vector2(0, -200);
                         break;
                     case ICollidable.Edge.Right:
-                        position = new Vector2(100, 100);
+                        position += new Vector2(-200, 0);
                         break;
                     case ICollidable.Edge.Left:
-                        position = new Vector2(0, 0);
+                        position += new Vector2(200, 0);
                         break;
                     case ICollidable.Edge.Bottom:
-                        position = new Vector2(0, 0);
+                        position += new Vector2(0, 200);
                         break;
                     default:
                         break;
