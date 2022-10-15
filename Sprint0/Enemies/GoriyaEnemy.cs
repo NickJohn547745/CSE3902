@@ -49,9 +49,7 @@ namespace sprint0.Enemies
                 // change direction
                 goriyaStateMachine.ChangeDirection();
                 boomerangTracker++;
-            } 
-
-            
+            }      
         }
 
         public override void Draw(SpriteBatch spriteBatch)

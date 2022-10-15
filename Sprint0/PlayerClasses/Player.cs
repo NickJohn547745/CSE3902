@@ -2,17 +2,19 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
+using sprint0.Sprites;
+using System;
 
 namespace sprint0.PlayerClasses; 
 
-public class Player : IPlayer {
+public class Player : ICollidable {
     public int ScaleFactor;
 
     private Vector2 initPosition;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public IPlayerState PlayerState { get; set; }
-    public PlayerAbilityManager AbilityManager { get; }
+    public PlayerAbilityManager AbilityManager { get; protected set; }
 
     public Player() {
         PlayerState = new PlayerFacingUpState(this);
@@ -23,48 +25,62 @@ public class Player : IPlayer {
         initPosition = Position;
     }
 
-    public void Draw(SpriteBatch spriteBatch) { 
+    public Type GetObjectType()
+    {
+        return this.GetType();
+    }
+    public Rectangle GetHitBox()
+    {
+        return new Rectangle((int)Position.X, (int)Position.Y, PlayerState.sprite.GetWidth(), PlayerState.sprite.GetHeight());
+    }
+
+    public void Collide(Type type, ICollidable.Edge edge)
+    {
+        PlayerState.Collide(type, edge);
+    }
+
+    public virtual void Draw(SpriteBatch spriteBatch) { 
         PlayerState.Draw(spriteBatch);
         AbilityManager.Draw(spriteBatch);
     }
 
-    public void Update() {
+    public virtual void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
-        AbilityManager.Update();
+        AbilityManager.Update(gameTime, game);
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
     }
 
-    public void TakeDamage(Game1 game) {
+    public virtual void TakeDamage(Game1 game) {
         Health--;
         game.Player = new DamagedPlayer(this, game);
     }
 
-    public void MoveUp() {
+    public virtual void MoveUp() {
         PlayerState.MoveUp();
     }
 
-    public void MoveDown() {
+    public virtual void MoveDown() {
         PlayerState.MoveDown();
     }
 
-    public void MoveLeft() {
+    public virtual void MoveLeft() {
         PlayerState.MoveLeft();
     }
 
-    public void MoveRight() {
+    public virtual void MoveRight() {
         PlayerState.MoveRight();
     }
 
-    public void SwordAttack() {
+    public virtual void SwordAttack() {
         PlayerState.SwordAttack();
     }
 
-    public void UseAbility(AbilityTypes abilityType) {
+    public virtual void UseAbility(AbilityTypes abilityType) {
         PlayerState.UseAbility(abilityType);
     }
 

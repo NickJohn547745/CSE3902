@@ -4,27 +4,33 @@ using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
+using System;
 
 namespace sprint0.PlayerClasses; 
 
 public class PlayerFacingUpState : IPlayerState {
-    private IPlayer player;
+    private Player player;
     private int animationFrame = 0;
     private int currentFrame = 0;
     private const int FramesPerAnimationChange = 5;
+    public ISprite sprite { get; set; }
 
-    public PlayerFacingUpState(IPlayer player) {
+    public PlayerFacingUpState(Player player) {
         this.player = player;
         animationFrame = 0;
         currentFrame = 0;
+        sprite = PlayerSpriteFactory.Instance.GetWalkingUpSprite();
     }
-    
-    public void Draw(SpriteBatch spriteBatch) {
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetWalkingUpSprite(animationFrame);
-        Rectangle pos = new Rectangle((int)player.Position.X, (int)player.Position.Y, 64, 64);
-        
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
+        sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None);
+    }
+
+    public void Collide(Type type, ICollidable.Edge edge)
+    {
+        // add behavior later
     }
 
     public void Update() {

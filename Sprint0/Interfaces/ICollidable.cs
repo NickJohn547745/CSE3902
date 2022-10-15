@@ -14,12 +14,14 @@ namespace sprint0.Interfaces
 
         public void Collide(Type type, ICollidable.Edge edge);
 
-        Rectangle GetHitBox();
+        public Type GetObjectType();
 
-        void Update(GameTime gameTime, Game1 game);
+        public Rectangle GetHitBox();
 
-        void Draw(SpriteBatch spriteBatch);
+        public void Update(GameTime gameTime, Game1 game);
 
-        void Reset();
+        public void Draw(SpriteBatch spriteBatch);
+
+        public void Reset();
     }
 }

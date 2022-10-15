@@ -4,23 +4,31 @@ using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
+using sprint0.Sprites;
+using System;
 
 namespace sprint0.PlayerClasses; 
 
 public class PlayerAbilityRightState : IPlayerState{
-    private IPlayer player;
+    private Player player;
     private int frameCount;
-    
-    public PlayerAbilityRightState(IPlayer player) {
+    public ISprite sprite { get; set; }
+
+    public PlayerAbilityRightState(Player player) {
         this.player = player;
         frameCount = 21;
+        sprite = PlayerSpriteFactory.Instance.GetAbilitySideSprite();
     }
-    public void Draw(SpriteBatch spriteBatch) {
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetAbilitySideSprite();
-        Rectangle pos = new Rectangle((int)player.Position.X, (int)player.Position.Y, 64, 64);
-        
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
+        sprite.Draw(spriteBatch, player.Position, SpriteEffects.None);
+    }
+
+    public void Collide(Type type, ICollidable.Edge edge)
+    {
+
     }
 
     public void Update() {

@@ -24,11 +24,13 @@ public class Game1 : Game {
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<ICollidable> EnemyList { get; private set; }
     public List<ITile> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
     public List<ICollidable> Projectiles { get; private set; }
+    public List<ICollidable> CollidableList { get; private set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
@@ -38,7 +40,7 @@ public class Game1 : Game {
     private int WindowHeight;
 
 
-    public IPlayer Player;
+    public Player Player;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -206,10 +208,18 @@ public class Game1 : Game {
         Player = new Player();
 
         Projectiles = new List<ICollidable>();
+
+        CollidableList = new List<ICollidable>();
+        CollidableList.AddRange(EnemyList);
+        CollidableList.Add(Player);
+
+        CollisionManager = new CollisionManager();
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
+
+        CollisionManager.DetectCollisions(CollidableList);
 
         EnemyList[currentEnemyIndex].Update(gameTime, this);
 
@@ -218,8 +228,7 @@ public class Game1 : Game {
             projectile.Update(gameTime, this);
         }
 
-        EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].Update(gameTime, this);
-        Player.Update();
+        Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
@@ -260,7 +269,7 @@ public class Game1 : Game {
 
         Player.Reset();
 
-        foreach (ICollidable enemy in EnemyList)
+        foreach (ICollidable enemy in CollidableList)
         {
             enemy.Reset();
         }

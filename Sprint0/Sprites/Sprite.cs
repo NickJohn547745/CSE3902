@@ -19,37 +19,31 @@ namespace sprint0.Sprites
         protected int frameCount;
         protected float scale;
         protected List<Rectangle> frameSources;
+        protected Vector2 origin;
 
         public virtual int GetWidth()
         {
-            return frameSources[frame % frameSources.Count].Width;
+            return frameSources[frame % frameCount].Width;
         }
 
         public virtual int GetHeight()
         {
-            return frameSources[frame % frameSources.Count].Height;
+            return frameSources[frame % frameCount].Height;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
-        {
-            spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameSources.Count], Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-
-            // delay change in frames
-            delayCount++;
-            if (delayCount % delay == 0) frame++;
-
-        }
-
-        /*
-         * use spriteEffects
-        */
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect)
         {
-            spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameSources.Count], Color.White, 0f, Vector2.Zero, scale, spriteEffect, 0f);
+            spriteBatch.Draw(spriteSheet, position, frameSources[frame % frameCount], Color.White, 0f, origin, scale, spriteEffect, 0f);
 
             // delay change in frames
             delayCount++;
             if (delayCount % delay == 0) frame++;
+        }
+
+        // manual frame change
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, int currentFrame, SpriteEffects spriteEffect)
+        {
+            spriteBatch.Draw(spriteSheet, position, frameSources[currentFrame % frameCount], Color.White, 0f, origin, scale, spriteEffect, 0f);
         }
     }
 }

@@ -15,7 +15,22 @@ public abstract class Projectile : ICollidable {
     protected Vector2 initPosition;
     protected float speed;
     public Vector2 velocity { get; set; }
-    public Sprite sprite { get; set; }
+    public ISprite sprite { get; set; }
+
+    public Type GetObjectType()
+    {
+        return this.GetType().BaseType;
+    }
+
+    public Rectangle GetHitBox()
+    {
+        return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
+    }
+
+    public void Collide(Type type, ICollidable.Edge edge)
+    {
+
+    }
 
     protected abstract void Behavior(Game1 game);
 
@@ -28,20 +43,10 @@ public abstract class Projectile : ICollidable {
             Behavior(game);
         }
     }
-
-    public void Collide(Type type, ICollidable.Edge edge)
-    {
-
-    }
-
-    public Rectangle GetHitBox()
-    {
-        return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
-    }
-
+    
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        sprite.Draw(spriteBatch, position);
+        sprite.Draw(spriteBatch, position, SpriteEffects.None);
     }
 
     public void Reset()

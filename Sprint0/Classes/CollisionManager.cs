@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace sprint0.Classes
 {
-    public class CollisionHandler
+    public class CollisionManager
     {
 
         private int CompareBounds(ICollidable source1, ICollidable source2)
@@ -35,7 +35,7 @@ namespace sprint0.Classes
 
             // guaranteed to be left side collision with current
             // can't be right since only objects to the left of current are in Active list
-
+            
             // bottom of obj collide with top of current
             if (objBottom > currentTop && objBottom - currentTop > sideOverlap)
             {
@@ -47,8 +47,8 @@ namespace sprint0.Classes
                 objEdge = ICollidable.Edge.Top;
             }
 
-            current.Collide(obj.GetType(), currentEdge);
-            obj.Collide(current.GetType(), objEdge);
+            current.Collide(obj.GetObjectType(), currentEdge);
+            obj.Collide(current.GetObjectType(), objEdge);
         }
 
         public void DetectCollisions(List<ICollidable> collidables)
