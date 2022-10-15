@@ -7,8 +7,6 @@ namespace sprint0.PlayerClasses.Abilities;
 
 public class Bomb : Ability {
     private int frameCounter;
-    private int animationFrame;
-
 
     public Bomb(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;

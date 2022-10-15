@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
+using sprint0.PlayerClasses;
 using sprint0.Factories;
 
 namespace sprint0.Enemies
@@ -49,7 +49,7 @@ namespace sprint0.Enemies
 
         public virtual void Collide(Type type, ICollidable.Edge edge)
         {
-            if (type == typeof(IPlayer))
+            if (type == typeof(Player))
             {
                 switch (edge)
                 {
