@@ -2,19 +2,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Factories;
-using sprint0.Interfaces;
 
-namespace sprint0.PlayerClasses.Abilities; 
+namespace sprint0.PlayerClasses.Abilities;
 
-public class WoodenBoomerang : IAbility {
-    private Player player;
-
+public class WoodenBoomerang : Ability {
     private int frameCounter;
-    private int animationFrame;
     
-    private Vector2 Velocity;
     private Vector2 Acceleration;
-    public Vector2 Position { get; set; }
 
     private Vector2 initialPosition;
 
@@ -24,15 +18,11 @@ public class WoodenBoomerang : IAbility {
         initialPosition = Position;
         Velocity = Vector2.Multiply(velocity, new Vector2((float)6.5));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.08));
+        sprite = PlayerSpriteFactory.Instance.GetWoodenBoomerangSprite();
+        animationFrame = 0;
     }
     
-    public void Draw(SpriteBatch spriteBatch) {
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetWoodenBoomerangSprite(animationFrame);
-        spriteBatch.Draw(sprite, Position, texturePos, Color.White, 0, new Vector2((float)texturePos.Width/2,(float)texturePos.Height/2), player.ScaleFactor, SpriteEffects.None, 0);
-    }
-    
-    public void Update() {
+    public override void Update(GameTime gameTime, Game1 game) {
         frameCounter++;
         if (frameCounter % 5 == 0) {
             animationFrame++;

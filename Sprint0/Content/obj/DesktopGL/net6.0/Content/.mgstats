@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/stalfos.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/stalfos.xnb","TextureProcessor","Texture2DContent",379,2005,0.1294144
+"C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Enemies/stalfos.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/stalfos.xnb","TextureProcessor","Texture2DContent",379,2005,0.1794423
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Others/bottomDoors.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Others/bottomDoors.xnb","TextureProcessor","Texture2DContent",857,20565,0.3062277
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Others/leftDoors.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Others/leftDoors.xnb","TextureProcessor","Texture2DContent",821,20565,0.0045543
 "C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/Spritesheets/Others/rightDoors.png","C:/Users/wrb20/source/repos/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Others/rightDoors.xnb","TextureProcessor","Texture2DContent",859,20565,0.0042413

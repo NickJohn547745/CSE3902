@@ -59,43 +59,43 @@ namespace sprint0.Factories
         {
         }
          
-        public Sprite CreateStalfosSprite()
+        public ISprite CreateStalfosSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetStalfosSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 2, spriteSheet.Height));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, StalfosDelay, StalfosScale);
+            return new BasicSprite(spriteSheet, frameSources, StalfosDelay, StalfosScale);
         }
 
-        public Sprite CreateKeeseSprite()
+        public ISprite CreateKeeseSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetKeeseSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
             frameSources.Add(new Rectangle(KeeseX1, KeeseY, KeeseWidth, KeeseHeight1));
             frameSources.Add(new Rectangle(KeeseX2, KeeseY, KeeseWidth, KeeseHeight2));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, KeeseDelay, KeeseScale);
+            return new BasicSprite(spriteSheet, frameSources, KeeseDelay, KeeseScale);
         }
 
-        public Sprite CreateGoriyaFacingUpStateSprite()
+        public ISprite CreateGoriyaFacingUpStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
             Rectangle frameSource = new Rectangle(GoriyaUpX, GoriyaUpY, GoriyaWidth, GoriyaHeight);
 
-            return new FrameFlipEnemySprite(spriteSheet, frameSource, GoriyaDelay, GoriyaScale);
+            return new FrameFlipSprite(spriteSheet, frameSource, Vector2.Zero, GoriyaDelay, GoriyaScale);
         }
 
-        public Sprite CreateGoriyaFacingDownStateSprite()
+        public ISprite CreateGoriyaFacingDownStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
             Rectangle frameSource = new Rectangle(GoriyaDownX, GoriyaDownY, GoriyaWidth, GoriyaHeight);
 
-            return new FrameFlipEnemySprite(spriteSheet, frameSource, GoriyaDelay, GoriyaScale);
+            return new FrameFlipSprite(spriteSheet, frameSource, Vector2.Zero, GoriyaDelay, GoriyaScale);
         }
 
-        public Sprite CreateGoriyaFacingSideStateSprite()
+        public ISprite CreateGoriyaFacingSideStateSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -103,10 +103,10 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(GoriyaSideX1, GoriyaSideY1, GoriyaWidth, GoriyaHeight));
             frameSources.Add(new Rectangle(GoriyaSideX2, GoriyaSideY2, GoriyaWidth, GoriyaHeight));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, GoriyaDelay, GoriyaScale);
+            return new BasicSprite(spriteSheet, frameSources, GoriyaDelay, GoriyaScale);
         }
 
-        public Sprite CreateZolSprite()
+        public ISprite CreateZolSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetZolSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -114,19 +114,19 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(ZolX1, 0, ZolWidth, spriteSheet.Height));
             frameSources.Add(new Rectangle(ZolX2, 0, ZolWidth, spriteSheet.Height));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, ZolDelay, ZolScale);
+            return new BasicSprite(spriteSheet, frameSources, ZolDelay, ZolScale);
         }
 
-        public Sprite CreateOldManNPCSprite()
+        public ISprite CreateOldManNPCSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetOldManSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
 
             frameSources.Add(new Rectangle(0, 0, spriteSheet.Width, spriteSheet.Height));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, OldManDelay, OldManScale);
+            return new BasicSprite(spriteSheet, frameSources, OldManDelay, OldManScale);
         }
-        public Sprite CreateAquamentusSprite()
+        public ISprite CreateAquamentusSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetAquamentusSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -135,8 +135,7 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(1, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
 
-            return new BasicEnemySprite(spriteSheet, frameSources, AquamentusDelay, AquamentusScale);
-
+            return new BasicSprite(spriteSheet, frameSources, AquamentusDelay, AquamentusScale);
         }
     }
 }

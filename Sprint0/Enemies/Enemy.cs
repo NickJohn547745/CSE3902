@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
+using sprint0.PlayerClasses;
 using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
-    public abstract class Enemy : IEnemy
+    public abstract class Enemy : ICollidable
     {
         public int health { get; set; }
-        public int maxHealth { get; private set; }
         public int damage { get; set; }
         protected int delay;
         private int delayCount;
@@ -22,7 +21,7 @@ namespace sprint0.Enemies
         protected Vector2 initPosition;
         protected float speed;
         public Vector2 velocity { get; set; }
-        public Sprite sprite { get; set; }
+        public ISprite sprite { get; set; }
 
         protected abstract void Behavior(GameTime gameTime, Game1 game);
 
@@ -41,6 +40,44 @@ namespace sprint0.Enemies
                 Behavior(gameTime, game);
             }
             delayCount++;
+
+            if (health <= 0)
+            {
+                game.CollidableList.Remove(this);
+            }
+        }
+
+        public virtual void Collide(Type type, ICollidable.Edge edge)
+        {
+            if (type == typeof(Player))
+            {
+                switch (edge)
+                {
+                    case ICollidable.Edge.Top:
+                        position += new Vector2(0, -200);
+                        break;
+                    case ICollidable.Edge.Right:
+                        position += new Vector2(-200, 0);
+                        break;
+                    case ICollidable.Edge.Left:
+                        position += new Vector2(200, 0);
+                        break;
+                    case ICollidable.Edge.Bottom:
+                        position += new Vector2(0, 200);
+                        break;
+                    default:
+                        break;
+                }
+            } else if (type == typeof(ITile))
+            {
+                
+
+            }
+        }
+
+        public Type GetObjectType()
+        {
+            return this.GetType().BaseType;
         }
 
         public Rectangle GetHitBox()
@@ -50,13 +87,12 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, position);
+            sprite.Draw(spriteBatch, position, SpriteEffects.None);
         }
 
         public void Reset()
         {
             position = initPosition;
         }
-
     }
 }

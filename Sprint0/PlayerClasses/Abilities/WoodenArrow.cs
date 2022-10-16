@@ -2,17 +2,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Factories;
-using sprint0.Interfaces;
 
-namespace sprint0.PlayerClasses.Abilities; 
+namespace sprint0.PlayerClasses.Abilities;
 
-public class WoodenArrow : IAbility {
-    private Player player;
+public class WoodenArrow : Ability {
     private int frameCounter;
-    
-    public Vector2 Position { get; set; }
-
-    public Vector2 Velocity;
 
     private int spriteVersion;
 
@@ -22,15 +16,16 @@ public class WoodenArrow : IAbility {
         Velocity = Vector2.Multiply(velocity, new Vector2(5));
         if (Velocity.X == 0) {
             spriteVersion = 0;
+            sprite = PlayerSpriteFactory.Instance.GetWoodenArrowVerticalSprite();
         }
         else {
             spriteVersion = 1;
+            sprite = PlayerSpriteFactory.Instance.GetWoodenArrowHorizontalSprite();
         }
+        
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetWoodenArrowSprite(spriteVersion);
+    public override void Draw(SpriteBatch spriteBatch) {
         SpriteEffects effects = SpriteEffects.None;
         if (spriteVersion == 0 && Velocity.Y > 0) {
             effects = SpriteEffects.FlipVertically;
@@ -38,11 +33,11 @@ public class WoodenArrow : IAbility {
         else if (spriteVersion == 1 && Velocity.X < 0) {
             effects = SpriteEffects.FlipHorizontally;
         }
-        
-        spriteBatch.Draw(sprite, Position, texturePos, Color.White, 0, new Vector2((float)texturePos.Width/2,(float)texturePos.Height/2), player.ScaleFactor, effects, 0);
+
+        sprite.Draw(spriteBatch, Position, effects);
     }
     
-    public void Update() {
+    public override void Update(GameTime gameTime, Game1 game) {
         frameCounter++;
         Position = Vector2.Add(Position, Velocity);
 

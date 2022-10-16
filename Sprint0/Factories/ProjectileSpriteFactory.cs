@@ -43,7 +43,7 @@ namespace sprint0.Factories
         private ProjectileSpriteFactory()
         {
         }
-        public Sprite CreateGoriyaProjectileSprite()
+        public ISprite CreateGoriyaProjectileSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetGoriyaProjectileSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -51,10 +51,10 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(GoriyaProjectileX2, GoriyaProjectileY2, GoriyaProjectileWidth2, GoriyaProjectileHeight2));
             frameSources.Add(new Rectangle(GoriyaProjectileX3, GoriyaProjectileY3, GoriyaProjectileWidth3, GoriyaProjectileHeight3));
 
-            return new BasicProjectileSprite(spriteSheet, frameSources, GoriyaProjectileDelay, GoriyaProjectileScale);
+            return new BasicSprite(spriteSheet, frameSources, Vector2.Zero, GoriyaProjectileDelay, GoriyaProjectileScale);
         }
 
-        public Sprite CreateAquamentusProjectileSprite()
+        public ISprite CreateAquamentusProjectileSprite()
         {
             Texture2D spriteSheet = TextureStorage.GetFireballSpritesheet();
             List<Rectangle> frameSources = new List<Rectangle>();
@@ -63,7 +63,7 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(0, AquamentusProjectileY2, AquamentusProjectileWidth, AquamentusProjectileHeight));
             frameSources.Add(new Rectangle(AquamentusProjectileX, AquamentusProjectileY2, AquamentusProjectileWidth, AquamentusProjectileHeight));
 
-            return new BasicProjectileSprite(spriteSheet, frameSources, AquamentusProjectileDelay, AquamentusProjectileScale);
+            return new BasicSprite(spriteSheet, frameSources, AquamentusProjectileDelay, AquamentusProjectileScale);
         }
 
     }

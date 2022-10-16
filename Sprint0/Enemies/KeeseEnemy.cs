@@ -20,6 +20,7 @@ namespace sprint0.Enemies
             velocity = Vector2.One;
             delay = behaviorDelay;
             previous = 1;
+            health = 2;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

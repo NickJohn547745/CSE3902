@@ -15,16 +15,17 @@ namespace sprint0.Enemies
     {
         public OldManNPC(Vector2 position)
         {
-            this.initPosition = position;
+            initPosition = position;
             this.position = position;
             sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
             velocity = Vector2.Zero;
             delay = 1;
+            health = 2;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
         {
-            // no behavior
+            
         }
     }
 }

@@ -20,27 +20,27 @@ namespace sprint0;
 
 public class Game1 : Game {
 
-    private const float enemySpeed = 75;
+    private const float enemySpeed = 50;
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
-    public List<IEnemy> EnemyList { get; private set; }
+    public List<ICollidable> EnemyList { get; private set; }
     public List<ITile> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
-    public List<IProjectile> Projectiles { get; private set; }
+    public List<ICollidable> Projectiles { get; private set; }
+    public List<ICollidable> CollidableList { get; private set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
     private int currentItemIndex = 0;
 
-    public Texture2D Spritesheet;
-    private SpriteFont Spritefont;
     private int WindowWidth;
     private int WindowHeight;
 
 
-    public IPlayer Player;
+    public Player Player;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -66,18 +66,22 @@ public class Game1 : Game {
 
     public void NextEnemy()
     {
+        CollidableList.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex++;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
+        CollidableList.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousEnemy()
     {
+        CollidableList.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex--;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
+        CollidableList.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousItem()
@@ -191,38 +195,45 @@ public class Game1 : Game {
 
         Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
 
-        EnemyList = new List<IEnemy>();
-        IEnemy stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
+        EnemyList = new List<ICollidable>();
+        ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(stalfos);
-        IEnemy keese = new KeeseEnemy(enemySpawn, enemySpeed);
+        ICollidable keese = new KeeseEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(keese);
-        IEnemy goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
+        ICollidable goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(goriya);
-        IEnemy zol = new ZolEnemy(enemySpawn, enemySpeed);
+        ICollidable zol = new ZolEnemy(enemySpawn, enemySpeed);
         EnemyList.Add(zol);
-        IEnemy oldMan = new OldManNPC(enemySpawn);
+        ICollidable oldMan = new OldManNPC(Vector2.One * 200);
         EnemyList.Add(oldMan);
-        IEnemy aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
+        ICollidable aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
         EnemyList.Add(aquamentus);
 
         Player = new Player();
 
-        Projectiles = new List<IProjectile>();
+        Projectiles = new List<ICollidable>();
+
+        CollidableList = new List<ICollidable>();
+        //CollidableList.Add(keese);
+        CollidableList.Add(Player);
+
+        CollisionManager = new CollisionManager(CollidableList);
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
-        EnemyList[currentEnemyIndex].Update(gameTime, this);
+        CollisionManager.Update(gameTime, this);
 
-        foreach (IProjectile projectile in Projectiles)
+        //EnemyList[currentEnemyIndex].Update(gameTime, this);
+
+        foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
 
-        EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].Update(gameTime, this);
-        Player.Update();
-        foreach (IProjectile projectile in Projectiles)
+        //Player.Update(gameTime, this);
+        foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
@@ -238,20 +249,15 @@ public class Game1 : Game {
                           _graphics.GraphicsDevice.PresentationParameters.Bounds,
                           Color.White);
 
-        Player.Draw(_spriteBatch);
-
-        EnemyList[currentEnemyIndex].Draw(_spriteBatch);
+        //Player.Draw(_spriteBatch);
+        CollisionManager.Draw(_spriteBatch);
+        //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
         TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
-        //Credits.Draw(_spriteBatch, new Vector2(140, 360));
-
-        foreach (IProjectile projectile in Projectiles)
+        foreach (ICollidable projectile in Projectiles)
         {
-            if (EnemyList[Math.Abs(currentEnemyIndex % EnemyList.Count)].GetType() == typeof(GoriyaEnemy) || projectile.GetType() != typeof(GoriyaProjectile))
-            {
-                projectile.Draw(_spriteBatch);
-            }    
+                projectile.Draw(_spriteBatch);  
         }
 
         base.Draw(gameTime);
@@ -267,7 +273,7 @@ public class Game1 : Game {
 
         Player.Reset();
 
-        foreach (IEnemy enemy in EnemyList)
+        foreach (ICollidable enemy in CollidableList)
         {
             enemy.Reset();
         }

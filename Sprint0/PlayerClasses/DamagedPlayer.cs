@@ -4,79 +4,75 @@ using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
+using System;
 
 namespace sprint0.PlayerClasses; 
 
-public class DamagedPlayer : IPlayer {
+public class DamagedPlayer : Player {
     private Game1 game;
-    private IPlayer decoratedPlayer;
+    private Player decoratedPlayer;
     private int timer = 60;
 
     private Vector2 initPosition;
-    public Vector2 Position { get; set; }
-    public int Health { get; set; }
-    public IPlayerState PlayerState { get; set; }
-    public PlayerAbilityManager AbilityManager { get; }
+    public ISprite sprite { get; set; }
 
-    public DamagedPlayer(IPlayer decoratedPlayer, Game1 game) {
+    public DamagedPlayer(Player decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         this.game = game;
         PlayerState = decoratedPlayer.PlayerState;
         Position = decoratedPlayer.Position;
         initPosition = Position;
         AbilityManager = this.decoratedPlayer.AbilityManager;
+        sprite = PlayerSpriteFactory.Instance.GetDamagedSprite();
     }
+
     void RemoveDecorator() {
         game.Player = decoratedPlayer;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
-        Texture2D sprite = TextureStorage.GetPlayerSpritesheet();
-        Rectangle texturePos = PlayerSpriteFactory.GetDamagedSprite();
-        Rectangle pos = new Rectangle((int)decoratedPlayer.Position.X, (int)decoratedPlayer.Position.Y, texturePos.Width*4, texturePos.Height*4);
-        
-        spriteBatch.Draw(sprite, pos,texturePos, Color.White);
+    public override void Draw(SpriteBatch spriteBatch) {
+        sprite.Draw(spriteBatch, new Vector2(decoratedPlayer.Position.X, decoratedPlayer.Position.Y), SpriteEffects.None);
     }
 
-    public void Update() {
+    public override void Update(GameTime gameTime, Game1 game) {
         timer--;
         if (timer == 0) {
             RemoveDecorator();
         }
-        decoratedPlayer.Update();
+        decoratedPlayer.Update(gameTime, game);
     }
 
-    public void Reset()
+    public override void Reset()
     {
         RemoveDecorator();
         decoratedPlayer.Reset();
     }
 
-    public void TakeDamage(Game1 player) {
+    public override void TakeDamage(Game1 player) {
         // Do nothing since player just took damage
     }
 
-    public void MoveUp() {
+    public override void MoveUp() {
         decoratedPlayer.MoveUp();
     }
 
-    public void MoveDown() {
+    public override void MoveDown() {
         decoratedPlayer.MoveDown();
     }
 
-    public void MoveLeft() {
+    public override void MoveLeft() {
         decoratedPlayer.MoveLeft();
     }
 
-    public void MoveRight() {
+    public override void MoveRight() {
         decoratedPlayer.MoveRight();
     }
     
-    public void SwordAttack() {
+    public override void SwordAttack() {
         decoratedPlayer.SwordAttack();
     }
 
-    public void UseAbility(AbilityTypes abilityType) {
+    public override void UseAbility(AbilityTypes abilityType) {
         decoratedPlayer.UseAbility(abilityType);
     }
     

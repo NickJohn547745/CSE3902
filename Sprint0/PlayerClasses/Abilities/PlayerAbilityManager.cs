@@ -1,21 +1,20 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Interfaces;
 
-namespace sprint0.PlayerClasses.Abilities; 
+namespace sprint0.PlayerClasses.Abilities;
 
 public class PlayerAbilityManager {
     private Player player;
 
-    private IAbility currentAbility;
+    private Ability currentAbility;
 
     public PlayerAbilityManager(Player player) {
         this.player = player;
     }
 
-    public void Update() {
+    public void Update(GameTime gameTime, Game1 game) {
         if (currentAbility != null) {
-            currentAbility.Update();
+            currentAbility.Update(gameTime, game);
         }
         
     }
