@@ -15,6 +15,7 @@ public class Player : ICollidable {
     public int Health { get; set; }
     public IPlayerState PlayerState { get; set; }
     public PlayerAbilityManager AbilityManager { get; protected set; }
+    public int Damage { get; set; }
 
     public Player() {
         PlayerState = new PlayerFacingUpState(this);
@@ -23,6 +24,7 @@ public class Player : ICollidable {
         ScaleFactor = 4;
         Position = new Vector2(150);
         initPosition = Position;
+        Damage = 0;
     }
 
     public Type GetObjectType()
@@ -34,9 +36,9 @@ public class Player : ICollidable {
         return new Rectangle((int)Position.X, (int)Position.Y, PlayerState.sprite.GetWidth(), PlayerState.sprite.GetHeight());
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        PlayerState.Collide(type, edge);
+        PlayerState.Collide(obj, edge);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch) { 

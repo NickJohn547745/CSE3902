@@ -28,7 +28,7 @@ public class PlayerSwordRightState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None);
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

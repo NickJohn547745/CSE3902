@@ -29,8 +29,9 @@ public class PlayerFacingLeftState : IPlayerState {
         }
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
+        Type type = obj.GetObjectType();
         if (type == typeof(Projectile) || type == typeof(Enemy))
         {
            // damage player and put in takenDamage state

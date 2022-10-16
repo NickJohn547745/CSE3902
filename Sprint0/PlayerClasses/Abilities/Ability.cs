@@ -13,7 +13,7 @@ public abstract class Ability : ICollidable
     public Vector2 Position { get; set; }
     protected int animationFrame;
 
-    public virtual void Collide(Type type, ICollidable.Edge edge)
+    public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

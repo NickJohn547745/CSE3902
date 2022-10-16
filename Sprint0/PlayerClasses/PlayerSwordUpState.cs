@@ -21,15 +21,14 @@ public class PlayerSwordUpState : IPlayerState {
         animationFrame = 0;
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetSwordUpSprite();
-            //new Rectangle((int)player.Position.X, (int)player.Position.Y - (texturePos.Height - 16) * 4, texturePos.Width * 4, sprite.Height * 4);
     }
     public void Draw(SpriteBatch spriteBatch)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
-        sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None);
+        sprite.Draw(spriteBatch, new Vector2(player.Position.X, player.Position.Y - (sprite.GetHeight() - 64)), animationFrame, SpriteEffects.None);
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

@@ -27,10 +27,10 @@ public class PlayerSwordLeftState : IPlayerState {
     public void Draw(SpriteBatch spriteBatch)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
-        sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.FlipHorizontally);
+        sprite.Draw(spriteBatch, new Vector2(player.Position.X - (sprite.GetWidth() - 64), player.Position.Y), animationFrame, SpriteEffects.FlipHorizontally);
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

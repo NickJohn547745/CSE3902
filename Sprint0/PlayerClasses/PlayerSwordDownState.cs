@@ -30,7 +30,7 @@ public class PlayerSwordDownState : IPlayerState {
     }
 
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

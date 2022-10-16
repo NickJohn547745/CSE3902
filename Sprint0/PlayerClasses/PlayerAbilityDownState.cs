@@ -25,7 +25,7 @@ public class PlayerAbilityDownState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, SpriteEffects.None);
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
         
     }

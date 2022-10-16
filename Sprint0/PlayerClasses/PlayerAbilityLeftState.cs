@@ -26,7 +26,7 @@ public class PlayerAbilityLeftState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, SpriteEffects.FlipHorizontally);
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

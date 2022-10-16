@@ -27,7 +27,7 @@ public abstract class Projectile : ICollidable {
         return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }

@@ -12,7 +12,7 @@ namespace sprint0.Interfaces
     {
         public enum Edge {Top, Bottom, Left, Right };
 
-        public void Collide(Type type, Edge edge);
+        public void Collide(ICollidable obj, Edge edge);
 
         public Type GetObjectType();
 

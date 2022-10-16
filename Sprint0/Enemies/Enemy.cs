@@ -13,6 +13,8 @@ namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
+        private const int tileOffset = 20;
+
         public int health { get; set; }
         public int damage { get; set; }
         protected int delay;
@@ -47,30 +49,32 @@ namespace sprint0.Enemies
             }
         }
 
-        public virtual void Collide(Type type, ICollidable.Edge edge)
+        public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
+            Type type = obj.GetObjectType();
+
             if (type == typeof(Player))
+            {
+                
+            } else if (type == typeof(ITile))
             {
                 switch (edge)
                 {
                     case ICollidable.Edge.Top:
-                        position += new Vector2(0, -200);
+                        position += new Vector2(0, -tileOffset);
                         break;
                     case ICollidable.Edge.Right:
-                        position += new Vector2(-200, 0);
+                        position += new Vector2(-tileOffset, 0);
                         break;
                     case ICollidable.Edge.Left:
-                        position += new Vector2(200, 0);
+                        position += new Vector2(tileOffset, 0);
                         break;
                     case ICollidable.Edge.Bottom:
-                        position += new Vector2(0, 200);
+                        position += new Vector2(0, tileOffset);
                         break;
                     default:
                         break;
                 }
-            } else if (type == typeof(ITile))
-            {
-                
 
             }
         }
