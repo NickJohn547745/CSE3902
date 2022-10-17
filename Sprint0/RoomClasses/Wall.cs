@@ -41,7 +41,7 @@ namespace sprint0.RoomClasses
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            bounds = game.GraphicsDevice.PresentationParameters.Bounds;
+            bounds = new Rectangle(0, 0, 1280, 880);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace sprint0.TileClasses
 {
     public class TileType8 : TileType
     {
-        public TileType8()
+        public TileType8(int x, int y)
         {
-            this.SetLocation(1000, 360);
+            this.SetLocation(x, y);
             this.SetTextureCoords(2, 1);
         }
     }

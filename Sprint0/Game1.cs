@@ -49,7 +49,7 @@ public class Game1 : Game {
         _graphics = new GraphicsDeviceManager(this);
 
         _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.PreferredBackBufferHeight = 880;
         _graphics.ApplyChanges();
 
         Content.RootDirectory = "Content";
@@ -169,16 +169,16 @@ public class Game1 : Game {
         Controllers.Add(new MouseController());
 
         TileList = new List<ITile>();
-        TileList.Add(new TileType1());
-        TileList.Add(new TileType2());
-        TileList.Add(new TileType3());
-        TileList.Add(new TileType4());
-        TileList.Add(new TileType5());
-        TileList.Add(new TileType6());
-        TileList.Add(new TileType7());
-        TileList.Add(new TileType8());
-        TileList.Add(new TileType9());
-        TileList.Add(new TileType10());
+        TileList.Add(new TileType1(1000, 360));
+        TileList.Add(new TileType2(1000, 360));
+        TileList.Add(new TileType3(1000, 360));
+        TileList.Add(new TileType4(1000, 360));
+        TileList.Add(new TileType5(1000, 360));
+        TileList.Add(new TileType6(1000, 360));
+        TileList.Add(new TileType7(1000, 360));
+        TileList.Add(new TileType8(1000, 360));
+        TileList.Add(new TileType9(1000, 360));
+        TileList.Add(new TileType10(1000, 360));
 
         ItemList = new List<IItem>();
         ItemList.Add(new Arrow());
@@ -242,6 +242,8 @@ public class Game1 : Game {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        Room.Draw(_spriteBatch);
 
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);

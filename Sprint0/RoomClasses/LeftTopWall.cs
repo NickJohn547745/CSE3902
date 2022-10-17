@@ -16,7 +16,7 @@ namespace sprint0.RoomClasses
 
         public override Rectangle GetHitBox()
         {
-            return new Rectangle(0, 135, 160, 164);
+            return new Rectangle(0, 160, 160, 200);
         }
     }
 }
