@@ -26,7 +26,9 @@ namespace sprint0.Enemies
             this.speed = speed;
             velocity = Vector2.One;
             delay = behaviorDelay;
-            health = 2;
+            maxHealth = 2;
+            health = maxHealth;
+            Damage = 1;
 
             directionChoice = new Dictionary<int, Vector2>();
             directionChoice.Add(0, new Vector2(0, -1));

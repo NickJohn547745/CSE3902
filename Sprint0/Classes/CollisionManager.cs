@@ -14,7 +14,6 @@ namespace sprint0.Classes
     {
         List<ICollidable> collidables { get; set; }
 
-
         public CollisionManager(List<ICollidable> collidables)
         {
             this.collidables = collidables;
@@ -58,8 +57,8 @@ namespace sprint0.Classes
                 objEdge = ICollidable.Edge.Top;
             }
 
-            current.Collide(obj.GetObjectType(), currentEdge);
-            obj.Collide(current.GetObjectType(), objEdge);
+            current.Collide(obj, currentEdge);
+            obj.Collide(current, objEdge);
         }
 
         // uses sort and sweep algortithm
