@@ -30,7 +30,9 @@ namespace sprint0.Enemies
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
-            health = 3;
+            maxHealth = 3;
+            health = maxHealth;
+            Damage = 1;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

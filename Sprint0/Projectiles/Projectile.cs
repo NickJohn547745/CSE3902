@@ -8,7 +8,7 @@ namespace sprint0.Interfaces;
 
 public abstract class Projectile : ICollidable {
 
-    public int damage { get; set; }
+    public int Damage { get; set; }
     protected float start;
     protected int delay;
     protected Vector2 position { get; set; }
@@ -27,7 +27,7 @@ public abstract class Projectile : ICollidable {
         return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public void Collide(Type type, ICollidable.Edge edge)
+    public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }
@@ -49,7 +49,7 @@ public abstract class Projectile : ICollidable {
         sprite.Draw(spriteBatch, position, SpriteEffects.None);
     }
 
-    public void Reset()
+    public void Reset(Game1 game)
     {
         // temp
     }

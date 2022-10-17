@@ -9,16 +9,16 @@ using System;
 namespace sprint0.PlayerClasses; 
 
 public class DamagedPlayer : Player {
-    private Game1 game;
+
     private Player decoratedPlayer;
     private int timer = 60;
 
     private Vector2 initPosition;
     public ISprite sprite { get; set; }
 
-    public DamagedPlayer(Player decoratedPlayer, Game1 game) {
+    public DamagedPlayer(Player decoratedPlayer, Game1 game) : base(game) {
         this.decoratedPlayer = decoratedPlayer;
-        this.game = game;
+        Game = game;
         PlayerState = decoratedPlayer.PlayerState;
         Position = decoratedPlayer.Position;
         initPosition = Position;
@@ -27,7 +27,7 @@ public class DamagedPlayer : Player {
     }
 
     void RemoveDecorator() {
-        game.Player = decoratedPlayer;
+        Game.Player = decoratedPlayer;
     }
 
     public override void Draw(SpriteBatch spriteBatch) {
@@ -42,13 +42,13 @@ public class DamagedPlayer : Player {
         decoratedPlayer.Update(gameTime, game);
     }
 
-    public override void Reset()
+    public override void Reset(Game1 game)
     {
         RemoveDecorator();
-        decoratedPlayer.Reset();
+        decoratedPlayer.Reset(game);
     }
 
-    public override void TakeDamage(Game1 player) {
+    public override void TakeDamage(int damage) {
         // Do nothing since player just took damage
     }
 

@@ -12,7 +12,9 @@ namespace sprint0.Interfaces
     {
         public enum Edge {Top, Bottom, Left, Right };
 
-        public void Collide(Type type, Edge edge);
+        public int Damage { get; set; }
+
+        public void Collide(ICollidable obj, Edge edge);
 
         public Type GetObjectType();
 
@@ -22,6 +24,6 @@ namespace sprint0.Interfaces
 
         public void Draw(SpriteBatch spriteBatch);
 
-        public void Reset();
+        public void Reset(Game1 game);
     }
 }

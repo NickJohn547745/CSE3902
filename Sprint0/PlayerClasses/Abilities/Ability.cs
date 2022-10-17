@@ -8,12 +8,13 @@ namespace sprint0.PlayerClasses.Abilities;
 public abstract class Ability : ICollidable
 {
     protected Player player;
+    public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public ISprite sprite { get; set; }
     public Vector2 Position { get; set; }
     protected int animationFrame;
 
-    public virtual void Collide(Type type, ICollidable.Edge edge)
+    public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
     }
@@ -34,8 +35,8 @@ public abstract class Ability : ICollidable
         sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None);
     }
 
-    public void Reset()
+    public void Reset(Game1 game)
     {
-
+     
     }
 }
