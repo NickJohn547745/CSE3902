@@ -27,7 +27,7 @@ public class Game1 : Game {
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<ICollidable> EnemyList { get; private set; }
-    public List<ITile> TileList { get; private set; }
+    public List<ICollidable> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
@@ -166,7 +166,7 @@ public class Game1 : Game {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
-        TileList = new List<ITile>();
+        TileList = new List<ICollidable>();
         TileList.Add(new TileType1());
         TileList.Add(new TileType2());
         TileList.Add(new TileType3());

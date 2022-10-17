@@ -24,43 +24,43 @@ namespace sprint0
             this.tileSpriteSheet = TextureStorage.GetTilesSpritesheet();
         }
 
-        public ITile CreateTileType1()
+        public ICollidable CreateTileType1()
         {
             return new TileType1();
         }
-        public ITile CreateTileType2()
+        public ICollidable CreateTileType2()
         {
             return new TileType2();
         }
-        public ITile CreateTileType3()
+        public ICollidable CreateTileType3()
         {
             return new TileType3();
         }
-        public ITile CreateTileType4()
+        public ICollidable CreateTileType4()
         {
             return new TileType4();
         }
-        public ITile CreateTileType5()
+        public ICollidable CreateTileType5()
         {
             return new TileType5();
         }
-        public ITile CreateTileType6()
+        public ICollidable CreateTileType6()
         {
             return new TileType6();
         }
-        public ITile CreateTileType7()
+        public ICollidable CreateTileType7()
         {
             return new TileType7();
         }
-        public ITile CreateTileType8()
+        public ICollidable CreateTileType8()
         {
             return new TileType8();
         }
-        public ITile CreateTileType9()
+        public ICollidable CreateTileType9()
         {
             return new TileType9();
         }
-        public ITile CreateTileType10()
+        public ICollidable CreateTileType10()
         {
             return new TileType10();
         }
