@@ -165,6 +165,7 @@ public class Game1 : Game {
         
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
+        Controllers.Add(new GamePadController());
 
         TileList = new List<ITile>();
         TileList.Add(new TileType1());
