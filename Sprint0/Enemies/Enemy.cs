@@ -16,6 +16,7 @@ namespace sprint0.Enemies
         protected const int tileOffset = 20;
 
         public int health { get; set; }
+        public int maxHealth { get; protected set; }
         public int Damage { get; set; }
         protected int delay;
         private int delayCount;
@@ -105,9 +106,10 @@ namespace sprint0.Enemies
             sprite.Draw(spriteBatch, position, SpriteEffects.None);
         }
 
-        public void Reset()
+        public void Reset(Game1 game)
         {
             position = initPosition;
+            health = maxHealth;       
         }
     }
 }

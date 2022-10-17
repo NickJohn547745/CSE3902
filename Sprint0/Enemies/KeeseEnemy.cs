@@ -20,7 +20,8 @@ namespace sprint0.Enemies
             velocity = Vector2.One;
             delay = behaviorDelay;
             previous = 1;
-            health = 2;
+            maxHealth = 2;
+            health = maxHealth;
             Damage = 1;
         }
 

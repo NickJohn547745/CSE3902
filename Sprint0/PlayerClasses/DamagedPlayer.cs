@@ -42,10 +42,10 @@ public class DamagedPlayer : Player {
         decoratedPlayer.Update(gameTime, game);
     }
 
-    public override void Reset()
+    public override void Reset(Game1 game)
     {
         RemoveDecorator();
-        decoratedPlayer.Reset();
+        decoratedPlayer.Reset(game);
     }
 
     public override void TakeDamage(int damage) {

@@ -265,11 +265,12 @@ public class Game1 : Game {
         currentTileIndex = 0;
         currentItemIndex = 0;
 
-        Player.Reset();
-
-        foreach (ICollidable enemy in CollidableList)
+        foreach (ICollidable enemy in EnemyList)
         {
-            enemy.Reset();
+            enemy.Reset(this);
         }
+
+        Player.Reset(this);
+
     }
 }

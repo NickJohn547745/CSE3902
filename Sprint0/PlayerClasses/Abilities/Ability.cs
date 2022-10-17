@@ -35,8 +35,8 @@ public abstract class Ability : ICollidable
         sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None);
     }
 
-    public void Reset()
+    public void Reset(Game1 game)
     {
-
+     
     }
 }

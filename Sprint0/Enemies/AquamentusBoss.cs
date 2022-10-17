@@ -24,7 +24,8 @@ namespace sprint0.Enemies
             sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             delay = behaviorDelay;
             fireBallTracker = 1;
-            health = 8;
+            maxHealth = 8;
+            health = maxHealth;
             Damage = 1;
         }
 

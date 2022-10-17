@@ -71,7 +71,7 @@ public class Player : ICollidable {
         AbilityManager.Update(gameTime, game);
     }
 
-    public virtual void Reset()
+    public virtual void Reset(Game1 game)
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);

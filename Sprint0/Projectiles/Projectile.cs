@@ -49,7 +49,7 @@ public abstract class Projectile : ICollidable {
         sprite.Draw(spriteBatch, position, SpriteEffects.None);
     }
 
-    public void Reset()
+    public void Reset(Game1 game)
     {
         // temp
     }
