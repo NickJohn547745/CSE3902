@@ -15,6 +15,14 @@ public class PlayerAbilityUpState : PlayerAbilityState {
         frameCount = 21;
         sprite = PlayerSpriteFactory.Instance.GetAbilityUpSprite();
         player.Damage = 0;
-        previousState = new PlayerFacingUpState(player);
+    }
+
+    public override void Update()
+    {
+        frameCount--;
+        if (frameCount == 0)
+        {
+            player.PlayerState = new PlayerFacingUpState(player);
+        }
     }
 }

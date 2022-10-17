@@ -16,6 +16,14 @@ public class PlayerAbilityDownState : PlayerAbilityState {
         frameCount = 21;
         sprite = PlayerSpriteFactory.Instance.GetAbilityDownSprite();
         player.Damage = 0;
-        previousState = new PlayerFacingDownState(player);
+    }
+
+    public override void Update()
+    {
+        frameCount--;
+        if (frameCount == 0)
+        {
+            player.PlayerState = new PlayerFacingDownState(player);
+        }
     }
 }

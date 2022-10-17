@@ -14,8 +14,6 @@ public abstract class PlayerFacingState : IPlayerState {
     protected Player player;
     protected int animationFrame = 0;
     protected int currentFrame = 0;
-    protected PlayerAbilityState ability;
-    protected PlayerSwordState sword;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
@@ -23,7 +21,7 @@ public abstract class PlayerFacingState : IPlayerState {
         return new Rectangle((int)player.Position.X, (int)player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public virtual void Draw(SpriteBatch spriteBatch)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None);
@@ -42,10 +40,6 @@ public abstract class PlayerFacingState : IPlayerState {
         }
     }
 
-    public void SwordAttack() {
-        player.PlayerState = sword;
-    }
-
     public virtual void MoveUp() {
         player.PlayerState = new PlayerFacingUpState(player);
     }
@@ -61,9 +55,8 @@ public abstract class PlayerFacingState : IPlayerState {
     public virtual void MoveRight() {
         player.PlayerState = new PlayerFacingRightState(player);
     }
-    
-    public void UseAbility(AbilityTypes abilityType) {
-        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(8*4, 16*5)), new Vector2(0, 1));
-        player.PlayerState = ability;
-    }
+
+    public abstract void SwordAttack();
+
+    public abstract void UseAbility(AbilityTypes abilityType);
 }

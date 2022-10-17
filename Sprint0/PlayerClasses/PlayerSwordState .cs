@@ -15,7 +15,6 @@ public abstract class PlayerSwordState : IPlayerState {
     protected int animationFrame = 0;
     protected int currentFrame = 0;
     protected const int FramesPerAnimationChange = 3;
-    protected PlayerFacingState previous;
     protected ICollidable.Edge swordEdge;
     public ISprite sprite { get; set; }
 
@@ -46,18 +45,7 @@ public abstract class PlayerSwordState : IPlayerState {
         }
     }
 
-    public void Update() {
-        if (currentFrame > FramesPerAnimationChange) {
-            currentFrame = 0;
-            animationFrame++;
-        }
-
-        currentFrame++;
-        
-        if (animationFrame == 4) {
-            player.PlayerState = previous;
-        }
-    }
+    public abstract void Update();
 
     public void SwordAttack() {
         // Already in sword attack state

@@ -17,12 +17,20 @@ public class PlayerFacingRightState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingSideSprite();
         player.Damage = 0;
-        ability = new PlayerAbilityRightState(player);
-        sword = new PlayerSwordRightState(player);
     }
    
     public override void MoveRight() {
         currentFrame++;
         player.Position = Vector2.Add(player.Position, new Vector2(IPlayerState.playerSpeed, 0));
+    }
+    public override void SwordAttack()
+    {
+        player.PlayerState = new PlayerSwordRightState(player);
+    }
+
+    public override void UseAbility(AbilityTypes abilityType)
+    {
+        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(16 * 4, 8 * 4)), new Vector2(1, 0));
+        player.PlayerState = new PlayerAbilityRightState(player);
     }
 }

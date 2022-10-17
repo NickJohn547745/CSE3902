@@ -17,12 +17,21 @@ public class PlayerFacingUpState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingUpSprite();
         player.Damage = 0;
-        ability = new PlayerAbilityUpState(player);
-        sword = new PlayerSwordUpState(player);
     }
 
     public override void MoveUp() {
         currentFrame++;
         player.Position = Vector2.Add(player.Position, new Vector2(0, -IPlayerState.playerSpeed));
+    }
+
+    public override void SwordAttack()
+    {
+        player.PlayerState = new PlayerSwordUpState(player);
+    }
+
+    public override void UseAbility(AbilityTypes abilityType)
+    {
+        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(8 * 4, -16 * 4)), new Vector2(0, -1));
+        player.PlayerState = new PlayerAbilityUpState(player);
     }
 }

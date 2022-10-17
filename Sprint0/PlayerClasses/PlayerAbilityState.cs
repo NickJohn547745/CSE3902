@@ -12,7 +12,6 @@ namespace sprint0.PlayerClasses;
 public abstract class PlayerAbilityState : IPlayerState {
     protected Player player;
     protected int frameCount;
-    protected PlayerFacingState previousState;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
@@ -20,7 +19,7 @@ public abstract class PlayerAbilityState : IPlayerState {
         return new Rectangle((int)player.Position.X, (int)player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public virtual void Draw(SpriteBatch spriteBatch)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
         sprite.Draw(spriteBatch, player.Position, SpriteEffects.None);
@@ -32,12 +31,7 @@ public abstract class PlayerAbilityState : IPlayerState {
         if (type == typeof(Enemy)) player.TakeDamage(obj.Damage);
     }
 
-    public void Update() {
-        frameCount--;
-        if (frameCount == 0) {
-            player.PlayerState = previousState;
-        }
-    }
+    public abstract void Update();
 
     public void MoveUp() {
         // Can't move while using ability

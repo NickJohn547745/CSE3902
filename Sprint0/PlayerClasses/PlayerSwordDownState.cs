@@ -19,7 +19,21 @@ public class PlayerSwordDownState : PlayerSwordState {
         sprite = PlayerSpriteFactory.Instance.GetSwordDownSprite();
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Bottom;
-        previous = new PlayerFacingDownState(player);
     }
 
+    public override void Update()
+    {
+        if (currentFrame > FramesPerAnimationChange)
+        {
+            currentFrame = 0;
+            animationFrame++;
+        }
+
+        currentFrame++;
+
+        if (animationFrame == 4)
+        {
+            player.PlayerState = new PlayerFacingDownState(player);
+        }
+    }
 }
