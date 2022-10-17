@@ -39,4 +39,4 @@
 * We reviewed each other’s code through pull requests
 * Also reviewed informally during meetings
 ## Known Bugs
-* Killing an enemy after they use projectiles causes them to keep going continuously 
+* Killing an enemy after they use projectiles causes the projectile to keep going continuously 
