@@ -14,7 +14,6 @@ namespace sprint0.Classes
     {
         List<ICollidable> collidables { get; set; }
 
-
         public CollisionManager(List<ICollidable> collidables)
         {
             this.collidables = collidables;

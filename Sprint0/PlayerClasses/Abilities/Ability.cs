@@ -8,6 +8,7 @@ namespace sprint0.PlayerClasses.Abilities;
 public abstract class Ability : ICollidable
 {
     protected Player player;
+    public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public ISprite sprite { get; set; }
     public Vector2 Position { get; set; }

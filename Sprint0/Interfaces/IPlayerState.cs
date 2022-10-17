@@ -6,8 +6,9 @@ using System;
 namespace sprint0.Interfaces; 
 
 public interface IPlayerState {
-    protected const int playerSpeed = 3;
+    public const int playerSpeed = 3;
     public ISprite sprite { get; set; }
+    public Rectangle GetHitBox();
     public void Collide(ICollidable obj, ICollidable.Edge edge);
     void Draw(SpriteBatch spriteBatch);
     void Update();

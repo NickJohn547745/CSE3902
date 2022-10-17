@@ -25,6 +25,7 @@ namespace sprint0.Enemies
             delay = behaviorDelay;
             fireBallTracker = 1;
             health = 8;
+            Damage = 1;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

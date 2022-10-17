@@ -209,7 +209,7 @@ public class Game1 : Game {
         ICollidable aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
         EnemyList.Add(aquamentus);
 
-        Player = new Player();
+        Player = new Player(this);
 
         Projectiles = new List<ICollidable>();
 
@@ -226,12 +226,6 @@ public class Game1 : Game {
         CollisionManager.Update(gameTime, this);
 
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
-
-        foreach (ICollidable projectile in Projectiles)
-        {
-            projectile.Update(gameTime, this);
-        }
-
         //Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {

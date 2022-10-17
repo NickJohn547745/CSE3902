@@ -8,7 +8,7 @@ namespace sprint0.Interfaces;
 
 public abstract class Projectile : ICollidable {
 
-    public int damage { get; set; }
+    public int Damage { get; set; }
     protected float start;
     protected int delay;
     protected Vector2 position { get; set; }

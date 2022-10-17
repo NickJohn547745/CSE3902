@@ -21,6 +21,7 @@ namespace sprint0.Enemies
             delay = behaviorDelay;
             previous = 1;
             health = 2;
+            Damage = 1;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

@@ -20,6 +20,7 @@ namespace sprint0.Enemies
             velocity = Vector2.Zero;
             delay = behaviorDelay;
             health = 2;
+            Damage = 1;
 
             directionChoice = new Dictionary<int, Vector2>();
             directionChoice.Add(0, new Vector2(0, -1));

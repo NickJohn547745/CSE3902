@@ -13,17 +13,28 @@ namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
-        private const int tileOffset = 20;
+        protected const int tileOffset = 20;
 
         public int health { get; set; }
-        public int damage { get; set; }
+        public int Damage { get; set; }
         protected int delay;
         private int delayCount;
+        private int damageDelay;
         public Vector2 position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
+
         public Vector2 velocity { get; set; }
         public ISprite sprite { get; set; }
+
+        private void TakeDamage(int damage)
+        {
+            if (damageDelay % 12 == 0)
+            {
+                health -= damage;
+            }
+            damageDelay++;
+        }
 
         protected abstract void Behavior(GameTime gameTime, Game1 game);
 
@@ -55,7 +66,7 @@ namespace sprint0.Enemies
 
             if (type == typeof(Player))
             {
-                
+                TakeDamage(obj.Damage);
             } else if (type == typeof(ITile))
             {
                 switch (edge)
