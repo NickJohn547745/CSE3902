@@ -19,6 +19,11 @@ public class PlayerSwordUpState : PlayerSwordState {
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Top;
     }
+    public override Rectangle GetHitBox()
+    {
+        return new Rectangle((int) player.Position.X, (int) player.Position.Y - (sprite.GetHeight() - 64), sprite.GetWidth(), sprite.GetHeight());
+    }
+
     public override void Draw(SpriteBatch spriteBatch)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
