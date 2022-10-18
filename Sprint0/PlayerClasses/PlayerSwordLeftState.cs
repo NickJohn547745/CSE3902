@@ -23,7 +23,7 @@ public class PlayerSwordLeftState : PlayerSwordState {
 
     public override Rectangle GetHitBox()
     {
-        return new Rectangle((int) player.Position.X - (sprite.GetWidth() - 64), (int) player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
+        return new Rectangle((int) player.Position.X - (sprite.GetWidth(animationFrame) - 64), (int) player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
     public override void Draw(SpriteBatch spriteBatch)
@@ -32,7 +32,7 @@ public class PlayerSwordLeftState : PlayerSwordState {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
         
 
-        sprite.Draw(spriteBatch, new Vector2(player.Position.X - (sprite.GetWidth() - 64), player.Position.Y), animationFrame, SpriteEffects.FlipHorizontally);
+        sprite.Draw(spriteBatch, new Vector2(player.Position.X - (sprite.GetWidth(animationFrame) - 64), player.Position.Y), animationFrame, SpriteEffects.FlipHorizontally);
     }
 
 

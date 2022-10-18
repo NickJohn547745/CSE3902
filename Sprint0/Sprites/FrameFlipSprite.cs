@@ -40,12 +40,12 @@ namespace sprint0.Sprites
             effect = SpriteEffects.None;
         }
 
-        public override int GetWidth()
+        public override int GetWidth(int animationFrame = -1)
         {
             return frameSource.Width;
         }
 
-        public override int GetHeight()
+        public override int GetHeight(int animationFrame = -1)
         {
             return frameSource.Height;
         }
