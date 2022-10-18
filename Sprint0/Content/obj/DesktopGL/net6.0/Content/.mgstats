@@ -1,4 +1,3 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/Spritesheets/Enemies/aquamentus.png","C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/aquamentus.xnb","TextureProcessor","Texture2DContent",1207,14341,0.2420157
 "C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/Spritesheets/Enemies/goriya.png","C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/goriya.xnb","TextureProcessor","Texture2DContent",612,5269,0.0025376
 "C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/Spritesheets/Enemies/goriyaprojectile.png","C:/Users/evans/source/repos/NickJohn547745/CSE3902/Sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/goriyaprojectile.xnb","TextureProcessor","Texture2DContent",292,1941,0.002994
