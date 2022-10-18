@@ -37,7 +37,7 @@ public class Player : ICollidable {
 
     public Type GetObjectType()
     {
-        return this.GetType();
+        return this.GetType().BaseType;
     }
     public Rectangle GetHitBox()
     {

@@ -28,7 +28,7 @@ public class Game1 : Game {
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<ICollidable> EnemyList { get; private set; }
-    public List<ITile> TileList { get; private set; }
+    public List<ICollidable> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
@@ -104,18 +104,37 @@ public class Game1 : Game {
 
     public void PreviousTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex--;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
+
     }
 
     public void NextTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex++;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
+
+    }
+
+    // adds any tile type that is collidable to the collision list
+    public void AddCollisionTiles()
+    {
     }
 
 
@@ -168,7 +187,7 @@ public class Game1 : Game {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
-        TileList = new List<ITile>();
+        TileList = new List<ICollidable>();
         TileList.Add(new TileType1(1000, 360));
         TileList.Add(new TileType2(1000, 360));
         TileList.Add(new TileType3(1000, 360));
@@ -245,10 +264,10 @@ public class Game1 : Game {
 
         Room.Draw(_spriteBatch);
 
+        TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)
