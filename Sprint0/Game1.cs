@@ -102,14 +102,13 @@ public class Game1 : Game {
 
     public void PreviousTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex--;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
 
-        ICollidable tile1 = new TileType1();
-
-        if (TileList[currentTileIndex].GetType() != tile1.GetType())
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
             CollidableList.Add(TileList[currentTileIndex]);
         }
@@ -118,14 +117,13 @@ public class Game1 : Game {
 
     public void NextTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex++;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
 
-        ICollidable tile1 = new TileType1();
-
-        if (TileList[currentTileIndex].GetType() != tile1.GetType())
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
             CollidableList.Add(TileList[currentTileIndex]);
         }
@@ -135,7 +133,6 @@ public class Game1 : Game {
     // adds any tile type that is collidable to the collision list
     public void AddCollisionTiles()
     {
-        CollidableList.Add(TileList[0]);
     }
 
 
@@ -238,10 +235,6 @@ public class Game1 : Game {
         CollidableList = new List<ICollidable>();
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
-        CollidableList.Add(TileList[1]);
-        
-
-
 
         CollisionManager = new CollisionManager(CollidableList);
     }
