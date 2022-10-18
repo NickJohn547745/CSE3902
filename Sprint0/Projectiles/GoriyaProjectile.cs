@@ -20,17 +20,21 @@ namespace sprint0.Projectiles
 
         private GoriyaStateMachine goriya;
         private Boolean returnThrow;
+        private bool caught;
 
         public GoriyaProjectile(Vector2 position, Vector2 velocity, GoriyaStateMachine thrower)
         {
             initPosition = position;
-            this.position = position;
-            sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
-            this.velocity = velocity;
+            this.Position = position;
+            Sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
+            Velocity = velocity;
             speed = goriyaProjSpeed;
             delay = goriyaProjDelay;
             goriya = thrower;
             returnThrow = false;
+            Damage = 1;
+            Collision = false;
+            caught = false;
         }
 
         private Boolean Caught()
@@ -38,35 +42,44 @@ namespace sprint0.Projectiles
             Boolean output = false;
             if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Up)
             {
-                output = position.Y >= initPosition.Y - goriya.goriya.sprite.GetHeight();
+                output = Position.Y >= initPosition.Y - goriya.goriya.sprite.GetHeight();
             } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Down)
             {
-                output = position.Y <= initPosition.Y + goriya.goriya.sprite.GetHeight();
+                output = Position.Y <= initPosition.Y + goriya.goriya.sprite.GetHeight();
             } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Left)
             {
-                output = position.X >= initPosition.X;
+                output = Position.X >= initPosition.X;
             }
             else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Right)
             {
-                output = position.X <= initPosition.X + goriya.goriya.sprite.GetWidth();
+                output = Position.X <= initPosition.X + goriya.goriya.sprite.GetWidth();
             }
 
             return output;
         }
 
+        public override void Collide(ICollidable obj, ICollidable.Edge edge)
+        {
+            caught = returnThrow && obj.GetObjectType() == typeof(GoriyaEnemy) ;
+
+            Collision = caught || (Collision = obj.GetObjectType().BaseType != typeof(Projectile) && obj.GetObjectType().BaseType != typeof(Enemy));
+
+            if (Collision) goriya.boomerangThrown = false;
+        }
+
         protected override void Behavior(Game1 game)
         {
-            Boolean xMax = Math.Abs(position.X - initPosition.X) >= speed * 2;
-            Boolean yMax = Math.Abs(position.Y - initPosition.Y) >= speed * 2;
+            Boolean xMax = Math.Abs(Position.X - initPosition.X) >= speed * 2;
+            Boolean yMax = Math.Abs(Position.Y - initPosition.Y) >= speed * 2;
 
             // reverse velocity after 2 seconds
             if (!returnThrow &&  (xMax || yMax)) 
             {
-                velocity *= -1;
+                Velocity *= -1;
                 returnThrow = true;
             }
  
-            if (returnThrow && Caught())
+            if (returnThrow && caught) //Caught())
             {
                 goriya.boomerangThrown = false;
             }

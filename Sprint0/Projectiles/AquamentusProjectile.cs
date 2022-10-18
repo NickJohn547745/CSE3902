@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
 using sprint0.Interfaces;
-using sprint0.Sprites;
+using sprint0.Enemies;
 
 namespace sprint0.Interfaces; 
 
@@ -14,11 +14,13 @@ public class AquamentusProjectile : Projectile {
     public AquamentusProjectile(Vector2 position, Vector2 velocity)
     {
         initPosition = position;
-        this.position = position;
-        sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
-        this.velocity = velocity;
+        Position = position;
+        Sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
+        Velocity = velocity;
         speed = fireBallSpeed;
         delay = fireBallDelay;
+        Damage = 1;
+        Collision = false;
     }
 
     protected override void Behavior(Game1 game)

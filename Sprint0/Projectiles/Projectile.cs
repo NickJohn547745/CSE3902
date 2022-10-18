@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using System;
@@ -11,42 +12,45 @@ public abstract class Projectile : ICollidable {
     public int Damage { get; set; }
     protected float start;
     protected int delay;
-    protected Vector2 position { get; set; }
+    protected Vector2 Position { get; set; }
     protected Vector2 initPosition;
     protected float speed;
-    public Vector2 velocity { get; set; }
-    public ISprite sprite { get; set; }
+    public Vector2 Velocity { get; set; }
+    public ISprite Sprite { get; set; }
+    public bool Collision { get; set; }
 
     public Type GetObjectType()
     {
-        return this.GetType().BaseType;
+        return this.GetType();
     }
 
     public Rectangle GetHitBox()
     {
-        return new Rectangle((int)position.X, (int)position.Y, sprite.GetWidth(), sprite.GetHeight());
+        return new Rectangle((int)Position.X, (int)Position.Y, Sprite.GetWidth(), Sprite.GetHeight());
     }
 
-    public void Collide(ICollidable obj, ICollidable.Edge edge)
+    public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-
+        Collision = obj.GetObjectType() != typeof(Projectile) && obj.GetObjectType() != typeof(Enemy);
     }
 
     protected abstract void Behavior(Game1 game);
 
     public virtual void Update(GameTime gameTime, Game1 game)
     {
-        position += speed * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         if (gameTime.TotalGameTime.Seconds % delay == 0)
         {
             Behavior(game);
         }
+
+        if (Collision && game.CollidableList.Contains(this)) game.CollidableList.Remove(this);
     }
     
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        sprite.Draw(spriteBatch, position, SpriteEffects.None);
+        Sprite.Draw(spriteBatch, Position, SpriteEffects.None);
     }
 
     public void Reset(Game1 game)

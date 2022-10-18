@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
+using sprint0.PlayerClasses.Abilities;
 using sprint0.Factories;
 using sprint0.RoomClasses;
 
@@ -75,7 +76,7 @@ namespace sprint0.Enemies
         {
             Type type = obj.GetObjectType();
 
-            if (type == typeof(Player))
+            if (type == typeof(Player) || type == typeof(Ability))
             {
                 TakeDamage(obj.Damage);
             } else if (type == typeof(Wall))
@@ -106,7 +107,7 @@ namespace sprint0.Enemies
 
         public Type GetObjectType()
         {
-            return this.GetType().BaseType;
+            return this.GetType();
         }
 
         public Rectangle GetHitBox()
