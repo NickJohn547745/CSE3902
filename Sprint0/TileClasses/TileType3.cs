@@ -15,6 +15,7 @@ namespace sprint0.TileClasses
         {
             this.SetLocation(1000, 360);
             this.SetTextureCoords(2, 0);
+            this.SetCollidable(true);
         }
     }
 }

@@ -20,6 +20,9 @@ namespace sprint0.TileClasses
 
         public int Damage { get; set; }
 
+        private bool collidable;
+
+
         public void Draw(SpriteBatch spriteBatch)
         {
             texture = TextureStorage.GetTilesSpritesheet();
@@ -35,7 +38,9 @@ namespace sprint0.TileClasses
 
         public void Collide(ICollidable obj, ICollidable.Edge Edge)
         {
-            Type type = obj.GetObjectType();
+            // Type type = obj.GetObjectType();
+
+            // Code may be needed if some blocks are pushable / trap tiles
         }
 
         public Type GetObjectType()
@@ -45,8 +50,8 @@ namespace sprint0.TileClasses
 
         public Rectangle GetHitBox()
         {
-            int tileWidth = 16;
-            int tileHeight = 16;
+            int tileWidth = 80;
+            int tileHeight = 80;
             return new Rectangle(Location.X, Location.Y, tileWidth, tileHeight);
         }
 
@@ -57,6 +62,11 @@ namespace sprint0.TileClasses
         internal void SetLocation(int x, int y)
         {
             this.Location = new Point(x, y);
+        }
+
+        internal void SetCollidable(bool isCollidable)
+        {
+            this.collidable = isCollidable;
         }
 
         public void Reset(Game1 game)
