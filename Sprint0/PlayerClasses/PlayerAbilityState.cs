@@ -27,8 +27,8 @@ public abstract class PlayerAbilityState : IPlayerState {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-        if (type == typeof(Enemy)) player.TakeDamage(obj.Damage);
+        Type type = obj.GetObjectType().BaseType;
+        if (type == typeof(Enemy) || type == typeof(Projectile)) player.TakeDamage(obj.Damage);
     }
 
     public abstract void Update();

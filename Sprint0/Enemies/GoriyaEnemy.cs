@@ -46,9 +46,6 @@ namespace sprint0.Enemies
                 boomerangTracker++;
             } else if (!goriyaStateMachine.boomerangThrown)
             {
-                game.CollidableList.Remove(goriyaStateMachine.boomerang);
-                goriyaStateMachine.boomerang = null;
-
                 // change direction
                 goriyaStateMachine.ChangeDirection();
                 boomerangTracker++;
