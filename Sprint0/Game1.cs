@@ -187,20 +187,7 @@ public class Game1 : Game {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
-<<<<<<< HEAD
         TileList = new List<ICollidable>();
-        TileList.Add(new TileType1());
-        TileList.Add(new TileType2());
-        TileList.Add(new TileType3());
-        TileList.Add(new TileType4());
-        TileList.Add(new TileType5());
-        TileList.Add(new TileType6());
-        TileList.Add(new TileType7());
-        TileList.Add(new TileType8());
-        TileList.Add(new TileType9());
-        TileList.Add(new TileType10());
-=======
-        TileList = new List<ITile>();
         TileList.Add(new TileType1(1000, 360));
         TileList.Add(new TileType2(1000, 360));
         TileList.Add(new TileType3(1000, 360));
@@ -211,7 +198,6 @@ public class Game1 : Game {
         TileList.Add(new TileType8(1000, 360));
         TileList.Add(new TileType9(1000, 360));
         TileList.Add(new TileType10(1000, 360));
->>>>>>> main
 
         ItemList = new List<IItem>();
         ItemList.Add(new Arrow());
@@ -278,10 +264,10 @@ public class Game1 : Game {
 
         Room.Draw(_spriteBatch);
 
+        TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)

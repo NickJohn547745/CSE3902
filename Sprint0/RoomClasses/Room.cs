@@ -14,7 +14,7 @@ namespace sprint0.RoomClasses
     public class Room
     {
         private Game1 game;
-        private List<ITile> tileList = new List<ITile>();
+        private List<ICollidable> tileList = new List<ICollidable>();
         public Room(Game1 game)
         {
             this.game = game;
@@ -39,7 +39,7 @@ namespace sprint0.RoomClasses
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (ITile tile in tileList)
+            foreach (ICollidable tile in tileList)
             {
                 tile.Draw(spriteBatch);
             } 
