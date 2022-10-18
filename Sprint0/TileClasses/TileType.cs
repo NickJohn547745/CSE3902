@@ -45,7 +45,7 @@ namespace sprint0.TileClasses
 
         public Type GetObjectType()
         {
-            return this.GetType().BaseType;
+            return this.GetType();
         }
 
         public Rectangle GetHitBox()

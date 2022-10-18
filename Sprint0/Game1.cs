@@ -107,6 +107,13 @@ public class Game1 : Game {
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
 
+        ICollidable tile1 = new TileType1();
+
+        if (TileList[currentTileIndex].GetType() != tile1.GetType())
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
+
     }
 
     public void NextTile()
@@ -115,6 +122,13 @@ public class Game1 : Game {
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+
+        ICollidable tile1 = new TileType1();
+
+        if (TileList[currentTileIndex].GetType() != tile1.GetType())
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
 
     }
 
@@ -224,6 +238,7 @@ public class Game1 : Game {
         CollidableList = new List<ICollidable>();
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
+        CollidableList.Add(TileList[1]);
         
 
 
