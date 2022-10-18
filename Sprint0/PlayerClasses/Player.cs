@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
 using sprint0.Sprites;
+using sprint0.RoomClasses;
+
 using System;
 
 namespace sprint0.PlayerClasses; 
@@ -15,9 +17,12 @@ public class Player : ICollidable {
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public Game1 Game { get; set; }
+    public bool IsMultiSprite { get; set; }
     public IPlayerState PlayerState { get; set; }
     public PlayerAbilityManager AbilityManager { get; protected set; }
     public int Damage { get; set; }
+
+    private bool canMove = true;
 
     public Player(Game1 game) {
         Game = game;
@@ -41,24 +46,32 @@ public class Player : ICollidable {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        switch (edge)
+        Type type = obj.GetObjectType();
+
+        if (type == typeof(Room))
         {
-            case ICollidable.Edge.Top:
-                Position += new Vector2(0, -IPlayerState.playerSpeed);
-                break;
-            case ICollidable.Edge.Right:
-                Position += new Vector2(-IPlayerState.playerSpeed, 0);
-                break;
-            case ICollidable.Edge.Left:
-                Position += new Vector2(IPlayerState.playerSpeed, 0);
-                break;
-            case ICollidable.Edge.Bottom:
-                Position += new Vector2(0, IPlayerState.playerSpeed);
-                break;
-            default:
-                break;
+            canMove = false;
+        } else
+        {
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    Position += new Vector2(0, -IPlayerState.playerSpeed);
+                    break;
+                case ICollidable.Edge.Right:
+                    Position += new Vector2(-IPlayerState.playerSpeed, 0);
+                    break;
+                case ICollidable.Edge.Left:
+                    Position += new Vector2(IPlayerState.playerSpeed, 0);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    Position += new Vector2(0, IPlayerState.playerSpeed);
+                    break;
+                default:
+                    break;
+            }
+            PlayerState.Collide(obj, edge);
         }
-        PlayerState.Collide(obj, edge);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch) { 
@@ -69,6 +82,8 @@ public class Player : ICollidable {
     public virtual void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
+
+        canMove = true;
     }
 
     public virtual void Reset(Game1 game)
@@ -83,19 +98,23 @@ public class Player : ICollidable {
     }
 
     public virtual void MoveUp() {
-        PlayerState.MoveUp();
+        if (canMove)
+            PlayerState.MoveUp();
     }
 
     public virtual void MoveDown() {
-        PlayerState.MoveDown();
+        if (canMove)
+            PlayerState.MoveDown();
     }
 
     public virtual void MoveLeft() {
-        PlayerState.MoveLeft();
+        if (canMove)
+            PlayerState.MoveLeft();
     }
 
     public virtual void MoveRight() {
-        PlayerState.MoveRight();
+        if (canMove)
+            PlayerState.MoveRight();
     }
 
     public virtual void SwordAttack() {

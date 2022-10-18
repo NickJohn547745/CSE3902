@@ -11,9 +11,9 @@ namespace sprint0.TileClasses
 {
     public class TileType3 : TileType
     {
-        public TileType3()
+        public TileType3(int x, int y)
         {
-            this.SetLocation(1000, 360);
+            this.SetLocation(x, y);
             this.SetTextureCoords(2, 0);
             this.SetCollidable(true);
         }

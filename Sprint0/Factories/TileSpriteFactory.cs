@@ -26,43 +26,43 @@ namespace sprint0
 
         public ICollidable CreateTileType1()
         {
-            return new TileType1();
+            return new TileType1(0, 0);
         }
         public ICollidable CreateTileType2()
         {
-            return new TileType2();
+            return new TileType2(0, 0);
         }
         public ICollidable CreateTileType3()
         {
-            return new TileType3();
+            return new TileType3(0, 0);
         }
         public ICollidable CreateTileType4()
         {
-            return new TileType4();
+            return new TileType4(0, 0);
         }
         public ICollidable CreateTileType5()
         {
-            return new TileType5();
+            return new TileType5(0, 0);
         }
         public ICollidable CreateTileType6()
         {
-            return new TileType6();
+            return new TileType6(0, 0);
         }
         public ICollidable CreateTileType7()
         {
-            return new TileType7();
+            return new TileType7(0, 0);
         }
         public ICollidable CreateTileType8()
         {
-            return new TileType8();
+            return new TileType8(0, 0);
         }
         public ICollidable CreateTileType9()
         {
-            return new TileType9();
+            return new TileType9(0, 0);
         }
         public ICollidable CreateTileType10()
         {
-            return new TileType10();
+            return new TileType10(0, 0);
         }
 
         /*

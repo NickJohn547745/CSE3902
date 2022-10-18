@@ -31,7 +31,7 @@ namespace sprint0.TileClasses
             int row = (int)textureCoords.Y;
 
             Rectangle sourceRect = new Rectangle(16 * col, 16 * row, 16, 16);
-            Rectangle destRect = new Rectangle(Location, new Point(64, 64));
+            Rectangle destRect = new Rectangle(Location, new Point(80, 80));
 
             spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
         }

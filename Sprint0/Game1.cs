@@ -15,6 +15,7 @@ using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.Projectiles;
+using sprint0.RoomClasses;
 
 namespace sprint0;
 
@@ -41,13 +42,14 @@ public class Game1 : Game {
 
 
     public Player Player;
+    public Room Room;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
         _graphics = new GraphicsDeviceManager(this);
 
         _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.PreferredBackBufferHeight = 880;
         _graphics.ApplyChanges();
 
         Content.RootDirectory = "Content";
@@ -185,6 +187,7 @@ public class Game1 : Game {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
+<<<<<<< HEAD
         TileList = new List<ICollidable>();
         TileList.Add(new TileType1());
         TileList.Add(new TileType2());
@@ -196,6 +199,19 @@ public class Game1 : Game {
         TileList.Add(new TileType8());
         TileList.Add(new TileType9());
         TileList.Add(new TileType10());
+=======
+        TileList = new List<ITile>();
+        TileList.Add(new TileType1(1000, 360));
+        TileList.Add(new TileType2(1000, 360));
+        TileList.Add(new TileType3(1000, 360));
+        TileList.Add(new TileType4(1000, 360));
+        TileList.Add(new TileType5(1000, 360));
+        TileList.Add(new TileType6(1000, 360));
+        TileList.Add(new TileType7(1000, 360));
+        TileList.Add(new TileType8(1000, 360));
+        TileList.Add(new TileType9(1000, 360));
+        TileList.Add(new TileType10(1000, 360));
+>>>>>>> main
 
         ItemList = new List<IItem>();
         ItemList.Add(new Arrow());
@@ -236,6 +252,8 @@ public class Game1 : Game {
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
 
+        Room = new Room(this);
+
         CollisionManager = new CollisionManager(CollidableList);
     }
 
@@ -258,9 +276,7 @@ public class Game1 : Game {
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        _spriteBatch.Draw(TextureStorage.GetWallsSpritesheet(), 
-                          _graphics.GraphicsDevice.PresentationParameters.Bounds,
-                          Color.White);
+        Room.Draw(_spriteBatch);
 
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
