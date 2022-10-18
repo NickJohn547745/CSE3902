@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
+using sprint0.RoomClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,9 +108,22 @@ namespace sprint0.Classes
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < collidables.Count; i++)
+            List<ICollidable> frontCollidables = new List<ICollidable>();
+            
+            foreach (ICollidable collidable in collidables)
             {
-                collidables[i].Draw(spriteBatch);
+                if (collidable.GetObjectType() != typeof(Wall))
+                {
+                    frontCollidables.Add(collidable);
+                } else
+                {
+                    collidable.Draw(spriteBatch);
+                }
+            }
+
+            foreach (ICollidable frontCollidable in frontCollidables)
+            {
+                frontCollidable.Draw(spriteBatch);
             }
         }
     }

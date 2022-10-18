@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
 using sprint0.Factories;
+using sprint0.RoomClasses;
 
 namespace sprint0.Enemies
 {
@@ -21,9 +22,12 @@ namespace sprint0.Enemies
         protected int delay;
         private int delayCount;
         private int damageDelay;
+        public Vector2 finalPosition { get; set; }
         public Vector2 position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
+
+        private bool canMove = true;
 
         public Vector2 velocity { get; set; }
         public ISprite sprite { get; set; }
@@ -48,6 +52,10 @@ namespace sprint0.Enemies
                 position = initPosition;
             }
 
+            if (canMove)
+            {
+                finalPosition = position;
+            }
             // change direction every delay seconds
             if (delayCount % delay == 0)
             {
@@ -59,6 +67,8 @@ namespace sprint0.Enemies
             {
                 game.CollidableList.Remove(this);
             }
+
+            canMove = true;
         }
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -68,6 +78,9 @@ namespace sprint0.Enemies
             if (type == typeof(Player))
             {
                 TakeDamage(obj.Damage);
+            } else if (type == typeof(Wall))
+            {
+                canMove = false;
             } else if (type == typeof(ITile))
             {
                 switch (edge)
@@ -103,7 +116,7 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, position, SpriteEffects.None);
+            sprite.Draw(spriteBatch, finalPosition, SpriteEffects.None);
         }
 
         public void Reset(Game1 game)

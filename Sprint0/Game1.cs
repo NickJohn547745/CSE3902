@@ -15,6 +15,7 @@ using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.Projectiles;
+using sprint0.RoomClasses;
 
 namespace sprint0;
 
@@ -41,6 +42,7 @@ public class Game1 : Game {
 
 
     public Player Player;
+    public Room Room;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -217,6 +219,8 @@ public class Game1 : Game {
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
 
+        Room = new Room(this);
+
         CollisionManager = new CollisionManager(CollidableList);
     }
 
@@ -238,10 +242,6 @@ public class Game1 : Game {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(TextureStorage.GetWallsSpritesheet(), 
-                          _graphics.GraphicsDevice.PresentationParameters.Bounds,
-                          Color.White);
 
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
