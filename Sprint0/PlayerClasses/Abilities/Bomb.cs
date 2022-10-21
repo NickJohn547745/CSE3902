@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.Factories;
 
 namespace sprint0.PlayerClasses.Abilities;
@@ -10,10 +9,14 @@ public class Bomb : Ability {
 
     public Bomb(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        Position = position;
-        this.Velocity = velocity;
-        // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
+        Velocity = velocity;
         sprite = PlayerSpriteFactory.Instance.GetBombSprite();
+        if (Velocity.X != 0) {
+            Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+        }
+        else {
+            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+        }
     }
 
     public override void Draw(SpriteBatch spriteBatch)

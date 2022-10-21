@@ -42,12 +42,12 @@ namespace sprint0.Sprites
 
         public override int GetWidth(int animationFrame = -1)
         {
-            return frameSource.Width;
+            return (int) (frameSource.Width * scale);
         }
 
         public override int GetHeight(int animationFrame = -1)
         {
-            return frameSource.Height;
+            return (int) (frameSource.Height * scale);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect)
