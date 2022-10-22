@@ -17,11 +17,11 @@ namespace sprint0.Enemies
         public OldManNPC(Vector2 position)
         {
             initPosition = position;
-            this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
-            velocity = Vector2.Zero;
+            Position = position;
+            Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
+            Velocity = Vector2.Zero;
             delay = 1;
-            health = 2;
+            Health = 2;
             Damage = 0;
         }
 
@@ -39,16 +39,16 @@ namespace sprint0.Enemies
                 switch (edge)
                 {
                     case ICollidable.Edge.Top:
-                        position += new Vector2(0, -tileOffset);
+                        Position += new Vector2(0, -TileOffset);
                         break;
                     case ICollidable.Edge.Right:
-                        position += new Vector2(-tileOffset, 0);
+                        Position += new Vector2(-TileOffset, 0);
                         break;
                     case ICollidable.Edge.Left:
-                        position += new Vector2(tileOffset, 0);
+                        Position += new Vector2(TileOffset, 0);
                         break;
                     case ICollidable.Edge.Bottom:
-                        position += new Vector2(0, tileOffset);
+                        Position += new Vector2(0, TileOffset);
                         break;
                     default:
                         break;

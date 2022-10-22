@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
 using sprint0.Enemies;
-using System.Reflection.Metadata.Ecma335;
 
 namespace sprint0.Projectiles
 {
     public class GoriyaProjectile : Projectile
     {
-        private const int goriyaProjSpeed = 100;
-        private const int goriyaProjDelay = 1;
+        private const int GoriyaProjSpeed = 100;
+        private const int GoriyaProjDelay = 1;
 
         private GoriyaStateMachine goriya;
         private Boolean returnThrow;
@@ -25,11 +18,11 @@ namespace sprint0.Projectiles
         public GoriyaProjectile(Vector2 position, Vector2 velocity, GoriyaStateMachine thrower)
         {
             initPosition = position;
-            this.Position = position;
+            Position = position;
             Sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
             Velocity = velocity;
-            speed = goriyaProjSpeed;
-            delay = goriyaProjDelay;
+            speed = GoriyaProjSpeed;
+            delay = GoriyaProjDelay;
             goriya = thrower;
             returnThrow = false;
             Damage = 1;
@@ -40,19 +33,19 @@ namespace sprint0.Projectiles
         private Boolean Caught()
         {
             Boolean output = false;
-            if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Up)
+            if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Up)
             {
-                output = Position.Y >= initPosition.Y - goriya.goriya.sprite.GetHeight();
-            } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Down)
+                output = Position.Y >= initPosition.Y - goriya.Goriya.Sprite.GetHeight();
+            } else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Down)
             {
-                output = Position.Y <= initPosition.Y + goriya.goriya.sprite.GetHeight();
-            } else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Left)
+                output = Position.Y <= initPosition.Y + goriya.Goriya.Sprite.GetHeight();
+            } else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Left)
             {
                 output = Position.X >= initPosition.X;
             }
-            else if (goriya.goriyaDirection == GoriyaStateMachine.Direction.Right)
+            else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Right)
             {
-                output = Position.X <= initPosition.X + goriya.goriya.sprite.GetWidth();
+                output = Position.X <= initPosition.X + goriya.Goriya.Sprite.GetWidth();
             }
 
             return output;
@@ -64,7 +57,7 @@ namespace sprint0.Projectiles
 
             Collision = caught || (Collision = obj.GetObjectType().BaseType != typeof(Projectile) && obj.GetObjectType().BaseType != typeof(Enemy));
 
-            if (Collision) goriya.boomerangThrown = false;
+            if (Collision) goriya.BoomerangThrown = false;
         }
 
         protected override void Behavior(Game1 game)
@@ -81,7 +74,7 @@ namespace sprint0.Projectiles
  
             if (returnThrow && caught) //Caught())
             {
-                goriya.boomerangThrown = false;
+                goriya.BoomerangThrown = false;
             }
         }
     }
