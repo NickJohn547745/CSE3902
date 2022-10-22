@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.Factories;
 
 namespace sprint0.PlayerClasses.Abilities;
@@ -12,16 +11,17 @@ public class WoodenArrow : Ability {
 
     public WoodenArrow(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        Position = position;
-        Velocity = Vector2.Multiply(velocity, new Vector2(5));
-        if (Velocity.X == 0) {
+        if (velocity.X == 0) {
             spriteVersion = 0;
             sprite = PlayerSpriteFactory.Instance.GetWoodenArrowVerticalSprite();
+            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
         else {
             spriteVersion = 1;
             sprite = PlayerSpriteFactory.Instance.GetWoodenArrowHorizontalSprite();
+            Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
         }
+        Velocity = Vector2.Multiply(velocity, new Vector2(5));
         
     }
 

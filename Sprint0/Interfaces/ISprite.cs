@@ -5,8 +5,8 @@ namespace sprint0;
 
 public interface ISprite {
 
-    public int GetWidth();
-    public int GetHeight(); 
+    public int GetWidth(int animationFrame = -1);
+    public int GetHeight(int animationFrame = -1); 
     public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffects);
     public void Draw(SpriteBatch spriteBatch, Vector2 position, int currentFrame, SpriteEffects spriteEffect);
 }

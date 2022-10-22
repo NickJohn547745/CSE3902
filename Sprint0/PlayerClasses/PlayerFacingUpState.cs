@@ -1,11 +1,7 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
-using sprint0.Enemies;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using System;
 
 namespace sprint0.PlayerClasses; 
 
@@ -31,7 +27,7 @@ public class PlayerFacingUpState : PlayerFacingState {
 
     public override void UseAbility(AbilityTypes abilityType)
     {
-        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(8 * 4, -16 * 4)), new Vector2(0, -1));
+        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(sprite.GetWidth() / 2, 0)), new Vector2(0, -1));
         player.PlayerState = new PlayerAbilityUpState(player);
     }
 }

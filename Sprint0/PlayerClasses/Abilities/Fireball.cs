@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.Factories;
 
 namespace sprint0.PlayerClasses.Abilities;
@@ -12,10 +11,15 @@ public class Fireball : Ability {
 
     public Fireball(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        Position = position;
         Velocity = Vector2.Multiply(velocity, new Vector2(4));
-        finalPosition = Vector2.Add(position, Vector2.Multiply(velocity, new Vector2(128)));
         sprite = PlayerSpriteFactory.Instance.GetFireballSprite();
+        if (velocity.X != 0) {
+            Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+        }
+        else {
+            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+        }
+        finalPosition = Vector2.Add(Position, Vector2.Multiply(velocity, new Vector2(128)));
     }
 
     //Vector2 normalizedVelocity = Vector2.Normalize(velocity);
