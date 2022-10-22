@@ -5,12 +5,15 @@ using sprint0.Interfaces;
 using sprint0.PlayerClasses;
 using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
+using sprint0.TileClasses;
+using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
-        protected const int TileOffset = 20;
+        protected const int TileOffset = 5;
+        private const int DeathFrames = 4;
 
         public int Health { get; set; }
         public int MaxHealth { get; protected set; }
@@ -22,6 +25,7 @@ namespace sprint0.Enemies
         public Vector2 Position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
+        protected int deadCount;
 
         private bool canMove = true;
 
@@ -37,6 +41,11 @@ namespace sprint0.Enemies
             damageDelay++;
         }
 
+        protected virtual void ReverseDirection()
+        {
+            Velocity *= -1;
+        }
+        
         protected abstract void Behavior(GameTime gameTime, Game1 game);
 
         public void Update(GameTime gameTime, Game1 game)
@@ -55,14 +64,35 @@ namespace sprint0.Enemies
             }
             delayCount++;
 
-            if (Health <= 0)
+            if (deadCount >= DeathFrames)
             {
                 game.CollidableList.Remove(this);
             }
-
+            
             canMove = true;
         }
 
+        private void KnockBack(ICollidable.Edge edge, float offset)
+        {
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    Position += new Vector2(0, -offset);
+                    break;
+                case ICollidable.Edge.Right:
+                    Position += new Vector2(-offset, 0);
+                    break;
+                case ICollidable.Edge.Left:
+                    Position += new Vector2(offset, 0);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    Position += new Vector2(0, offset);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             Type type = obj.GetObjectType();
@@ -72,27 +102,12 @@ namespace sprint0.Enemies
                 TakeDamage(obj.Damage);
             } else if (type == typeof(Wall))
             {
-                canMove = false;
-            } else if (type == typeof(ITile))
+                KnockBack(edge, TileOffset);
+                ReverseDirection();
+                // canMove = false;
+            } else if (type == typeof(TileType))
             {
-                switch (edge)
-                {
-                    case ICollidable.Edge.Top:
-                        Position += new Vector2(0, -TileOffset);
-                        break;
-                    case ICollidable.Edge.Right:
-                        Position += new Vector2(-TileOffset, 0);
-                        break;
-                    case ICollidable.Edge.Left:
-                        Position += new Vector2(TileOffset, 0);
-                        break;
-                    case ICollidable.Edge.Bottom:
-                        Position += new Vector2(0, TileOffset);
-                        break;
-                    default:
-                        break;
-                }
-
+                KnockBack(edge, TileOffset);
             }
         }
 
@@ -108,13 +123,22 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+            if (Health <= 0)
+            {
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+                deadCount++;
+            }
+            else
+            {
+                Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+            }
         }
 
         public void Reset(Game1 game)
         {
             Position = initPosition;
-            Health = MaxHealth;       
+            Health = MaxHealth;
+            deadCount = 0;
         }
     }
 }

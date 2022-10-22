@@ -14,7 +14,7 @@ namespace sprint0.Enemies
 {
     public class GoriyaEnemy: Enemy
     {
-        private const int BehaviorDelay = 40;
+        private const int BehaviorDelay = 60;
         private const int DirectionChange = 4;
 
         private GoriyaStateMachine goriyaStateMachine;
@@ -33,6 +33,12 @@ namespace sprint0.Enemies
             MaxHealth = 3;
             Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
+        }
+        
+        protected override void ReverseDirection()
+        {
+            goriyaStateMachine.flipped = true;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -54,7 +60,15 @@ namespace sprint0.Enemies
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect);
+            if (Health <= 0)
+            {
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, goriyaStateMachine.SpriteEffect);
+                deadCount++;
+            }
+            else
+            {
+                Sprite.Draw(spriteBatch, FinalPosition, goriyaStateMachine.SpriteEffect);
+            }
         }
     }
 }

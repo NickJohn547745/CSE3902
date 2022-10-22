@@ -21,8 +21,10 @@ namespace sprint0.Enemies
             Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
             Velocity = Vector2.Zero;
             delay = 1;
-            Health = 2;
+            MaxHealth = 2;
+            Health = MaxHealth;
             Damage = 0;
+            deadCount = 0;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

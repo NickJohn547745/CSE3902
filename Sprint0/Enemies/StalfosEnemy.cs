@@ -7,7 +7,7 @@ namespace sprint0.Enemies
 {
     public class StalfosEnemy : Enemy
     {
-        private const int BehaviorDelay = 40;
+        private const int BehaviorDelay = 50;
         private const int RandBound = 4;
 
         private Dictionary<int, Vector2> DirectionChoice;
@@ -22,6 +22,7 @@ namespace sprint0.Enemies
             MaxHealth = 2;
             Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));

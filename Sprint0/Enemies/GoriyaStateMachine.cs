@@ -22,20 +22,44 @@ namespace sprint0.Enemies
         public SpriteEffects SpriteEffect { get; private set; }
         public bool BoomerangThrown { get; set; }
         public GoriyaProjectile Boomerang { get; set; }
+        public bool flipped { private get; set; }
 
         public GoriyaStateMachine(GoriyaEnemy goriya)
         {
             Goriya = goriya;            
             BoomerangThrown = false;
             SpriteEffect = SpriteEffects.None;
+            flipped = false;
         }
 
+        private int Flip()
+        {
+            int flip = 0;
+            switch (GoriyaDirection)
+            {
+                case Direction.Up:
+                    // move down
+                    flip = 3;
+                    break;
+                case Direction.Left:
+                    // move right
+                    flip = 2;
+                    break;
+                case Direction.Right:
+                    // move left
+                    flip = 1;
+                    break;
+            }
+            return flip;
+        }
+        
         public void ChangeDirection()
         {
                 Random rand = new Random();
-
+                int dir = rand.Next(0, DirectionChange);
+                if (flipped) dir = Flip();
                 // randomly choose direction
-                switch (rand.Next(0, DirectionChange))
+                switch (dir)
                 {
                     case 0:
                         // move up
@@ -65,9 +89,9 @@ namespace sprint0.Enemies
                             Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
                             SpriteEffect = SpriteEffects.FlipHorizontally;
                             break;
-                    default:
-                            break;
                 }
+
+                flipped = false;
         }
 
         public void ThrowBoomerang()

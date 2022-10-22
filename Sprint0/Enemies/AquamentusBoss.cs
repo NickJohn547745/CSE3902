@@ -27,6 +27,7 @@ namespace sprint0.Enemies
             MaxHealth = 8;
             Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

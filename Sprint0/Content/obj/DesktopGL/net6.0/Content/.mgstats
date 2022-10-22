@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Arial.spritefont","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37919,0.2615092
+"C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Arial.spritefont","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37919,0.2633608
 "C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Spritesheets/Enemies/aquamentus.png","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/aquamentus.xnb","TextureProcessor","Texture2DContent",1207,14341,0.0195819
 "C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Spritesheets/Enemies/fireball.png","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/fireball.xnb","TextureProcessor","Texture2DContent",420,2133,0.0020438
 "C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Spritesheets/Enemies/gel.png","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Enemies/gel.xnb","TextureProcessor","Texture2DContent",185,1109,0.0022565

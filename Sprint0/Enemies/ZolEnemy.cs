@@ -13,7 +13,7 @@ namespace sprint0.Enemies
 {
     public class ZolEnemy : Enemy
     {
-        private const int BehaviorDelay = 40;
+        private const int BehaviorDelay = 50;
         private const int RandBound = 6;
 
         private Dictionary<int, Vector2> DirectionChoice;
@@ -26,9 +26,10 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.One;
             delay = BehaviorDelay;
-            MaxHealth = 2;
+            MaxHealth = 1;
             Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));
