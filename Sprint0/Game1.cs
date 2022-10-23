@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Xna.Framework;
@@ -32,6 +33,8 @@ public class Game1 : Game {
     public List<IItem> ItemList { get; private set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
+    
+    public List<ICollidable> CollidablesToDelete { get; set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
@@ -237,6 +240,8 @@ public class Game1 : Game {
         CollidableList = new List<ICollidable>();
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
+        
+        CollidablesToDelete = new List<ICollidable>();
 
         Room = new Room(this);
 
@@ -248,12 +253,16 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
+        if(CollidablesToDelete != null)
+            CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
+
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
         //Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
+
         base.Update(gameTime);
     }
 

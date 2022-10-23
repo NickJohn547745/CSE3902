@@ -1,6 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Enemies;
 using sprint0.Factories;
+using sprint0.Interfaces;
+using sprint0.RoomClasses;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -8,6 +11,7 @@ public class WoodenArrow : Ability {
     private int frameCounter;
 
     private int spriteVersion;
+    private int hitFrame = 0;
 
     public WoodenArrow(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
@@ -41,8 +45,23 @@ public class WoodenArrow : Ability {
         frameCounter++;
         Position = Vector2.Add(Position, Velocity);
 
-        if (frameCounter == 45) {
+        if (hitFrame > 0)
+            hitFrame++;
+
+        if (hitFrame == 5) {
+            game.CollidablesToDelete.Add(this);
             player.AbilityManager.RemoveCurrentAbility();
         }
+    }
+    
+    public override void Collide(ICollidable obj, ICollidable.Edge edge)
+    {
+        if (obj.GetObjectType() == typeof(Wall)) {
+            Velocity = Vector2.Zero;
+            sprite = PlayerSpriteFactory.Instance.GetArrowHitSprite();
+            if (hitFrame == 0)
+                hitFrame = 1;
+        }
+
     }
 }

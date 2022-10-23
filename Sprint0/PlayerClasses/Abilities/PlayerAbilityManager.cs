@@ -6,6 +6,8 @@ namespace sprint0.PlayerClasses.Abilities;
 public class PlayerAbilityManager {
     private Player player;
 
+    private Game1 Game;
+
     private Ability currentAbility;
 
     public PlayerAbilityManager(Player player) {
@@ -13,15 +15,13 @@ public class PlayerAbilityManager {
     }
 
     public void Update(GameTime gameTime, Game1 game) {
-        if (currentAbility != null) {
-            currentAbility.Update(gameTime, game);
-        }
-        
+        if (Game == null)
+            Game = game;
     }
 
     public void Draw(SpriteBatch spriteBatch) {
         if (currentAbility != null) {
-            currentAbility.Draw(spriteBatch);
+            //currentAbility.Draw(spriteBatch);
         }
         
     }
@@ -47,6 +47,10 @@ public class PlayerAbilityManager {
                 case AbilityTypes.Fireball:
                     currentAbility = new Fireball(player, position, velocity);
                     break;
+            }
+
+            if (currentAbility != null) {
+                Game.CollisionManager.collidables.Add(currentAbility);
             }
         }
     }
