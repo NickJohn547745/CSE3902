@@ -9,8 +9,6 @@ using System;
 namespace sprint0.PlayerClasses; 
 
 public class Player : ICollidable {
-    
-    public int ScaleFactor;
 
     private Vector2 initPosition;
     public Vector2 Position { get; set; }
@@ -28,7 +26,6 @@ public class Player : ICollidable {
         PlayerState = new PlayerFacingUpState(this);
         AbilityManager = new PlayerAbilityManager(this);
         Health = 6;
-        ScaleFactor = 4;
         Position = new Vector2(150);
         initPosition = Position;
         Damage = 0;
@@ -36,7 +33,7 @@ public class Player : ICollidable {
 
     public Type GetObjectType()
     {
-        return this.GetType().BaseType;
+        return this.GetType();
     }
     public Rectangle GetHitBox()
     {

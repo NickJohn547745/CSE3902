@@ -6,23 +6,24 @@ namespace sprint0.Enemies
 {
     public class KeeseEnemy : Enemy
     {
-        private const int behaviorDelay = 40;
-        private const int directionChange = 2;
-        private const int randBound = 2;
+        private const int BehaviorDelay = 50;
+        private const int DirectionChange = 2;
+        private const int RandBound = 2;
 
         private int previous;
         public KeeseEnemy(Vector2 position, float speed)
         {
             initPosition = position;
-            this.position = position;
-            sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
+            Position = position;
+            Sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             this.speed = speed;
-            velocity = Vector2.One;
-            delay = behaviorDelay;
+            Velocity = Vector2.One;
+            delay = BehaviorDelay;
             previous = 1;
-            maxHealth = 2;
-            health = maxHealth;
+            MaxHealth = 1;
+            Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -31,10 +32,10 @@ namespace sprint0.Enemies
             Random rand2 = new Random();
 
             // randomly choose movement direction
-            int x = rand.Next(-1, randBound) % directionChange;
-            int y = rand2.Next(-1, randBound) % directionChange;
-            if (x == 0 && y == 0) x = previous *= -1;
-            velocity = new Vector2 (x, y);
+            int x = rand.Next(-1, RandBound) % DirectionChange;
+            int y = rand2.Next(-1, RandBound) % DirectionChange;
+            if (x == 0 && y == 0) x = previous;
+            Velocity = new Vector2 (x, y);
         }
     }
 }

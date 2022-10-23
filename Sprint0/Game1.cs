@@ -21,7 +21,7 @@ namespace sprint0;
 
 public class Game1 : Game {
 
-    private const float enemySpeed = 50;
+    private const float enemySpeed = 60;
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -214,7 +214,7 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
-        Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
+        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 200);
 
         EnemyList = new List<ICollidable>();
         ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
