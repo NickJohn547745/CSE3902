@@ -14,6 +14,10 @@ public class MouseController : IController {
         
     }
 
+    public void BindCommand(Buttons button, ICommand command, IController.KeyState keyState) {
+        
+    }
+
     public void Update(Game1 game) {
         MouseState mouseInfo = Mouse.GetState();
         mousePosition = new Point(mouseInfo.X, mouseInfo.Y);
