@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using sprint0.Sprites;
 using sprint0.RoomClasses;
 
 using System;
@@ -10,12 +9,11 @@ using System;
 namespace sprint0.PlayerClasses; 
 
 public class Player : ICollidable {
-    
-    public int ScaleFactor;
 
     private Vector2 initPosition;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
+    public int ScaleFactor { get; set; }
     public Game1 Game { get; set; }
     public bool IsMultiSprite { get; set; }
     public IPlayerState PlayerState { get; set; }

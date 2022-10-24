@@ -1,8 +1,8 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: October 2, 2022
+##### Date: October 23, 2022
 
-# Sprint2:
+# Sprint3:
 
 ## Controls:
 ### Player controls
@@ -16,27 +16,20 @@
 * Right arrow - move Link right, make Link face right
 * Z - make Link attack with sword
 * N - make Link attack with sword
-* E - put Link in damage state
 * 1 - Use Link’s bomb ability
 * 2 - Use Link’s wooden boomerang ability
 * 3 - Use Link’s magical boomerang ability
 * 4 - Use Link’s wooden arrow ability
 * 5 - Use Link’s silver arrow ability
 * 6 - Use Link’s fireball ability
-### Block/obstacle controls
-* T - switch item display to the previous tile/object
-* Y - switch item display to the next tile/object
-### Item controls
-* U - switch item display to the previous item
-* I - switch item display to the next item
-### Enemy/NPC (other character) controls
-* O - switch enemy/NPC display to the previous enemy/NPC
-* P - switch enemy/NPC display to the next enemy/NPC
+
 ### Other controls
 * Q - quit game
 * R - reset the program to its initial state
-## Code Review
-* We reviewed each other’s code through pull requests
-* Also reviewed informally during meetings
+
 ## Known Bugs
 * Killing an enemy after they use projectiles causes the projectile to keep going continuously 
+* Link gets pushed back when using sword on enemy (need to change sword hitbox)
+* Link cannot take damage
+* Link gets stuck in walls
+* Enemy wall collision is still not quite right

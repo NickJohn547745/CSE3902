@@ -1,15 +1,12 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
-using sprint0.Interfaces;
-using sprint0.Enemies;
 
 namespace sprint0.Interfaces; 
 
 public class AquamentusProjectile : Projectile {
 
-    private const int fireBallDelay = 1;
-    private const int fireBallSpeed = 200;
+    private const int FireBallDelay = 1;
+    private const int FireBallSpeed = 200;
 
     public AquamentusProjectile(Vector2 position, Vector2 velocity)
     {
@@ -17,8 +14,8 @@ public class AquamentusProjectile : Projectile {
         Position = position;
         Sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
         Velocity = velocity;
-        speed = fireBallSpeed;
-        delay = fireBallDelay;
+        speed = FireBallSpeed;
+        delay = FireBallDelay;
         Damage = 1;
         Collision = false;
     }

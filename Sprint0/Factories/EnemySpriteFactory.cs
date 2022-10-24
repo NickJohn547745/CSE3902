@@ -47,6 +47,9 @@ namespace sprint0.Factories
 
         private const int AquamentusDelay = 8;
         private const float AquamentusScale = 5;
+        
+        private const int ExplosionDelay = 8;
+        private const float ExplosionScale = 5;
 
         private static EnemySpriteFactory instance = new EnemySpriteFactory();
 
@@ -136,6 +139,18 @@ namespace sprint0.Factories
             frameSources.Add(new Rectangle(spriteSheet.Width / 2, spriteSheet.Height / 2, spriteSheet.Width / 2, spriteSheet.Height / 2));
 
             return new BasicSprite(spriteSheet, frameSources, AquamentusDelay, AquamentusScale);
+        }
+        
+        public ISprite CreateEnemyExplosionSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetEnemyexplosionSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 4, spriteSheet.Height));
+            frameSources.Add(new Rectangle(spriteSheet.Width / 4, 0, spriteSheet.Width / 4, spriteSheet.Height));
+            frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 4, spriteSheet.Height));
+            frameSources.Add(new Rectangle(spriteSheet.Width * 3 / 4, 0, spriteSheet.Width / 2, spriteSheet.Height));
+
+            return new BasicSprite(spriteSheet, frameSources, ExplosionDelay, ExplosionScale);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace sprint0.RoomClasses
     public class Room
     {
         private Game1 game;
-        private List<ITile> tileList = new List<ITile>();
+
+        private List<ICollidable> tileList = new List<ICollidable>();
         private List<Door> doorList = new List<Door>();
 
         private Rectangle bounds = new Rectangle();
@@ -86,7 +87,7 @@ namespace sprint0.RoomClasses
         {
             spriteBatch.Draw(TextureStorage.GetWallsSpritesheet(), bounds, Color.White);
 
-            foreach (ITile tile in tileList)
+            foreach (ICollidable tile in tileList)
             {
                 tile.Draw(spriteBatch);
             }

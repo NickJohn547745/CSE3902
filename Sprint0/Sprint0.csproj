@@ -28,6 +28,9 @@
       <Content Include="Content\Data\LevelFile_0.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\Data\LevelFile_1.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\Data\LevelFile_2.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -38,9 +41,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\Data\LevelFile_5.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_1.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

@@ -21,13 +21,19 @@ namespace sprint0.Sprites
         protected List<Rectangle> frameSources;
         protected Vector2 origin;
 
-        public virtual int GetWidth()
+        public virtual int GetWidth(int animationFrame = -1)
         {
+            if (animationFrame != -1) {
+                frame = animationFrame;
+            }
             return (int) (scale * frameSources[frame % frameCount].Width);
         }
 
-        public virtual int GetHeight()
+        public virtual int GetHeight(int animationFrame = -1)
         {
+            if (animationFrame != -1) {
+                frame = animationFrame;
+            }
             return (int) (scale * frameSources[frame % frameCount].Height);
         }
 
