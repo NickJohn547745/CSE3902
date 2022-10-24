@@ -5,3 +5,5 @@
 bin/
 obj/
 .idea/
+Sprint0/bin/*
+project.assets.json
