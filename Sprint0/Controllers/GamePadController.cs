@@ -13,7 +13,7 @@ public class GamePadController : IController {
     private GamePadState previousState;
     private int playerIndex = 1;
 
-    public void GamepadController()
+    public GamePadController()
     {
         buttonMappings = new Dictionary<Buttons, (ICommand, IController.KeyState)>();
     }
