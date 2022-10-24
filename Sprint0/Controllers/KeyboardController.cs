@@ -45,13 +45,13 @@ public class KeyboardController : IController {
     public void Update(Game1 game) {
         previousState = currentState;
         currentState = Keyboard.GetState();
-
-        GamePadButtons currentButtons = currentState.Buttons;
         
-        foreach (Buttons button in currentButtons) {
-            if (keyMappings.ContainsKey(key) && GetKeyState(button) == currentButtons[button].Item2) {
-                currentButtons[button].Item1.Execute(game);
-            }
-        } 
+        Keys[] pressedKeys = currentState.GetPressedKeys();
+        
+        foreach (Keys key in pressedKeys) {
+            if (keyMappings.ContainsKey(key) && GetKeyState(key) == keyMappings[key].Item2) {
+                keyMappings[key].Item1.Execute(game);
+             }
+        }
     }
 }

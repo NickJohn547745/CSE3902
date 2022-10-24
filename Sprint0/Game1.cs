@@ -194,10 +194,10 @@ public class Game1 : Game {
 	
 	    gamePad.BindCommand(Buttons.Back, new QuitCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.Start, new ResetGameCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.LeftThumstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadUp, new MoveUpCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadDown, new MoveDownCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadRight, new MoveRightCommand(), IController.KeyState.KeyDown);

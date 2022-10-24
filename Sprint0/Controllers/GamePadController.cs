@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using sprint0.Interfaces;
+using System;
 
 namespace sprint0.Controllers; 
 
@@ -12,7 +13,7 @@ public class GamePadController : IController {
     private GamePadState previousState;
     private int playerIndex = 1;
 
-    public GamepadController()
+    public void GamepadController()
     {
         buttonMappings = new Dictionary<Buttons, (ICommand, IController.KeyState)>();
     }
@@ -46,18 +47,34 @@ public class GamePadController : IController {
         return result;
     }
 
+    public List<Buttons> GetPressedButtons(GamePadState curr)
+    {
+        List<Buttons> pressedButtons = new List<Buttons>();
+
+        foreach (Buttons button in Enum.GetValues(typeof(Buttons))) 
+        {
+            if (curr.IsButtonDown(button))
+            {
+                pressedButtons.Add(button);
+            }
+        }
+
+        return pressedButtons;
+    }
+
     public void Update(Game1 game)
     {
         previousState = currentState;
         currentState = GamePad.GetState(playerIndex);
 
-        Buttons[] pressedButtons = currentState.Buttons;
-
-        foreach (Buttons button in pressedButtons)
-        {
-            if (buttonMappings.ContainsKey(button) && GetButtonState(button) == buttonMappings[button].Item2)
-            {
-                buttonMappings[button].Item1.Execute(game);
+        if(GamePad.GetState(playerIndex).IsConnected) 
+        { 
+            List<Buttons> pressedButtons = GetPressedButtons(currentState);
+        
+            foreach (Buttons button in pressedButtons) {
+                if (buttonMappings.ContainsKey(button) && GetButtonState(button) == buttonMappings[button].Item2) {
+                    buttonMappings[button].Item1.Execute(game);
+                }
             }
         }
     }
