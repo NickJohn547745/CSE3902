@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Xna.Framework;
@@ -35,6 +36,8 @@ public class Game1 : Game {
     public List<LevelConfig> LevelList { get; set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
+    
+    public List<ICollidable> CollidablesToDelete { get; set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
@@ -208,6 +211,28 @@ public class Game1 : Game {
         Controllers.Add(keyboard);
         Controllers.Add(new MouseController());
 
+        IController gamePad = new GamePadController();
+	
+	    gamePad.BindCommand(Buttons.Back, new QuitCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.Start, new ResetGameCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.LeftThumstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadUp, new MoveUpCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadDown, new MoveDownCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadRight, new MoveRightCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightShoulder, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.X, new NextTileCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.Y, new PreviousTileCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightTrigger, new NextItemCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.LeftTrigger, new PreviousItemCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightThumbstickLeft, new PreviousEnemyCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightThumbstickRight, new NextEnemyCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightStick, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
+
         TileList = new List<ICollidable>();
         TileList.Add(new TileType1(1000, 360));
         TileList.Add(new TileType2(1000, 360));
@@ -258,6 +283,8 @@ public class Game1 : Game {
         CollidableList = new List<ICollidable>();
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
+        
+        CollidablesToDelete = new List<ICollidable>();
 
 
         GameConfig = new GameConfig();
@@ -283,12 +310,16 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
+        if(CollidablesToDelete != null)
+            CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
+
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
         //Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
+
         base.Update(gameTime);
     }
 

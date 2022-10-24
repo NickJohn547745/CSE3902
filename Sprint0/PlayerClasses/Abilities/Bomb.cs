@@ -36,6 +36,7 @@ public class Bomb : Ability {
             animationFrame = 3;
         }
         else if (frameCounter == 75) {
+            game.CollidablesToDelete.Add(this);
             player.AbilityManager.RemoveCurrentAbility();
         }
     }

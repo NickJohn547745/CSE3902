@@ -4,16 +4,12 @@ using sprint0.Interfaces;
 using sprint0.RoomClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sprint0.Classes
 {
     public class CollisionManager
     {
-        List<ICollidable> collidables { get; set; }
+        public List<ICollidable> collidables { get; set; }
 
         public CollisionManager(List<ICollidable> collidables)
         {
