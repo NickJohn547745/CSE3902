@@ -11,8 +11,38 @@
         <ApplicationIcon>Icon.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
+        <None Remove="Content\Data\GameFile.xml" />
+        <None Remove="Content\Data\LevelFile_0.xml" />
+        <None Remove="Content\Data\LevelFile_1.xml" />
+        <None Remove="Content\Data\LevelFile_2.xml" />
+        <None Remove="Content\Data\LevelFile_3.xml" />
+        <None Remove="Content\Data\LevelFile_4.xml" />
+        <None Remove="Content\Data\LevelFile_5.xml" />
         <None Remove="Icon.ico" />
         <None Remove="Icon.bmp" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Content\Data\GameFile.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_0.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_2.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_3.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_4.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_5.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\LevelFile_1.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="Icon.ico" />

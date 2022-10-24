@@ -16,6 +16,10 @@ namespace sprint0.TileClasses
             this.SetLocation(x, y);
             this.SetTextureCoords(3, 0);
         }
+        public override Type GetObjectType()
+        {
+            return typeof(TileType);
+        }
 
     }
 }
