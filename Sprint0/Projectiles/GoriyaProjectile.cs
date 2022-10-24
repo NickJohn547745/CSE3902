@@ -53,9 +53,9 @@ namespace sprint0.Projectiles
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            caught = returnThrow && obj.GetObjectType() == typeof(GoriyaEnemy) ;
+            caught = returnThrow && obj == goriya.Goriya;
 
-            Collision = caught || (Collision = obj.GetObjectType().BaseType != typeof(Projectile) && obj.GetObjectType().BaseType != typeof(Enemy));
+            Collision = caught || (Collision = obj.GetObjectType() != typeof(Projectile) && obj.GetObjectType() != typeof(Enemy));
 
             if (Collision) goriya.BoomerangThrown = false;
         }
