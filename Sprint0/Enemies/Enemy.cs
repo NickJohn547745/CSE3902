@@ -66,7 +66,7 @@ namespace sprint0.Enemies
 
             if (deadCount >= DeathFrames)
             {
-                game.CollidableList.Remove(this);
+                game.CollisionManager.collidables.Remove(this);
             }
             
             canMove = true;
@@ -113,7 +113,7 @@ namespace sprint0.Enemies
 
         public Type GetObjectType()
         {
-            return this.GetType();
+            return this.GetType().BaseType;
         }
 
         public Rectangle GetHitBox()

@@ -71,22 +71,22 @@ public class Game1 : Game {
 
     public void NextEnemy()
     {
-        CollidableList.Remove(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex++;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollidableList.Add(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousEnemy()
     {
-        CollidableList.Remove(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex--;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollidableList.Add(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousItem()
@@ -239,7 +239,7 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
-        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 200);
+        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 100);
 
         EnemyList = new List<ICollidable>();
         ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);

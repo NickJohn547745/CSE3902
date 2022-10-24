@@ -21,7 +21,7 @@ public abstract class Projectile : ICollidable {
 
     public Type GetObjectType()
     {
-        return this.GetType();
+        return this.GetType().BaseType;
     }
 
     public Rectangle GetHitBox()
@@ -45,7 +45,7 @@ public abstract class Projectile : ICollidable {
             Behavior(game);
         }
 
-        if (Collision && game.CollidableList.Contains(this)) game.CollidableList.Remove(this);
+        if (Collision && game.CollisionManager.collidables.Contains(this)) game.CollisionManager.collidables.Remove(this);
     }
     
     public virtual void Draw(SpriteBatch spriteBatch)

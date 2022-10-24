@@ -40,9 +40,9 @@ namespace sprint0.Enemies
             {
                 Vector2 fireBallSpawn = Position;
                 fireBallSpawn.Y += FireBallOffsetY;
-                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
-                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
+                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
+                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
+                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
             }
             fireBallTracker++;
         }
