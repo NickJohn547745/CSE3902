@@ -7,41 +7,42 @@ namespace sprint0.Enemies
 {
     public class AquamentusBoss: Enemy
     {
-        private const int behaviorDelay = 60;
-        private const int fireBallShoot = 3;
-        private const int fireBallOffsetY = 30;
-        private const float fireBallDirection = (float) 2/3;
-        private const int randBound = 3;
+        private const int BehaviorDelay = 60;
+        private const int FireBallShoot = 3;
+        private const int FireBallOffsetY = 30;
+        private const float FireBallDirection = (float) 2/3;
+        private const int RandBound = 3;
 
         private int fireBallTracker;
 
         public AquamentusBoss(Vector2 position, float speed)
         {
             initPosition = position;
-            this.position = position;
+            this.Position = position;
             this.speed = speed;
-            velocity = new Vector2(1, 0);
-            sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
-            delay = behaviorDelay;
+            Velocity = new Vector2(1, 0);
+            Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
+            delay = BehaviorDelay;
             fireBallTracker = 1;
-            maxHealth = 8;
-            health = maxHealth;
+            MaxHealth = 8;
+            Health = MaxHealth;
             Damage = 1;
+            deadCount = 0;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
         {
             Random random = new Random();
-            if (random.Next(0, randBound) != 0) velocity *= -1;
+            if (random.Next(0, RandBound) != 0) Velocity *= -1;
             
             // shoot fireballs
-            if (fireBallTracker % fireBallShoot == 0)
+            if (fireBallTracker % FireBallShoot == 0)
             {
-                Vector2 fireBallSpawn = position;
-                fireBallSpawn.Y += fireBallOffsetY;
-                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, fireBallDirection)));
+                Vector2 fireBallSpawn = Position;
+                fireBallSpawn.Y += FireBallOffsetY;
+                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
                 game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -fireBallDirection))); 
+                game.CollidableList.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
             }
             fireBallTracker++;
         }

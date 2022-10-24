@@ -159,4 +159,13 @@ public class PlayerSpriteFactory
         Rectangle frameSource =  new Rectangle(191, 185, 16, 16) ;
         return new FrameFlipSprite(playerSpriteSheet, frameSource, Vector2.Zero, FireballDelay, FireballDynamicDelay, AbilityScale);
     }
+
+    public ISprite GetArrowHitSprite() {
+        List<Rectangle> frameSource = new List<Rectangle> {new Rectangle(53, 187, 8, 16)};
+        return new BasicSprite(playerSpriteSheet, frameSource, AbilityDelay, AbilityScale);
+    }
+    public ISprite GetBoomerangHitSprite() {
+        List<Rectangle> frameSource = new List<Rectangle> {new Rectangle(118, 187, 8, 16)};
+        return new BasicSprite(playerSpriteSheet, frameSource, AbilityDelay, AbilityScale);
+    }
 }

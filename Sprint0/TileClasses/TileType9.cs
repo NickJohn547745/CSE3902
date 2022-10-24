@@ -11,10 +11,11 @@ namespace sprint0.TileClasses
 {
     public class TileType9 : TileType
     {
-        public TileType9()
+        public TileType9(int x, int y)
         {
-            this.SetLocation(1000, 360);
+            this.SetLocation(x, y);
             this.SetTextureCoords(3, 1);
+            this.SetCollidable(true);
         }
 
     }

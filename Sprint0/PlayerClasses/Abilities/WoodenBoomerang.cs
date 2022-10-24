@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.Factories;
+using sprint0.Interfaces;
+using sprint0.RoomClasses;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -9,17 +9,23 @@ public class WoodenBoomerang : Ability {
     private int frameCounter;
     
     private Vector2 Acceleration;
+    private int hitFrame = 0;
 
     private Vector2 initialPosition;
 
     public WoodenBoomerang(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        Position = position;
+        sprite = PlayerSpriteFactory.Instance.GetWoodenBoomerangSprite();
+        animationFrame = 0;
+        if (velocity.X != 0) {
+            Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+        }
+        else {
+            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+        }
         initialPosition = Position;
         Velocity = Vector2.Multiply(velocity, new Vector2((float)6.5));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.08));
-        sprite = PlayerSpriteFactory.Instance.GetWoodenBoomerangSprite();
-        animationFrame = 0;
     }
     
     public override void Update(GameTime gameTime, Game1 game) {
@@ -31,9 +37,33 @@ public class WoodenBoomerang : Ability {
         Velocity = Vector2.Add(Velocity, Acceleration);
 
         Position = Vector2.Add(Position, Velocity);
-
-        if(Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20) {
+        
+        if (hitFrame > 0)
+            hitFrame++;
+        
+        if (hitFrame >= 5) {
+            game.CollidablesToDelete.Add(this);
             player.AbilityManager.RemoveCurrentAbility();
         }
+
+        if(Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20) {
+            game.CollidablesToDelete.Add(this);
+            player.AbilityManager.RemoveCurrentAbility();
+        }
+    }
+    
+    public override void Collide(ICollidable obj, ICollidable.Edge edge)
+    {
+        if (obj.GetObjectType() == typeof(Wall)) {
+            Velocity = Vector2.Zero;
+            sprite = PlayerSpriteFactory.Instance.GetBoomerangHitSprite();
+            if (hitFrame == 0)
+                hitFrame = 1;
+        }
+
+        if (obj.GetObjectType() == typeof(Player)) {
+            hitFrame = 4;
+        }
+
     }
 }

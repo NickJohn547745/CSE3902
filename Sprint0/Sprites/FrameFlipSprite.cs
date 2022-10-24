@@ -40,14 +40,14 @@ namespace sprint0.Sprites
             effect = SpriteEffects.None;
         }
 
-        public override int GetWidth()
+        public override int GetWidth(int animationFrame = -1)
         {
-            return frameSource.Width;
+            return (int) (frameSource.Width * scale);
         }
 
-        public override int GetHeight()
+        public override int GetHeight(int animationFrame = -1)
         {
-            return frameSource.Height;
+            return (int) (frameSource.Height * scale);
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Xna.Framework;
@@ -15,22 +16,25 @@ using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.Projectiles;
+using sprint0.RoomClasses;
 
 namespace sprint0;
 
 public class Game1 : Game {
 
-    private const float enemySpeed = 50;
+    private const float enemySpeed = 60;
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<ICollidable> EnemyList { get; private set; }
-    public List<ITile> TileList { get; private set; }
+    public List<ICollidable> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
+    
+    public List<ICollidable> CollidablesToDelete { get; set; }
 
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
@@ -41,13 +45,14 @@ public class Game1 : Game {
 
 
     public Player Player;
+    public Room Room;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
         _graphics = new GraphicsDeviceManager(this);
 
         _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 720;
+        _graphics.PreferredBackBufferHeight = 880;
         _graphics.ApplyChanges();
 
         Content.RootDirectory = "Content";
@@ -102,18 +107,37 @@ public class Game1 : Game {
 
     public void PreviousTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex--;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
+
     }
 
     public void NextTile()
     {
+        CollidableList.Remove(TileList[currentTileIndex]);
         currentTileIndex++;
 
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
+
+        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        {
+            CollidableList.Add(TileList[currentTileIndex]);
+        }
+
+    }
+
+    // adds any tile type that is collidable to the collision list
+    public void AddCollisionTiles()
+    {
     }
 
 
@@ -188,17 +212,17 @@ public class Game1 : Game {
         gamePad.BindCommand(Buttons.RightThumbstickRight, new NextEnemyCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightStick, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
 
-        TileList = new List<ITile>();
-        TileList.Add(new TileType1());
-        TileList.Add(new TileType2());
-        TileList.Add(new TileType3());
-        TileList.Add(new TileType4());
-        TileList.Add(new TileType5());
-        TileList.Add(new TileType6());
-        TileList.Add(new TileType7());
-        TileList.Add(new TileType8());
-        TileList.Add(new TileType9());
-        TileList.Add(new TileType10());
+        TileList = new List<ICollidable>();
+        TileList.Add(new TileType1(1000, 360));
+        TileList.Add(new TileType2(1000, 360));
+        TileList.Add(new TileType3(1000, 360));
+        TileList.Add(new TileType4(1000, 360));
+        TileList.Add(new TileType5(1000, 360));
+        TileList.Add(new TileType6(1000, 360));
+        TileList.Add(new TileType7(1000, 360));
+        TileList.Add(new TileType8(1000, 360));
+        TileList.Add(new TileType9(1000, 360));
+        TileList.Add(new TileType10(1000, 360));
 
         ItemList = new List<IItem>();
         ItemList.Add(new Arrow());
@@ -215,7 +239,7 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
-        Vector2 enemySpawn = new Vector2(WindowWidth * 3 / 4, WindowHeight * 3 / 4);
+        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 200);
 
         EnemyList = new List<ICollidable>();
         ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
@@ -238,6 +262,10 @@ public class Game1 : Game {
         CollidableList = new List<ICollidable>();
         //CollidableList.Add(keese);
         CollidableList.Add(Player);
+        
+        CollidablesToDelete = new List<ICollidable>();
+
+        Room = new Room(this);
 
         CollisionManager = new CollisionManager(CollidableList);
     }
@@ -247,12 +275,16 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
+        if(CollidablesToDelete != null)
+            CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
+
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
         //Player.Update(gameTime, this);
         foreach (ICollidable projectile in Projectiles)
         {
             projectile.Update(gameTime, this);
         }
+
         base.Update(gameTime);
     }
 
@@ -261,14 +293,12 @@ public class Game1 : Game {
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        _spriteBatch.Draw(TextureStorage.GetWallsSpritesheet(), 
-                          _graphics.GraphicsDevice.PresentationParameters.Bounds,
-                          Color.White);
+        Room.Draw(_spriteBatch);
 
+        TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        TileList[currentTileIndex].Draw(_spriteBatch);
         ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)

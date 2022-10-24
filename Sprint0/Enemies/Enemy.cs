@@ -1,115 +1,144 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
+using sprint0.PlayerClasses.Abilities;
+using sprint0.RoomClasses;
+using sprint0.TileClasses;
 using sprint0.Factories;
 
 namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
-        protected const int tileOffset = 20;
+        protected const int TileOffset = 5;
+        private const int DeathFrames = 4;
 
-        public int health { get; set; }
-        public int maxHealth { get; protected set; }
+        public int Health { get; set; }
+        public int MaxHealth { get; protected set; }
         public int Damage { get; set; }
         protected int delay;
         private int delayCount;
         private int damageDelay;
-        public Vector2 position { get; set; }
+        public Vector2 FinalPosition { get; set; }
+        public Vector2 Position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
+        protected int deadCount;
 
-        public Vector2 velocity { get; set; }
-        public ISprite sprite { get; set; }
+        private bool canMove = true;
+
+        public Vector2 Velocity { get; set; }
+        public ISprite Sprite { get; set; }
 
         private void TakeDamage(int damage)
         {
             if (damageDelay % 12 == 0)
             {
-                health -= damage;
+                Health -= damage;
             }
             damageDelay++;
         }
 
+        protected virtual void ReverseDirection()
+        {
+            Velocity *= -1;
+        }
+        
         protected abstract void Behavior(GameTime gameTime, Game1 game);
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            position += speed * velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (position.X < 0 || position.Y < 0 || position.X + sprite.GetWidth()> game.GetWindowWidth() || position.Y + sprite.GetHeight() > game.GetWindowHeight())
+            if (canMove)
             {
-                position = initPosition;
+                FinalPosition = Position;
             }
-
-            // change direction every delay seconds
+            
+            // Ex: change direction every delay seconds
             if (delayCount % delay == 0)
             {
                 Behavior(gameTime, game);
             }
             delayCount++;
 
-            if (health <= 0)
+            if (deadCount >= DeathFrames)
             {
                 game.CollidableList.Remove(this);
             }
+            
+            canMove = true;
         }
 
+        private void KnockBack(ICollidable.Edge edge, float offset)
+        {
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    Position += new Vector2(0, -offset);
+                    break;
+                case ICollidable.Edge.Right:
+                    Position += new Vector2(-offset, 0);
+                    break;
+                case ICollidable.Edge.Left:
+                    Position += new Vector2(offset, 0);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    Position += new Vector2(0, offset);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             Type type = obj.GetObjectType();
 
-            if (type == typeof(Player))
+            if (type == typeof(Player) || type == typeof(Ability))
             {
                 TakeDamage(obj.Damage);
-            } else if (type == typeof(ITile))
+            } else if (type == typeof(Wall))
             {
-                switch (edge)
-                {
-                    case ICollidable.Edge.Top:
-                        position += new Vector2(0, -tileOffset);
-                        break;
-                    case ICollidable.Edge.Right:
-                        position += new Vector2(-tileOffset, 0);
-                        break;
-                    case ICollidable.Edge.Left:
-                        position += new Vector2(tileOffset, 0);
-                        break;
-                    case ICollidable.Edge.Bottom:
-                        position += new Vector2(0, tileOffset);
-                        break;
-                    default:
-                        break;
-                }
-
+                KnockBack(edge, TileOffset);
+                ReverseDirection();
+                // canMove = false;
+            } else if (type == typeof(TileType))
+            {
+                KnockBack(edge, TileOffset);
             }
         }
 
         public Type GetObjectType()
         {
-            return this.GetType().BaseType;
+            return this.GetType();
         }
 
         public Rectangle GetHitBox()
         {
-            return new Rectangle((int) position.X, (int) position.Y, sprite.GetWidth(), sprite.GetHeight());
+            return new Rectangle((int) Position.X, (int) Position.Y, Sprite.GetWidth(), Sprite.GetHeight());
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            sprite.Draw(spriteBatch, position, SpriteEffects.None);
+            if (Health <= 0)
+            {
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+                deadCount++;
+            }
+            else
+            {
+                Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+            }
         }
 
         public void Reset(Game1 game)
         {
-            position = initPosition;
-            health = maxHealth;       
+            Position = initPosition;
+            Health = MaxHealth;
+            deadCount = 0;
         }
     }
 }
