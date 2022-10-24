@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
+using sprint0.Interfaces;
+using sprint0.RoomClasses;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -38,7 +40,17 @@ public class Fireball : Ability {
         }
 
         if (waitFrames == 20) {
+            game.CollidablesToDelete.Add(this);
             player.AbilityManager.RemoveCurrentAbility();
         }
+    }
+    
+    public override void Collide(ICollidable obj, ICollidable.Edge edge)
+    {
+        if (obj.GetObjectType() == typeof(Wall)) {
+            Velocity = Vector2.Zero;
+            finalPosition = Position;
+        }
+
     }
 }
