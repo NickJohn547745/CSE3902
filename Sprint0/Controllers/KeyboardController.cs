@@ -19,6 +19,10 @@ public class KeyboardController : IController {
         keyMappings.Add(key, (command, keyState));
     }
 
+    public void BindCommand(Buttons button, ICommand command, IController.KeyState keyState) {
+        
+    }
+
     private IController.KeyState GetKeyState(Keys key)
     {
         IController.KeyState result;
@@ -42,11 +46,11 @@ public class KeyboardController : IController {
         previousState = currentState;
         currentState = Keyboard.GetState();
 
-        Keys[] pressedKeys = currentState.GetPressedKeys();
+        GamePadButtons currentButtons = currentState.Buttons;
         
-        foreach (Keys key in pressedKeys) {
-            if (keyMappings.ContainsKey(key) && GetKeyState(key) == keyMappings[key].Item2) {
-                keyMappings[key].Item1.Execute(game);
+        foreach (Buttons button in currentButtons) {
+            if (keyMappings.ContainsKey(key) && GetKeyState(button) == currentButtons[button].Item2) {
+                currentButtons[button].Item1.Execute(game);
             }
         } 
     }

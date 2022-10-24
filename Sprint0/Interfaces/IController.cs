@@ -12,6 +12,8 @@ public interface IController {
     }
     public void BindCommand(Keys key, ICommand command, KeyState keyState);
 
+    public void BindCommand(Buttons button, ICommand command, KeyState buttonState);
+
     public void Update(Game1 game);
 
 }
