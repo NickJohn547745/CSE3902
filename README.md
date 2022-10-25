@@ -22,6 +22,10 @@
 * 4 - Use Link’s wooden arrow ability
 * 5 - Use Link’s silver arrow ability
 * 6 - Use Link’s fireball ability
+* K - Move to previous room
+* L - Move to next room
+* Left Click - Move to previous room
+* Right Click - Move to next room
 
 ### Other controls
 * Q - quit game
@@ -32,4 +36,5 @@
 * Link gets pushed back when using sword on enemy (need to change sword hitbox)
 * Link cannot take damage
 * Link gets stuck in walls
+* Swapping rooms with mouse can look weird if done quickly
 * Enemy wall collision is still not quite right
