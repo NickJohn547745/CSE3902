@@ -34,7 +34,7 @@ namespace sprint0.FileReaderClasses
                         }
                     case "TileIds":
                         {
-                            string[] tileIdRows = settingText.Trim().Split("\r\n");
+                            string[] tileIdRows = settingText.Trim().Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
                             List<List<int>> tileIdArray = new List<List<int>>();
 
