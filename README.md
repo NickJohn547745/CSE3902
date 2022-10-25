@@ -32,6 +32,7 @@
 * R - reset the program to its initial state
 
 ## Known Bugs
+* Walking through doors not currently implemented
 * Killing an enemy after they use projectiles causes the projectile to keep going continuously 
 * Link gets pushed back when using sword on enemy (need to change sword hitbox)
 * Link cannot take damage
