@@ -32,7 +32,7 @@ public abstract class Ability : ICollidable
     public abstract void Update(GameTime gameTime, Game1 game);
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None);
+        sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None, Color.White);
     }
 
     public void Reset(Game1 game)

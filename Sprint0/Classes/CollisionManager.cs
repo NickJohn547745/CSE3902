@@ -93,8 +93,7 @@ namespace sprint0.Classes
             }
         }
 
-        public void Update(GameTime gameTime, Game1 game)
-        {
+        public void Update(GameTime gameTime, Game1 game) {
             for (int i = 0; i < collidables.Count; i++)
             {
                 collidables[i].Update(gameTime, game);

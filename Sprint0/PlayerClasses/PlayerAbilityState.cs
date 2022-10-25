@@ -17,10 +17,10 @@ public abstract class PlayerAbilityState : IPlayerState {
         return new Rectangle((int)player.Position.X, (int)player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public virtual void Draw(SpriteBatch spriteBatch)
+    public virtual void Draw(SpriteBatch spriteBatch, Color color)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
-        sprite.Draw(spriteBatch, player.Position, SpriteEffects.None);
+        sprite.Draw(spriteBatch, player.Position, SpriteEffects.None, color);
     }
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)

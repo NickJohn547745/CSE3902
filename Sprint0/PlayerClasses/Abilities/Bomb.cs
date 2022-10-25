@@ -19,11 +19,6 @@ public class Bomb : Ability {
         }
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None);
-    }
-
     public override void Update(GameTime gameTime, Game1 game) {
         frameCounter++;
         if (frameCounter == 60) {
@@ -37,7 +32,7 @@ public class Bomb : Ability {
         }
         else if (frameCounter == 75) {
             game.CollidablesToDelete.Add(this);
-            player.AbilityManager.RemoveCurrentAbility();
+            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.Bomb);
         }
     }
 }

@@ -41,14 +41,9 @@ public class WoodenBoomerang : Ability {
         if (hitFrame > 0)
             hitFrame++;
         
-        if (hitFrame >= 5) {
+        if (hitFrame >= 5 || (Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20)) {
             game.CollidablesToDelete.Add(this);
-            player.AbilityManager.RemoveCurrentAbility();
-        }
-
-        if(Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20) {
-            game.CollidablesToDelete.Add(this);
-            player.AbilityManager.RemoveCurrentAbility();
+            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.WoodenBoomerang);
         }
     }
     

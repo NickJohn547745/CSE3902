@@ -50,7 +50,7 @@ public abstract class Projectile : ICollidable {
     
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        Sprite.Draw(spriteBatch, Position, SpriteEffects.None);
+        Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
     }
 
     public void Reset(Game1 game)

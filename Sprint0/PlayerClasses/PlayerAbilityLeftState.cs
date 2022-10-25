@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
 
@@ -13,10 +14,10 @@ public class PlayerAbilityLeftState : PlayerAbilityState {
         player.Damage = 0;
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch, Color color)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
-        sprite.Draw(spriteBatch, player.Position, SpriteEffects.FlipHorizontally);
+        sprite.Draw(spriteBatch, player.Position, SpriteEffects.FlipHorizontally, color);
     }
 
     public override void Update()

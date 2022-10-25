@@ -8,7 +8,7 @@ using System;
 
 namespace sprint0.PlayerClasses; 
 
-public class Player : ICollidable {
+public class Player : IPlayer {
 
     private Vector2 initPosition;
 
@@ -68,44 +68,45 @@ public class Player : ICollidable {
         
     }
 
-    public virtual void Draw(SpriteBatch spriteBatch) { 
-        PlayerState.Draw(spriteBatch);
-        AbilityManager.Draw(spriteBatch);
+    public void Draw(SpriteBatch spriteBatch) { 
+        PlayerState.Draw(spriteBatch, Color.White);
     }
 
-    public virtual void Update(GameTime gameTime, Game1 game) {
+    public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
     }
 
-    public virtual void Reset(Game1 game)
+    public void Reset(Game1 game)
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
     }
 
-    public virtual void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         Health -= damage;
         Game.Player = new DamagedPlayer(this, Game);
+        Game.CollidablesToAdd.Add(Game.Player);
+        Game.CollidablesToDelete.Add(this);
     }
 
-    public virtual void MoveUp() {
+    public void MoveUp() {
             PlayerState.MoveUp();
     }
 
-    public virtual void MoveDown() {
+    public void MoveDown() {
             PlayerState.MoveDown();
     }
 
-    public virtual void MoveLeft() {
+    public void MoveLeft() {
             PlayerState.MoveLeft();
     }
 
-    public virtual void MoveRight() {
+    public void MoveRight() {
             PlayerState.MoveRight();
     }
 
-    public virtual void SwordAttack() {
+    public void SwordAttack() {
         PlayerState.SwordAttack();
     }
 

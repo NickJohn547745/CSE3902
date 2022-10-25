@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,12 +7,10 @@ using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Enemies;
-using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
-using sprint0.Projectiles;
 using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
 using System.Linq;
@@ -37,6 +32,7 @@ public class Game1 : Game {
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
     
+    public List<ICollidable> CollidablesToAdd { get; set; }
     public List<ICollidable> CollidablesToDelete { get; set; }
 
     private int currentEnemyIndex = 0;
@@ -50,7 +46,7 @@ public class Game1 : Game {
     public GameConfig GameConfig { get; private set; }
     private string gameFilePath = "./Content/Data/GameFile.xml";
 
-    public Player Player;
+    public IPlayer Player;
     public Room Room;
     public ISprite CurrentSprite { get; set; }
 
@@ -285,6 +281,7 @@ public class Game1 : Game {
         CollidableList.Add(Player);
         
         CollidablesToDelete = new List<ICollidable>();
+        CollidablesToAdd = new List<ICollidable>();
 
 
         GameConfig = new GameConfig();
@@ -310,8 +307,15 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
-        if(CollidablesToDelete != null)
+        if (CollidablesToDelete != null) {
             CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
+            CollidablesToDelete.Clear();
+        }
+
+        if (CollidablesToAdd != null) {
+            CollisionManager.collidables.AddRange(CollidablesToAdd);
+            CollidablesToAdd.Clear();
+        }
 
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
         //Player.Update(gameTime, this);

@@ -50,9 +50,9 @@ namespace sprint0.Sprites
             return (int) (frameSource.Height * scale);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect, Color color)
         {
-            spriteBatch.Draw(spriteSheet, position, frameSource, Color.White, 0f, origin, scale, effect, 0f);
+            spriteBatch.Draw(spriteSheet, position, frameSource, color, 0f, origin, scale, effect, 0f);
 
             // delay change in frames
             delayCount++;
@@ -69,9 +69,9 @@ namespace sprint0.Sprites
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect, SpriteEffects alternate)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, SpriteEffects spriteEffect, SpriteEffects alternate, Color color)
         {
-            spriteBatch.Draw(spriteSheet, position, frameSource, Color.White, 0f, origin, scale, effect, 0f);
+            spriteBatch.Draw(spriteSheet, position, frameSource, color, 0f, origin, scale, effect, 0f);
 
             // delay change in frames
             delayCount++;

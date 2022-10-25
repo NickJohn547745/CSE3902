@@ -125,12 +125,12 @@ namespace sprint0.Enemies
         {
             if (Health <= 0)
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, SpriteEffects.None, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None);
+                Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None, Color.White);
             }
         }
 
