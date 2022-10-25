@@ -33,3 +33,4 @@
 * Link cannot take damage
 * Link gets stuck in walls
 * Enemy wall collision is still not quite right
+* Some tiles can be walked through that shouldn't be
