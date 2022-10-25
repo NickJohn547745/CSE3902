@@ -14,6 +14,7 @@ public class PlayerFacingLeftState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingSideSprite();
         player.Damage = 0;
+        shield = ICollidable.Edge.Left;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

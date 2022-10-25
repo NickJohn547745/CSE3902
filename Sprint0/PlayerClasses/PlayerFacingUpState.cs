@@ -13,6 +13,7 @@ public class PlayerFacingUpState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingUpSprite();
         player.Damage = 0;
+        shield = ICollidable.Edge.Top;
     }
 
     public override void MoveUp() {
