@@ -12,6 +12,7 @@ namespace sprint0.Enemies
         private const int FireBallOffsetY = 30;
         private const float FireBallDirection = (float) 2/3;
         private const int RandBound = 3;
+        private const int AquamentusHealth= 4;
 
         private int fireBallTracker;
 
@@ -25,7 +26,7 @@ namespace sprint0.Enemies
             Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             delay = BehaviorDelay;
             fireBallTracker = 1;
-            MaxHealth = 8;
+            MaxHealth = AquamentusHealth;
             Health = MaxHealth;
             Damage = 1;
             deadCount = 0;

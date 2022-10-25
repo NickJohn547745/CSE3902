@@ -25,7 +25,7 @@ namespace sprint0.Enemies
             initPosition = position;
             Position = position;
             PreviousPosition = position;
-            this.speed = 10;
+            this.speed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
             boomerangTracker = 1;
