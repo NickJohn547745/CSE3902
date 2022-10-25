@@ -13,12 +13,11 @@ namespace sprint0.TileClasses
     public abstract class TileType : ICollidable
     {
         public Point Location { get; set; }
+        public int Damage { get; set; }
 
         private Vector2 textureCoords;
 
         private Texture2D texture;
-
-        public int Damage { get; set; }
 
         private bool collidable;
 
@@ -31,7 +30,7 @@ namespace sprint0.TileClasses
             int row = (int)textureCoords.Y;
 
             Rectangle sourceRect = new Rectangle(16 * col, 16 * row, 16, 16);
-            Rectangle destRect = new Rectangle(Location, new Point(80, 80));
+            Rectangle destRect = GetHitBox();
 
             spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
         }
@@ -43,10 +42,6 @@ namespace sprint0.TileClasses
             // Code may be needed if some blocks are pushable / trap tiles
         }
 
-        public Type GetObjectType()
-        {
-            return this.GetType();
-        }
 
         public Rectangle GetHitBox()
         {
@@ -69,12 +64,14 @@ namespace sprint0.TileClasses
             this.collidable = isCollidable;
         }
 
-        public void Reset(Game1 game)
-        {
-            // Empty
-        }
+        public abstract Type GetObjectType();
 
         public void Update(GameTime gameTime, Game1 game)
+        {
+            // Empty - Not used
+        }
+
+        public void Reset(Game1 game)
         {
             // Empty - Not used
         }

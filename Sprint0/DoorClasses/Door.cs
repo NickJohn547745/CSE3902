@@ -9,29 +9,24 @@ using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
 
-namespace sprint0.RoomClasses
+namespace sprint0.DoorClasses
 {
-    public abstract class Wall : ICollidable
+    public abstract class Door : ICollidable
     {
         public int Damage { get; set; }
 
+
+        public int Id { get; set; }
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             // Not needed
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public abstract Rectangle GetHitBox();
-
-        public Type GetObjectType()
-        {
-            return typeof(Wall);
-        }
+        public abstract Type GetObjectType();
 
         public void Reset(Game1 game)
         {

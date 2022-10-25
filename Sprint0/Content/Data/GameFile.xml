@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Settings>
+	<Setting name="ResolutionWidth">1280</Setting>
+	<Setting name="ResolutionHeight">880</Setting>
+	<Setting name="StartLevelId">0</Setting>
+	
+	<Setting name="LevelConfigs">
+		<Field id="0">LevelFile_0.xml</Field>
+		<Field id="1">LevelFile_1.xml</Field>
+		<Field id="2">LevelFile_2.xml</Field>
+		<Field id="3">LevelFile_3.xml</Field>
+		<Field id="4">LevelFile_4.xml</Field>
+		<Field id="5">LevelFile_5.xml</Field>
+	</Setting>
+</Settings>

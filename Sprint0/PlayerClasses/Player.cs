@@ -15,13 +15,12 @@ public class Player : IPlayer {
     public PlayerInventory PlayerInventory;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
+    public int ScaleFactor { get; set; }
     public Game1 Game { get; set; }
     public bool IsMultiSprite { get; set; }
     public IPlayerState PlayerState { get; set; }
     public PlayerAbilityManager AbilityManager { get; protected set; }
     public int Damage { get; set; }
-
-    private bool canMove = true;
 
     public Player(Game1 game) {
         Game = game;
@@ -29,7 +28,8 @@ public class Player : IPlayer {
         AbilityManager = new PlayerAbilityManager(this);
         PlayerInventory = new PlayerInventory();
         Health = 6;
-        Position = new Vector2(150);
+        ScaleFactor = 4;
+        Position = new Vector2(200, 200);
         initPosition = Position;
         Damage = 0;
     }
@@ -47,11 +47,6 @@ public class Player : IPlayer {
     {
         Type type = obj.GetObjectType();
 
-        if (type == typeof(Room))
-        {
-            canMove = false;
-        } else
-        {
             switch (edge)
             {
                 case ICollidable.Edge.Top:
@@ -70,7 +65,7 @@ public class Player : IPlayer {
                     break;
             }
             PlayerState.Collide(obj, edge);
-        }
+        
     }
 
     public void Draw(SpriteBatch spriteBatch) { 
@@ -80,8 +75,6 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
-
-        canMove = true;
     }
 
     public void Reset(Game1 game)
@@ -98,22 +91,18 @@ public class Player : IPlayer {
     }
 
     public void MoveUp() {
-        if (canMove)
             PlayerState.MoveUp();
     }
 
     public void MoveDown() {
-        if (canMove)
             PlayerState.MoveDown();
     }
 
     public void MoveLeft() {
-        if (canMove)
             PlayerState.MoveLeft();
     }
 
     public void MoveRight() {
-        if (canMove)
             PlayerState.MoveRight();
     }
 
@@ -121,7 +110,7 @@ public class Player : IPlayer {
         PlayerState.SwordAttack();
     }
 
-    public void UseAbility(AbilityTypes abilityType) {
+    public virtual void UseAbility(AbilityTypes abilityType) {
         if (PlayerInventory.AbilityCounts[abilityType] > 0) {
             if (abilityType == AbilityTypes.Bomb) {
                 PlayerInventory.AbilityCounts[AbilityTypes.Bomb] -= 1;
