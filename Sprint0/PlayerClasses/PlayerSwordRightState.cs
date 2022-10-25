@@ -11,6 +11,7 @@ public class PlayerSwordRightState : PlayerSwordState {
         sprite = PlayerSpriteFactory.Instance.GetSwordSideSprite();
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Right;
+        backEdge = ICollidable.Edge.Left;
     }
 
     public override void Update()
