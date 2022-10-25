@@ -8,7 +8,7 @@ using System;
 
 namespace sprint0.PlayerClasses; 
 
-public class Player : ICollidable {
+public class Player : IPlayer {
 
     private Vector2 initPosition;
 
@@ -73,53 +73,55 @@ public class Player : ICollidable {
         }
     }
 
-    public virtual void Draw(SpriteBatch spriteBatch) { 
-        PlayerState.Draw(spriteBatch);
+    public void Draw(SpriteBatch spriteBatch) { 
+        PlayerState.Draw(spriteBatch, Color.White);
     }
 
-    public virtual void Update(GameTime gameTime, Game1 game) {
+    public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
 
         canMove = true;
     }
 
-    public virtual void Reset(Game1 game)
+    public void Reset(Game1 game)
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
     }
 
-    public virtual void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         Health -= damage;
         Game.Player = new DamagedPlayer(this, Game);
+        Game.CollidablesToAdd.Add(Game.Player);
+        Game.CollidablesToDelete.Add(this);
     }
 
-    public virtual void MoveUp() {
+    public void MoveUp() {
         if (canMove)
             PlayerState.MoveUp();
     }
 
-    public virtual void MoveDown() {
+    public void MoveDown() {
         if (canMove)
             PlayerState.MoveDown();
     }
 
-    public virtual void MoveLeft() {
+    public void MoveLeft() {
         if (canMove)
             PlayerState.MoveLeft();
     }
 
-    public virtual void MoveRight() {
+    public void MoveRight() {
         if (canMove)
             PlayerState.MoveRight();
     }
 
-    public virtual void SwordAttack() {
+    public void SwordAttack() {
         PlayerState.SwordAttack();
     }
 
-    public virtual void UseAbility(AbilityTypes abilityType) {
+    public void UseAbility(AbilityTypes abilityType) {
         if (PlayerInventory.AbilityCounts[abilityType] > 0) {
             if (abilityType == AbilityTypes.Bomb) {
                 PlayerInventory.AbilityCounts[AbilityTypes.Bomb] -= 1;

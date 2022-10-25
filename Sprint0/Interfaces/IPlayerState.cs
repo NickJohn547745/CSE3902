@@ -10,7 +10,7 @@ public interface IPlayerState {
     public ISprite sprite { get; set; }
     public Rectangle GetHitBox();
     public void Collide(ICollidable obj, ICollidable.Edge edge);
-    void Draw(SpriteBatch spriteBatch);
+    void Draw(SpriteBatch spriteBatch, Color color);
     void Update();
     void MoveUp();
     void MoveDown();

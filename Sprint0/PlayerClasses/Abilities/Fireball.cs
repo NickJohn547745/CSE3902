@@ -26,7 +26,7 @@ public class Fireball : Ability {
     //Vector2 normalizedVelocity = Vector2.Normalize(velocity);
     public override void Draw(SpriteBatch spriteBatch)
     {
-        sprite.Draw(spriteBatch, Position, SpriteEffects.None);
+        sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
     }
 
     public override void Update(GameTime gameTime, Game1 game) {

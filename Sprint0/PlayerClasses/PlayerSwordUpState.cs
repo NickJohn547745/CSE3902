@@ -19,10 +19,10 @@ public class PlayerSwordUpState : PlayerSwordState {
         return new Rectangle((int) player.Position.X, (int) player.Position.Y - (sprite.GetHeight(animationFrame) - 64), sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch, Color color)
     {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
-        sprite.Draw(spriteBatch, new Vector2(player.Position.X, player.Position.Y - (sprite.GetHeight(animationFrame) - 64)), animationFrame, SpriteEffects.None);
+        sprite.Draw(spriteBatch, new Vector2(player.Position.X, player.Position.Y - (sprite.GetHeight(animationFrame) - 64)), animationFrame, SpriteEffects.None, color);
     }
 
     public override void Update()

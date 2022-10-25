@@ -19,11 +19,6 @@ public class Bomb : Ability {
         }
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None);
-    }
-
     public override void Update(GameTime gameTime, Game1 game) {
         frameCounter++;
         if (frameCounter == 60) {

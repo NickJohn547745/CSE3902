@@ -36,7 +36,7 @@ public class WoodenArrow : Ability {
             effects = SpriteEffects.FlipHorizontally;
         }
 
-        sprite.Draw(spriteBatch, Position, effects);
+        sprite.Draw(spriteBatch, Position, effects, Color.White);
     }
     
     public override void Update(GameTime gameTime, Game1 game) {

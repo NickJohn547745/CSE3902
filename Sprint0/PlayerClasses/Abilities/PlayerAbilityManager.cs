@@ -51,6 +51,7 @@ public class PlayerAbilityManager {
                     break;
             }
 
+            UsingAbility[abilityType] = true;
             if (currentAbility != null) {
                 Game.CollisionManager.collidables.Add(currentAbility);
             }

@@ -29,6 +29,7 @@ public class Game1 : Game {
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
     
+    public List<ICollidable> CollidablesToAdd { get; set; }
     public List<ICollidable> CollidablesToDelete { get; set; }
 
     private int currentEnemyIndex = 0;
@@ -39,7 +40,7 @@ public class Game1 : Game {
     private int WindowHeight;
 
 
-    public Player Player;
+    public IPlayer Player;
     public Room Room;
     public ISprite CurrentSprite { get; set; }
 
@@ -259,6 +260,7 @@ public class Game1 : Game {
         CollidableList.Add(Player);
         
         CollidablesToDelete = new List<ICollidable>();
+        CollidablesToAdd = new List<ICollidable>();
 
         Room = new Room(this);
 
@@ -270,8 +272,15 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
-        if(CollidablesToDelete != null)
+        if (CollidablesToDelete != null) {
             CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
+            CollidablesToDelete.Clear();
+        }
+
+        if (CollidablesToAdd != null) {
+            CollisionManager.collidables.AddRange(CollidablesToAdd);
+            CollidablesToAdd.Clear();
+        }
 
         //EnemyList[currentEnemyIndex].Update(gameTime, this);
         //Player.Update(gameTime, this);
