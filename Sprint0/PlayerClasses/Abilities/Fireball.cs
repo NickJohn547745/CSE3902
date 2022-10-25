@@ -21,6 +21,7 @@ public class Fireball : Ability {
             Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
         finalPosition = Vector2.Add(Position, Vector2.Multiply(velocity, new Vector2(128)));
+        type = ICollidable.objectType.Ability;
     }
 
     //Vector2 normalizedVelocity = Vector2.Normalize(velocity);
@@ -45,7 +46,7 @@ public class Fireball : Ability {
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.GetObjectType() == typeof(Wall)) {
+        if (obj.type == ICollidable.objectType.Wall) {
             Velocity = Vector2.Zero;
             finalPosition = Position;
         }

@@ -13,6 +13,7 @@ public class PlayerFacingRightState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingSideSprite();
         player.Damage = 0;
+        shield = ICollidable.Edge.Right;
     }
    
     public override void MoveRight() {

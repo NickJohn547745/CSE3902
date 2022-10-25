@@ -26,6 +26,7 @@ public class MagicalBoomerang : Ability {
         initialPosition = Position;
         Velocity = Vector2.Multiply(velocity, new Vector2((float)9));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.1));
+        type = ICollidable.objectType.Ability;
     }
     
     public override void Update(GameTime gameTime, Game1 game) {
@@ -49,7 +50,7 @@ public class MagicalBoomerang : Ability {
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.GetObjectType() == typeof(Wall)) {
+        if (obj.type == ICollidable.objectType.Wall) {
             Velocity = Vector2.Zero;
             sprite = PlayerSpriteFactory.Instance.GetBoomerangHitSprite();
             if (hitFrame == 0)

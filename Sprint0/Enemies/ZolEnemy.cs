@@ -22,6 +22,7 @@ namespace sprint0.Enemies
         {
             initPosition = position;
             Position = position;
+            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             this.speed = speed;
             Velocity = Vector2.One;
@@ -30,6 +31,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 1;
             deadCount = 0;
+            type = ICollidable.objectType.Enemy;
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));

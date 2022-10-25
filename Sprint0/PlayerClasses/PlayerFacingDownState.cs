@@ -12,6 +12,7 @@ public class PlayerFacingDownState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingDownSprite();
         player.Damage = 0;
+        shield = ICollidable.Edge.Bottom;
     }
 
     public override void MoveDown() {

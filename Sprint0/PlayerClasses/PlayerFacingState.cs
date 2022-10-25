@@ -10,8 +10,9 @@ namespace sprint0.PlayerClasses;
 public abstract class PlayerFacingState : IPlayerState {
     protected const int FramesPerAnimationChange = 5;
     protected Player player;
-    protected int animationFrame = 0;
-    protected int currentFrame = 0;
+    protected int animationFrame;
+    protected int currentFrame;
+    protected ICollidable.Edge shield;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
@@ -27,8 +28,7 @@ public abstract class PlayerFacingState : IPlayerState {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-        if (type == typeof(Enemy) || type == typeof(Projectile)) player.TakeDamage(obj.Damage);
+        if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)) player.TakeDamage(obj.Damage);
     }
 
     public void Update() {

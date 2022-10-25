@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
+using sprint0.Interfaces;
 
 namespace sprint0.Enemies
 {
@@ -11,10 +12,12 @@ namespace sprint0.Enemies
         private const int RandBound = 4;
 
         private Dictionary<int, Vector2> DirectionChoice;
+        
         public StalfosEnemy(Vector2 position, float speed)
         {
             initPosition = position;
             Position = position;
+            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
             Velocity = Vector2.Zero;
@@ -23,6 +26,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 1;
             deadCount = 0;
+            type = ICollidable.objectType.Enemy;
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));

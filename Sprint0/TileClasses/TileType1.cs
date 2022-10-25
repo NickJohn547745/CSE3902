@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
-using System;
+using sprint0.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,7 @@ namespace sprint0.TileClasses
             this.SetLocation(x, y);
             this.SetTextureCoords(0, 0);
             this.SetCollidable(false);
+            type = ICollidable.objectType.Tile;
         }
 
         public override Type GetObjectType()

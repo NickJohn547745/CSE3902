@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
+using sprint0.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace sprint0.RoomClasses
     {
         public BottomRightWall()
         {
-
+            type = ICollidable.objectType.Wall;
         }
 
         public override Rectangle GetHitBox()

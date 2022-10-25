@@ -10,6 +10,7 @@ public abstract class Ability : ICollidable
     protected Player player;
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
+    public ICollidable.objectType type { get; set; }
     public ISprite sprite { get; set; }
     public Vector2 Position { get; set; }
     protected int animationFrame;
@@ -17,11 +18,6 @@ public abstract class Ability : ICollidable
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
 
-    }
-
-    public Type GetObjectType()
-    {
-        return this.sprite.GetType();
     }
 
     public Rectangle GetHitBox()

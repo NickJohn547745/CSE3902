@@ -21,7 +21,8 @@ namespace sprint0.Enemies
         protected int delay;
         private int delayCount;
         private int damageDelay;
-        public Vector2 FinalPosition { get; set; }
+        public ICollidable.objectType type { get; set; }
+        public Vector2 PreviousPosition { get; set; }
         public Vector2 Position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
@@ -50,13 +51,17 @@ namespace sprint0.Enemies
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             if (canMove)
             {
-                FinalPosition = Position;
+                PreviousPosition = Position;
+                Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else
+            {
+                Position = PreviousPosition;
             }
             
+
             // Ex: change direction every delay seconds
             if (delayCount % delay == 0)
             {
@@ -72,49 +77,19 @@ namespace sprint0.Enemies
             canMove = true;
         }
 
-        private void KnockBack(ICollidable.Edge edge, float offset)
-        {
-            switch (edge)
-            {
-                case ICollidable.Edge.Top:
-                    Position += new Vector2(0, -offset);
-                    break;
-                case ICollidable.Edge.Right:
-                    Position += new Vector2(-offset, 0);
-                    break;
-                case ICollidable.Edge.Left:
-                    Position += new Vector2(offset, 0);
-                    break;
-                case ICollidable.Edge.Bottom:
-                    Position += new Vector2(0, offset);
-                    break;
-                default:
-                    break;
-            }
-        }
-        
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            Type type = obj.GetObjectType();
 
-            if (type == typeof(Player) || type == typeof(Ability))
+            if (obj.type == ICollidable.objectType.Player || obj.type == ICollidable.objectType.Ability)
             {
                 TakeDamage(obj.Damage);
-            } else if (type == typeof(Wall))
+            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
             {
-                KnockBack(edge, TileOffset);
                 ReverseDirection();
-                // canMove = false;
-            } else if (type == typeof(TileType))
-            {
-                KnockBack(edge, TileOffset);
-            }
+                canMove = false;
+            } 
         }
-
-        public Type GetObjectType()
-        {
-            return this.GetType().BaseType;
-        }
+        
 
         public Rectangle GetHitBox()
         {
@@ -125,12 +100,12 @@ namespace sprint0.Enemies
         {
             if (Health <= 0)
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, SpriteEffects.None, Color.White);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, SpriteEffects.None);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, FinalPosition, SpriteEffects.None, Color.White);
+                Sprite.Draw(spriteBatch, Position, SpriteEffects.None);
             }
         }
 

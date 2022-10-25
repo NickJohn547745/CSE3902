@@ -13,6 +13,7 @@ public class Player : IPlayer {
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
+    public ICollidable.objectType type { get; set; }
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public int ScaleFactor { get; set; }
@@ -32,12 +33,9 @@ public class Player : IPlayer {
         Position = new Vector2(200, 200);
         initPosition = Position;
         Damage = 0;
+        type = ICollidable.objectType.Player;
     }
-
-    public Type GetObjectType()
-    {
-        return this.GetType();
-    }
+    
     public Rectangle GetHitBox()
     {
         return PlayerState.GetHitBox();
@@ -45,9 +43,7 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-
-            switch (edge)
+        switch (edge)
             {
                 case ICollidable.Edge.Top:
                     Position += new Vector2(0, -IPlayerState.playerSpeed);
@@ -65,7 +61,6 @@ public class Player : IPlayer {
                     break;
             }
             PlayerState.Collide(obj, edge);
-        
     }
 
     public void Draw(SpriteBatch spriteBatch) { 

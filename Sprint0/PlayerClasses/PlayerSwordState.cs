@@ -28,8 +28,7 @@ public abstract class PlayerSwordState : IPlayerState {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-        if (type == typeof(Enemy) || type == typeof(Projectile))
+        if (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)
         {
             if (edge == swordEdge)
             {

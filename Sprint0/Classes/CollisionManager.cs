@@ -107,7 +107,7 @@ namespace sprint0.Classes
             
             foreach (ICollidable collidable in collidables)
             {
-                if (collidable.GetObjectType() != typeof(Wall))
+                if (collidable.type != ICollidable.objectType.Wall)
                 {
                     frontCollidables.Add(collidable);
                 } else
