@@ -48,7 +48,7 @@ namespace sprint0.Enemies
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
-                game.CollidableList.Add(goriyaStateMachine.Boomerang);
+                game.CollisionManager.collidables.Add(goriyaStateMachine.Boomerang);
                 boomerangTracker++;
             } else if (!goriyaStateMachine.BoomerangThrown)
             {

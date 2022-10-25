@@ -11,6 +11,8 @@ namespace sprint0.PlayerClasses;
 public class Player : ICollidable {
 
     private Vector2 initPosition;
+
+    public PlayerInventory PlayerInventory;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public int ScaleFactor { get; set; }
@@ -24,6 +26,7 @@ public class Player : ICollidable {
         Game = game;
         PlayerState = new PlayerFacingUpState(this);
         AbilityManager = new PlayerAbilityManager(this);
+        PlayerInventory = new PlayerInventory();
         Health = 6;
         ScaleFactor = 4;
         Position = new Vector2(200, 200);
@@ -107,7 +110,13 @@ public class Player : ICollidable {
     }
 
     public virtual void UseAbility(AbilityTypes abilityType) {
-        PlayerState.UseAbility(abilityType);
+        if (PlayerInventory.AbilityCounts[abilityType] > 0) {
+            if (abilityType == AbilityTypes.Bomb) {
+                PlayerInventory.AbilityCounts[AbilityTypes.Bomb] -= 1;
+            }
+
+            PlayerState.UseAbility(abilityType);
+        }
     }
 
 }

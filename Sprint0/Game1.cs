@@ -73,22 +73,22 @@ public class Game1 : Game {
 
     public void NextEnemy()
     {
-        CollidableList.Remove(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex++;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollidableList.Add(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousEnemy()
     {
-        CollidableList.Remove(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
         currentEnemyIndex--;
 
         int remainder = (currentEnemyIndex % EnemyList.Count);
         currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollidableList.Add(EnemyList[currentEnemyIndex]);
+        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
     }
 
     public void PreviousItem()
@@ -128,7 +128,7 @@ public class Game1 : Game {
 
     public void PreviousTile()
     {
-        CollidableList.Remove(TileList[currentTileIndex]);
+        CollisionManager.collidables.Remove(TileList[currentTileIndex]);
         currentTileIndex--;
 
         int remainder = (currentTileIndex % TileList.Count);
@@ -136,7 +136,7 @@ public class Game1 : Game {
 
         if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
-            CollidableList.Add(TileList[currentTileIndex]);
+            CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }
 
     }
@@ -151,7 +151,7 @@ public class Game1 : Game {
 
         if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
-            CollidableList.Add(TileList[currentTileIndex]);
+            CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }
 
     }
@@ -215,10 +215,10 @@ public class Game1 : Game {
 	
 	    gamePad.BindCommand(Buttons.Back, new QuitCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.Start, new ResetGameCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.LeftThumstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.LeftThumstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadUp, new MoveUpCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadDown, new MoveDownCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.DPadRight, new MoveRightCommand(), IController.KeyState.KeyDown);
@@ -260,7 +260,7 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
-        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 200);
+        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 100);
 
         EnemyList = new List<ICollidable>();
         ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
