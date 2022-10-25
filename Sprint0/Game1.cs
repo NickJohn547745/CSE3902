@@ -17,6 +17,8 @@ using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.Projectiles;
 using sprint0.RoomClasses;
+using sprint0.FileReaderClasses;
+using System.Linq;
 
 namespace sprint0;
 
@@ -31,6 +33,7 @@ public class Game1 : Game {
     public List<ICollidable> EnemyList { get; private set; }
     public List<ICollidable> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
+    public List<LevelConfig> LevelList { get; set; }
     public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
     
@@ -39,10 +42,13 @@ public class Game1 : Game {
     private int currentEnemyIndex = 0;
     private int currentTileIndex = 0;
     private int currentItemIndex = 0;
+    private int currentLevelIndex = 0;
 
     private int WindowWidth;
     private int WindowHeight;
 
+    public GameConfig GameConfig { get; private set; }
+    private string gameFilePath = "./Content/Data/GameFile.xml";
 
     public Player Player;
     public Room Room;
@@ -50,10 +56,6 @@ public class Game1 : Game {
 
     public Game1() {
         _graphics = new GraphicsDeviceManager(this);
-
-        _graphics.PreferredBackBufferWidth = 1280;
-        _graphics.PreferredBackBufferHeight = 880;
-        _graphics.ApplyChanges();
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -103,6 +105,25 @@ public class Game1 : Game {
 
         int remainder = (currentItemIndex % ItemList.Count);
         currentItemIndex = (remainder < 0) ? (ItemList.Count + remainder) : remainder;
+    }
+    public void PreviousLevel()
+    {
+        currentLevelIndex--;
+
+        int remainder = (currentLevelIndex % LevelList.Count);
+        currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
+
+        Room = new Room(this, LevelList[currentLevelIndex]);
+    }
+
+    public void NextLevel()
+    {
+        currentLevelIndex++;
+
+        int remainder = (currentLevelIndex % LevelList.Count);
+        currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
+
+        Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
     public void PreviousTile()
@@ -155,8 +176,6 @@ public class Game1 : Game {
 
         TextureStorage.LoadAllTextures(Content);
 
-        TextureStorage.LoadAllTextures(Content);
-
         Controllers = new List<IController>();
         IController keyboard = new KeyboardController();
         
@@ -178,6 +197,8 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.U, new PreviousItemCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.O, new PreviousEnemyCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.P, new NextEnemyCommand(), IController.KeyState.Pressed);
+        keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
+        keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
 
         keyboard.BindCommand(Keys.D1, new UseBombCommand(), IController.KeyState.Pressed);
@@ -265,7 +286,21 @@ public class Game1 : Game {
         
         CollidablesToDelete = new List<ICollidable>();
 
-        Room = new Room(this);
+
+        GameConfig = new GameConfig();
+
+        GameFileReader gameFileReader = new GameFileReader(GameConfig);
+        gameFileReader.LoadFile(gameFilePath);
+        GameConfig = gameFileReader.GameConfig;
+
+        _graphics.PreferredBackBufferWidth = GameConfig.ResolutionWidth;
+        _graphics.PreferredBackBufferHeight = GameConfig.ResolutionHeight;
+        _graphics.ApplyChanges();
+
+        LevelList = new List<LevelConfig>();
+        LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
+
+        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
 
         CollisionManager = new CollisionManager(CollidableList);
     }
@@ -316,6 +351,7 @@ public class Game1 : Game {
         currentEnemyIndex = 0;
         currentTileIndex = 0;
         currentItemIndex = 0;
+        currentLevelIndex = 0;
 
         foreach (ICollidable enemy in EnemyList)
         {

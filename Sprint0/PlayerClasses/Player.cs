@@ -15,13 +15,12 @@ public class Player : ICollidable {
     public PlayerInventory PlayerInventory;
     public Vector2 Position { get; set; }
     public int Health { get; set; }
+    public int ScaleFactor { get; set; }
     public Game1 Game { get; set; }
     public bool IsMultiSprite { get; set; }
     public IPlayerState PlayerState { get; set; }
     public PlayerAbilityManager AbilityManager { get; protected set; }
     public int Damage { get; set; }
-
-    private bool canMove = true;
 
     public Player(Game1 game) {
         Game = game;
@@ -29,7 +28,8 @@ public class Player : ICollidable {
         AbilityManager = new PlayerAbilityManager(this);
         PlayerInventory = new PlayerInventory();
         Health = 6;
-        Position = new Vector2(150);
+        ScaleFactor = 4;
+        Position = new Vector2(200, 200);
         initPosition = Position;
         Damage = 0;
     }
@@ -47,11 +47,6 @@ public class Player : ICollidable {
     {
         Type type = obj.GetObjectType();
 
-        if (type == typeof(Room))
-        {
-            canMove = false;
-        } else
-        {
             switch (edge)
             {
                 case ICollidable.Edge.Top:
@@ -70,7 +65,7 @@ public class Player : ICollidable {
                     break;
             }
             PlayerState.Collide(obj, edge);
-        }
+        
     }
 
     public virtual void Draw(SpriteBatch spriteBatch) { 
@@ -81,8 +76,6 @@ public class Player : ICollidable {
     public virtual void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
-
-        canMove = true;
     }
 
     public virtual void Reset(Game1 game)
@@ -97,22 +90,18 @@ public class Player : ICollidable {
     }
 
     public virtual void MoveUp() {
-        if (canMove)
             PlayerState.MoveUp();
     }
 
     public virtual void MoveDown() {
-        if (canMove)
             PlayerState.MoveDown();
     }
 
     public virtual void MoveLeft() {
-        if (canMove)
             PlayerState.MoveLeft();
     }
 
     public virtual void MoveRight() {
-        if (canMove)
             PlayerState.MoveRight();
     }
 
