@@ -33,9 +33,8 @@ namespace sprint0.RoomClasses
 
             foreach (ICollidable collidable in game.CollidableList)
             {
-                Type type = collidable.GetObjectType();
 
-                if (type == typeof(Wall) || type == typeof(TileType) || type == typeof(Door))
+                if (collidable.type == ICollidable.objectType.Wall || collidable.type == ICollidable.objectType.Tile || collidable.type == ICollidable.objectType.Door)
                     removalList.Add(collidable);
             }
 

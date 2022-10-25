@@ -14,7 +14,7 @@ namespace sprint0.DoorClasses
     public abstract class Door : ICollidable
     {
         public int Damage { get; set; }
-
+        public ICollidable.objectType type { get; set; }
 
         public int Id { get; set; }
 

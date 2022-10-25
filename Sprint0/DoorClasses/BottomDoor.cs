@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sprint0.Interfaces;
 
 namespace sprint0.DoorClasses
 {
@@ -13,7 +14,7 @@ namespace sprint0.DoorClasses
     {
         public BottomDoor()
         {
-
+            type = ICollidable.objectType.Door;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

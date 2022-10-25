@@ -13,6 +13,7 @@ public class DamagedPlayer : IPlayer {
     private Game1 Game;
     private int timer = 120;
     private int frameCountdown = 0;
+    public ICollidable.objectType type { get; set; }
 
 
     public int Damage {
@@ -23,11 +24,6 @@ public class DamagedPlayer : IPlayer {
     public DamagedPlayer(Player decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
-        PlayerState = decoratedPlayer.PlayerState;
-        Position = decoratedPlayer.Position;
-        initPosition = Position;
-        AbilityManager = this.decoratedPlayer.AbilityManager;
-        sprite = PlayerSpriteFactory.Instance.GetDamagedSprite();
         type = ICollidable.objectType.Player;
     }
 
@@ -48,11 +44,7 @@ public class DamagedPlayer : IPlayer {
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
         decoratedPlayer.Collide(obj, edge);
     }
-
-    public Type GetObjectType() {
-        return decoratedPlayer.GetObjectType();
-    }
-
+    
     public Rectangle GetHitBox() {
         return decoratedPlayer.GetHitBox();
     }

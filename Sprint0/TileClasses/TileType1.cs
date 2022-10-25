@@ -17,10 +17,6 @@ namespace sprint0.TileClasses
             this.SetCollidable(false);
             type = ICollidable.objectType.Tile;
         }
-
-        public override Type GetObjectType()
-        {
-            return typeof(TileType);
-        }
+        
     }
 }

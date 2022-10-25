@@ -64,8 +64,6 @@ namespace sprint0.TileClasses
             this.collidable = isCollidable;
         }
 
-        public abstract Type GetObjectType();
-
         public void Update(GameTime gameTime, Game1 game)
         {
             // Empty - Not used

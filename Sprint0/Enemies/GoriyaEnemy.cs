@@ -64,12 +64,12 @@ namespace sprint0.Enemies
         {
             if (Health <= 0)
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect);
+                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
             }
         }
     }
