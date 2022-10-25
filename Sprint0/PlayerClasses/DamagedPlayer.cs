@@ -13,6 +13,9 @@ public class DamagedPlayer : IPlayer {
     private Game1 Game;
     private int timer = 120;
     private int frameCountdown = 0;
+    public Vector2 Velocity { get; set; }
+    public Vector2 InitVelocity { get; set; }
+    public Vector2 PreviousPosition { get; set; }
     public ICollidable.objectType type { get; set; }
 
 
@@ -25,6 +28,7 @@ public class DamagedPlayer : IPlayer {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
         type = ICollidable.objectType.Player;
+        
     }
 
     void RemoveDecorator() {
@@ -42,7 +46,12 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
-        decoratedPlayer.Collide(obj, edge);
+        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        {
+            decoratedPlayer.Position = PreviousPosition;
+            decoratedPlayer.Velocity = Vector2.Zero;
+        }   
+        // decoratedPlayer.Collide(obj, edge);
     }
     
     public Rectangle GetHitBox() {
@@ -52,10 +61,18 @@ public class DamagedPlayer : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         timer--;
         frameCountdown++;
+        PreviousPosition = decoratedPlayer.Position; 
+        
+        if (Math.Abs(decoratedPlayer.Velocity.X) > 5 || Math.Abs(decoratedPlayer.Velocity.Y) > 5)
+        {
+            decoratedPlayer.Position += decoratedPlayer.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            decoratedPlayer.Velocity += (Vector2.Zero - decoratedPlayer.InitVelocity) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
 
         if (frameCountdown > 10)
             frameCountdown = 0;
         if (timer == 0) {
+            decoratedPlayer.Velocity = Vector2.Zero;
             RemoveDecorator();
         }
         decoratedPlayer.Update(gameTime, game);

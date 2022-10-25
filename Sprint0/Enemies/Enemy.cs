@@ -83,7 +83,7 @@ namespace sprint0.Enemies
             if (obj.type == ICollidable.objectType.Player || obj.type == ICollidable.objectType.Ability)
             {
                 TakeDamage(obj.Damage);
-            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile || obj.type == ICollidable.objectType.Door)
             {
                 ReverseDirection();
                 canMove = false;

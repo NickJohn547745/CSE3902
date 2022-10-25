@@ -10,6 +10,7 @@ namespace sprint0.PlayerClasses;
 public abstract class PlayerAbilityState : IPlayerState {
     protected Player player;
     protected int frameCount;
+    protected ICollidable.Edge facing;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
@@ -23,9 +24,34 @@ public abstract class PlayerAbilityState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, SpriteEffects.None, color);
     }
 
+    private void Knockback()
+    {
+        switch (facing)
+        {
+            case ICollidable.Edge.Top:
+                player.InitVelocity = new Vector2(0, 300);
+                break;
+            case ICollidable.Edge.Right:
+                player.InitVelocity = new Vector2(-300, 0);
+                break;
+            case ICollidable.Edge.Left:
+                player.InitVelocity = new Vector2(300, 0);
+                break;
+            case ICollidable.Edge.Bottom:
+                player.InitVelocity = new Vector2(0, -300);
+                break;
+        }
+
+        player.Velocity = player.InitVelocity;
+    }
+    
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile) player.TakeDamage(obj.Damage);
+        if (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)
+        {
+            player.TakeDamage(obj.Damage);
+            Knockback();
+        }
     }
 
     public abstract void Update();

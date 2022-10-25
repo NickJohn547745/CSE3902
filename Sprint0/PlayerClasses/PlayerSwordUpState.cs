@@ -13,6 +13,7 @@ public class PlayerSwordUpState : PlayerSwordState {
         sprite = PlayerSpriteFactory.Instance.GetSwordUpSprite();
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Top;
+        backEdge = ICollidable.Edge.Bottom;
     }
     public override Rectangle GetHitBox()
     {
