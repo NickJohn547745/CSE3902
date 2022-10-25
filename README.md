@@ -32,4 +32,5 @@
 * Link gets pushed back when using sword on enemy (need to change sword hitbox)
 * Link cannot take damage
 * Link gets stuck in walls
+* Swapping rooms with mouse can look weird if done quickly
 * Enemy wall collision is still not quite right
