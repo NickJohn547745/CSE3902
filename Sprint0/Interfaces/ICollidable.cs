@@ -1,22 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Linq;
+using sprint0.Enemies;
+using sprint0.PlayerClasses;
 
 namespace sprint0.Interfaces
 {
     public interface ICollidable
     {
         public enum Edge {Top, Bottom, Left, Right };
+        
+        public enum objectType {Enemy, Player, Door, Wall, Tile, Projectile, Ability, Item}
+        
+        public objectType type { get; set; }
 
         public int Damage { get; set; }
 
         public void Collide(ICollidable obj, Edge edge);
-
-        public Type GetObjectType();
 
         public Rectangle GetHitBox();
 

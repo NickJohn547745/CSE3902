@@ -21,6 +21,7 @@ namespace sprint0.Enemies
         protected int delay;
         private int delayCount;
         private int damageDelay;
+        public ICollidable.objectType type { get; set; }
         public Vector2 PreviousPosition { get; set; }
         public Vector2 Position { get; set; }
         protected Vector2 initPosition;
@@ -78,22 +79,17 @@ namespace sprint0.Enemies
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            Type type = obj.GetObjectType();
 
-            if (type == typeof(Player) || type == typeof(Ability))
+            if (obj.type == ICollidable.objectType.Player || obj.type == ICollidable.objectType.Ability)
             {
                 TakeDamage(obj.Damage);
-            } else if (type == typeof(Wall) || type == typeof(TileType))
+            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
             {
                 ReverseDirection();
                 canMove = false;
             } 
         }
-
-        public Type GetObjectType()
-        {
-            return this.GetType().BaseType;
-        }
+        
 
         public Rectangle GetHitBox()
         {

@@ -18,6 +18,7 @@ public class AquamentusProjectile : Projectile {
         delay = FireBallDelay;
         Damage = 1;
         Collision = false;
+        type = ICollidable.objectType.Projectile;
     }
 
     protected override void Behavior(Game1 game)

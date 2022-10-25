@@ -34,9 +34,8 @@ namespace sprint0.Enemies
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            Type type = obj.GetObjectType();
 
-            if (type == typeof(Player))
+            if (obj.type == ICollidable.objectType.Player)
             {
                 switch (edge)
                 {

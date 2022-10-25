@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sprint0.Interfaces;
 
 namespace sprint0.TileClasses
 {
@@ -16,6 +17,7 @@ namespace sprint0.TileClasses
             this.SetLocation(x, y);
             this.SetTextureCoords(2, 1);
             this.SetCollidable(true);
+            type = ICollidable.objectType.Tile;
         }
     }
 }

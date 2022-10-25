@@ -15,6 +15,7 @@ public abstract class Projectile : ICollidable {
     protected Vector2 Position { get; set; }
     protected Vector2 initPosition;
     protected float speed;
+    public ICollidable.objectType type { get; set; }
     public Vector2 Velocity { get; set; }
     public ISprite Sprite { get; set; }
     public bool Collision { get; set; }
@@ -31,7 +32,7 @@ public abstract class Projectile : ICollidable {
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Collision = obj.GetObjectType() != typeof(Projectile) && obj.GetObjectType() != typeof(Enemy);
+        Collision = obj.type != ICollidable.objectType.Projectile && obj.type != ICollidable.objectType.Enemy;
     }
 
     protected abstract void Behavior(Game1 game);

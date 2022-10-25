@@ -14,7 +14,7 @@ namespace sprint0.Enemies
 {
     public class GoriyaEnemy: Enemy
     {
-        private const int BehaviorDelay = 60;
+        private const int BehaviorDelay = 70;
         private const int DirectionChange = 4;
 
         private GoriyaStateMachine goriyaStateMachine;
@@ -25,7 +25,7 @@ namespace sprint0.Enemies
             initPosition = position;
             Position = position;
             PreviousPosition = position;
-            this.speed = speed;
+            this.speed = 10;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
             boomerangTracker = 1;
@@ -35,6 +35,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 1;
             deadCount = 0;
+            type = ICollidable.objectType.Enemy;
         }
         
         protected override void ReverseDirection()

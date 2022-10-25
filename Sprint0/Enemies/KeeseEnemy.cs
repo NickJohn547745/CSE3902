@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
-
+using sprint0.Interfaces;
 namespace sprint0.Enemies
 {
     public class KeeseEnemy : Enemy
@@ -25,6 +25,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 1;
             deadCount = 0;
+            type = ICollidable.objectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

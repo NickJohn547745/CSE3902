@@ -36,9 +36,9 @@ public class Game1 : Game {
     
     public List<ICollidable> CollidablesToDelete { get; set; }
 
-    private int currentEnemyIndex = 0;
-    private int currentTileIndex = 0;
-    private int currentItemIndex = 0;
+    private int currentEnemyIndex;
+    private int currentTileIndex;
+    private int currentItemIndex;
 
     private int WindowWidth;
     private int WindowHeight;
@@ -113,7 +113,7 @@ public class Game1 : Game {
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
 
-        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        if (TileList[currentTileIndex].type != ICollidable.objectType.Tile)
         {
             CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }
@@ -128,7 +128,7 @@ public class Game1 : Game {
         int remainder = (currentTileIndex % TileList.Count);
         currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
 
-        if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
+        if (TileList[currentTileIndex].type != ICollidable.objectType.Tile)
         {
             CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }

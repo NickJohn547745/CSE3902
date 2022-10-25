@@ -28,8 +28,7 @@ public abstract class PlayerFacingState : IPlayerState {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-        if (edge != shield && (type == typeof(Enemy) || type == typeof(Projectile))) player.TakeDamage(obj.Damage);
+        if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)) player.TakeDamage(obj.Damage);
     }
 
     public void Update() {

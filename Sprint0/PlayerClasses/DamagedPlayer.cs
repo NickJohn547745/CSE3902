@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
+using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
@@ -21,6 +22,7 @@ public class DamagedPlayer : Player {
         initPosition = Position;
         AbilityManager = this.decoratedPlayer.AbilityManager;
         sprite = PlayerSpriteFactory.Instance.GetDamagedSprite();
+        type = ICollidable.objectType.Player;
     }
 
     void RemoveDecorator() {

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
+using sprint0.Interfaces;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -17,6 +18,7 @@ public class Bomb : Ability {
         else {
             Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
+        type = ICollidable.objectType.Ability;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

@@ -13,6 +13,7 @@ public class Player : ICollidable {
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
+    public ICollidable.objectType type { get; set; }
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public Game1 Game { get; set; }
@@ -29,15 +30,12 @@ public class Player : ICollidable {
         AbilityManager = new PlayerAbilityManager(this);
         PlayerInventory = new PlayerInventory();
         Health = 6;
-        Position = new Vector2(150);
+        Position = new Vector2(200);
         initPosition = Position;
         Damage = 0;
+        type = ICollidable.objectType.Player;
     }
-
-    public Type GetObjectType()
-    {
-        return this.GetType();
-    }
+    
     public Rectangle GetHitBox()
     {
         return PlayerState.GetHitBox();
@@ -45,14 +43,7 @@ public class Player : ICollidable {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Type type = obj.GetObjectType();
-
-        if (type == typeof(Room))
-        {
-            canMove = false;
-        } else
-        {
-            switch (edge)
+        switch (edge)
             {
                 case ICollidable.Edge.Top:
                     Position += new Vector2(0, -IPlayerState.playerSpeed);
@@ -70,7 +61,6 @@ public class Player : ICollidable {
                     break;
             }
             PlayerState.Collide(obj, edge);
-        }
     }
 
     public virtual void Draw(SpriteBatch spriteBatch) { 

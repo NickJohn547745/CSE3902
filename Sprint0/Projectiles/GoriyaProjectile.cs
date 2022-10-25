@@ -28,6 +28,7 @@ namespace sprint0.Projectiles
             Damage = 1;
             Collision = false;
             caught = false;
+            type = ICollidable.objectType.Projectile;
         }
 
         private Boolean Caught()
@@ -55,7 +56,7 @@ namespace sprint0.Projectiles
         {
             caught = returnThrow && obj == goriya.Goriya;
 
-            Collision = caught || (Collision = obj.GetObjectType() != typeof(Projectile) && obj.GetObjectType() != typeof(Enemy));
+            Collision = caught || (obj.type != ICollidable.objectType.Projectile && obj.type != ICollidable.objectType.Enemy);
 
             if (Collision) goriya.BoomerangThrown = false;
         }
