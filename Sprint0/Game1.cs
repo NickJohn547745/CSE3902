@@ -107,7 +107,7 @@ public class Game1 : Game {
 
     public void PreviousTile()
     {
-        CollidableList.Remove(TileList[currentTileIndex]);
+        CollisionManager.collidables.Remove(TileList[currentTileIndex]);
         currentTileIndex--;
 
         int remainder = (currentTileIndex % TileList.Count);
@@ -115,7 +115,7 @@ public class Game1 : Game {
 
         if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
-            CollidableList.Add(TileList[currentTileIndex]);
+            CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }
 
     }
@@ -130,7 +130,7 @@ public class Game1 : Game {
 
         if (TileList[currentTileIndex].GetObjectType() != typeof(TileType1))
         {
-            CollidableList.Add(TileList[currentTileIndex]);
+            CollisionManager.collidables.Add(TileList[currentTileIndex]);
         }
 
     }
