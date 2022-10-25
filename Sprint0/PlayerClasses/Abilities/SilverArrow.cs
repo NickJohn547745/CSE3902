@@ -46,7 +46,7 @@ public class SilverArrow : Ability{
 
         if (hitFrame == 5) {
             game.CollidablesToDelete.Add(this);
-            player.AbilityManager.RemoveCurrentAbility();
+            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.SilverArrow);
         }
     }
     

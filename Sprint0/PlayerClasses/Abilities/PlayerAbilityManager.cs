@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -8,10 +8,18 @@ public class PlayerAbilityManager {
 
     private Game1 Game;
 
-    private Ability currentAbility;
+    private Dictionary<AbilityTypes, bool> UsingAbility;
 
     public PlayerAbilityManager(Player player) {
         this.player = player;
+        UsingAbility = new Dictionary<AbilityTypes, bool>();
+        UsingAbility.Add(AbilityTypes.Bomb, false);
+        UsingAbility.Add(AbilityTypes.WoodenBoomerang, false);
+        UsingAbility.Add(AbilityTypes.MagicalBoomerang, false);
+        UsingAbility.Add(AbilityTypes.WoodenArrow, false);
+        UsingAbility.Add(AbilityTypes.SilverArrow, false);
+        UsingAbility.Add(AbilityTypes.Fireball, false);
+        
     }
 
     public void Update(GameTime gameTime, Game1 game) {
@@ -19,15 +27,9 @@ public class PlayerAbilityManager {
             Game = game;
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
-        if (currentAbility != null) {
-            //currentAbility.Draw(spriteBatch);
-        }
-        
-    }
-
     public void UseAbility(AbilityTypes abilityType, Vector2 position, Vector2 velocity) {
-        if (currentAbility == null) {
+        if (!UsingAbility[abilityType]) {
+            Ability currentAbility = null;
             switch (abilityType) {
                 case AbilityTypes.Bomb:
                     currentAbility = new Bomb(player, position, velocity);
@@ -55,8 +57,8 @@ public class PlayerAbilityManager {
         }
     }
 
-    public void RemoveCurrentAbility() {
-        currentAbility = null;
+    public void RemoveCurrentAbility(AbilityTypes abilityType) {
+        UsingAbility[abilityType] = false;
     }
 
 }

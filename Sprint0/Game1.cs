@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,12 +7,10 @@ using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Enemies;
-using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
 using sprint0.TileClasses;
-using sprint0.Projectiles;
 using sprint0.RoomClasses;
 
 namespace sprint0;

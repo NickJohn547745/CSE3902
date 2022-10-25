@@ -75,7 +75,6 @@ public class Player : ICollidable {
 
     public virtual void Draw(SpriteBatch spriteBatch) { 
         PlayerState.Draw(spriteBatch);
-        AbilityManager.Draw(spriteBatch);
     }
 
     public virtual void Update(GameTime gameTime, Game1 game) {

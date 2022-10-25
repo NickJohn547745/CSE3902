@@ -1,6 +1,7 @@
 .vs/
 .DS_Store
-*.mgcontent
+.mgcontent
+.mgstats
 *.xnb
 bin/
 obj/

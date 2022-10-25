@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -8,7 +7,6 @@ using sprint0.RoomClasses;
 namespace sprint0.PlayerClasses.Abilities;
 
 public class WoodenArrow : Ability {
-    private int frameCounter;
 
     private int spriteVersion;
     private int hitFrame = 0;
@@ -42,7 +40,6 @@ public class WoodenArrow : Ability {
     }
     
     public override void Update(GameTime gameTime, Game1 game) {
-        frameCounter++;
         Position = Vector2.Add(Position, Velocity);
 
         if (hitFrame > 0)
@@ -50,7 +47,7 @@ public class WoodenArrow : Ability {
 
         if (hitFrame == 5) {
             game.CollidablesToDelete.Add(this);
-            player.AbilityManager.RemoveCurrentAbility();
+            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.WoodenArrow);
         }
     }
     
