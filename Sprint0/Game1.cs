@@ -177,6 +177,10 @@ public class Game1 : Game {
         TextureStorage.LoadAllTextures(Content);
 
         Controllers = new List<IController>();
+
+        IController mouse = new MouseController();
+        // May add binding for mouse clicks later
+
         IController keyboard = new KeyboardController();
         
         keyboard.BindCommand(Keys.Q, new QuitCommand(), IController.KeyState.Pressed);
@@ -209,7 +213,7 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.D6, new UseFireballCommand(), IController.KeyState.Pressed);
         
         Controllers.Add(keyboard);
-        Controllers.Add(new MouseController());
+        Controllers.Add(mouse);
 
         IController gamePad = new GamePadController();
 	
