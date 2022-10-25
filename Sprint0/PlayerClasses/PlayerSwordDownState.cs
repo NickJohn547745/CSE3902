@@ -12,7 +12,7 @@ public class PlayerSwordDownState : PlayerSwordState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetSwordDownSprite();
         player.Damage = 0;
-        swordEdge = ICollidable.Edge.Top;
+        swordEdge = ICollidable.Edge.Bottom;
     }
 
     public override void Update()
