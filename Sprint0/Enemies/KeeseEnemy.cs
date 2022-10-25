@@ -15,6 +15,7 @@ namespace sprint0.Enemies
         {
             initPosition = position;
             Position = position;
+            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             this.speed = speed;
             Velocity = Vector2.One;

@@ -18,7 +18,8 @@ namespace sprint0.Enemies
         public AquamentusBoss(Vector2 position, float speed)
         {
             initPosition = position;
-            this.Position = position;
+            Position = position;
+            PreviousPosition = position;
             this.speed = speed;
             Velocity = new Vector2(1, 0);
             Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();

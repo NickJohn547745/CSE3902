@@ -24,6 +24,7 @@ namespace sprint0.Enemies
         {
             initPosition = position;
             Position = position;
+            PreviousPosition = position;
             this.speed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
@@ -62,12 +63,12 @@ namespace sprint0.Enemies
         {
             if (Health <= 0)
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, FinalPosition, goriyaStateMachine.SpriteEffect);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, FinalPosition, goriyaStateMachine.SpriteEffect);
+                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect);
             }
         }
     }

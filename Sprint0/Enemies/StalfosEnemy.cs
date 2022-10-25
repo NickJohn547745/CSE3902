@@ -11,10 +11,12 @@ namespace sprint0.Enemies
         private const int RandBound = 4;
 
         private Dictionary<int, Vector2> DirectionChoice;
+        
         public StalfosEnemy(Vector2 position, float speed)
         {
             initPosition = position;
             Position = position;
+            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             this.speed = speed;
             Velocity = Vector2.Zero;
