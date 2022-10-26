@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
 
@@ -9,10 +10,15 @@ public class PlayerItemPickupState : IPlayerState
 {
     private Player Player;
     public ISprite sprite { get; set; }
+    private int PickupType;
 
-    public PlayerItemPickupState(Player player)
+    private int frameCounter = 0;
+
+    public PlayerItemPickupState(Player player, int pickupType)
     {
         Player = player;
+        sprite = PlayerSpriteFactory.Instance.GetItemPickupSprite();
+        PickupType = pickupType;
     }
     public Rectangle GetHitBox()
     {
@@ -26,12 +32,17 @@ public class PlayerItemPickupState : IPlayerState
 
     public void Draw(SpriteBatch spriteBatch, Color color)
     {
-        throw new System.NotImplementedException();
+        sprite.Draw(spriteBatch, Player.Position, PickupType, SpriteEffects.None, color);
     }
 
     public void Update()
     {
-        throw new System.NotImplementedException();
+        frameCounter++;
+
+        if (frameCounter == 20)
+        {
+            Player.PlayerState = new PlayerFacingDownState(Player);
+        }
     }
 
     public void MoveUp()
