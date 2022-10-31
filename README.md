@@ -37,4 +37,4 @@
 * Link gets pushed back when using sword on enemy (need to change sword hitbox)
 * Swapping rooms with mouse can look weird if done quickly
 * Enemy wall collision is still not quite right
-* Some tiles can be walked through that shouldn't be
+* Some tiles can be walked through that shouldn't be. Looks like some tiles of type 2 are permanently drawn and all others do not collide.
