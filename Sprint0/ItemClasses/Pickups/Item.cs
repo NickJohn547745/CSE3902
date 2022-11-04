@@ -17,7 +17,7 @@ namespace sprint0.ItemClasses.Pickups
         {
         }
 
-        public Rectangle GetHitBox()
+        public virtual Rectangle GetHitBox()
         {
             return new Rectangle((int)Position.X, (int)Position.Y, Sprite.GetWidth(), Sprite.GetHeight());
         }
@@ -27,7 +27,7 @@ namespace sprint0.ItemClasses.Pickups
             
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
         }

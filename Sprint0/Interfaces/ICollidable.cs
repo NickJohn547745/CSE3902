@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Xml.Linq;
-using sprint0.Enemies;
-using sprint0.PlayerClasses;
 
 namespace sprint0.Interfaces
 {
@@ -11,7 +7,7 @@ namespace sprint0.Interfaces
     {
         public enum Edge {Top, Bottom, Left, Right };
         
-        public enum objectType {Enemy, Player, Door, Wall, Tile, Projectile, Ability, Item}
+        public enum objectType {Enemy, Player, Door, Wall, Tile, Projectile, Ability, Item, ItemTwoHands, ItemOneHand}
         
         public objectType type { get; set; }
 

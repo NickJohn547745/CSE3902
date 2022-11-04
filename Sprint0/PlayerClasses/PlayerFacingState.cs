@@ -1,9 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using System;
 
 namespace sprint0.PlayerClasses; 
 
@@ -30,8 +28,9 @@ public abstract class PlayerFacingState : IPlayerState {
     {
         if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)) player.TakeDamage(obj.Damage);
 
-        if (obj.type == ICollidable.objectType.Item)
+        if (obj.type == ICollidable.objectType.ItemOneHand)
         {
+            player.Position = new Vector2(obj.GetHitBox().X, obj.GetHitBox().Bottom);
             player.PlayerState = new PlayerItemPickupState(player, 2);
         }
     }

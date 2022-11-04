@@ -1,16 +1,19 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses;
 
 namespace sprint0.ItemClasses.Pickups
 {
-    public class ArrowPickup : Item
+    public class HeartPickup : Item
     {
-        private int animationFrames = 0;
-        public ArrowPickup() 
+
+        private bool readyToDelete = false;
+        public HeartPickup() 
         {
-            type = ICollidable.objectType.ItemOneHand;
-            Sprite = ItemSpriteFactory.Instance.ArrowSprite();
+            type = ICollidable.objectType.Item;
+            Sprite = ItemSpriteFactory.Instance.HeartSprite();
             Position = new Vector2(300, 300);
         }
         
@@ -18,18 +21,13 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.objectType.Player)
             {
-                Position = Vector2.Subtract(new Vector2(obj.GetHitBox().X, obj.GetHitBox().Y), new Vector2(0, Sprite.GetHeight()));
-                if (animationFrames == 0)
-                    animationFrames = 1;
+                readyToDelete = true;
             }
         }
 
         public override void Update(GameTime gameTime, Game1 game)
         {
-            if (animationFrames > 0)
-                animationFrames++;
-
-            if (animationFrames == 20)
+            if (readyToDelete)
             {
                 game.CollidablesToDelete.Add(this);
             }

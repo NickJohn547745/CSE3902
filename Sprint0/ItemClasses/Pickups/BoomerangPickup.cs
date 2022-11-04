@@ -4,13 +4,13 @@ using sprint0.Interfaces;
 
 namespace sprint0.ItemClasses.Pickups
 {
-    public class ArrowPickup : Item
+    public class BoomerangPickup : Item
     {
-        private int animationFrames = 0;
-        public ArrowPickup() 
+        private bool readyToDelete = false;
+        public BoomerangPickup() 
         {
-            type = ICollidable.objectType.ItemOneHand;
-            Sprite = ItemSpriteFactory.Instance.ArrowSprite();
+            type = ICollidable.objectType.Item;
+            Sprite = ItemSpriteFactory.Instance.BoomerangSprite();
             Position = new Vector2(300, 300);
         }
         
@@ -18,18 +18,13 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.objectType.Player)
             {
-                Position = Vector2.Subtract(new Vector2(obj.GetHitBox().X, obj.GetHitBox().Y), new Vector2(0, Sprite.GetHeight()));
-                if (animationFrames == 0)
-                    animationFrames = 1;
+                readyToDelete = true;
             }
         }
 
         public override void Update(GameTime gameTime, Game1 game)
         {
-            if (animationFrames > 0)
-                animationFrames++;
-
-            if (animationFrames == 20)
+            if (readyToDelete)
             {
                 game.CollidablesToDelete.Add(this);
             }
