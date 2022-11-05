@@ -9,6 +9,7 @@ using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
 using Microsoft.Xna.Framework.Audio;
+using sprint0.Classes;
 
 namespace sprint0.Enemies
 {
@@ -61,6 +62,15 @@ namespace sprint0.Enemies
                 goriyaStateMachine.ChangeDirection();
                 boomerangTracker++;
             }      
+        }
+
+        protected override void Death(CollisionManager manager)
+        {
+            if (deadCount >= DeathFrames)
+            {
+                manager.collidables.Remove(this);
+                manager.collidables.Remove(goriyaStateMachine.Boomerang);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

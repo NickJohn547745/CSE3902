@@ -61,8 +61,7 @@ namespace sprint0.Interfaces
                     swordWH = new Point(width, length);
                     break;
             }
-            Rectangle hitBox = new Rectangle(swordPosition, swordWH);
-            return hitBox;
+            return new Rectangle(swordPosition, swordWH); ;
         }
         public void Update(GameTime gameTime, Game1 game)
         {

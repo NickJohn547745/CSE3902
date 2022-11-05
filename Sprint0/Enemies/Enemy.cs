@@ -7,13 +7,14 @@ using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
 using sprint0.TileClasses;
 using sprint0.Factories;
+using sprint0.Classes;
 
 namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
         protected const int TileOffset = 5;
-        private const int DeathFrames = 4;
+        protected const int DeathFrames = 4;
 
         public int Health { get; set; }
         public int MaxHealth { get; protected set; }
@@ -49,10 +50,8 @@ namespace sprint0.Enemies
         {
             Velocity *= -1;
         }
-        
-        protected abstract void Behavior(GameTime gameTime, Game1 game);
 
-        public void Update(GameTime gameTime, Game1 game)
+        private void Move(GameTime gameTime)
         {
             if (canMove)
             {
@@ -63,7 +62,10 @@ namespace sprint0.Enemies
             {
                 Position = PreviousPosition;
             }
+        }
 
+        private void DamageControl()
+        {
             if (damaged)
             {
                 damageDelay++;
@@ -72,7 +74,24 @@ namespace sprint0.Enemies
                     damaged = false;
                     color = Color.White;
                 }
-            }      
+            }
+        }
+
+        protected virtual void Death(CollisionManager manager)
+        {
+            if (deadCount >= DeathFrames)
+            {
+                manager.collidables.Remove(this);
+            }
+        }
+        
+        protected abstract void Behavior(GameTime gameTime, Game1 game);
+
+        public void Update(GameTime gameTime, Game1 game)
+        {
+            Move(gameTime);
+
+            DamageControl();     
 
             // Ex: change direction every delay seconds
             if (delayCount % delay == 0)
@@ -81,10 +100,7 @@ namespace sprint0.Enemies
             }
             delayCount++;
 
-            if (deadCount >= DeathFrames)
-            {
-                game.CollisionManager.collidables.Remove(this);
-            }
+            Death(game.CollisionManager);
             
             canMove = true;
         }
