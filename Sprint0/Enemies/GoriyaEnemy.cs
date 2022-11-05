@@ -70,6 +70,7 @@ namespace sprint0.Enemies
             {
                 manager.collidables.Remove(this);
                 manager.collidables.Remove(goriyaStateMachine.Boomerang);
+                goriyaStateMachine.BoomerangThrown = false;
             }
         }
 
