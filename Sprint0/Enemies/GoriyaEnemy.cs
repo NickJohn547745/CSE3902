@@ -34,6 +34,9 @@ namespace sprint0.Enemies
             MaxHealth = 3;
             Health = MaxHealth;
             Damage = 1;
+            damageDelay = 0;
+            damaged = false;
+            color = Color.White;
             deadCount = 0;
             type = ICollidable.objectType.Enemy;
         }
@@ -69,7 +72,7 @@ namespace sprint0.Enemies
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
+                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, color);
             }
         }
     }

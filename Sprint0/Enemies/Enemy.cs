@@ -20,7 +20,9 @@ namespace sprint0.Enemies
         public int Damage { get; set; }
         protected int delay;
         private int delayCount;
-        private int damageDelay;
+        protected int damageDelay;
+        protected bool damaged;
+        protected Color color;
         public ICollidable.objectType type { get; set; }
         public Vector2 PreviousPosition { get; set; }
         public Vector2 Position { get; set; }
@@ -35,11 +37,12 @@ namespace sprint0.Enemies
 
         private void TakeDamage(int damage)
         {
-            if (damageDelay % 12 == 0)
+            if (!damaged && damage > 0)
             {
                 Health -= damage;
+                damaged = true;
+                color = Color.Red;
             }
-            damageDelay++;
         }
 
         protected virtual void ReverseDirection()
@@ -60,7 +63,16 @@ namespace sprint0.Enemies
             {
                 Position = PreviousPosition;
             }
-            
+
+            if (damaged)
+            {
+                damageDelay++;
+                if (damageDelay % 12 == 0)
+                {
+                    damaged = false;
+                    color = Color.White;
+                }
+            }      
 
             // Ex: change direction every delay seconds
             if (delayCount % delay == 0)
@@ -105,7 +117,7 @@ namespace sprint0.Enemies
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
+                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, color);
             }
         }
 

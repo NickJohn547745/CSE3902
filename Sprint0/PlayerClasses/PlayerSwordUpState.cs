@@ -14,6 +14,8 @@ public class PlayerSwordUpState : PlayerSwordState {
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Top;
         backEdge = ICollidable.Edge.Bottom;
+        sword = new PlayerSword(this.player, swordEdge);
+        this.player.Game.CollisionManager.collidables.Add(sword);
     }
     public override Rectangle GetHitBox()
     {
@@ -32,13 +34,15 @@ public class PlayerSwordUpState : PlayerSwordState {
         {
             currentFrame = 0;
             animationFrame++;
+            sword.currentFrame = animationFrame;
         }
 
         currentFrame++;
 
         if (animationFrame == 4)
         {
-            player.PlayerState = new PlayerFacingUpState(player);
+            player.Game.CollisionManager.collidables.Remove(sword);
+            player.PlayerState = new PlayerFacingUpState(player);        
         }
     }
 }
