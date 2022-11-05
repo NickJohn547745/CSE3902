@@ -48,10 +48,9 @@ public class DamagedPlayer : IPlayer {
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
         if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
         {
-            decoratedPlayer.Position = PreviousPosition;
             decoratedPlayer.Velocity = Vector2.Zero;
-        }   
-        // decoratedPlayer.Collide(obj, edge);
+            decoratedPlayer.Collide(obj, edge);
+        }
     }
     
     public Rectangle GetHitBox() {
