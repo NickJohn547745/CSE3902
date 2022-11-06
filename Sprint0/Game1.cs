@@ -143,6 +143,9 @@ public class Game1 : Game {
     {
         currentLevelIndex = startingLevelIndex;
         Room = new Room(this, LevelList[currentLevelIndex]);
+
+        // reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
+        
     }
 
     public void NextTile()
