@@ -33,8 +33,6 @@
 
 ## Known Bugs
 * Walking through doors not currently implemented
-* Killing an enemy after they use projectiles causes the projectile to keep going continuously 
-* Link gets pushed back when using sword on enemy (need to change sword hitbox)
+* Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
 * Swapping rooms with mouse can look weird if done quickly
-* Enemy wall collision is still not quite right
 * Some tiles can be walked through that shouldn't be. Looks like some tiles of type 2 are permanently drawn and all others do not collide.
