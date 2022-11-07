@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
@@ -18,6 +18,7 @@
         <None Remove="Content\Data\LevelFile_3.xml" />
         <None Remove="Content\Data\LevelFile_4.xml" />
         <None Remove="Content\Data\LevelFile_5.xml" />
+        <None Remove="Content\smb_mario_sheet.png" />
         <None Remove="Icon.ico" />
         <None Remove="Icon.bmp" />
     </ItemGroup>
@@ -42,6 +43,9 @@
       </Content>
       <Content Include="Content\Data\LevelFile_5.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\smb_mario_sheet.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
     <ItemGroup>

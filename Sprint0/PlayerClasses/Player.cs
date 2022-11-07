@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
-
+using sprint0.Sound;
 using System;
 
 namespace sprint0.PlayerClasses; 
@@ -87,6 +87,7 @@ public class Player : IPlayer {
         Game.Player = new DamagedPlayer(this, Game);
         Game.CollidablesToAdd.Add(Game.Player);
         Game.CollidablesToDelete.Add(this);
+        SoundManager.Manager.linkDamageSound().Play();
     }
 
     public void MoveUp() {
@@ -107,6 +108,7 @@ public class Player : IPlayer {
 
     public void SwordAttack() {
         PlayerState.SwordAttack();
+        SoundManager.Manager.swordSound().Play();
     }
 
     public virtual void UseAbility(AbilityTypes abilityType) {

@@ -7,6 +7,7 @@ using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
 using sprint0.TileClasses;
 using sprint0.Factories;
+using sprint0.Sound;
 
 namespace sprint0.Enemies
 {
@@ -40,6 +41,8 @@ namespace sprint0.Enemies
                 Health -= damage;
             }
             damageDelay++;
+            SoundManager.Manager.enemyDamageSound().Play();
+
         }
 
         protected virtual void ReverseDirection()
