@@ -58,6 +58,27 @@ namespace sprint0.Classes
             obj.Collide(current, objEdge);
         }
 
+        private int RemoveInactive(List<ICollidable> active, int currentX, int j)
+        {
+            while (collidables[j].GetHitBox().X + collidables[j].GetHitBox().Width < currentX)
+            {
+                active.Remove(collidables[j]);
+                j++;
+            }
+            return j;
+        }
+
+        private void ActiveCollision(List<ICollidable> active, int i)
+        {
+            foreach (ICollidable obj in active)
+            {
+                if (collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
+                {
+                    CollisionResponse(collidables[i], obj);
+                }
+            }
+        }
+
         // uses sort and sweep algortithm
         public void DetectCollisions()
         {
@@ -73,21 +94,9 @@ namespace sprint0.Classes
             {
                 currentX = collidables[i].GetHitBox().X;
 
-                // remove hitboxes that are out of active zone
-                while (collidables[j].GetHitBox().X + collidables[j].GetHitBox().Width < currentX)
-                {
-                    active.Remove(collidables[j]);
-                    j++;
-                }
+                j = RemoveInactive(active, currentX, j);
 
-                // check if active hitBoxes are colliding with current hitBox
-                foreach (ICollidable obj in active)
-                {
-                    if (collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
-                    {
-                        CollisionResponse(collidables[i], obj);
-                    }
-                }
+                ActiveCollision(active, i);
 
                 active.Add(collidables[i]);
             }
