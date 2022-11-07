@@ -75,6 +75,21 @@ namespace sprint0.Factories
             List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(0, 0, 8, 16)};
             return new BasicSprite(TextureStorage.GetMapSpritesheet(), frameSource, 1, ItemScale);
         }
+        public ISprite TriforceSprite()
+        {
+            List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(0, 0, 10, 10), new Rectangle(10,0,10,10)};
+            return new BasicSprite(TextureStorage.GetTriforceSpritesheet(), frameSource, 8, ItemScale);
+        }
+        public ISprite HeartContainerSprite()
+        {
+            List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(0, 0, 13, 13)};
+            return new BasicSprite(TextureStorage.GetHeartcontainerSpritesheet(), frameSource, 1, ItemScale);
+        }
+        public ISprite BowSprite()
+        {
+            List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(0, 0, 8, 16)};
+            return new BasicSprite(TextureStorage.GetBowSpritesheet(), frameSource, 1, ItemScale);
+        }
         
     }
 }

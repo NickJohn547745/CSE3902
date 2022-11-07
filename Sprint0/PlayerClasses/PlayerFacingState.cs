@@ -30,8 +30,12 @@ public abstract class PlayerFacingState : IPlayerState {
 
         if (obj.type == ICollidable.objectType.ItemOneHand)
         {
-            player.Position = new Vector2(obj.GetHitBox().X, obj.GetHitBox().Bottom);
             player.PlayerState = new PlayerItemPickupState(player, 2);
+        }
+
+        if (obj.type == ICollidable.objectType.ItemTwoHands)
+        {
+            player.PlayerState = new PlayerItemPickupState(player, 1);
         }
     }
 

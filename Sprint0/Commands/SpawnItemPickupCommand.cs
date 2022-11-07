@@ -7,6 +7,6 @@ public class SpawnItemPickupCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.CollidablesToAdd.Add(new ArrowPickup());
+        game.CollidablesToAdd.Add(new BowPickup());
     }
 }
