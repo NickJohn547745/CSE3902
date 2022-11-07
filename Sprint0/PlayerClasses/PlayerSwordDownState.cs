@@ -14,6 +14,8 @@ public class PlayerSwordDownState : PlayerSwordState {
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Bottom;
         backEdge = ICollidable.Edge.Top;
+        sword = new PlayerSword(this.player, swordEdge);
+        this.player.Game.CollisionManager.collidables.Add(sword);
     }
 
     public override void Update()
@@ -22,12 +24,14 @@ public class PlayerSwordDownState : PlayerSwordState {
         {
             currentFrame = 0;
             animationFrame++;
+            sword.currentFrame = animationFrame;
         }
 
         currentFrame++;
 
         if (animationFrame == 4)
         {
+            player.Game.CollisionManager.collidables.Remove(sword);
             player.PlayerState = new PlayerFacingDownState(player);
         }
     }
