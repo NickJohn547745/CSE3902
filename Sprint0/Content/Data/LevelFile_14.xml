@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Settings>
-	<Setting name="Id">2</Setting>
+	<Setting name="Id">14</Setting>
 	<Setting name="TileIds">
 		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 1 1 0 0 0 0 1 1 0 0
-		0 0 1 1 0 0 0 0 1 1 0 0
-		0 0 1 1 0 0 0 0 1 1 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
+		0 1 1 1 1 1 1 1 1 1 1 0
+		0 1 0 0 2 0 0 2 0 0 1 0
+		0 1 0 2 0 0 0 0 2 0 1 0
+		0 1 0 0 0 0 0 0 0 0 1 0
+		0 1 1 1 1 0 0 1 1 1 1 0
 		0 0 0 0 0 0 0 0 0 0 0 0
 	</Setting>
 
@@ -16,6 +16,6 @@
 		0 0 0 1
 	</Setting>
 	<Setting name="Destinations">
-		-1 -1 -1 0
+		-1 -1 -1 13
 	</Setting>
 </Settings>
