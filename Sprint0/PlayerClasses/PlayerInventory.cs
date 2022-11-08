@@ -23,6 +23,11 @@ public class PlayerInventory {
         // return AbilityCounts[AbilityTypes.Bomb];
     }
 
+    public int GetRupees()
+    {
+        return 20;
+        // return rupees;
+    }
     public int GetBombs()
     {
         return AbilityCounts[AbilityTypes.Bomb];
