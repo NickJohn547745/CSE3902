@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using sprint0.PlayerClasses;
 using sprint0.PlayerClasses.Abilities;
 using System;
@@ -32,6 +33,8 @@ namespace sprint0.Classes
         // map only shows if player has found it
         public bool hasMap { get; set; }
 
+        private Vector2 HudHeightWidth;
+
         // currentA and currentB may be better implemented in the inventory class. They are just needed to display the equipped items
         public HUD (Game1 game, PlayerInventory inventory, AbilityTypes currentA, AbilityTypes currentB, int currentHealth)
         {
@@ -42,6 +45,7 @@ namespace sprint0.Classes
         public void Update(PlayerInventory inventory, AbilityTypes currentA, AbilityTypes currentB, int currentHealth)
         {
             Inventory = inventory;
+            // may make a separate updateHealth method
             Health = currentHealth;
 
             // currently won't work for things not in AbilityType enum
@@ -57,27 +61,27 @@ namespace sprint0.Classes
             Level = 1;
         }
 
-        public void DrawLevelText()
+        public void DrawLevelText(SpriteBatch spriteBatch)
         {
 
         }
 
-        public void DrawMap()
+        public void DrawMap(SpriteBatch spriteBatch)
         {
             
         }
-        public void DrawInventoryItems()
+        public void DrawInventoryItems(SpriteBatch spriteBatch)
         {
             Texture2D keyTexture = TextureStorage.GetKeySpritesheet();
             Texture2D bombTexture = TextureStorage.GetBombSpritesheet();
             Texture2D rupeeTexture = TextureStorage.GetRupeeSpritesheet();
         }
-        public void DrawItemA()
+        public void DrawItemA(SpriteBatch spriteBatch)
         {
             // just drawing bow for now
             Texture2D bowTexture = TextureStorage.GetBowSpritesheet();
         }
-        public void DrawItemB()
+        public void DrawItemB(SpriteBatch spriteBatch)
         {
             Texture2D itemTextureB;
             switch (currentAbilityB)
@@ -105,14 +109,19 @@ namespace sprint0.Classes
                     break;
             }
         }
-        public void DrawLife()
+        public void DrawLife(SpriteBatch spriteBatch)
         {
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
             Texture2D heartContainerTexture = TextureStorage.GetHeartcontainerSpritesheet();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            DrawLevelText(spriteBatch);
+            DrawMap(spriteBatch);
+            DrawInventoryItems(spriteBatch);
+            DrawItemA(spriteBatch);
+            DrawItemB(spriteBatch);
+            DrawLife(spriteBatch);
         }
     }
 }

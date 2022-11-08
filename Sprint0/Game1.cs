@@ -49,6 +49,7 @@ public class Game1 : Game {
 
     public IPlayer Player;
     public Room Room;
+    public HUD MainHUD;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -304,6 +305,8 @@ public class Game1 : Game {
 
         Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
 
+        // MainHUD = new HUD(this, , 
+
         CollisionManager = new CollisionManager(CollidableList);
     }
 
@@ -336,6 +339,8 @@ public class Game1 : Game {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+       //  MainHUD.Draw(_spriteBatch);
 
         Room.Draw(_spriteBatch);
 
