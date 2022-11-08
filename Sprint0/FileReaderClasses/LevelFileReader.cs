@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using sprint0.Classes;
@@ -54,6 +55,17 @@ namespace sprint0.FileReaderClasses
                             List<int> doorIdList = doorIdArray.Select(int.Parse).ToList();
 
                             doorIdList.ForEach(id => LevelConfig.DoorIds.Add(id));
+
+                            break;
+                        }
+                    case "Destinations":
+                        {
+                            string[] destinationArray = settingText.Trim().Split(' ');
+                            List<int> destionationList = destinationArray.Select(int.Parse).ToList();
+
+                            destionationList.ForEach(id => Debug.WriteLine(id));
+
+                            destionationList.ForEach(id => LevelConfig.Destinations.Add(id));
 
                             break;
                         }

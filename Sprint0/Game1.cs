@@ -13,7 +13,6 @@ using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
-using System.Linq;
 
 namespace sprint0;
 
@@ -298,9 +297,10 @@ public class Game1 : Game {
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
-        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
-
         CollisionManager = new CollisionManager(CollidableList);
+
+        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
+        Room.Initialize();
     }
 
     protected override void Update(GameTime gameTime) {
@@ -335,15 +335,15 @@ public class Game1 : Game {
 
         Room.Draw(_spriteBatch);
 
-        TileList[currentTileIndex].Draw(_spriteBatch);
+        //TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        ItemList[currentItemIndex].Draw(_spriteBatch);
+        //ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)
         {
-                projectile.Draw(_spriteBatch);  
+            projectile.Draw(_spriteBatch);  
         }
 
         base.Draw(gameTime);

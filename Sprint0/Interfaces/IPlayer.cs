@@ -1,8 +1,11 @@
+using Microsoft.Xna.Framework;
 using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.Interfaces; 
 
-public interface IPlayer : ICollidable {
+public interface IPlayer : ICollidable
+{
+    public Vector2 Position { get; set; }
     public void TakeDamage(int damage);
     public void MoveUp();
     public void MoveDown();
