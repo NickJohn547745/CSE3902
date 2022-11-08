@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.DoorClasses;
+using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.TileClasses;
 
@@ -49,7 +50,8 @@ namespace sprint0.RoomClasses
 
             foreach (ICollidable collidable in game.CollisionManager.collidables)
             {
-                if (collidable.type == ICollidable.objectType.Wall || collidable.type == ICollidable.objectType.Tile || collidable.type == ICollidable.objectType.Door)
+                if (collidable.type == ICollidable.objectType.Enemy || collidable.type == ICollidable.objectType.Wall || 
+                    collidable.type == ICollidable.objectType.Tile || collidable.type == ICollidable.objectType.Door)
                     game.CollidablesToDelete.Add(collidable);
             }
 
@@ -152,6 +154,11 @@ namespace sprint0.RoomClasses
             {
                 if (tile.IsCollidable)
                     game.CollidablesToAdd.Add(tile);
+            }
+
+            foreach (KeyValuePair<int, Point> enemy in levelConfig.Enemies)
+            {
+                game.CollidablesToAdd.Add(GetEnemyFromId(enemy.Key, enemy.Value.X, enemy.Value.Y));
             }
         }
 
@@ -256,6 +263,26 @@ namespace sprint0.RoomClasses
                     return new BottomDoor();
                 case 3:
                     return new LeftDoor();
+            }
+            return null;
+        }
+        private Enemy GetEnemyFromId(int id, int x, int y)
+        {
+            Vector2 location = new Vector2(x, y);
+            switch (id)
+            {
+                case 0:
+                    return new AquamentusBoss(location, 0);
+                case 1:
+                    return new GoriyaEnemy(location, 0);
+                case 2:
+                    return new KeeseEnemy(location, 0);
+                case 3:
+                    return new OldManNPC(location);
+                case 4:
+                    return new StalfosEnemy(location, 0);
+                case 5:
+                    return new ZolEnemy(location, 0);
             }
             return null;
         }
