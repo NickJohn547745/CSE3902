@@ -17,4 +17,14 @@ public class PlayerInventory {
         AbilityCounts.Add(AbilityTypes.Fireball, 1);
     }
     
+    public int GetKeys()
+    {
+        return 3;
+        // return AbilityCounts[AbilityTypes.Bomb];
+    }
+
+    public int GetBombs()
+    {
+        return AbilityCounts[AbilityTypes.Bomb];
+    }
 }
