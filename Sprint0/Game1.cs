@@ -50,6 +50,7 @@ public class Game1 : Game {
 
     public IPlayer Player;
     public Room Room;
+    public HUD MainHUD;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -176,6 +177,7 @@ public class Game1 : Game {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         TextureStorage.LoadAllTextures(Content);
+        SpriteFont font = Content.Load<SpriteFont>("Arial");
 
         Controllers = new List<IController>();
 
@@ -313,6 +315,8 @@ public class Game1 : Game {
 
         Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
 
+        MainHUD = new HUD(this, new PlayerInventory(), 3, font);
+
         CollisionManager = new CollisionManager(CollidableList);
 
         SoundManager.Manager.LoadContent(Content);
@@ -322,6 +326,8 @@ public class Game1 : Game {
         Controllers.ForEach(controller => controller.Update(this));
 
         CollisionManager.Update(gameTime, this);
+
+        MainHUD.Update(new PlayerInventory(), 3);
 
         if (CollidablesToDelete != null) {
             CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
@@ -344,9 +350,11 @@ public class Game1 : Game {
     }
 
     protected override void Draw(GameTime gameTime) {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.DarkGray);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+        MainHUD.Draw(_spriteBatch);
 
         Room.Draw(_spriteBatch);
 
