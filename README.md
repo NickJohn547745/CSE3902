@@ -28,11 +28,15 @@
 * Right Click - Move to next room
 
 ### Other controls
+* G - spawn Bow to test item pickup
 * Q - quit game
 * R - reset the program to its initial state
+* M - mute sound
 
 ## Known Bugs
-* Walking through doors not currently implemented
+* Link moves across screen when walking through doors
 * Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
 * Swapping rooms with mouse can look weird if done quickly
-* Some tiles can be walked through that shouldn't be. Looks like some tiles of type 2 are permanently drawn and all others do not collide.
+* Health not currently drawn on HUD
+* HUD values not dynamic
+* Holding WASD + Arrow Key can speed up movement
