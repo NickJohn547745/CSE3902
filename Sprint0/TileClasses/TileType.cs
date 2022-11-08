@@ -20,15 +20,10 @@ namespace sprint0.TileClasses
 
         public int Damage { get; set; }
         public ICollidable.objectType type { get; set; }
-        public bool IsCollidable { get; set; }
+        private bool collidable;
 
 
         public void Draw(SpriteBatch spriteBatch)
-        {
-            Draw(spriteBatch, new Point());
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Point offset)
         {
             texture = TextureStorage.GetTilesSpritesheet();
 
@@ -36,9 +31,7 @@ namespace sprint0.TileClasses
             int row = (int)textureCoords.Y;
 
             Rectangle sourceRect = new Rectangle(16 * col, 16 * row, 16, 16);
-
-            Rectangle hitBox = GetHitBox();
-            Rectangle destRect = new Rectangle(hitBox.Location + offset, hitBox.Size);
+            Rectangle destRect = GetHitBox();
 
             spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
         }
@@ -54,7 +47,6 @@ namespace sprint0.TileClasses
         {
             int tileWidth = 80;
             int tileHeight = 80;
-
             return new Rectangle(Location.X, Location.Y, tileWidth, tileHeight);
         }
 
@@ -65,6 +57,11 @@ namespace sprint0.TileClasses
         internal void SetLocation(int x, int y)
         {
             this.Location = new Point(x, y);
+        }
+
+        internal void SetCollidable(bool isCollidable)
+        {
+            this.collidable = isCollidable;
         }
 
         public void Update(GameTime gameTime, Game1 game)

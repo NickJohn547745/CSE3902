@@ -4,26 +4,15 @@
 	<Setting name="Id">3</Setting>
 	<Setting name="TileIds">
 		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 0 0 0 0 0 0 0 0
+		0 1 1 0 0 0 0 0 0 1 1 0
+		0 1 1 0 0 0 0 0 0 1 1 0
+		0 0 0 0 1 0 0 1 0 0 0 0
+		0 1 1 0 0 0 0 0 0 1 1 0
+		0 1 1 0 0 0 0 0 0 1 1 0
 		0 0 0 0 0 0 0 0 0 0 0 0
 	</Setting>
 
 	<Setting name="DoorIds">
-		0 1 0 0
-	</Setting>
-	<Setting name="Destinations">
-		-1 0 -1 -1
-	</Setting>
-	<Setting name="Enemies">
-		<Enemy>0 640 600</Enemy>
-		<Enemy>1 200 200</Enemy>
-		<Enemy>2 400 200</Enemy>
-		<Enemy>3 600 200</Enemy>
-		<Enemy>4 800 200</Enemy>
-		<Enemy>5 1000 200</Enemy>
+		0 1 2 3
 	</Setting>
 </Settings>

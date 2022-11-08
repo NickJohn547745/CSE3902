@@ -9,7 +9,6 @@ namespace sprint0.PlayerClasses;
 
 public class DamagedPlayer : IPlayer {
 
-    public Vector2 Position { get; set; }
     private Player decoratedPlayer;
     private Game1 Game;
     private int timer = 120;
