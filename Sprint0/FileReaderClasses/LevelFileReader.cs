@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml;
+using Microsoft.Xna.Framework;
 using sprint0.Classes;
 using sprint0.FileReaderClasses;
 

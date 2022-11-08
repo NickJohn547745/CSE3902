@@ -107,18 +107,12 @@ namespace sprint0.Classes
             
             foreach (ICollidable collidable in collidables)
             {
-                if (collidable.type != ICollidable.objectType.Wall)
-                {
-                    frontCollidables.Add(collidable);
-                } else
+                if (collidable.type != ICollidable.objectType.Wall &&
+                    collidable.type != ICollidable.objectType.Door &&
+                    collidable.type != ICollidable.objectType.Tile)
                 {
                     collidable.Draw(spriteBatch);
                 }
-            }
-
-            foreach (ICollidable frontCollidable in frontCollidables)
-            {
-                frontCollidable.Draw(spriteBatch);
             }
         }
     }
