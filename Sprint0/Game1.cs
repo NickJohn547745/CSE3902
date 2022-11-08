@@ -13,7 +13,7 @@ using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
-using System.Linq;
+using sprint0.Sound;
 
 namespace sprint0;
 
@@ -209,6 +209,8 @@ public class Game1 : Game {
         // For testing purposes only
         keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
 
+        keyboard.BindCommand(Keys.M, new MuteCommand(), IController.KeyState.Pressed);
+
         keyboard.BindCommand(Keys.D1, new UseBombCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.D3, new UseMagicalBoomerangCommand(), IController.KeyState.Pressed);
@@ -312,6 +314,8 @@ public class Game1 : Game {
         Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
 
         CollisionManager = new CollisionManager(CollidableList);
+
+        SoundManager.Manager.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime) {
