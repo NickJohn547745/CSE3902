@@ -32,4 +32,14 @@ public class PlayerInventory {
     {
         return AbilityCounts[AbilityTypes.Bomb];
     }
+
+    // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory
+    public AbilityTypes GetCurrentA()
+    {
+        return AbilityTypes.Bomb;
+    }
+    public AbilityTypes GetCurrentB()
+    {
+        return AbilityTypes.WoodenBoomerang;
+    }
 }
