@@ -1,9 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using System;
 
 namespace sprint0.PlayerClasses; 
 
@@ -25,7 +23,7 @@ public abstract class PlayerFacingState : IPlayerState {
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
-    
+
     private void Knockback()
     {
         switch (shield)
@@ -53,6 +51,16 @@ public abstract class PlayerFacingState : IPlayerState {
         {
             player.TakeDamage(obj.Damage);
             Knockback();
+        }
+
+        if (obj.type == ICollidable.objectType.ItemOneHand)
+        {
+            player.PlayerState = new PlayerItemPickupState(player, 2);
+        }
+
+        if (obj.type == ICollidable.objectType.ItemTwoHands)
+        {
+            player.PlayerState = new PlayerItemPickupState(player, 1);
         }
     }
 

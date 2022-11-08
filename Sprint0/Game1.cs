@@ -205,8 +205,11 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.M, new MuteCommand(), IController.KeyState.Pressed);
+        
+        // For testing purposes only
+        keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
 
+        keyboard.BindCommand(Keys.M, new MuteCommand(), IController.KeyState.Pressed);
 
         keyboard.BindCommand(Keys.D1, new UseBombCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand(), IController.KeyState.Pressed);
