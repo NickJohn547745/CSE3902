@@ -25,6 +25,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 0;
             deadCount = 0;
+            type = ICollidable.objectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
