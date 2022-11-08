@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sprint0.Interfaces;
-using sprint0.RoomClasses;
 
 namespace sprint0.DoorClasses
 {
@@ -16,11 +15,15 @@ namespace sprint0.DoorClasses
         public BottomDoor()
         {
             type = ICollidable.objectType.Door;
-
-            HasCollided = false;
-            TransitionDirection = Direction.DOWN;
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Rectangle sourceRect = new Rectangle(Id * 32, 0, 32, 32);
+       
+            spriteBatch.Draw(TextureStorage.GetBottomDoorsSpritesheet(),
+                                 GetHitBox(), sourceRect, Color.White);
+        }
         public override Rectangle GetHitBox()
         {
             return new Rectangle(560, 720, 5 * 32, 5 * 32);

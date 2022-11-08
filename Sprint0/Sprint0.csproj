@@ -14,32 +14,10 @@
         <None Remove="Content\Data\GameFile.xml" />
         <None Remove="Content\Data\LevelFile_0.xml" />
         <None Remove="Content\Data\LevelFile_1.xml" />
-        <None Remove="Content\Data\LevelFile_10.xml" />
-        <None Remove="Content\Data\LevelFile_11.xml" />
-        <None Remove="Content\Data\LevelFile_12.xml" />
-        <None Remove="Content\Data\LevelFile_13.xml" />
-        <None Remove="Content\Data\LevelFile_14.xml" />
-        <None Remove="Content\Data\LevelFile_15.xml" />
-        <None Remove="Content\Data\LevelFile_16.xml" />
-        <None Remove="Content\Data\LevelFile_17.xml" />
         <None Remove="Content\Data\LevelFile_2.xml" />
         <None Remove="Content\Data\LevelFile_3.xml" />
         <None Remove="Content\Data\LevelFile_4.xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (13).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (2).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (3).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (4).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (5).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (6).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (7).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (8).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy (9).xml" />
-        <None Remove="Content\Data\LevelFile_5 - Copy.xml" />
         <None Remove="Content\Data\LevelFile_5.xml" />
-        <None Remove="Content\Data\LevelFile_6.xml" />
-        <None Remove="Content\Data\LevelFile_7.xml" />
-        <None Remove="Content\Data\LevelFile_8.xml" />
-        <None Remove="Content\Data\LevelFile_9.xml" />
         <None Remove="Icon.ico" />
         <None Remove="Icon.bmp" />
     </ItemGroup>
@@ -53,30 +31,6 @@
       <Content Include="Content\Data\LevelFile_1.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\LevelFile_10.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_11.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_12.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_13.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_14.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_15.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_16.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_17.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <Content Include="Content\Data\LevelFile_2.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -86,19 +40,7 @@
       <Content Include="Content\Data\LevelFile_4.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\LevelFile_6.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_7.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_8.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <Content Include="Content\Data\LevelFile_5.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Content\Data\LevelFile_9.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

@@ -313,13 +313,11 @@ public class Game1 : Game {
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
-        CollisionManager = new CollisionManager(CollidableList);
-
         Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
-        Room.Initialize();
 
         MainHUD = new HUD(this, new PlayerInventory(), 3, font);
 
+        CollisionManager = new CollisionManager(CollidableList);
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -360,15 +358,15 @@ public class Game1 : Game {
 
         Room.Draw(_spriteBatch);
 
-        //TileList[currentTileIndex].Draw(_spriteBatch);
+        TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        //ItemList[currentItemIndex].Draw(_spriteBatch);
+        ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)
         {
-            projectile.Draw(_spriteBatch);  
+                projectile.Draw(_spriteBatch);  
         }
 
         base.Draw(gameTime);
