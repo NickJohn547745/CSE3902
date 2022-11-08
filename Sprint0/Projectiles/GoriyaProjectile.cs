@@ -31,27 +31,6 @@ namespace sprint0.Projectiles
             type = ICollidable.objectType.Projectile;
         }
 
-        private Boolean Caught()
-        {
-            Boolean output = false;
-            if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Up)
-            {
-                output = Position.Y >= initPosition.Y - goriya.Goriya.Sprite.GetHeight();
-            } else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Down)
-            {
-                output = Position.Y <= initPosition.Y + goriya.Goriya.Sprite.GetHeight();
-            } else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Left)
-            {
-                output = Position.X >= initPosition.X;
-            }
-            else if (goriya.GoriyaDirection == GoriyaStateMachine.Direction.Right)
-            {
-                output = Position.X <= initPosition.X + goriya.Goriya.Sprite.GetWidth();
-            }
-
-            return output;
-        }
-
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             caught = returnThrow && obj == goriya.Goriya;
@@ -63,8 +42,8 @@ namespace sprint0.Projectiles
 
         protected override void Behavior(Game1 game)
         {
-            Boolean xMax = Math.Abs(Position.X - initPosition.X) >= speed * 2;
-            Boolean yMax = Math.Abs(Position.Y - initPosition.Y) >= speed * 2;
+            bool xMax = Math.Abs(Position.X - initPosition.X) >= speed * 2;
+            bool yMax = Math.Abs(Position.Y - initPosition.Y) >= speed * 2;
 
             // reverse velocity after 2 seconds
             if (!returnThrow &&  (xMax || yMax)) 
@@ -72,8 +51,8 @@ namespace sprint0.Projectiles
                 Velocity *= -1;
                 returnThrow = true;
             }
- 
-            if (returnThrow && caught) //Caught())
+
+            if (returnThrow && caught) 
             {
                 goriya.BoomerangThrown = false;
             }

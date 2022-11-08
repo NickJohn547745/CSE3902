@@ -7,20 +7,24 @@ using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
 using sprint0.TileClasses;
 using sprint0.Factories;
+using sprint0.Classes;
+using sprint0.Sound;
 
 namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
         protected const int TileOffset = 5;
-        private const int DeathFrames = 4;
+        protected const int DeathFrames = 4;
 
         public int Health { get; set; }
         public int MaxHealth { get; protected set; }
         public int Damage { get; set; }
         protected int delay;
         private int delayCount;
-        private int damageDelay;
+        protected int damageDelay;
+        protected bool damaged;
+        protected Color color;
         public ICollidable.objectType type { get; set; }
         public Vector2 PreviousPosition { get; set; }
         public Vector2 Position { get; set; }
@@ -35,21 +39,21 @@ namespace sprint0.Enemies
 
         private void TakeDamage(int damage)
         {
-            if (damageDelay % 12 == 0)
+            if (!damaged && damage > 0)
             {
                 Health -= damage;
+                damaged = true;
+                color = Color.Red;
+                SoundManager.Manager.enemyDamageSound().Play();
             }
-            damageDelay++;
         }
 
         protected virtual void ReverseDirection()
         {
             Velocity *= -1;
         }
-        
-        protected abstract void Behavior(GameTime gameTime, Game1 game);
 
-        public void Update(GameTime gameTime, Game1 game)
+        private void Move(GameTime gameTime)
         {
             if (canMove)
             {
@@ -60,7 +64,37 @@ namespace sprint0.Enemies
             {
                 Position = PreviousPosition;
             }
-            
+        }
+
+        private void DamageControl()
+        {
+            if (damaged)
+            {
+                damageDelay++;
+                if (damageDelay % 12 == 0)
+                {
+                    damaged = false;
+                    color = Color.White;
+                }
+            }
+        }
+
+        protected virtual void Death(CollisionManager manager)
+        {
+            if (deadCount >= DeathFrames)
+            {
+                manager.collidables.Remove(this);
+                SoundManager.Manager.enemyDeadSound().Play();
+            }
+        }
+        
+        protected abstract void Behavior(GameTime gameTime, Game1 game);
+
+        public void Update(GameTime gameTime, Game1 game)
+        {
+            Move(gameTime);
+
+            DamageControl();     
 
             // Ex: change direction every delay seconds
             if (delayCount % delay == 0)
@@ -69,10 +103,7 @@ namespace sprint0.Enemies
             }
             delayCount++;
 
-            if (deadCount >= DeathFrames)
-            {
-                game.CollisionManager.collidables.Remove(this);
-            }
+            Death(game.CollisionManager);
             
             canMove = true;
         }
@@ -83,7 +114,7 @@ namespace sprint0.Enemies
             if (obj.type == ICollidable.objectType.Player || obj.type == ICollidable.objectType.Ability)
             {
                 TakeDamage(obj.Damage);
-            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+            } else if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile || obj.type == ICollidable.objectType.Door)
             {
                 ReverseDirection();
                 canMove = false;
@@ -105,7 +136,7 @@ namespace sprint0.Enemies
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
+                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, color);
             }
         }
 

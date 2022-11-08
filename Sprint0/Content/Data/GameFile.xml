@@ -2,7 +2,8 @@
 
 <Settings>
 	<Setting name="ResolutionWidth">1280</Setting>
-	<Setting name="ResolutionHeight">1280</Setting>
+	<Setting name="ResolutionHeight">1080</Setting>
+  
 	<Setting name="StartLevelId">0</Setting>
 	
 	<Setting name="LevelConfigs">

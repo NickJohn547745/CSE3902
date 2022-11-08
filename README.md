@@ -22,15 +22,21 @@
 * 4 - Use Link’s wooden arrow ability
 * 5 - Use Link’s silver arrow ability
 * 6 - Use Link’s fireball ability
+* K - Move to previous room
+* L - Move to next room
+* Left Click - Move to previous room
+* Right Click - Move to next room
 
 ### Other controls
+* G - spawn Bow to test item pickup
 * Q - quit game
 * R - reset the program to its initial state
+* M - mute sound
 
 ## Known Bugs
-* Killing an enemy after they use projectiles causes the projectile to keep going continuously 
-* Link gets pushed back when using sword on enemy (need to change sword hitbox)
-* Link cannot take damage
-* Link gets stuck in walls
-* Enemy wall collision is still not quite right
-* Some tiles can be walked through that shouldn't be
+* Link moves across screen when walking through doors
+* Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
+* Swapping rooms with mouse can look weird if done quickly
+* Health not currently drawn on HUD
+* HUD values not dynamic
+* Holding WASD + Arrow Key can speed up movement

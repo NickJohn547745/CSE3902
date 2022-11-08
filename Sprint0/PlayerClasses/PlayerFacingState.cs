@@ -1,9 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using System;
 
 namespace sprint0.PlayerClasses; 
 
@@ -26,9 +24,44 @@ public abstract class PlayerFacingState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
 
+    private void Knockback()
+    {
+        switch (shield)
+        {
+            case ICollidable.Edge.Top:
+                player.InitVelocity = new Vector2(0, 300);
+                break;
+            case ICollidable.Edge.Right:
+                player.InitVelocity = new Vector2(-300, 0);
+                break;
+            case ICollidable.Edge.Left:
+                player.InitVelocity = new Vector2(300, 0);
+                break;
+            case ICollidable.Edge.Bottom:
+                player.InitVelocity = new Vector2(0, -300);
+                break;
+        }
+
+        player.Velocity = player.InitVelocity;
+    }
+    
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)) player.TakeDamage(obj.Damage);
+        if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile))
+        {
+            player.TakeDamage(obj.Damage);
+            Knockback();
+        }
+
+        if (obj.type == ICollidable.objectType.ItemOneHand)
+        {
+            player.PlayerState = new PlayerItemPickupState(player, 2);
+        }
+
+        if (obj.type == ICollidable.objectType.ItemTwoHands)
+        {
+            player.PlayerState = new PlayerItemPickupState(player, 1);
+        }
     }
 
     public void Update() {

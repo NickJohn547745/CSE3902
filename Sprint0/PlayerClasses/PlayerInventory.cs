@@ -17,4 +17,29 @@ public class PlayerInventory {
         AbilityCounts.Add(AbilityTypes.Fireball, 1);
     }
     
+    public int GetKeys()
+    {
+        return 3;
+        // return AbilityCounts[AbilityTypes.Bomb];
+    }
+
+    public int GetRupees()
+    {
+        return 20;
+        // return rupees;
+    }
+    public int GetBombs()
+    {
+        return AbilityCounts[AbilityTypes.Bomb];
+    }
+
+    // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory
+    public AbilityTypes GetCurrentA()
+    {
+        return AbilityTypes.Bomb;
+    }
+    public AbilityTypes GetCurrentB()
+    {
+        return AbilityTypes.WoodenBoomerang;
+    }
 }
