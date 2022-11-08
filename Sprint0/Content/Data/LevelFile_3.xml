@@ -19,11 +19,11 @@
 		-1 0 -1 -1
 	</Setting>
 	<Setting name="Enemies">
-		<Enemy>0 640 600</Enemy>
-		<Enemy>1 200 200</Enemy>
-		<Enemy>2 400 200</Enemy>
-		<Enemy>3 600 200</Enemy>
-		<Enemy>4 800 200</Enemy>
-		<Enemy>5 1000 200</Enemy>
+		<Enemy>0 60 640 600</Enemy>
+		<Enemy>1 60 200 200</Enemy>
+		<Enemy>2 60 400 200</Enemy>
+		<Enemy>3 60 600 200</Enemy>
+		<Enemy>4 60 800 200</Enemy>
+		<Enemy>5 60 1000 200</Enemy>
 	</Setting>
 </Settings>

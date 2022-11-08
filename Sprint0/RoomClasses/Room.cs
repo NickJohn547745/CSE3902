@@ -156,9 +156,9 @@ namespace sprint0.RoomClasses
                     game.CollidablesToAdd.Add(tile);
             }
 
-            foreach (KeyValuePair<int, Point> enemy in levelConfig.Enemies)
+            foreach (KeyValuePair<int, Tuple<Point, int>> enemy in levelConfig.Enemies)
             {
-                game.CollidablesToAdd.Add(GetEnemyFromId(enemy.Key, enemy.Value.X, enemy.Value.Y));
+                game.CollidablesToAdd.Add(GetEnemyFromId(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2));
             }
         }
 
@@ -166,6 +166,7 @@ namespace sprint0.RoomClasses
         {
             if (transitioning && RoomReady)
             {
+                game.CollidablesToDelete.Add(game.Player);
                 if (dir == Direction.LEFT && roomOffset.X < 1285)
                 {
                     roomOffset.X += 5;
@@ -210,6 +211,8 @@ namespace sprint0.RoomClasses
                     game.Room = nextRoom;
                     game.Room.roomOffset = new Point();
                     game.Room.Initialize();
+
+                    game.CollidablesToAdd.Add(game.Player);
 
                     foreach (Door door in doorList)
                     {
@@ -266,23 +269,23 @@ namespace sprint0.RoomClasses
             }
             return null;
         }
-        private Enemy GetEnemyFromId(int id, int x, int y)
+        private Enemy GetEnemyFromId(int id, int x, int y, int speed)
         {
             Vector2 location = new Vector2(x, y);
             switch (id)
             {
                 case 0:
-                    return new AquamentusBoss(location, 0);
+                    return new AquamentusBoss(location, speed);
                 case 1:
-                    return new GoriyaEnemy(location, 0);
+                    return new GoriyaEnemy(location, speed);
                 case 2:
-                    return new KeeseEnemy(location, 0);
+                    return new KeeseEnemy(location, speed);
                 case 3:
                     return new OldManNPC(location);
                 case 4:
-                    return new StalfosEnemy(location, 0);
+                    return new StalfosEnemy(location, speed);
                 case 5:
-                    return new ZolEnemy(location, 0);
+                    return new ZolEnemy(location, speed);
             }
             return null;
         }

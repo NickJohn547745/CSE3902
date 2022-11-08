@@ -79,7 +79,8 @@ namespace sprint0.FileReaderClasses
                                 string[] enemyData = enemyText.Trim().Split(' ');
                                 List<int> enemyList = enemyData.Select(int.Parse).ToList();
 
-                                LevelConfig.Enemies.Add(enemyList[0], new Point(enemyList[1], enemyList[2]));
+                                LevelConfig.Enemies.Add(enemyList[0], 
+                                    new Tuple<Point, int>(new Point(enemyList[2], enemyList[3]), enemyList[1]));
                             }
 
                             break;
