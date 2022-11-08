@@ -76,19 +76,19 @@ namespace sprint0.Enemies
                         SpriteEffect = SpriteEffects.FlipHorizontally;
                         break;
                     case 2:
-                            // move right
-                            GoriyaDirection = Direction.Right;
-                            Goriya.Velocity = new Vector2(1, 0);
-                            Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
-                            SpriteEffect = SpriteEffects.None;
-                            break;
+                        // move right
+                        GoriyaDirection = Direction.Right;
+                        Goriya.Velocity = new Vector2(1, 0);
+                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
+                        SpriteEffect = SpriteEffects.None;
+                        break;
                     case 3:
-                            // move down
-                            GoriyaDirection = Direction.Down;
-                            Goriya.Velocity = new Vector2(0, 1);
-                            Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
-                            SpriteEffect = SpriteEffects.FlipHorizontally;
-                            break;
+                        // move down
+                        GoriyaDirection = Direction.Down;
+                        Goriya.Velocity = new Vector2(0, 1);
+                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
+                        SpriteEffect = SpriteEffects.FlipHorizontally;
+                        break;
                 }
 
                 flipped = false;

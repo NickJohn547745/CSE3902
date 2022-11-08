@@ -35,6 +35,7 @@ public class Game1 : Game {
     public List<ICollidable> CollidablesToAdd { get; set; }
     public List<ICollidable> CollidablesToDelete { get; set; }
 
+    private int startingLevelIndex = 0;
 
     private int currentLevelIndex;
     private int currentEnemyIndex;
@@ -138,6 +139,15 @@ public class Game1 : Game {
 
     }
 
+    public void ResetLevel()
+    {
+        currentLevelIndex = startingLevelIndex;
+        Room = new Room(this, LevelList[currentLevelIndex]);
+
+        // reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
+        
+    }
+
     public void NextTile()
     {
         CollidableList.Remove(TileList[currentTileIndex]);
@@ -152,12 +162,6 @@ public class Game1 : Game {
         }
 
     }
-
-    // adds any tile type that is collidable to the collision list
-    public void AddCollisionTiles()
-    {
-    }
-
 
     protected override void Initialize() {
         // TODO: Add your initialization logic here
@@ -174,6 +178,10 @@ public class Game1 : Game {
         TextureStorage.LoadAllTextures(Content);
 
         Controllers = new List<IController>();
+
+        IController mouse = new MouseController();
+        // May add binding for mouse clicks later
+
         IController keyboard = new KeyboardController();
         
         keyboard.BindCommand(Keys.Q, new QuitCommand(), IController.KeyState.Pressed);
@@ -209,7 +217,7 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.D6, new UseFireballCommand(), IController.KeyState.Pressed);
         
         Controllers.Add(keyboard);
-        Controllers.Add(new MouseController());
+        Controllers.Add(mouse);
 
         IController gamePad = new GamePadController();
 	

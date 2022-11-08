@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
-
+using sprint0.Interfaces;
 
 namespace sprint0.PlayerClasses; 
 
@@ -12,6 +12,7 @@ public class PlayerAbilityLeftState : PlayerAbilityState {
         frameCount = 21;
         sprite = PlayerSpriteFactory.Instance.GetAbilitySideSprite();
         player.Damage = 0;
+        facing = ICollidable.Edge.Left;
     }
 
     public override void Draw(SpriteBatch spriteBatch, Color color)

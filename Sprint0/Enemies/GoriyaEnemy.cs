@@ -9,6 +9,7 @@ using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
 using Microsoft.Xna.Framework.Audio;
+using sprint0.Classes;
 
 namespace sprint0.Enemies
 {
@@ -34,6 +35,9 @@ namespace sprint0.Enemies
             MaxHealth = 3;
             Health = MaxHealth;
             Damage = 1;
+            damageDelay = 0;
+            damaged = false;
+            color = Color.White;
             deadCount = 0;
             type = ICollidable.objectType.Enemy;
         }
@@ -60,6 +64,16 @@ namespace sprint0.Enemies
             }      
         }
 
+        protected override void Death(CollisionManager manager)
+        {
+            if (deadCount >= DeathFrames)
+            {
+                manager.collidables.Remove(this);
+                manager.collidables.Remove(goriyaStateMachine.Boomerang);
+                goriyaStateMachine.BoomerangThrown = false;
+            }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Health <= 0)
@@ -69,7 +83,7 @@ namespace sprint0.Enemies
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
+                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, color);
             }
         }
     }

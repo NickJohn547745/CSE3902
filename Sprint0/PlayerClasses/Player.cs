@@ -19,18 +19,17 @@ public class Player : IPlayer {
     public IPlayerState PlayerState { get; set; }
     public PlayerAbilityManager AbilityManager { get; protected set; }
     public int Damage { get; set; }
+    public Vector2 Velocity { get; set; }
+    public Vector2 InitVelocity { get; set; }
 
+
+    
     public Player(Game1 game) {
         Game = game;
-        PlayerState = new PlayerFacingUpState(this);
-        AbilityManager = new PlayerAbilityManager(this);
-        PlayerInventory = new PlayerInventory();
-        Health = 6;
-        ScaleFactor = 4;
         Position = new Vector2(200, 200);
         initPosition = Position;
-        Damage = 0;
-        type = ICollidable.objectType.Player;
+
+        Reset(Game);
     }
     
     public Rectangle GetHitBox()
@@ -40,24 +39,25 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        switch (edge)
+        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        {
+            switch (edge)
             {
                 case ICollidable.Edge.Top:
-                    Position += new Vector2(0, -IPlayerState.playerSpeed);
+                    Position += new Vector2(0, -3);
                     break;
                 case ICollidable.Edge.Right:
-                    Position += new Vector2(-IPlayerState.playerSpeed, 0);
+                    Position += new Vector2(-3, 0);
                     break;
                 case ICollidable.Edge.Left:
-                    Position += new Vector2(IPlayerState.playerSpeed, 0);
+                    Position += new Vector2(3, 0);
                     break;
                 case ICollidable.Edge.Bottom:
-                    Position += new Vector2(0, IPlayerState.playerSpeed);
-                    break;
-                default:
+                    Position += new Vector2(0, 3);
                     break;
             }
-            PlayerState.Collide(obj, edge);
+        }
+        PlayerState.Collide(obj, edge);
     }
 
     public void Draw(SpriteBatch spriteBatch) { 
@@ -67,12 +67,26 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
+
+        if (Health <= 0)
+        {
+            game.ResetLevel();
+            Reset(game);
+        }
     }
 
     public void Reset(Game1 game)
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
+        AbilityManager = new PlayerAbilityManager(this);
+        PlayerInventory = new PlayerInventory();
+
+        Health = 6;
+        ScaleFactor = 4;
+        Damage = 0;
+        type = ICollidable.objectType.Player;
+        Velocity = Vector2.Zero;
     }
 
     public void TakeDamage(int damage) {

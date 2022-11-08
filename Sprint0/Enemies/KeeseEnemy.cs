@@ -24,6 +24,9 @@ namespace sprint0.Enemies
             MaxHealth = 1;
             Health = MaxHealth;
             Damage = 1;
+            damageDelay = 0;
+            damaged = false;
+            color = Color.White;
             deadCount = 0;
             type = ICollidable.objectType.Enemy;
         }
