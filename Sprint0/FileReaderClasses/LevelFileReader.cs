@@ -57,6 +57,32 @@ namespace sprint0.FileReaderClasses
 
                             break;
                         }
+                    case "Destinations":
+                        {
+                            string[] destinationArray = settingText.Trim().Split(' ');
+                            List<int> destionationList = destinationArray.Select(int.Parse).ToList();
+
+                            destionationList.ForEach(id => LevelConfig.Destinations.Add(id));
+
+                            break;
+                        }
+                    case "Enemies":
+                        {
+                            XmlNodeList enemies = settingNode.ChildNodes;
+
+                            foreach (XmlNode enemy in enemies)
+                            {
+                                string enemyText = enemy.InnerText;
+
+                                string[] enemyData = enemyText.Trim().Split(' ');
+                                List<int> enemyList = enemyData.Select(int.Parse).ToList();
+
+                                LevelConfig.Enemies.Add(enemyList[0], 
+                                    new Tuple<Point, int>(new Point(enemyList[2], enemyList[3]), enemyList[1]));
+                            }
+
+                            break;
+                        }
                 }
             }
         }

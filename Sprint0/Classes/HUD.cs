@@ -197,16 +197,6 @@ namespace sprint0.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            // temporary test of where HUD is drawn
-            Color[] data = new Color[HUDWidth * HUDHeight];
-            Texture2D whiteRectangle = new Texture2D(Game.GraphicsDevice, HUDWidth, HUDHeight);
-            for (int i = 0; i< data.Length; ++i)
-            {
-                data[i] = Color.White;
-            }
-            whiteRectangle.SetData(data);
-            spriteBatch.Draw(whiteRectangle, HUDArea, Color.Black);
-
             DrawLevelText(spriteBatch);
             DrawMap(spriteBatch);
             DrawInventoryItems(spriteBatch);

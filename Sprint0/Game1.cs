@@ -350,7 +350,7 @@ public class Game1 : Game {
     }
 
     protected override void Draw(GameTime gameTime) {
-        GraphicsDevice.Clear(Color.DarkGray);
+        GraphicsDevice.Clear(Color.Black);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
