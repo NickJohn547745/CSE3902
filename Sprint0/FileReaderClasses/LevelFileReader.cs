@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Xml;
-using Microsoft.Xna.Framework;
 using sprint0.Classes;
 using sprint0.FileReaderClasses;
 
@@ -56,31 +54,6 @@ namespace sprint0.FileReaderClasses
                             List<int> doorIdList = doorIdArray.Select(int.Parse).ToList();
 
                             doorIdList.ForEach(id => LevelConfig.DoorIds.Add(id));
-
-                            break;
-                        }
-                    case "Destinations":
-                        {
-                            string[] destinationArray = settingText.Trim().Split(' ');
-                            List<int> destionationList = destinationArray.Select(int.Parse).ToList();
-
-                            destionationList.ForEach(id => LevelConfig.Destinations.Add(id));
-
-                            break;
-                        }
-                    case "Enemies":
-                        {
-                            XmlNodeList enemies = settingNode.ChildNodes;
-
-                            foreach (XmlNode enemy in enemies)
-                            {
-                                string enemyText = enemy.InnerText;
-
-                                string[] enemyData = enemyText.Trim().Split(' ');
-                                List<int> enemyList = enemyData.Select(int.Parse).ToList();
-
-                                LevelConfig.Enemies.Add(enemyList[0], new Point(enemyList[1], enemyList[2]));
-                            }
 
                             break;
                         }
