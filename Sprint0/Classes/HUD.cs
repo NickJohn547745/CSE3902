@@ -126,22 +126,41 @@ namespace sprint0.Classes
             float countX = countVector.X;
             float countY = countVector.Y;
 
+            int scaleY = 20;
+
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
-            spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + 20), Color.White);
-            spriteBatch.DrawString(Font, "X" + Bombs.ToString(), new Vector2(countX, countY + 40), Color.White);
+            spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
+            spriteBatch.DrawString(Font, "X" + Bombs.ToString(), new Vector2(countX, countY + 2 * scaleY), Color.White);
+
+            Rectangle rupeeRectangle = new Rectangle((int)countX - 16, (int)countY, 16, 20);
+            spriteBatch.Draw(rupeeTexture, rupeeRectangle, Color.White);
+
+            Rectangle keyRectangle = new Rectangle((int)countX - 16, (int)countY + scaleY, 16, 20);
+            spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
+
+            Rectangle bombRectangle = new Rectangle((int)countX - 16, (int)countY + 2 * scaleY, 16, 20);
+            spriteBatch.Draw(bombTexture, bombRectangle, Color.White);
         }
         public void DrawItemA(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "A", Sections["A"], Color.White);
+            Vector2 itemVectorA = Sections["A"];
+            float aX = itemVectorA.X;
+            float aY = itemVectorA.Y;
+            spriteBatch.DrawString(Font, "A", itemVectorA, Color.White);
 
             // just drawing bow for now
             Texture2D bowTexture = TextureStorage.GetBowSpritesheet();
-            // Rectangle destinationRectangle = new Rectangle
+            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + 33, 40, 80);
+            spriteBatch.Draw(bowTexture, destinationRectangle, Color.White);
 
         }
         public void DrawItemB(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "B", Sections["B"], Color.White);
+            Vector2 itemVectorB = Sections["B"];
+            float bX = itemVectorB.X;
+            float bY = itemVectorB.Y;
+            spriteBatch.DrawString(Font, "B", itemVectorB, Color.White);
+
             Texture2D itemTextureB;
             switch (currentAbilityB)
             {
@@ -167,6 +186,8 @@ namespace sprint0.Classes
                     itemTextureB = TextureStorage.GetClockSpritesheet();
                     break;
             }
+            Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + 33, 40, 80);
+            spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
         }
         public void DrawLife(SpriteBatch spriteBatch)
         {
