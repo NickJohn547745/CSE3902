@@ -10,6 +10,7 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int RandBound = 4;
+        private const int StalfosHealth = 2;
 
         private Dictionary<int, Vector2> DirectionChoice;
         
@@ -22,7 +23,7 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
-            MaxHealth = 2;
+            MaxHealth = StalfosHealth;
             Health = MaxHealth;
             Damage = 1;
             damageDelay = 0;

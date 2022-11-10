@@ -12,7 +12,7 @@ namespace sprint0.Enemies
         private const int FireBallOffsetY = 30;
         private const float FireBallDirection = (float) 2/3;
         private const int RandBound = 3;
-        private const int AquamentusHealth= 4;
+        private const int AquamentusHealth= 6;
 
         private int fireBallTracker;
 

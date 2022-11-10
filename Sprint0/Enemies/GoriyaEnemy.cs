@@ -17,6 +17,7 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 70;
         private const int DirectionChange = 4;
+        private const int GoriyaHealth = 3;
 
         private GoriyaStateMachine goriyaStateMachine;
         private int boomerangTracker;
@@ -32,7 +33,7 @@ namespace sprint0.Enemies
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
-            MaxHealth = 3;
+            MaxHealth = GoriyaHealth;
             Health = MaxHealth;
             Damage = 1;
             damageDelay = 0;
