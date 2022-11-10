@@ -42,3 +42,4 @@
 * Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
 * Moving through the top door causes a downwards room transition
+* HUD should be at top of screen (at least it is in the actual game)
