@@ -24,7 +24,7 @@ public class WoodenArrow : Ability {
             Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
         }
         Velocity = Vector2.Multiply(velocity, new Vector2(5));
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Ability;
         Damage = 2;
     }
 
@@ -55,10 +55,10 @@ public class WoodenArrow : Ability {
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
         switch (obj.type) {
-            case ICollidable.objectType.Wall:
-            case ICollidable.objectType.Tile:
-            case ICollidable.objectType.Enemy:
-            case ICollidable.objectType.Door:
+            case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Tile:
+            case ICollidable.ObjectType.Enemy:
+            case ICollidable.ObjectType.Door:
 
                     Velocity = Vector2.Zero;
                 sprite = PlayerSpriteFactory.Instance.GetArrowHitSprite();

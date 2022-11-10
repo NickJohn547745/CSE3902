@@ -18,7 +18,7 @@ public class Bomb : Ability {
         else {
             Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Ability;
     }
 
     public override void Update(GameTime gameTime, Game1 game) {

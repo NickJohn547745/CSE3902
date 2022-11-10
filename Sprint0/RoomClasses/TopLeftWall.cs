@@ -11,7 +11,7 @@ namespace sprint0.RoomClasses
     {
         public TopLeftWall()
         {
-            type = ICollidable.objectType.Wall;
+            type = ICollidable.ObjectType.Wall;
         }
 
         public override Rectangle GetHitBox()

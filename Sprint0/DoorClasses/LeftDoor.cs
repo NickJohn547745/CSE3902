@@ -14,7 +14,7 @@ namespace sprint0.DoorClasses
     {
         public LeftDoor()
         {
-            type = ICollidable.objectType.Door;
+            type = ICollidable.ObjectType.Door;
 
             HasCollided = false;
             TransitionDirection = Direction.LEFT;

@@ -7,9 +7,22 @@ namespace sprint0.Interfaces
     {
         public enum Edge {Top, Bottom, Left, Right };
         
-        public enum objectType {Enemy, Player, Door, Wall, Tile, Projectile, Ability, Item, ItemTwoHands, ItemOneHand}
+        public enum ObjectType
+        {
+            Enemy,
+            Player,
+            Door,
+            Wall,
+            Tile,
+            Projectile,
+            Ability,
+            Item,
+            ItemTwoHands,
+            ItemOneHand,
+            Boomerang
+        }
         
-        public objectType type { get; set; }
+        public ObjectType type { get; set; }
 
         public int Damage { get; set; }
 

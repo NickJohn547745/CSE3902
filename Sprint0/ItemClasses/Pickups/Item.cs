@@ -10,7 +10,7 @@ namespace sprint0.ItemClasses.Pickups
         
         public ISprite Sprite { get; set; }
 
-        public ICollidable.objectType type { get; set; }
+        public ICollidable.ObjectType type { get; set; }
         public int Damage { get; set; }
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge) 

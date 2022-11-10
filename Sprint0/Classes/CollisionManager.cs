@@ -116,9 +116,9 @@ namespace sprint0.Classes
             
             foreach (ICollidable collidable in collidables)
             {
-                if (collidable.type != ICollidable.objectType.Wall &&
-                    collidable.type != ICollidable.objectType.Door &&
-                    collidable.type != ICollidable.objectType.Tile)
+                if (collidable.type != ICollidable.ObjectType.Wall &&
+                    collidable.type != ICollidable.ObjectType.Door &&
+                    collidable.type != ICollidable.ObjectType.Tile)
                 {
                     collidable.Draw(spriteBatch);
                 }

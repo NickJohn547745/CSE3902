@@ -27,13 +27,9 @@ namespace sprint0.Enemies
             delay = BehaviorDelay;
             fireBallTracker = 1;
             MaxHealth = AquamentusHealth;
-            Health = MaxHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

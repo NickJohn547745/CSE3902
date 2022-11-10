@@ -10,14 +10,14 @@ namespace sprint0.ItemClasses.Pickups
         private bool readyToDelete = false;
         public ClockPickup() 
         {
-            type = ICollidable.objectType.Item;
+            type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.ClockSprite();
             Position = new Vector2(300, 300);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 
         {
-            if (obj.type == ICollidable.objectType.Player)
+            if (obj.type == ICollidable.ObjectType.Player)
             {
                 readyToDelete = true;
             }

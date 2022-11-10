@@ -25,7 +25,7 @@ namespace sprint0.Enemies
             Health = MaxHealth;
             Damage = 0;
             deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -36,7 +36,7 @@ namespace sprint0.Enemies
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
 
-            if (obj.type == ICollidable.objectType.Player)
+            if (obj.type == ICollidable.ObjectType.Player)
             {
                 switch (edge)
                 {

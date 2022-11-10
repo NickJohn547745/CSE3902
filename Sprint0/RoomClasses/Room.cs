@@ -50,8 +50,8 @@ namespace sprint0.RoomClasses
 
             foreach (ICollidable collidable in game.CollisionManager.collidables)
             {
-                if (collidable.type == ICollidable.objectType.Enemy || collidable.type == ICollidable.objectType.Wall || 
-                    collidable.type == ICollidable.objectType.Tile || collidable.type == ICollidable.objectType.Door)
+                if (collidable.type == ICollidable.ObjectType.Enemy || collidable.type == ICollidable.ObjectType.Wall || 
+                    collidable.type == ICollidable.ObjectType.Tile || collidable.type == ICollidable.ObjectType.Door)
                     game.CollidablesToDelete.Add(collidable);
             }
 

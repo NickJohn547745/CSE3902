@@ -17,7 +17,7 @@ public class DamagedPlayer : IPlayer {
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
     public Vector2 PreviousPosition { get; set; }
-    public ICollidable.objectType type { get; set; }
+    public ICollidable.ObjectType type { get; set; }
 
 
     public int Damage {
@@ -28,7 +28,7 @@ public class DamagedPlayer : IPlayer {
     public DamagedPlayer(Player decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
-        type = ICollidable.objectType.Player;
+        type = ICollidable.ObjectType.Player;
         
     }
 
@@ -47,7 +47,7 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
-        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
         {
             decoratedPlayer.Velocity = Vector2.Zero;
             decoratedPlayer.Collide(obj, edge);

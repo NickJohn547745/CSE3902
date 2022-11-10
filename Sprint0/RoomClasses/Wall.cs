@@ -14,7 +14,7 @@ namespace sprint0.RoomClasses
     public abstract class Wall : ICollidable
     {
         public int Damage { get; set; }
-        public ICollidable.objectType type { get; set; }
+        public ICollidable.ObjectType type { get; set; }
 
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)

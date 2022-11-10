@@ -14,7 +14,7 @@ public class Player : IPlayer {
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
-    public ICollidable.objectType type { get; set; }
+    public ICollidable.ObjectType type { get; set; }
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public int ScaleFactor { get; set; }
@@ -43,7 +43,7 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
         {
             switch (edge)
             {
@@ -89,7 +89,7 @@ public class Player : IPlayer {
         Health = 6;
         ScaleFactor = 4;
         Damage = 0;
-        type = ICollidable.objectType.Player;
+        type = ICollidable.ObjectType.Player;
         Velocity = Vector2.Zero;
     }
 

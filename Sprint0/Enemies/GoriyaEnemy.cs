@@ -34,18 +34,20 @@ namespace sprint0.Enemies
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
             MaxHealth = GoriyaHealth;
-            Health = MaxHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
         }
-        
+
         protected override void ReverseDirection()
         {
             goriyaStateMachine.flipped = true;
+
+        }
+        
+        protected override void Stun()
+        {
+            stunCount++;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)

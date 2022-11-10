@@ -15,7 +15,7 @@ namespace sprint0.DoorClasses
     {
         public BottomDoor()
         {
-            type = ICollidable.objectType.Door;
+            type = ICollidable.ObjectType.Door;
 
             HasCollided = false;
             TransitionDirection = Direction.DOWN;

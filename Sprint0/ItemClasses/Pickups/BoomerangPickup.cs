@@ -9,14 +9,14 @@ namespace sprint0.ItemClasses.Pickups
         private bool readyToDelete = false;
         public BoomerangPickup() 
         {
-            type = ICollidable.objectType.Item;
+            type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.BoomerangSprite();
             Position = new Vector2(300, 300);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 
         {
-            if (obj.type == ICollidable.objectType.Player)
+            if (obj.type == ICollidable.ObjectType.Player)
             {
                 readyToDelete = true;
             }

@@ -16,7 +16,7 @@ namespace sprint0.Interfaces
         private const int bottomOffset = 7;
         private readonly int[] swordLen = {0, 11, 7, 3};
 
-        public objectType type { get; set; }
+        public ObjectType type { get; set; }
         public int Damage { get; set; }
         private Player player;
         private Point swordPosition;
@@ -27,7 +27,7 @@ namespace sprint0.Interfaces
         public PlayerSword(Player link, Edge edge)
         {
             Damage = 1;
-            type = objectType.Player;
+            type = ObjectType.Player;
             player = link;
             currentFrame = 0;
             Edge = edge;

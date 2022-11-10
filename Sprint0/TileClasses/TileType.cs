@@ -19,7 +19,7 @@ namespace sprint0.TileClasses
         private Texture2D texture;
 
         public int Damage { get; set; }
-        public ICollidable.objectType type { get; set; }
+        public ICollidable.ObjectType type { get; set; }
         public bool IsCollidable { get; set; }
 
 
