@@ -22,10 +22,7 @@ namespace sprint0.Enemies
             Velocity = Vector2.Zero;
             delay = 1;
             MaxHealth = 2;
-            Health = MaxHealth;
-            Damage = 0;
-            deadCount = 0;
-            type = ICollidable.ObjectType.Enemy;
+            InitEnemyFields();
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
