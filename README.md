@@ -41,3 +41,4 @@
 * HUD values not dynamic
 * Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
+* Moving through the top door causes a downwards room transition
