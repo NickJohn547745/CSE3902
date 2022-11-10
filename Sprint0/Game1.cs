@@ -13,7 +13,7 @@ using sprint0.PlayerClasses;
 using sprint0.TileClasses;
 using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
-using System.Linq;
+using sprint0.Sound;
 
 namespace sprint0;
 
@@ -35,6 +35,7 @@ public class Game1 : Game {
     public List<ICollidable> CollidablesToAdd { get; set; }
     public List<ICollidable> CollidablesToDelete { get; set; }
 
+    private int startingLevelIndex = 0;
 
     private int currentLevelIndex;
     private int currentEnemyIndex;
@@ -49,6 +50,7 @@ public class Game1 : Game {
 
     public IPlayer Player;
     public Room Room;
+    public HUD MainHUD;
     public ISprite CurrentSprite { get; set; }
 
     public Game1() {
@@ -138,6 +140,15 @@ public class Game1 : Game {
 
     }
 
+    public void ResetLevel()
+    {
+        currentLevelIndex = startingLevelIndex;
+        Room = new Room(this, LevelList[currentLevelIndex]);
+
+        // reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
+        
+    }
+
     public void NextTile()
     {
         CollidableList.Remove(TileList[currentTileIndex]);
@@ -153,12 +164,6 @@ public class Game1 : Game {
 
     }
 
-    // adds any tile type that is collidable to the collision list
-    public void AddCollisionTiles()
-    {
-    }
-
-
     protected override void Initialize() {
         // TODO: Add your initialization logic here
 
@@ -172,6 +177,7 @@ public class Game1 : Game {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         TextureStorage.LoadAllTextures(Content);
+        SpriteFont font = Content.Load<SpriteFont>("Arial");
 
         Controllers = new List<IController>();
 
@@ -201,6 +207,11 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
+        
+        // For testing purposes only
+        keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
+
+        keyboard.BindCommand(Keys.M, new MuteCommand(), IController.KeyState.Pressed);
 
         keyboard.BindCommand(Keys.D1, new UseBombCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.D2, new UseWoodenBoomerangCommand(), IController.KeyState.Pressed);
@@ -302,15 +313,23 @@ public class Game1 : Game {
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
-        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
-
         CollisionManager = new CollisionManager(CollidableList);
+
+        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
+        Room.Initialize();
+
+        MainHUD = new HUD(this, new PlayerInventory(), 3, font);
+
+
+        SoundManager.Manager.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
         CollisionManager.Update(gameTime, this);
+
+        MainHUD.Update(new PlayerInventory(), 3);
 
         if (CollidablesToDelete != null) {
             CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
@@ -333,21 +352,23 @@ public class Game1 : Game {
     }
 
     protected override void Draw(GameTime gameTime) {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
+        MainHUD.Draw(_spriteBatch);
+
         Room.Draw(_spriteBatch);
 
-        TileList[currentTileIndex].Draw(_spriteBatch);
+        //TileList[currentTileIndex].Draw(_spriteBatch);
         //Player.Draw(_spriteBatch);
         CollisionManager.Draw(_spriteBatch);
         //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        ItemList[currentItemIndex].Draw(_spriteBatch);
+        //ItemList[currentItemIndex].Draw(_spriteBatch);
 
         foreach (ICollidable projectile in Projectiles)
         {
-                projectile.Draw(_spriteBatch);  
+            projectile.Draw(_spriteBatch);  
         }
 
         base.Draw(gameTime);

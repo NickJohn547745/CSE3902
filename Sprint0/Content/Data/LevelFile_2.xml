@@ -3,16 +3,19 @@
 <Settings>
 	<Setting name="Id">2</Setting>
 	<Setting name="TileIds">
-		1 1 0 0 0 0 0 0 0 0 1 1
-		1 0 0 0 0 0 0 0 0 0 0 1
-		0 0 1 0 0 0 0 0 0 1 0 0
-		0 0 0 0 0 1 1 0 0 0 0 0
-		0 0 1 0 0 0 0 0 0 1 0 0
-		1 0 0 0 0 0 0 0 0 0 0 1
-		1 1 0 0 0 0 0 0 0 0 1 1
+		0 0 0 0 0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0 0 0 0 0
+		0 0 1 1 0 0 0 0 1 1 0 0
+		0 0 1 1 0 0 0 0 1 1 0 0
+		0 0 1 1 0 0 0 0 1 1 0 0
+		0 0 0 0 0 0 0 0 0 0 0 0
+		0 0 0 0 0 0 0 0 0 0 0 0
 	</Setting>
 
 	<Setting name="DoorIds">
-		0 1 2 3
+		0 0 0 1
+	</Setting>
+	<Setting name="Destinations">
+		-1 -1 -1 0
 	</Setting>
 </Settings>

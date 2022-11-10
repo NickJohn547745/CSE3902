@@ -99,9 +99,12 @@ public class PlayerSpriteFactory
         return new BasicSprite(playerSpriteSheet, frameSource, AbilityDelay, PlayerScale);
     }
 
-    public ISprite GetDamagedSprite() {
-        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(1, 249, 16, 16) };
-        return new BasicSprite(playerSpriteSheet, frameSource, AbilityDelay, PlayerScale);
+    public ISprite GetItemPickupSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(213, 11, 16, 16),
+            new Rectangle(230, 11, 16, 16)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, AbilityDelay, PlayerScale);
     }
 
     public ISprite GetBombSprite() {

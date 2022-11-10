@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Settings>
+	<Setting name="Id">15</Setting>
+	<Setting name="TileIds">
+		0 0 0 0 0 0 0 0 0 0 0 0
+		0 7 7 7 0 0 0 0 7 7 7 0
+		0 7 0 0 0 0 0 0 0 0 7 0
+		0 7 0 7 7 7 7 7 7 0 7 0
+		0 7 0 0 0 0 0 0 0 0 7 0
+		0 7 7 7 0 0 0 0 7 7 7 0
+		0 0 0 0 0 0 0 0 0 0 0 0
+	</Setting>
+
+	<Setting name="DoorIds">
+		0 0 1 1
+	</Setting>
+	<Setting name="Destinations">
+		-1 -1 9 16
+	</Setting>
+</Settings>

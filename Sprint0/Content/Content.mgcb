@@ -20,6 +20,78 @@
 /processorParam:TextureFormat=Compressed
 /build:Arial.spritefont
 
+#begin Sound/Dungeon.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Dungeon.mp3
+
+#begin Sound/LOZ_Arrow_Boomerang.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Arrow_Boomerang.wav
+
+#begin Sound/LOZ_Bomb_Blow.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Bomb_Blow.wav
+
+#begin Sound/LOZ_Bomb_Drop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Bomb_Drop.wav
+
+#begin Sound/LOZ_Candle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Candle.wav
+
+#begin Sound/LOZ_Enemy_Die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Enemy_Die.wav
+
+#begin Sound/LOZ_Enemy_Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Enemy_Hit.wav
+
+#begin Sound/LOZ_Fireball.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Fireball.wav
+
+#begin Sound/LOZ_Get_Item.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Get_Item.wav
+
+#begin Sound/LOZ_Link_Die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Link_Die.wav
+
+#begin Sound/LOZ_Link_Hurt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Link_Hurt.wav
+
+#begin Sound/LOZ_Sword_Slash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/LOZ_Sword_Slash.wav
+
 #begin Spritesheets/Enemies/aquamentus.png
 /importer:TextureImporter
 /processor:TextureProcessor

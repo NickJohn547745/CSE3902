@@ -4,15 +4,18 @@
 	<Setting name="Id">4</Setting>
 	<Setting name="TileIds">
 		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 0 1 0 0 1 0 0 0 0
-		0 0 0 1 1 0 0 1 1 0 0 0
 		0 0 0 0 0 0 0 0 0 0 0 0
-		0 0 0 1 1 0 0 1 1 0 0 0
-		0 0 0 0 1 0 0 1 0 0 0 0
+		0 0 1 0 0 0 0 0 0 1 0 0
+		0 0 0 0 0 0 0 0 0 0 0 0
+		0 0 1 0 0 0 0 0 0 1 0 0
+		0 0 0 0 0 0 0 0 0 0 0 0
 		0 0 0 0 0 0 0 0 0 0 0 0
 	</Setting>
 
 	<Setting name="DoorIds">
-		0 1 2 3
+		4 1 1 1
+	</Setting>
+	<Setting name="Destinations">
+		5 6 1 7
 	</Setting>
 </Settings>

@@ -2,8 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using sprint0.RoomClasses;
 
+using sprint0.RoomClasses;
+using sprint0.Sound;
 using System;
 
 namespace sprint0.PlayerClasses; 
@@ -24,19 +25,15 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
+
+
     
     public Player(Game1 game) {
         Game = game;
-        PlayerState = new PlayerFacingUpState(this);
-        AbilityManager = new PlayerAbilityManager(this);
-        PlayerInventory = new PlayerInventory();
-        Health = 6;
-        ScaleFactor = 4;
         Position = new Vector2(200, 200);
         initPosition = Position;
-        Damage = 0;
-        type = ICollidable.objectType.Player;
-        Velocity = Vector2.Zero;
+
+        Reset(Game);
     }
     
     public Rectangle GetHitBox()
@@ -74,12 +71,26 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
+
+        if (Health <= 0)
+        {
+            game.ResetLevel();
+            Reset(game);
+        }
     }
 
     public void Reset(Game1 game)
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
+        AbilityManager = new PlayerAbilityManager(this);
+        PlayerInventory = new PlayerInventory();
+
+        Health = 6;
+        ScaleFactor = 4;
+        Damage = 0;
+        type = ICollidable.objectType.Player;
+        Velocity = Vector2.Zero;
     }
 
     public void TakeDamage(int damage) {
@@ -87,6 +98,7 @@ public class Player : IPlayer {
         Game.Player = new DamagedPlayer(this, Game);
         Game.CollidablesToAdd.Add(Game.Player);
         Game.CollidablesToDelete.Add(this);
+        SoundManager.Manager.linkDamageSound().Play();
     }
 
     public void MoveUp() {

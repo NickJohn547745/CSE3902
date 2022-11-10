@@ -8,6 +8,7 @@ using sprint0.RoomClasses;
 using sprint0.TileClasses;
 using sprint0.Factories;
 using sprint0.Classes;
+using sprint0.Sound;
 
 namespace sprint0.Enemies
 {
@@ -43,6 +44,7 @@ namespace sprint0.Enemies
                 Health -= damage;
                 damaged = true;
                 color = Color.Red;
+                SoundManager.Manager.enemyDamageSound().Play();
             }
         }
 
@@ -82,6 +84,7 @@ namespace sprint0.Enemies
             if (deadCount >= DeathFrames)
             {
                 manager.collidables.Remove(this);
+                SoundManager.Manager.enemyDeadSound().Play();
             }
         }
         

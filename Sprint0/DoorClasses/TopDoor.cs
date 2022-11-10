@@ -6,6 +6,7 @@ using sprint0.Interfaces;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sprint0.RoomClasses;
 
 namespace sprint0.DoorClasses
 {
@@ -14,14 +15,9 @@ namespace sprint0.DoorClasses
         public TopDoor()
         {
             type = ICollidable.objectType.Door;
-        }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            Rectangle sourceRect = new Rectangle(Id * 32, 0, 32, 32);
-
-            spriteBatch.Draw(TextureStorage.GetTopDoorsSpritesheet(),
-                                 GetHitBox(), sourceRect, Color.White);
+            HasCollided = false;
+            TransitionDirection = Direction.UP;
         }
 
         public override Rectangle GetHitBox()
