@@ -133,7 +133,8 @@ namespace sprint0.Classes
             spriteBatch.DrawString(Font, "X" + Bombs.ToString(), new Vector2(countX, countY + 2 * scaleY), Color.White);
 
             Rectangle rupeeRectangle = new Rectangle((int)countX - scaleX, (int)countY, 24, 30);
-            spriteBatch.Draw(rupeeTexture, rupeeRectangle, Color.White);
+            Rectangle rupeeSource = new Rectangle(0, 0, 8, 16);
+            spriteBatch.Draw(rupeeTexture, rupeeRectangle, rupeeSource, Color.White);
 
             Rectangle keyRectangle = new Rectangle((int)countX - scaleX, (int)countY + scaleY, 24, 30);
             spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
