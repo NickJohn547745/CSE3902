@@ -126,7 +126,7 @@ namespace sprint0.Classes
             float countY = countVector.Y;
 
             int scaleY = 50;
-            int scaleX = 24;
+            int scaleX = 26;
 
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
             spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
@@ -139,7 +139,7 @@ namespace sprint0.Classes
             spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
 
             Rectangle bombRectangle = new Rectangle((int)countX - scaleX, (int)countY + 2 * scaleY, 24, 30);
-            spriteBatch.Draw(bombTexture, bombRectangle, Color.White);
+            spriteBatch.Draw(bombTexture,bombRectangle, Color.White);
         }
         public void DrawItemA(SpriteBatch spriteBatch)
         {
@@ -198,14 +198,21 @@ namespace sprint0.Classes
             float lifeX = lifeVector.X;
             float lifeY = lifeVector.Y;
 
-            spriteBatch.DrawString(Font, "-LIFE-", lifeVector, Color.Red);
+            float lifeTextX = lifeX + (float).5 * ((float)HUDWidth - lifeX);
+            Vector2 LifeTextVector = new Vector2(lifeTextX, lifeY);
+
+            spriteBatch.DrawString(Font, "-LIFE-", LifeTextVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
 
-            int offsetX = 30;
+            int offsetX = 40;
             int offsetY = 40;
+            Rectangle heartRectangle = new Rectangle(0, 0, 7, 8);
+            int destinationHeight = 30;
+            int destinationWidth = 30;
+
             for (int i = 0; i < Health; i++)
             {
-                spriteBatch.Draw(heartTexture, new Rectangle((int)lifeX + (offsetX*i), (int)lifeY + offsetY, 40, 40), Color.White);
+                spriteBatch.Draw(heartTexture, new Rectangle((int)lifeX + (offsetX*i), (int)lifeY + offsetY, destinationWidth, destinationHeight), heartRectangle, Color.White);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
