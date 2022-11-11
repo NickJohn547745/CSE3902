@@ -22,7 +22,7 @@ namespace sprint0.Classes
         
         public int Bombs { get; set; }
 
-        // get from game?
+        // get from game? For now we only have 1 dungeon anyway
         public int Level { get; set; }
 
         // Will get from inventory class when implemented
@@ -58,7 +58,6 @@ namespace sprint0.Classes
             Font = font;
             Update(inventory, currentHealth);
 
-            // Will simplify this later
             nextWidth = (float)(.275 * HUDWidth);
 
             Sections.Add("Level", new Vector2(HUDX, HUDY));
@@ -126,19 +125,20 @@ namespace sprint0.Classes
             float countX = countVector.X;
             float countY = countVector.Y;
 
-            int scaleY = 20;
+            int scaleY = 50;
+            int scaleX = 24;
 
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
             spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
             spriteBatch.DrawString(Font, "X" + Bombs.ToString(), new Vector2(countX, countY + 2 * scaleY), Color.White);
 
-            Rectangle rupeeRectangle = new Rectangle((int)countX - 16, (int)countY, 16, 20);
+            Rectangle rupeeRectangle = new Rectangle((int)countX - scaleX, (int)countY, 24, 30);
             spriteBatch.Draw(rupeeTexture, rupeeRectangle, Color.White);
 
-            Rectangle keyRectangle = new Rectangle((int)countX - 16, (int)countY + scaleY, 16, 20);
+            Rectangle keyRectangle = new Rectangle((int)countX - scaleX, (int)countY + scaleY, 24, 30);
             spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
 
-            Rectangle bombRectangle = new Rectangle((int)countX - 16, (int)countY + 2 * scaleY, 16, 20);
+            Rectangle bombRectangle = new Rectangle((int)countX - scaleX, (int)countY + 2 * scaleY, 24, 30);
             spriteBatch.Draw(bombTexture, bombRectangle, Color.White);
         }
         public void DrawItemA(SpriteBatch spriteBatch)
@@ -150,7 +150,9 @@ namespace sprint0.Classes
 
             // just drawing bow for now
             Texture2D bowTexture = TextureStorage.GetBowSpritesheet();
-            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + 33, 40, 80);
+
+            int offsetY = 45;
+            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + offsetY, 40, 80);
             spriteBatch.Draw(bowTexture, destinationRectangle, Color.White);
 
         }
@@ -186,14 +188,25 @@ namespace sprint0.Classes
                     itemTextureB = TextureStorage.GetClockSpritesheet();
                     break;
             }
-            Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + 33, 40, 80);
+            int offsetY = 45;
+            Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
         }
         public void DrawLife(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "-LIFE-", Sections["Life"], Color.Red);
+            Vector2 lifeVector = Sections["Life"];
+            float lifeX = lifeVector.X;
+            float lifeY = lifeVector.Y;
+
+            spriteBatch.DrawString(Font, "-LIFE-", lifeVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
-            Texture2D heartContainerTexture = TextureStorage.GetHeartcontainerSpritesheet();
+
+            int offsetX = 30;
+            int offsetY = 40;
+            for (int i = 0; i < Health; i++)
+            {
+                spriteBatch.Draw(heartTexture, new Rectangle((int)lifeX + (offsetX*i), (int)lifeY + offsetY, 40, 40), Color.White);
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
