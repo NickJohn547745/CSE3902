@@ -146,14 +146,15 @@ namespace sprint0.Classes
             Vector2 itemVectorA = Sections["A"];
             float aX = itemVectorA.X;
             float aY = itemVectorA.Y;
-            spriteBatch.DrawString(Font, "A", itemVectorA, Color.White);
 
-            // just drawing bow for now
-            Texture2D bowTexture = TextureStorage.GetBowSpritesheet();
+            Vector2 ItemTextVector = new Vector2((int)aX, aY);
+            spriteBatch.DrawString(Font, "A", ItemTextVector, Color.White);
+
+            Texture2D itemTextureA = GetItemToDraw(currentAbilityA);
 
             int offsetY = 45;
             Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + offsetY, 40, 80);
-            spriteBatch.Draw(bowTexture, destinationRectangle, Color.White);
+            spriteBatch.Draw(itemTextureA, destinationRectangle, Color.White);
 
         }
         public void DrawItemB(SpriteBatch spriteBatch)
@@ -161,33 +162,12 @@ namespace sprint0.Classes
             Vector2 itemVectorB = Sections["B"];
             float bX = itemVectorB.X;
             float bY = itemVectorB.Y;
-            spriteBatch.DrawString(Font, "B", itemVectorB, Color.White);
 
-            Texture2D itemTextureB;
-            switch (currentAbilityB)
-            {
-                case AbilityTypes.Bomb:
-                    itemTextureB = TextureStorage.GetBombSpritesheet();
-                    break;
-                case AbilityTypes.WoodenBoomerang:
-                    itemTextureB = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.MagicalBoomerang:
-                    itemTextureB = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.WoodenArrow:
-                    itemTextureB = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.SilverArrow:
-                    itemTextureB = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.Fireball:
-                    itemTextureB = TextureStorage.GetFireballSpritesheet();
-                    break;
-                default:
-                    itemTextureB = TextureStorage.GetClockSpritesheet();
-                    break;
-            }
+            Vector2 ItemTextVector = new Vector2((int)bX, bY);
+            spriteBatch.DrawString(Font, "B", ItemTextVector, Color.White);
+
+            Texture2D itemTextureB = GetItemToDraw(currentAbilityB);
+
             int offsetY = 45;
             Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
@@ -204,16 +184,54 @@ namespace sprint0.Classes
             spriteBatch.DrawString(Font, "-LIFE-", LifeTextVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
 
-            int offsetX = 40;
-            int offsetY = 40;
+            int offsetX = 35;
+            int offsetY = 50;
             Rectangle heartRectangle = new Rectangle(0, 0, 7, 8);
             int destinationHeight = 30;
             int destinationWidth = 30;
 
+            const int MAXHEALTHINROW = 8;
+            int rowCount = 0;
             for (int i = 0; i < Health; i++)
             {
-                spriteBatch.Draw(heartTexture, new Rectangle((int)lifeX + (offsetX*i), (int)lifeY + offsetY, destinationWidth, destinationHeight), heartRectangle, Color.White);
+                if (i % MAXHEALTHINROW == 0)
+                {
+                    rowCount++;
+                }
+                int drawX = (int)lifeX + (offsetX * (i % MAXHEALTHINROW));
+                int drawY = (int)lifeY + (offsetY * rowCount);
+                spriteBatch.Draw(heartTexture, new Rectangle(drawX, drawY, destinationWidth, destinationHeight), heartRectangle, Color.White);
             }
+        }
+
+        public Texture2D GetItemToDraw(AbilityTypes currentAbility)
+        {
+            Texture2D FinalTexture;
+            switch (currentAbility)
+            {
+                case AbilityTypes.Bomb:
+                    FinalTexture = TextureStorage.GetBombSpritesheet();
+                    break;
+                case AbilityTypes.WoodenBoomerang:
+                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
+                    break;
+                case AbilityTypes.MagicalBoomerang:
+                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
+                    break;
+                case AbilityTypes.WoodenArrow:
+                    FinalTexture = TextureStorage.GetArrowSpritesheet();
+                    break;
+                case AbilityTypes.SilverArrow:
+                    FinalTexture = TextureStorage.GetArrowSpritesheet();
+                    break;
+                case AbilityTypes.Fireball:
+                    FinalTexture = TextureStorage.GetFireballSpritesheet();
+                    break;
+                default:
+                    FinalTexture = TextureStorage.GetBowSpritesheet();
+                    break;
+            }
+            return FinalTexture;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
