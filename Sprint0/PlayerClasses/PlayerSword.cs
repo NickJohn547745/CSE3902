@@ -27,7 +27,7 @@ namespace sprint0.Interfaces
         public PlayerSword(Player link, Edge edge)
         {
             Damage = 1;
-            type = ObjectType.Player;
+            type = ObjectType.Sword;
             player = link;
             currentFrame = 0;
             Edge = edge;

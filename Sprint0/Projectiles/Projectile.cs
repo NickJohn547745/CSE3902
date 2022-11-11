@@ -32,7 +32,15 @@ public abstract class Projectile : ICollidable {
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Collision = obj.type != ICollidable.ObjectType.Projectile && obj.type != ICollidable.ObjectType.Enemy;
+        switch (obj.type)
+        {
+            case ICollidable.ObjectType.Door:
+            case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Tile:
+            case ICollidable.ObjectType.Player:
+                Collision = true;   
+                break;
+        }
     }
 
     protected abstract void Behavior(Game1 game);

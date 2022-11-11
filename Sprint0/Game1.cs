@@ -166,10 +166,6 @@ public class Game1 : Game {
 
     protected override void Initialize() {
         // TODO: Add your initialization logic here
-
-        WindowWidth = _graphics.PreferredBackBufferWidth;
-        WindowHeight = _graphics.PreferredBackBufferHeight;
-
         base.Initialize();
     }
 
@@ -310,6 +306,9 @@ public class Game1 : Game {
         _graphics.PreferredBackBufferHeight = GameConfig.ResolutionHeight;
         _graphics.ApplyChanges();
 
+        WindowWidth = _graphics.PreferredBackBufferWidth;
+        WindowHeight = _graphics.PreferredBackBufferHeight;
+        
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 

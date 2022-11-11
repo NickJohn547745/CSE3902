@@ -19,7 +19,8 @@ namespace sprint0.Interfaces
             Item,
             ItemTwoHands,
             ItemOneHand,
-            Boomerang
+            Boomerang,
+            Sword
         }
         
         public ObjectType type { get; set; }

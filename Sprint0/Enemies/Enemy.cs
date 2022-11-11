@@ -131,7 +131,7 @@ namespace sprint0.Enemies
         {
             switch (obj.type)
             {
-                case ICollidable.ObjectType.Player:
+                case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
                     TakeDamage(obj.Damage);
                     break;
