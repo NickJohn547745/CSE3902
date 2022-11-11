@@ -22,8 +22,6 @@ public class Game1 : Game {
     private SpriteBatch _spriteBatch;
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
-    public List<ICollidable> TileList { get; private set; }
-    public List<IItem> ItemList { get; private set; }
     public List<LevelConfig> LevelList { get; set; }
     public List<ICollidable> CollidableList { get; private set; }
     
@@ -61,22 +59,7 @@ public class Game1 : Game {
     {
         return _graphics.PreferredBackBufferHeight;
     }
-
-    public void PreviousItem()
-    {
-        currentItemIndex--;
-
-        int remainder = (currentItemIndex % ItemList.Count);
-        currentItemIndex = (remainder < 0) ? (ItemList.Count + remainder) : remainder;
-    }
-
-    public void NextItem()
-    {
-        currentItemIndex++;
-
-        int remainder = (currentItemIndex % ItemList.Count);
-        currentItemIndex = (remainder < 0) ? (ItemList.Count + remainder) : remainder;
-    }
+    
     public void PreviousLevel()
     {
         currentLevelIndex--;
@@ -97,43 +80,13 @@ public class Game1 : Game {
         Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
-    public void PreviousTile()
-    {
-        CollisionManager.collidables.Remove(TileList[currentTileIndex]);
-        currentTileIndex--;
-
-        int remainder = (currentTileIndex % TileList.Count);
-        currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
-
-        if (TileList[currentTileIndex].type != ICollidable.ObjectType.Tile)
-        {
-            CollisionManager.collidables.Add(TileList[currentTileIndex]);
-        }
-
-    }
-
     public void ResetLevel()
     {
         currentLevelIndex = startingLevelIndex;
         Room = new Room(this, LevelList[currentLevelIndex]);
 
-        // reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
+        // Reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
         
-    }
-
-    public void NextTile()
-    {
-        CollidableList.Remove(TileList[currentTileIndex]);
-        currentTileIndex++;
-
-        int remainder = (currentTileIndex % TileList.Count);
-        currentTileIndex = (remainder < 0) ? (TileList.Count + remainder) : remainder;
-
-        if (TileList[currentTileIndex].type != ICollidable.ObjectType.Tile)
-        {
-            CollisionManager.collidables.Add(TileList[currentTileIndex]);
-        }
-
     }
 
     protected override void Initialize() {
@@ -166,10 +119,6 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.Left, new MoveLeftCommand(), IController.KeyState.KeyDown);
         keyboard.BindCommand(Keys.Z, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.N, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.T, new NextTileCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.Y, new PreviousTileCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.I, new NextItemCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.U, new PreviousItemCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
@@ -203,39 +152,7 @@ public class Game1 : Game {
         gamePad.BindCommand(Buttons.DPadLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightShoulder, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.X, new NextTileCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.Y, new PreviousTileCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.RightTrigger, new NextItemCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.LeftTrigger, new PreviousItemCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightStick, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
-
-        TileList = new List<ICollidable>();
-        TileList.Add(new TileType1(1000, 360));
-        TileList.Add(new TileType2(1000, 360));
-        TileList.Add(new TileType3(1000, 360));
-        TileList.Add(new TileType4(1000, 360));
-        TileList.Add(new TileType5(1000, 360));
-        TileList.Add(new TileType6(1000, 360));
-        TileList.Add(new TileType7(1000, 360));
-        TileList.Add(new TileType8(1000, 360));
-        TileList.Add(new TileType9(1000, 360));
-        TileList.Add(new TileType10(1000, 360));
-
-        ItemList = new List<IItem>();
-        ItemList.Add(new Arrow());
-        ItemList.Add(new Bomb());
-        ItemList.Add(new Boomerang());
-        ItemList.Add(new Bow());
-        ItemList.Add(new Clock());
-        ItemList.Add(new Compass());
-        ItemList.Add(new Fairy());
-        ItemList.Add(new Heart());
-        ItemList.Add(new HeartContainer());
-        ItemList.Add(new Key());
-        ItemList.Add(new Map());
-        ItemList.Add(new Rupee());
-        ItemList.Add(new Triforce());
-
 
         Player = new Player(this);
 
@@ -256,8 +173,6 @@ public class Game1 : Game {
         _graphics.PreferredBackBufferHeight = GameConfig.ResolutionHeight;
         _graphics.ApplyChanges();
 
-        
-        
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
@@ -307,7 +222,7 @@ public class Game1 : Game {
 
         _spriteBatch.End();
     }
-    public void reset()
+    public void Reset()
     {
         
         currentTileIndex = 0;

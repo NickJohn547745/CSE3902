@@ -49,9 +49,10 @@ public class KeyboardController : IController {
         Keys[] pressedKeys = currentState.GetPressedKeys();
         
         foreach (Keys key in pressedKeys) {
-            if (keyMappings.ContainsKey(key) && GetKeyState(key) == keyMappings[key].Item2) {
+            if (keyMappings.ContainsKey(key) && GetKeyState(key) == keyMappings[key].Item2) 
+            {
                 keyMappings[key].Item1.Execute(game);
-             }
+            }
         }
     }
 }
