@@ -111,5 +111,15 @@ public class DamagedPlayer : IPlayer {
     public void UseAbility(AbilityTypes abilityType) {
         decoratedPlayer.UseAbility(abilityType);
     }
-    
+
+    public int GetHealth()
+    {
+        return decoratedPlayer.GetHealth();
+    }
+
+    public PlayerInventory GetInventory()
+    {
+        return decoratedPlayer.GetInventory();
+    }
+
 }

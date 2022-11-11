@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using sprint0.PlayerClasses.Abilities;
 using Microsoft.Xna.Framework;
+using sprint0.PlayerClasses;
 
 namespace sprint0.Interfaces; 
 
@@ -17,5 +18,6 @@ public interface IPlayer : ICollidable
     public void MoveRight();
     public void SwordAttack();
     public void UseAbility(AbilityTypes abilityType);
-
+    public PlayerInventory GetInventory();
+    public int GetHealth();
 }

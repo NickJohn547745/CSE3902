@@ -131,4 +131,14 @@ public class Player : IPlayer {
         }
     }
 
+    public int GetHealth()
+    {
+        return this.Health;
+    }
+
+    public PlayerInventory GetInventory()
+    {
+        return this.PlayerInventory;
+    }
+
 }
