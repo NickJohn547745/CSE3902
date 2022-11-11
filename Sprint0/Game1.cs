@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Input;
 using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
-using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
@@ -18,18 +17,14 @@ using sprint0.Sound;
 namespace sprint0;
 
 public class Game1 : Game {
-
-    private const float enemySpeed = 60;
-
+    
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
-    public List<ICollidable> EnemyList { get; private set; }
     public List<ICollidable> TileList { get; private set; }
     public List<IItem> ItemList { get; private set; }
     public List<LevelConfig> LevelList { get; set; }
-    public List<ICollidable> Projectiles { get; private set; }
     public List<ICollidable> CollidableList { get; private set; }
     
     public List<ICollidable> CollidablesToAdd { get; set; }
@@ -38,12 +33,9 @@ public class Game1 : Game {
     private int startingLevelIndex = 0;
 
     private int currentLevelIndex;
-    private int currentEnemyIndex;
     private int currentTileIndex;
     private int currentItemIndex;
-
-    private int WindowWidth;
-    private int WindowHeight;
+    
 
     public GameConfig GameConfig { get; private set; }
     private string gameFilePath = "./Content/Data/GameFile.xml";
@@ -62,32 +54,12 @@ public class Game1 : Game {
 
     public int GetWindowWidth()
     {
-        return WindowWidth;
+        return _graphics.PreferredBackBufferWidth;
     }
 
     public int GetWindowHeight()
     {
-        return WindowHeight;
-    }
-
-    public void NextEnemy()
-    {
-        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
-        currentEnemyIndex++;
-
-        int remainder = (currentEnemyIndex % EnemyList.Count);
-        currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
-    }
-
-    public void PreviousEnemy()
-    {
-        CollisionManager.collidables.Remove(EnemyList[currentEnemyIndex]);
-        currentEnemyIndex--;
-
-        int remainder = (currentEnemyIndex % EnemyList.Count);
-        currentEnemyIndex = (remainder < 0) ? (EnemyList.Count + remainder) : remainder;
-        CollisionManager.collidables.Add(EnemyList[currentEnemyIndex]);
+        return _graphics.PreferredBackBufferHeight;
     }
 
     public void PreviousItem()
@@ -198,8 +170,6 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.Y, new PreviousTileCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.I, new NextItemCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.U, new PreviousItemCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.O, new PreviousEnemyCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.P, new NextEnemyCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
@@ -237,8 +207,6 @@ public class Game1 : Game {
         gamePad.BindCommand(Buttons.Y, new PreviousTileCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightTrigger, new NextItemCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.LeftTrigger, new PreviousItemCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.RightThumbstickLeft, new PreviousEnemyCommand(), IController.KeyState.Pressed);
-        gamePad.BindCommand(Buttons.RightThumbstickRight, new NextEnemyCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightStick, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
 
         TileList = new List<ICollidable>();
@@ -268,28 +236,10 @@ public class Game1 : Game {
         ItemList.Add(new Rupee());
         ItemList.Add(new Triforce());
 
-        Vector2 enemySpawn = new Vector2(200, WindowHeight / 2 + 100);
-
-        EnemyList = new List<ICollidable>();
-        ICollidable stalfos = new StalfosEnemy(enemySpawn, enemySpeed);
-        EnemyList.Add(stalfos);
-        ICollidable keese = new KeeseEnemy(enemySpawn, enemySpeed);
-        EnemyList.Add(keese);
-        ICollidable goriya = new GoriyaEnemy(enemySpawn, enemySpeed);
-        EnemyList.Add(goriya);
-        ICollidable zol = new ZolEnemy(enemySpawn, enemySpeed);
-        EnemyList.Add(zol);
-        ICollidable oldMan = new OldManNPC(Vector2.One * 200);
-        EnemyList.Add(oldMan);
-        ICollidable aquamentus = new AquamentusBoss(enemySpawn, enemySpeed);
-        EnemyList.Add(aquamentus);
 
         Player = new Player(this);
 
-        Projectiles = new List<ICollidable>();
-
         CollidableList = new List<ICollidable>();
-        //CollidableList.Add(keese);
         CollidableList.Add(Player);
         
         CollidablesToDelete = new List<ICollidable>();
@@ -306,8 +256,7 @@ public class Game1 : Game {
         _graphics.PreferredBackBufferHeight = GameConfig.ResolutionHeight;
         _graphics.ApplyChanges();
 
-        WindowWidth = _graphics.PreferredBackBufferWidth;
-        WindowHeight = _graphics.PreferredBackBufferHeight;
+        
         
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
@@ -340,13 +289,6 @@ public class Game1 : Game {
             CollidablesToAdd.Clear();
         }
 
-        //EnemyList[currentEnemyIndex].Update(gameTime, this);
-        //Player.Update(gameTime, this);
-        foreach (ICollidable projectile in Projectiles)
-        {
-            projectile.Update(gameTime, this);
-        }
-
         base.Update(gameTime);
     }
 
@@ -358,17 +300,8 @@ public class Game1 : Game {
         MainHUD.Draw(_spriteBatch);
 
         Room.Draw(_spriteBatch);
-
-        //TileList[currentTileIndex].Draw(_spriteBatch);
-        //Player.Draw(_spriteBatch);
+        
         CollisionManager.Draw(_spriteBatch);
-        //EnemyList[currentEnemyIndex].Draw(_spriteBatch);
-        //ItemList[currentItemIndex].Draw(_spriteBatch);
-
-        foreach (ICollidable projectile in Projectiles)
-        {
-            projectile.Draw(_spriteBatch);  
-        }
 
         base.Draw(gameTime);
 
@@ -376,16 +309,11 @@ public class Game1 : Game {
     }
     public void reset()
     {
-
-        currentEnemyIndex = 0;
+        
         currentTileIndex = 0;
         currentItemIndex = 0;
         currentLevelIndex = 0;
-
-        foreach (ICollidable enemy in EnemyList)
-        {
-            enemy.Reset(this);
-        }
+        
 
         Player.Reset(this);
 

@@ -20,6 +20,7 @@ namespace sprint0.Enemies
         private const int FireBallShoot = 10;
         private const int HUDOffset = 134;
         private const int FireBallScale = 50;
+        private const int HitBoxOffset = 20;
 
         private int fireBallTracker;
         
@@ -41,7 +42,7 @@ namespace sprint0.Enemies
             if (Health < OldManHealth)
             {
                 Position = new Vector2((game.GetWindowWidth() - GetHitBox().Width ) / 2, (game.GetWindowHeight() - GetHitBox().Height ) / 2 - HUDOffset);
-                Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X, GetHitBox().Center.Y);
+                Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
                 if (fireBallTracker % FireBallShoot == 0)
                 {
                     game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn,
