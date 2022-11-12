@@ -37,7 +37,7 @@ public class GamePauseState : AGameState
 
         Unmute();
 
-        gameState.game.state = new GamePlayState(gameState);
+        gameState.currentState = new GamePlayState(gameState);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

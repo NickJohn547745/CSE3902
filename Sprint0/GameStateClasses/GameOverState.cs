@@ -21,4 +21,9 @@ public class GameOverState : AGameState
     {
         
     }
+
+    public override void Reset()
+    {
+        gameState.currentState = new GamePlayState(gameState);
+    }
 }

@@ -20,13 +20,13 @@ public class GamePlayState : AGameState
         {
             gameState.game.ResetLevel();
             gameState.player.Reset();
-            gameState.game.state = new GameOverState(gameState);
+            gameState.currentState = new GameOverState(gameState);
         }
     }
 
     public override void TogglePause()
     {
-        gameState.game.state = new GamePauseState(gameState);
+        gameState.currentState = new GamePauseState(gameState);
     }
 
     public override void Update(GameTime gameTime)

@@ -22,7 +22,7 @@ public abstract class AGameState : IGameState
         
     }
     
-    public void Reset()
+    public virtual void Reset()
     {
         
     }
