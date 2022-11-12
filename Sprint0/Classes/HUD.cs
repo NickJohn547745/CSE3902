@@ -22,7 +22,7 @@ namespace sprint0.Classes
         
         public int Bombs { get; set; }
 
-        // get from game?
+        // get from game? For now we only have 1 dungeon anyway
         public int Level { get; set; }
 
         // Will get from inventory class when implemented
@@ -58,7 +58,6 @@ namespace sprint0.Classes
             Font = font;
             Update(inventory, currentHealth);
 
-            // Will simplify this later
             nextWidth = (float)(.275 * HUDWidth);
 
             Sections.Add("Level", new Vector2(HUDX, HUDY));
@@ -126,32 +125,37 @@ namespace sprint0.Classes
             float countX = countVector.X;
             float countY = countVector.Y;
 
-            int scaleY = 20;
+            int scaleY = 50;
+            int scaleX = 26;
 
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
             spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
             spriteBatch.DrawString(Font, "X" + Bombs.ToString(), new Vector2(countX, countY + 2 * scaleY), Color.White);
 
-            Rectangle rupeeRectangle = new Rectangle((int)countX - 16, (int)countY, 16, 20);
-            spriteBatch.Draw(rupeeTexture, rupeeRectangle, Color.White);
+            Rectangle rupeeRectangle = new Rectangle((int)countX - scaleX, (int)countY, 24, 30);
+            Rectangle rupeeSource = new Rectangle(0, 0, 8, 16);
+            spriteBatch.Draw(rupeeTexture, rupeeRectangle, rupeeSource, Color.White);
 
-            Rectangle keyRectangle = new Rectangle((int)countX - 16, (int)countY + scaleY, 16, 20);
+            Rectangle keyRectangle = new Rectangle((int)countX - scaleX, (int)countY + scaleY, 24, 30);
             spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
 
-            Rectangle bombRectangle = new Rectangle((int)countX - 16, (int)countY + 2 * scaleY, 16, 20);
-            spriteBatch.Draw(bombTexture, bombRectangle, Color.White);
+            Rectangle bombRectangle = new Rectangle((int)countX - scaleX, (int)countY + 2 * scaleY, 24, 30);
+            spriteBatch.Draw(bombTexture,bombRectangle, Color.White);
         }
         public void DrawItemA(SpriteBatch spriteBatch)
         {
             Vector2 itemVectorA = Sections["A"];
             float aX = itemVectorA.X;
             float aY = itemVectorA.Y;
-            spriteBatch.DrawString(Font, "A", itemVectorA, Color.White);
 
-            // just drawing bow for now
-            Texture2D bowTexture = TextureStorage.GetBowSpritesheet();
-            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + 33, 40, 80);
-            spriteBatch.Draw(bowTexture, destinationRectangle, Color.White);
+            Vector2 ItemTextVector = new Vector2((int)aX, aY);
+            spriteBatch.DrawString(Font, "A", ItemTextVector, Color.White);
+
+            Texture2D itemTextureA = GetItemToDraw(currentAbilityA);
+
+            int offsetY = 45;
+            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + offsetY, 40, 80);
+            spriteBatch.Draw(itemTextureA, destinationRectangle, Color.White);
 
         }
         public void DrawItemB(SpriteBatch spriteBatch)
@@ -159,41 +163,76 @@ namespace sprint0.Classes
             Vector2 itemVectorB = Sections["B"];
             float bX = itemVectorB.X;
             float bY = itemVectorB.Y;
-            spriteBatch.DrawString(Font, "B", itemVectorB, Color.White);
 
-            Texture2D itemTextureB;
-            switch (currentAbilityB)
-            {
-                case AbilityTypes.Bomb:
-                    itemTextureB = TextureStorage.GetBombSpritesheet();
-                    break;
-                case AbilityTypes.WoodenBoomerang:
-                    itemTextureB = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.MagicalBoomerang:
-                    itemTextureB = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.WoodenArrow:
-                    itemTextureB = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.SilverArrow:
-                    itemTextureB = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.Fireball:
-                    itemTextureB = TextureStorage.GetFireballSpritesheet();
-                    break;
-                default:
-                    itemTextureB = TextureStorage.GetClockSpritesheet();
-                    break;
-            }
-            Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + 33, 40, 80);
+            Vector2 ItemTextVector = new Vector2((int)bX, bY);
+            spriteBatch.DrawString(Font, "B", ItemTextVector, Color.White);
+
+            Texture2D itemTextureB = GetItemToDraw(currentAbilityB);
+
+            int offsetY = 45;
+            Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
         }
         public void DrawLife(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "-LIFE-", Sections["Life"], Color.Red);
+            Vector2 lifeVector = Sections["Life"];
+            float lifeX = lifeVector.X;
+            float lifeY = lifeVector.Y;
+
+            float lifeTextX = lifeX + (float).5 * ((float)HUDWidth - lifeX);
+            Vector2 LifeTextVector = new Vector2(lifeTextX, lifeY);
+
+            spriteBatch.DrawString(Font, "-LIFE-", LifeTextVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
-            Texture2D heartContainerTexture = TextureStorage.GetHeartcontainerSpritesheet();
+
+            int offsetX = 35;
+            int offsetY = 50;
+            Rectangle heartRectangle = new Rectangle(0, 0, 7, 8);
+            int destinationHeight = 30;
+            int destinationWidth = 30;
+
+            const int MAXHEALTHINROW = 8;
+            int rowCount = 0;
+            for (int i = 0; i < Health; i++)
+            {
+                if (i % MAXHEALTHINROW == 0)
+                {
+                    rowCount++;
+                }
+                int drawX = (int)lifeX + (offsetX * (i % MAXHEALTHINROW));
+                int drawY = (int)lifeY + (offsetY * rowCount);
+                spriteBatch.Draw(heartTexture, new Rectangle(drawX, drawY, destinationWidth, destinationHeight), heartRectangle, Color.White);
+            }
+        }
+
+        public Texture2D GetItemToDraw(AbilityTypes currentAbility)
+        {
+            Texture2D FinalTexture;
+            switch (currentAbility)
+            {
+                case AbilityTypes.Bomb:
+                    FinalTexture = TextureStorage.GetBombSpritesheet();
+                    break;
+                case AbilityTypes.WoodenBoomerang:
+                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
+                    break;
+                case AbilityTypes.MagicalBoomerang:
+                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
+                    break;
+                case AbilityTypes.WoodenArrow:
+                    FinalTexture = TextureStorage.GetArrowSpritesheet();
+                    break;
+                case AbilityTypes.SilverArrow:
+                    FinalTexture = TextureStorage.GetArrowSpritesheet();
+                    break;
+                case AbilityTypes.Fireball:
+                    FinalTexture = TextureStorage.GetFireballSpritesheet();
+                    break;
+                default:
+                    FinalTexture = TextureStorage.GetBowSpritesheet();
+                    break;
+            }
+            return FinalTexture;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
