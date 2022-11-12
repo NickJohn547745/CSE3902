@@ -162,7 +162,7 @@ public class Game1 : Game {
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
-        CollisionManager = new CollisionManager();
+        CollisionManager = new CollisionManager(Player);
         
         CollisionManager.Collidables.Add(Player);
 

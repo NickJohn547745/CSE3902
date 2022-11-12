@@ -48,12 +48,15 @@ namespace sprint0.RoomClasses
             RoomReady = false;
             bounds = new Rectangle(0, 0, 1280, 880);
 
-            foreach (ICollidable collidable in CollisionManager.Collidables)
-            {
-                if (collidable.type == ICollidable.ObjectType.Enemy || collidable.type == ICollidable.ObjectType.Wall || 
-                    collidable.type == ICollidable.ObjectType.Tile || collidable.type == ICollidable.ObjectType.Door)
-                    CollisionManager.Collidables.Remove(collidable);
-            }
+            //for (int i = 0; i < CollisionManager.Collidables.Count; i++)
+            //{
+            //    ICollidable.ObjectType type = CollisionManager.Collidables[i].type;
+            //    if (type == ICollidable.ObjectType.Enemy || type == ICollidable.ObjectType.Wall || 
+            //        type == ICollidable.ObjectType.Tile || type == ICollidable.ObjectType.Door)
+            //        CollisionManager.Collidables.Remove(CollisionManager.Collidables[i]);
+            //}
+            
+            game.CollisionManager.Reset();
 
             CollisionManager.Collidables.Add(new TopLeftWall());
             CollisionManager.Collidables.Add(new TopRightWall());

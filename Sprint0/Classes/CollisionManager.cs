@@ -9,6 +9,13 @@ namespace sprint0.Classes
     public class CollisionManager
     {
         public static List<ICollidable> Collidables { get; set; }
+        private IPlayer Player;
+
+        public CollisionManager(IPlayer player)
+        {
+            Collidables = new List<ICollidable>();
+            Player = player;
+        }
 
         private int CompareBounds(ICollidable source1, ICollidable source2)
         {
@@ -73,15 +80,15 @@ namespace sprint0.Classes
             }
         }
 
-        // uses sort and sweep algortithm
+        // uses sort and sweep algorithm
         private void DetectCollisions()
         {
-            // store hitboxes with X values that overlap with collidable[i]
+            // store hit-boxes with X values that overlap with collidable[i]
             List<ICollidable> active = new List<ICollidable>();
             int currentX = 0;
             int j = 0;
 
-            // sort collidables in ascending order by hit box x-value
+            // sort collidables in ascending order by Hitbox x-value
             Collidables.Sort(CompareBounds);
 
             for (int i = 0; i < Collidables.Count; i++)
@@ -115,6 +122,12 @@ namespace sprint0.Classes
                     collidable.Draw(spriteBatch);
                 }
             }
+        }
+
+        public void Reset()
+        {
+            Collidables.Clear();
+            Collidables.Add(Player);
         }
     }
 }
