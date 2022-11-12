@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using sprint0.PlayerClasses.Abilities;
-using Microsoft.Xna.Framework;
 
 namespace sprint0.Interfaces; 
 

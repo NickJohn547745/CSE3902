@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -9,7 +10,7 @@ public class WoodenBoomerang : Ability {
     private int frameCounter;
     
     private Vector2 Acceleration;
-    private int hitFrame = 0;
+    private int hitFrame;
 
     private Vector2 initialPosition;
 
@@ -43,7 +44,7 @@ public class WoodenBoomerang : Ability {
             hitFrame++;
         
         if (hitFrame >= 5 || (Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20)) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.WoodenBoomerang);
         }
     }

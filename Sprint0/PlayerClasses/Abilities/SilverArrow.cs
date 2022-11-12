@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -47,7 +48,7 @@ public class SilverArrow : Ability{
             hitFrame++;
 
         if (hitFrame == 5) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.SilverArrow);
         }
     }

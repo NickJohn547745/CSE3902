@@ -7,11 +7,10 @@ using sprint0.Classes;
 using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Interfaces;
-using sprint0.ItemClasses;
 using sprint0.PlayerClasses;
-using sprint0.TileClasses;
 using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
+using sprint0.GameStateClasses;
 using sprint0.Sound;
 
 namespace sprint0;
@@ -23,25 +22,19 @@ public class Game1 : Game {
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<LevelConfig> LevelList { get; set; }
-    public List<ICollidable> CollidableList { get; private set; }
-    
-    public List<ICollidable> CollidablesToAdd { get; set; }
-    public List<ICollidable> CollidablesToDelete { get; set; }
+   
+
+    public IGameState gameState;
 
     private int startingLevelIndex = 0;
 
     private int currentLevelIndex;
-    private int currentTileIndex;
-    private int currentItemIndex;
     
-
     public GameConfig GameConfig { get; private set; }
     private string gameFilePath = "./Content/Data/GameFile.xml";
 
     public IPlayer Player;
-    public Room Room;
-    public HUD MainHUD;
-    public ISprite CurrentSprite { get; set; }
+    
 
     public Game1() {
         _graphics = new GraphicsDeviceManager(this);
@@ -67,7 +60,7 @@ public class Game1 : Game {
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        Room = new Room(this, LevelList[currentLevelIndex]);
+        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
     public void NextLevel()
@@ -77,13 +70,13 @@ public class Game1 : Game {
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        Room = new Room(this, LevelList[currentLevelIndex]);
+        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
     public void ResetLevel()
     {
         currentLevelIndex = startingLevelIndex;
-        Room = new Room(this, LevelList[currentLevelIndex]);
+        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
 
         // Reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
         
@@ -156,13 +149,6 @@ public class Game1 : Game {
 
         Player = new Player(this);
 
-        CollidableList = new List<ICollidable>();
-        CollidableList.Add(Player);
-        
-        CollidablesToDelete = new List<ICollidable>();
-        CollidablesToAdd = new List<ICollidable>();
-
-
         GameConfig = new GameConfig();
 
         GameFileReader gameFileReader = new GameFileReader(GameConfig);
@@ -176,13 +162,15 @@ public class Game1 : Game {
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
-        CollisionManager = new CollisionManager(CollidableList);
+        CollisionManager = new CollisionManager();
+        
+        CollisionManager.Collidables.Add(Player);
 
-        Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
-        Room.Initialize();
-
-        MainHUD = new HUD(this, new PlayerInventory(), 3, font);
-
+        Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
+        room.Initialize();
+        
+        gameState = new GamePlayState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager);
+        gameState.Room = room;
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -190,19 +178,7 @@ public class Game1 : Game {
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
-        CollisionManager.Update(gameTime, this);
-
-        MainHUD.Update(new PlayerInventory(), 3);
-
-        if (CollidablesToDelete != null) {
-            CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
-            CollidablesToDelete.Clear();
-        }
-
-        if (CollidablesToAdd != null) {
-            CollisionManager.collidables.AddRange(CollidablesToAdd);
-            CollidablesToAdd.Clear();
-        }
+        gameState.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -212,11 +188,7 @@ public class Game1 : Game {
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        MainHUD.Draw(_spriteBatch);
-
-        Room.Draw(_spriteBatch);
-        
-        CollisionManager.Draw(_spriteBatch);
+        gameState.Draw(_spriteBatch);
 
         base.Draw(gameTime);
 
@@ -224,12 +196,8 @@ public class Game1 : Game {
     }
     public void Reset()
     {
-        
-        currentTileIndex = 0;
-        currentItemIndex = 0;
         currentLevelIndex = 0;
         
-
         Player.Reset(this);
 
     }

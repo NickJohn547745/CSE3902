@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
@@ -45,17 +46,14 @@ namespace sprint0.Enemies
                 Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
                 if (fireBallTracker % FireBallShoot == 0)
                 {
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn,
-                        new Vector2(-1, FireBallDirection)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn,
-                        new Vector2(-1, -FireBallDirection)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn,
-                        new Vector2(1, FireBallDirection)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(1, 0)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(1, -FireBallDirection)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(0, 1)));
-                    game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(0, -1)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(1, FireBallDirection)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(1, 0)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(1, -FireBallDirection)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(0, 1)));
+                    CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(0, -1)));
                 }
 
                 if (fireBallTracker % (FireBallShoot * FireBallScale) == 0)

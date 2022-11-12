@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 
@@ -27,7 +28,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (readyToDelete)
             {
-                game.CollidablesToDelete.Add(this);
+                CollisionManager.Collidables.Remove(this);
             }
 
         }

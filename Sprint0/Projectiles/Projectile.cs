@@ -4,6 +4,7 @@ using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using System;
+using sprint0.Classes;
 
 namespace sprint0.Interfaces; 
 
@@ -54,7 +55,7 @@ public abstract class Projectile : ICollidable {
             Behavior(game);
         }
 
-        if (Collision && game.CollisionManager.collidables.Contains(this)) game.CollisionManager.collidables.Remove(this);
+        if (Collision && CollisionManager.Collidables.Contains(this)) CollisionManager.Collidables.Remove(this);
     }
     
     public virtual void Draw(SpriteBatch spriteBatch)

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
@@ -34,8 +35,8 @@ public class DamagedPlayer : IPlayer {
 
     void RemoveDecorator() {
         Game.Player = decoratedPlayer;
-        Game.CollidablesToAdd.Add(Game.Player);
-        Game.CollidablesToDelete.Add(this);
+        CollisionManager.Collidables.Add(Game.Player);
+        CollisionManager.Collidables.Remove(this);
     }
 
     public void Draw(SpriteBatch spriteBatch) {

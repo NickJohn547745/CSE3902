@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
-using sprint0.RoomClasses;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +8,7 @@ namespace sprint0.Classes
 {
     public class CollisionManager
     {
-        public List<ICollidable> collidables { get; set; }
-
-        public CollisionManager(List<ICollidable> collidables)
-        {
-            this.collidables = collidables;
-        }
+        public static List<ICollidable> Collidables { get; set; }
 
         private int CompareBounds(ICollidable source1, ICollidable source2)
         {
@@ -60,9 +54,9 @@ namespace sprint0.Classes
 
         private int RemoveInactive(List<ICollidable> active, int currentX, int j)
         {
-            while (collidables[j].GetHitBox().X + collidables[j].GetHitBox().Width < currentX)
+            while (Collidables[j].GetHitBox().X + Collidables[j].GetHitBox().Width < currentX)
             {
-                active.Remove(collidables[j]);
+                active.Remove(Collidables[j]);
                 j++;
             }
             return j;
@@ -72,49 +66,47 @@ namespace sprint0.Classes
         {
             foreach (ICollidable obj in active)
             {
-                if (collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
+                if (Collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
                 {
-                    CollisionResponse(collidables[i], obj);
+                    CollisionResponse(Collidables[i], obj);
                 }
             }
         }
 
         // uses sort and sweep algortithm
-        public void DetectCollisions()
+        private void DetectCollisions()
         {
             // store hitboxes with X values that overlap with collidable[i]
             List<ICollidable> active = new List<ICollidable>();
             int currentX = 0;
             int j = 0;
 
-            // sort collidables in ascending order by Hitbox x-value
-            collidables.Sort(CompareBounds);
+            // sort collidables in ascending order by hit box x-value
+            Collidables.Sort(CompareBounds);
 
-            for (int i = 0; i < collidables.Count; i++)
+            for (int i = 0; i < Collidables.Count; i++)
             {
-                currentX = collidables[i].GetHitBox().X;
+                currentX = Collidables[i].GetHitBox().X;
 
                 j = RemoveInactive(active, currentX, j);
 
                 ActiveCollision(active, i);
 
-                active.Add(collidables[i]);
+                active.Add(Collidables[i]);
             }
         }
 
         public void Update(GameTime gameTime, Game1 game) {
-            for (int i = 0; i < collidables.Count; i++)
+            for (int i = 0; i < Collidables.Count; i++)
             {
-                collidables[i].Update(gameTime, game);
+                Collidables[i].Update(gameTime, game);
             }
             DetectCollisions();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            List<ICollidable> frontCollidables = new List<ICollidable>();
-            
-            foreach (ICollidable collidable in collidables)
+            foreach (ICollidable collidable in Collidables)
             {
                 if (collidable.type != ICollidable.ObjectType.Wall &&
                     collidable.type != ICollidable.ObjectType.Door &&

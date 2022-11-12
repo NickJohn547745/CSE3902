@@ -57,7 +57,7 @@ namespace sprint0.Enemies
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
-                game.CollisionManager.collidables.Add(goriyaStateMachine.Boomerang);
+                CollisionManager.Collidables.Add(goriyaStateMachine.Boomerang);
                 boomerangTracker++;
             } else if (!goriyaStateMachine.BoomerangThrown)
             {
@@ -67,12 +67,12 @@ namespace sprint0.Enemies
             }      
         }
 
-        protected override void Death(CollisionManager manager)
+        protected override void Death()
         {
             if (deadCount >= DeathFrames)
             {
-                manager.collidables.Remove(this);
-                manager.collidables.Remove(goriyaStateMachine.Boomerang);
+                CollisionManager.Collidables.Remove(this);
+                CollisionManager.Collidables.Remove(goriyaStateMachine.Boomerang);
                 goriyaStateMachine.BoomerangThrown = false;
             }
         }

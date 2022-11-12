@@ -1,4 +1,6 @@
-﻿namespace sprint0.GameStateClasses;
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace sprint0.GameStateClasses;
 using Microsoft.Xna.Framework;
 
 public class ItemSelectState : GameState
@@ -14,7 +16,7 @@ public class ItemSelectState : GameState
         
     }
 
-    public override void Draw(GameTime gameTime)
+    public override void Draw(SpriteBatch spriteBatch)
     {
         
     }

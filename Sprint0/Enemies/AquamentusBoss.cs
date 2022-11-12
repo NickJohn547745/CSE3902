@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Factories;
 
@@ -42,9 +43,9 @@ namespace sprint0.Enemies
             {
                 Vector2 fireBallSpawn = Position;
                 fireBallSpawn.Y += FireBallOffsetY;
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
             }
             fireBallTracker++;
         }

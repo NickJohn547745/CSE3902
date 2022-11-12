@@ -6,6 +6,7 @@ using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
 using sprint0.Sound;
 using System;
+using sprint0.Classes;
 
 namespace sprint0.PlayerClasses; 
 
@@ -96,8 +97,8 @@ public class Player : IPlayer {
     public void TakeDamage(int damage) {
         Health -= damage;
         Game.Player = new DamagedPlayer(this, Game);
-        Game.CollidablesToAdd.Add(Game.Player);
-        Game.CollidablesToDelete.Add(this);
+        CollisionManager.Collidables.Add(Game.Player);
+        CollisionManager.Collidables.Remove(this);
         SoundManager.Manager.linkDamageSound().Play();
     }
 

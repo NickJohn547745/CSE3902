@@ -1,4 +1,6 @@
-﻿namespace sprint0.GameStateClasses;
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace sprint0.GameStateClasses;
 using Microsoft.Xna.Framework;
 
 public class GamePauseState : GameState
@@ -14,7 +16,7 @@ public class GamePauseState : GameState
         
     }
 
-    public override void Draw(GameTime gameTime)
+    public override void Draw(SpriteBatch spriteBatch)
     {
         
     }

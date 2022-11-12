@@ -91,11 +91,11 @@ namespace sprint0.Enemies
             }
         }
 
-        protected virtual void Death(CollisionManager manager)
+        protected virtual void Death()
         {
             if (deadCount >= DeathFrames)
             {
-                manager.collidables.Remove(this);
+                CollisionManager.Collidables.Remove(this);
                 SoundManager.Manager.enemyDeadSound().Play();
             }
         }
@@ -122,7 +122,7 @@ namespace sprint0.Enemies
                 stunCount++;
             }
 
-            Death(game.CollisionManager);
+            Death();
             
             canMove = true;
         }
