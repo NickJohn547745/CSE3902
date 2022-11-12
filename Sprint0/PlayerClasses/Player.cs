@@ -17,7 +17,7 @@ public class Player : IPlayer {
     public PlayerInventory PlayerInventory;
     public ICollidable.ObjectType type { get; set; }
     public Vector2 Position { get; set; }
-    public int Health { get; set; }
+    public int Health { get; private set; }
     public int ScaleFactor { get; set; }
     public Game1 Game { get; set; }
     public bool IsMultiSprite { get; set; }
@@ -26,15 +26,17 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
-
-
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(200, 200);
         initPosition = Position;
-
-        Reset(Game);
+        Reset();
+    }
+    
+    public int GetHealth()
+    {
+        return Health;
     }
     
     public Rectangle GetHitBox()
@@ -72,15 +74,9 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
-
-        if (Health <= 0)
-        {
-            game.ResetLevel();
-            Reset(game);
-        }
     }
 
-    public void Reset(Game1 game)
+    public void Reset()
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);

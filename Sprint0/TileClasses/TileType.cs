@@ -72,7 +72,7 @@ namespace sprint0.TileClasses
             // Empty - Not used
         }
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // Empty - Not used
         }

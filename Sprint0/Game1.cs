@@ -115,6 +115,7 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
+        keyboard.BindCommand(Keys.Escape, new PauseGameCommand(), IController.KeyState.Pressed);
         
         // For testing purposes only
         keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
@@ -169,7 +170,8 @@ public class Game1 : Game {
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
         
-        gameState = new GamePlayState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager);
+        gameState = new GamePlayState();
+        gameState.Initialize(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager);
         gameState.Room = room;
 
         SoundManager.Manager.LoadContent(Content);
@@ -194,11 +196,11 @@ public class Game1 : Game {
 
         _spriteBatch.End();
     }
+    
     public void Reset()
     {
         currentLevelIndex = 0;
-        
-        Player.Reset(this);
-
+        gameState = new GamePlayState();
+        Player.Reset();
     }
 }

@@ -9,21 +9,33 @@ namespace sprint0.GameStateClasses;
 public class GamePlayState : GameState
 {
 
-    private HUD mainHUD;
-    
-    public GamePlayState(Game1 game, HUD hud, IPlayer link, CollisionManager manager)
+    public GamePlayState()
     {
-        this.game = game;
-        mainHUD = hud;
-        player = link;
-        collisionManager = manager;
+        
     }
-    
+
+    private void PlayerDeath()
+    {
+        if (player.GetHealth() <= 0)
+        {
+            game.ResetLevel();
+            player.Reset();
+            game.gameState = new GameOverState();
+        }
+    }
+
+    public override void PauseGame()
+    {
+        game.gameState = new GamePauseState();
+    }
+
     public override void Update(GameTime gameTime)
     {
         collisionManager.Update(gameTime, game);
 
         mainHUD.Update(new PlayerInventory(), 3);
+
+        PlayerDeath();
     }
 
     public override void Draw(SpriteBatch spriteBatch)

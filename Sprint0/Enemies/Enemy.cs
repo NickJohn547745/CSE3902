@@ -166,7 +166,7 @@ namespace sprint0.Enemies
             }
         }
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             Position = initPosition;
             Health = MaxHealth;

@@ -69,7 +69,7 @@ namespace sprint0.PlayerClasses
             // nothing
         }
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // nothing
         }

@@ -63,7 +63,7 @@ namespace sprint0.DoorClasses
         public abstract Rectangle GetHitBox();
         public abstract Type GetObjectType();
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // Not needed
         }

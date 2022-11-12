@@ -32,7 +32,7 @@ namespace sprint0.ItemClasses.Pickups
             Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
         }
 
-        public void Reset(Game1 game) {
+        public void Reset() {
             
         }
     }

@@ -35,6 +35,6 @@ namespace sprint0.Interfaces
 
         public void Draw(SpriteBatch spriteBatch);
 
-        public void Reset(Game1 game);
+        public void Reset();
     }
 }

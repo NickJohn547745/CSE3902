@@ -30,7 +30,11 @@ public class DamagedPlayer : IPlayer {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
         type = ICollidable.ObjectType.Player;
-        
+    }
+
+    public int GetHealth()
+    {
+        return decoratedPlayer.Health;
     }
 
     void RemoveDecorator() {
@@ -79,10 +83,10 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.Update(gameTime, game);
     }
 
-    public void Reset(Game1 game)
+    public void Reset()
     {
         RemoveDecorator();
-        decoratedPlayer.Reset(game);
+        decoratedPlayer.Reset();
     }
 
     public void TakeDamage(int damage) {

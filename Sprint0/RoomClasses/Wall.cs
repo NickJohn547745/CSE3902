@@ -29,7 +29,7 @@ namespace sprint0.RoomClasses
 
         public abstract Rectangle GetHitBox();
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // Not needed
         }

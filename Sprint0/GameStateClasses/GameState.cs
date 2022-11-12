@@ -9,14 +9,27 @@ namespace sprint0.GameStateClasses;
 
 public abstract class GameState : IGameState
 {
-    protected Game1 game;
-    protected IPlayer player;
-    protected CollisionManager collisionManager;
+    protected static Game1 game;
+    protected static IPlayer player;
+    protected static CollisionManager collisionManager;
+    protected static HUD mainHUD;
     public Room Room { get; set; }
+
+    public void Initialize(Game1 game, HUD hud, IPlayer link, CollisionManager manager)
+    {
+        GameState.game = game;
+        mainHUD = hud;
+        player = link;
+        collisionManager = manager;
+    }
     
     public abstract void Update(GameTime gameTime);
     public abstract void Draw(SpriteBatch spriteBatch);
 
+    public virtual void PauseGame()
+    {
+        
+    }
     
     public void Reset()
     {
