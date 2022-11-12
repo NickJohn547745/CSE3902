@@ -318,7 +318,7 @@ public class Game1 : Game {
         Room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         Room.Initialize();
 
-        MainHUD = new HUD(this, new PlayerInventory(), 3, font);
+        MainHUD = new HUD(this, this.Player.GetInventory(), this.Player.GetHealth(), font);
 
 
         SoundManager.Manager.LoadContent(Content);
@@ -329,7 +329,7 @@ public class Game1 : Game {
 
         CollisionManager.Update(gameTime, this);
 
-        MainHUD.Update(new PlayerInventory(), 3);
+        MainHUD.Update(this.Player.GetInventory(), this.Player.GetHealth());
 
         if (CollidablesToDelete != null) {
             CollisionManager.collidables = CollisionManager.collidables.Except(CollidablesToDelete).ToList();
