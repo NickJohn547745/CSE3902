@@ -14,7 +14,7 @@ namespace sprint0.RoomClasses
     public abstract class Wall : ICollidable
     {
         public int Damage { get; set; }
-        public ICollidable.objectType type { get; set; }
+        public ICollidable.ObjectType type { get; set; }
 
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -29,7 +29,7 @@ namespace sprint0.RoomClasses
 
         public abstract Rectangle GetHitBox();
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // Not needed
         }

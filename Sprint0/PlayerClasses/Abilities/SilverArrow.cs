@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -24,7 +25,8 @@ public class SilverArrow : Ability{
             Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
         }
         Velocity = Vector2.Multiply(velocity, new Vector2(7));
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Ability;
+        Damage = 4;
     }
 
     public override void Draw(SpriteBatch spriteBatch) {
@@ -46,20 +48,25 @@ public class SilverArrow : Ability{
             hitFrame++;
 
         if (hitFrame == 5) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.SilverArrow);
         }
     }
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Wall) {
-            Velocity = Vector2.Zero;
-            sprite = PlayerSpriteFactory.Instance.GetArrowHitSprite();
-            if (hitFrame == 0)
-                hitFrame = 1;
-        }
+        switch (obj.type) {
+            case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Tile:
+            case ICollidable.ObjectType.Enemy:
+            case ICollidable.ObjectType.Door:
 
+                Velocity = Vector2.Zero;
+                sprite = PlayerSpriteFactory.Instance.GetArrowHitSprite();
+                if (hitFrame == 0)
+                    hitFrame = 1;
+                break;
+        }
     }
     
 }

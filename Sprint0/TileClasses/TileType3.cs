@@ -13,7 +13,7 @@ namespace sprint0.TileClasses
     {
         public TileType3(int x, int y)
         {
-            type = ICollidable.objectType.Tile;
+            type = ICollidable.ObjectType.Tile;
             IsCollidable = true;
 
             this.SetLocation(x, y);

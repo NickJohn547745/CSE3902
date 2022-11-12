@@ -10,6 +10,7 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int RandBound = 4;
+        private const int StalfosHealth = 2;
 
         private Dictionary<int, Vector2> DirectionChoice;
         
@@ -22,14 +23,10 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
-            MaxHealth = 2;
-            Health = MaxHealth;
+            MaxHealth = StalfosHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));
@@ -38,6 +35,11 @@ namespace sprint0.Enemies
             DirectionChoice.Add(3, new Vector2(0, 1));
         }
 
+        protected override void Stun()
+        {
+            stunCount++;
+        }
+        
         protected override void Behavior(GameTime gameTime, Game1 game)
         {
             Random rand = new Random();

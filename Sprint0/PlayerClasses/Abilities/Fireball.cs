@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -21,7 +22,7 @@ public class Fireball : Ability {
             Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
         finalPosition = Vector2.Add(Position, Vector2.Multiply(velocity, new Vector2(128)));
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Ability;
     }
 
     //Vector2 normalizedVelocity = Vector2.Normalize(velocity);
@@ -39,14 +40,14 @@ public class Fireball : Ability {
         }
 
         if (waitFrames == 20) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.Fireball);
         }
     }
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Wall) {
+        if (obj.type == ICollidable.ObjectType.Wall) {
             Velocity = Vector2.Zero;
             finalPosition = Position;
         }

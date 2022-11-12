@@ -47,7 +47,7 @@ public abstract class PlayerAbilityState : IPlayerState {
     
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile)
+        if (obj.type == ICollidable.ObjectType.Enemy || obj.type == ICollidable.ObjectType.Projectile)
         {
             player.TakeDamage(obj.Damage);
             Knockback();

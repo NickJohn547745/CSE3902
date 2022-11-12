@@ -6,6 +6,6 @@ public class MoveDownCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-            game.Player.MoveDown();
+        if (!game.Paused) game.Player.MoveDown();
     }
 }

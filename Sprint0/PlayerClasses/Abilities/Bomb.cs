@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 
@@ -18,7 +19,7 @@ public class Bomb : Ability {
         else {
             Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Ability;
     }
 
     public override void Update(GameTime gameTime, Game1 game) {
@@ -33,7 +34,7 @@ public class Bomb : Ability {
             animationFrame = 3;
         }
         else if (frameCounter == 75) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.Bomb);
         }
     }

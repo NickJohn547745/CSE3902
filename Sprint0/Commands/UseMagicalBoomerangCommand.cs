@@ -8,7 +8,10 @@ public class UseMagicalBoomerangCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.UseAbility(AbilityTypes.MagicalBoomerang);
-        SoundManager.Manager.arrowBoomerangSound().Play();
+        if (!game.Paused)
+        {
+            game.Player.UseAbility(AbilityTypes.MagicalBoomerang);
+            SoundManager.Manager.arrowBoomerangSound().Play();
+        }
     }
 }

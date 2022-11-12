@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
@@ -17,7 +18,7 @@ public class DamagedPlayer : IPlayer {
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
     public Vector2 PreviousPosition { get; set; }
-    public ICollidable.objectType type { get; set; }
+    public ICollidable.ObjectType type { get; set; }
 
 
     public int Damage {
@@ -28,14 +29,18 @@ public class DamagedPlayer : IPlayer {
     public DamagedPlayer(Player decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
-        type = ICollidable.objectType.Player;
-        
+        type = ICollidable.ObjectType.Player;
+    }
+
+    public int GetHealth()
+    {
+        return decoratedPlayer.Health;
     }
 
     void RemoveDecorator() {
         Game.Player = decoratedPlayer;
-        Game.CollidablesToAdd.Add(Game.Player);
-        Game.CollidablesToDelete.Add(this);
+        CollisionManager.Collidables.Add(Game.Player);
+        CollisionManager.Collidables.Remove(this);
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -47,7 +52,7 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
-        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
         {
             decoratedPlayer.Velocity = Vector2.Zero;
             decoratedPlayer.Collide(obj, edge);
@@ -78,10 +83,10 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.Update(gameTime, game);
     }
 
-    public void Reset(Game1 game)
+    public void Reset()
     {
         RemoveDecorator();
-        decoratedPlayer.Reset(game);
+        decoratedPlayer.Reset();
     }
 
     public void TakeDamage(int damage) {

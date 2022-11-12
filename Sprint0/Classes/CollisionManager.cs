@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
-using sprint0.RoomClasses;
 using System;
 using System.Collections.Generic;
 
@@ -9,11 +8,14 @@ namespace sprint0.Classes
 {
     public class CollisionManager
     {
-        public List<ICollidable> collidables { get; set; }
+        public static List<ICollidable> Collidables { get; set; }
+        private IPlayer Player;
 
-        public CollisionManager(List<ICollidable> collidables)
+        public CollisionManager(IPlayer player)
         {
-            this.collidables = collidables;
+            Collidables = new List<ICollidable>();
+            Player = player;
+            Collidables.Add(Player);
         }
 
         private int CompareBounds(ICollidable source1, ICollidable source2)
@@ -58,62 +60,75 @@ namespace sprint0.Classes
             obj.Collide(current, objEdge);
         }
 
-        // uses sort and sweep algortithm
-        public void DetectCollisions()
+        private int RemoveInactive(List<ICollidable> active, int currentX, int j)
         {
-            // store hitboxes with X values that overlap with collidable[i]
+            while (Collidables[j].GetHitBox().X + Collidables[j].GetHitBox().Width < currentX)
+            {
+                active.Remove(Collidables[j]);
+                j++;
+            }
+            return j;
+        }
+
+        private void ActiveCollision(List<ICollidable> active, int i)
+        {
+            foreach (ICollidable obj in active)
+            {
+                if (Collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
+                {
+                    CollisionResponse(Collidables[i], obj);
+                }
+            }
+        }
+
+        // uses sort and sweep algorithm
+        private void DetectCollisions()
+        {
+            // store hit-boxes with X values that overlap with collidable[i]
             List<ICollidable> active = new List<ICollidable>();
             int currentX = 0;
             int j = 0;
 
             // sort collidables in ascending order by Hitbox x-value
-            collidables.Sort(CompareBounds);
+            Collidables.Sort(CompareBounds);
 
-            for (int i = 0; i < collidables.Count; i++)
+            for (int i = 0; i < Collidables.Count; i++)
             {
-                currentX = collidables[i].GetHitBox().X;
+                currentX = Collidables[i].GetHitBox().X;
 
-                // remove hitboxes that are out of active zone
-                while (collidables[j].GetHitBox().X + collidables[j].GetHitBox().Width < currentX)
-                {
-                    active.Remove(collidables[j]);
-                    j++;
-                }
+                j = RemoveInactive(active, currentX, j);
 
-                // check if active hitBoxes are colliding with current hitBox
-                foreach (ICollidable obj in active)
-                {
-                    if (collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
-                    {
-                        CollisionResponse(collidables[i], obj);
-                    }
-                }
+                ActiveCollision(active, i);
 
-                active.Add(collidables[i]);
+                active.Add(Collidables[i]);
             }
         }
 
         public void Update(GameTime gameTime, Game1 game) {
-            for (int i = 0; i < collidables.Count; i++)
+            for (int i = 0; i < Collidables.Count; i++)
             {
-                collidables[i].Update(gameTime, game);
+                Collidables[i].Update(gameTime, game);
             }
             DetectCollisions();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            List<ICollidable> frontCollidables = new List<ICollidable>();
-            
-            foreach (ICollidable collidable in collidables)
+            foreach (ICollidable collidable in Collidables)
             {
-                if (collidable.type != ICollidable.objectType.Wall &&
-                    collidable.type != ICollidable.objectType.Door &&
-                    collidable.type != ICollidable.objectType.Tile)
+                if (collidable.type != ICollidable.ObjectType.Wall &&
+                    collidable.type != ICollidable.ObjectType.Door &&
+                    collidable.type != ICollidable.ObjectType.Tile)
                 {
                     collidable.Draw(spriteBatch);
                 }
             }
+        }
+
+        public void Reset()
+        {
+            Collidables.Clear();
+            Collidables.Add(Player);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Factories;
 
@@ -12,7 +13,7 @@ namespace sprint0.Enemies
         private const int FireBallOffsetY = 30;
         private const float FireBallDirection = (float) 2/3;
         private const int RandBound = 3;
-        private const int AquamentusHealth= 4;
+        private const int AquamentusHealth= 6;
 
         private int fireBallTracker;
 
@@ -27,13 +28,9 @@ namespace sprint0.Enemies
             delay = BehaviorDelay;
             fireBallTracker = 1;
             MaxHealth = AquamentusHealth;
-            Health = MaxHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -46,9 +43,9 @@ namespace sprint0.Enemies
             {
                 Vector2 fireBallSpawn = Position;
                 fireBallSpawn.Y += FireBallOffsetY;
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
-                game.CollisionManager.collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
+                CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
             }
             fireBallTracker++;
         }

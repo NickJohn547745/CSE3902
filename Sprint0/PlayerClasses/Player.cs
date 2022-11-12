@@ -6,6 +6,7 @@ using sprint0.PlayerClasses.Abilities;
 using sprint0.RoomClasses;
 using sprint0.Sound;
 using System;
+using sprint0.Classes;
 
 namespace sprint0.PlayerClasses; 
 
@@ -14,9 +15,9 @@ public class Player : IPlayer {
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
-    public ICollidable.objectType type { get; set; }
+    public ICollidable.ObjectType type { get; set; }
     public Vector2 Position { get; set; }
-    public int Health { get; set; }
+    public int Health { get; private set; }
     public int ScaleFactor { get; set; }
     public Game1 Game { get; set; }
     public bool IsMultiSprite { get; set; }
@@ -25,15 +26,17 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
-
-
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(200, 200);
         initPosition = Position;
-
-        Reset(Game);
+        Reset();
+    }
+    
+    public int GetHealth()
+    {
+        return Health;
     }
     
     public Rectangle GetHitBox()
@@ -43,7 +46,7 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Wall || obj.type == ICollidable.objectType.Tile)
+        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
         {
             switch (edge)
             {
@@ -71,15 +74,9 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
-
-        if (Health <= 0)
-        {
-            game.ResetLevel();
-            Reset(game);
-        }
     }
 
-    public void Reset(Game1 game)
+    public void Reset()
     {
         Position = initPosition;
         PlayerState = new PlayerFacingUpState(this);
@@ -89,15 +86,15 @@ public class Player : IPlayer {
         Health = 6;
         ScaleFactor = 4;
         Damage = 0;
-        type = ICollidable.objectType.Player;
+        type = ICollidable.ObjectType.Player;
         Velocity = Vector2.Zero;
     }
 
     public void TakeDamage(int damage) {
         Health -= damage;
         Game.Player = new DamagedPlayer(this, Game);
-        Game.CollidablesToAdd.Add(Game.Player);
-        Game.CollidablesToDelete.Add(this);
+        CollisionManager.Collidables.Add(Game.Player);
+        CollisionManager.Collidables.Remove(this);
         SoundManager.Manager.linkDamageSound().Play();
     }
 

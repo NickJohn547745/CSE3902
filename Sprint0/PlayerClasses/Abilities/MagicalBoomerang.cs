@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.RoomClasses;
@@ -21,12 +22,12 @@ public class MagicalBoomerang : Ability {
             Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
         }
         else {
-            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth() / 2, sprite.GetHeight() * (velocity.Y - 1)/2));
         }
         initialPosition = Position;
         Velocity = Vector2.Multiply(velocity, new Vector2((float)9));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.1));
-        type = ICollidable.objectType.Ability;
+        type = ICollidable.ObjectType.Boomerang;
     }
     
     public override void Update(GameTime gameTime, Game1 game) {
@@ -43,23 +44,25 @@ public class MagicalBoomerang : Ability {
             hitFrame++;
         
         if (hitFrame == 5 || (Vector2.Distance(initialPosition, Position) < 5 && frameCounter > 20)) {
-            game.CollidablesToDelete.Add(this);
+            CollisionManager.Collidables.Remove(this);
             player.AbilityManager.RemoveCurrentAbility(AbilityTypes.MagicalBoomerang);
         }
     }
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.objectType.Wall) {
-            Velocity = Vector2.Zero;
-            sprite = PlayerSpriteFactory.Instance.GetBoomerangHitSprite();
-            if (hitFrame == 0)
-                hitFrame = 1;
+        switch (obj.type)
+        {
+            case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Tile:
+                Velocity = Vector2.Zero;
+                sprite = PlayerSpriteFactory.Instance.GetBoomerangHitSprite();
+                if (hitFrame == 0)
+                    hitFrame = 1;
+                break;
+            case ICollidable.ObjectType.Player:
+                hitFrame = 4;
+                break;
         }
-
-        if (obj.GetType() == typeof(Player)) {
-            hitFrame = 4;
-        }
-
     }
 }

@@ -17,6 +17,7 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 70;
         private const int DirectionChange = 4;
+        private const int GoriyaHealth = 3;
 
         private GoriyaStateMachine goriyaStateMachine;
         private int boomerangTracker;
@@ -32,19 +33,21 @@ namespace sprint0.Enemies
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection();
-            MaxHealth = 3;
-            Health = MaxHealth;
+            MaxHealth = GoriyaHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
         }
-        
+
         protected override void ReverseDirection()
         {
             goriyaStateMachine.flipped = true;
+
+        }
+        
+        protected override void Stun()
+        {
+            stunCount++;
         }
 
         protected override void Behavior(GameTime gameTime, Game1 game)
@@ -54,7 +57,7 @@ namespace sprint0.Enemies
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
-                game.CollisionManager.collidables.Add(goriyaStateMachine.Boomerang);
+                CollisionManager.Collidables.Add(goriyaStateMachine.Boomerang);
                 boomerangTracker++;
             } else if (!goriyaStateMachine.BoomerangThrown)
             {
@@ -64,12 +67,12 @@ namespace sprint0.Enemies
             }      
         }
 
-        protected override void Death(CollisionManager manager)
+        protected override void Death()
         {
             if (deadCount >= DeathFrames)
             {
-                manager.collidables.Remove(this);
-                manager.collidables.Remove(goriyaStateMachine.Boomerang);
+                CollisionManager.Collidables.Remove(this);
+                CollisionManager.Collidables.Remove(goriyaStateMachine.Boomerang);
                 goriyaStateMachine.BoomerangThrown = false;
             }
         }

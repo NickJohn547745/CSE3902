@@ -19,7 +19,7 @@ namespace sprint0.TileClasses
         private Texture2D texture;
 
         public int Damage { get; set; }
-        public ICollidable.objectType type { get; set; }
+        public ICollidable.ObjectType type { get; set; }
         public bool IsCollidable { get; set; }
 
 
@@ -72,7 +72,7 @@ namespace sprint0.TileClasses
             // Empty - Not used
         }
 
-        public void Reset(Game1 game)
+        public void Reset()
         {
             // Empty - Not used
         }

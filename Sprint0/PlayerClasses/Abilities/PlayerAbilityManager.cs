@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using sprint0.Classes;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -53,7 +54,7 @@ public class PlayerAbilityManager {
 
             UsingAbility[abilityType] = true;
             if (currentAbility != null) {
-                Game.CollisionManager.collidables.Add(currentAbility);
+                CollisionManager.Collidables.Add(currentAbility);
             }
         }
     }

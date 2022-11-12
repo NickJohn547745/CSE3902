@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 
@@ -15,7 +16,7 @@ public class PlayerSwordUpState : PlayerSwordState {
         swordEdge = ICollidable.Edge.Top;
         backEdge = ICollidable.Edge.Bottom;
         sword = new PlayerSword(this.player, swordEdge);
-        this.player.Game.CollisionManager.collidables.Add(sword);
+        CollisionManager.Collidables.Add(sword);
     }
     public override Rectangle GetHitBox()
     {
@@ -41,7 +42,7 @@ public class PlayerSwordUpState : PlayerSwordState {
 
         if (animationFrame == 4)
         {
-            player.Game.CollisionManager.collidables.Remove(sword);
+            CollisionManager.Collidables.Remove(sword);
             player.PlayerState = new PlayerFacingUpState(player);        
         }
     }

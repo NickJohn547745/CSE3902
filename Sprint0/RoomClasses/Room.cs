@@ -48,21 +48,24 @@ namespace sprint0.RoomClasses
             RoomReady = false;
             bounds = new Rectangle(0, 0, 1280, 880);
 
-            foreach (ICollidable collidable in game.CollisionManager.collidables)
-            {
-                if (collidable.type == ICollidable.objectType.Enemy || collidable.type == ICollidable.objectType.Wall || 
-                    collidable.type == ICollidable.objectType.Tile || collidable.type == ICollidable.objectType.Door)
-                    game.CollidablesToDelete.Add(collidable);
-            }
+            //for (int i = 0; i < CollisionManager.Collidables.Count; i++)
+            //{
+            //    ICollidable.ObjectType type = CollisionManager.Collidables[i].type;
+            //    if (type == ICollidable.ObjectType.Enemy || type == ICollidable.ObjectType.Wall || 
+            //        type == ICollidable.ObjectType.Tile || type == ICollidable.ObjectType.Door)
+            //        CollisionManager.Collidables.Remove(CollisionManager.Collidables[i]);
+            //}
+            
+            game.CollisionManager.Reset();
 
-            game.CollidablesToAdd.Add(new TopLeftWall());
-            game.CollidablesToAdd.Add(new TopRightWall());
-            game.CollidablesToAdd.Add(new RightTopWall());
-            game.CollidablesToAdd.Add(new RightBottomWall());
-            game.CollidablesToAdd.Add(new BottomRightWall());
-            game.CollidablesToAdd.Add(new BottomLeftWall());
-            game.CollidablesToAdd.Add(new LeftBottomWall());
-            game.CollidablesToAdd.Add(new LeftTopWall());
+            CollisionManager.Collidables.Add(new TopLeftWall());
+            CollisionManager.Collidables.Add(new TopRightWall());
+            CollisionManager.Collidables.Add(new RightTopWall());
+            CollisionManager.Collidables.Add(new RightBottomWall());
+            CollisionManager.Collidables.Add(new BottomRightWall());
+            CollisionManager.Collidables.Add(new BottomLeftWall());
+            CollisionManager.Collidables.Add(new LeftBottomWall());
+            CollisionManager.Collidables.Add(new LeftTopWall());
 
             int rows = levelConfig.TileIds.Count;
 
@@ -76,7 +79,7 @@ namespace sprint0.RoomClasses
                     TileType tile = GetTileFromId(currentTileId, 160 + x * 80, 160 + y * 80);
                     tileList.Add(tile);
                     if (tile.IsCollidable)
-                        game.CollidablesToAdd.Add(tile);
+                        CollisionManager.Collidables.Add(tile);
                 }
             }
 
@@ -88,7 +91,7 @@ namespace sprint0.RoomClasses
                 door.Id = currentDoorId;
 
                 doorList.Add(door);
-                game.CollidablesToAdd.Add(door);
+                CollisionManager.Collidables.Add(door);
             }
 
 
@@ -153,12 +156,12 @@ namespace sprint0.RoomClasses
             foreach (TileType tile in tileList)
             {
                 if (tile.IsCollidable)
-                    game.CollidablesToAdd.Add(tile);
+                    CollisionManager.Collidables.Add(tile);
             }
 
             foreach (KeyValuePair<int, Tuple<Point, int>> enemy in levelConfig.Enemies)
             {
-                game.CollidablesToAdd.Add(GetEnemyFromId(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2));
+                CollisionManager.Collidables.Add(GetEnemyFromId(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2));
             }
         }
 
@@ -166,7 +169,7 @@ namespace sprint0.RoomClasses
         {
             if (transitioning && RoomReady)
             {
-                game.CollidablesToDelete.Add(game.Player);
+                CollisionManager.Collidables.Remove(game.Player);
                 if (dir == Direction.LEFT && roomOffset.X < 1285)
                 {
                     roomOffset.X += 5;
@@ -208,11 +211,11 @@ namespace sprint0.RoomClasses
                     roomOffset = new Point(0, 0);
                     transitioning = false;
 
-                    game.Room = nextRoom;
-                    game.Room.roomOffset = new Point();
-                    game.Room.Initialize();
+                    game.state.Room = nextRoom;
+                    game.state.Room.roomOffset = new Point();
+                    game.state.Room.Initialize();
 
-                    game.CollidablesToAdd.Add(game.Player);
+                    CollisionManager.Collidables.Add(game.Player);
 
                     foreach (Door door in doorList)
                     {

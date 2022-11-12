@@ -1,3 +1,4 @@
+using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 
@@ -15,7 +16,7 @@ public class PlayerSwordDownState : PlayerSwordState {
         swordEdge = ICollidable.Edge.Bottom;
         backEdge = ICollidable.Edge.Top;
         sword = new PlayerSword(this.player, swordEdge);
-        this.player.Game.CollisionManager.collidables.Add(sword);
+        CollisionManager.Collidables.Add(sword);
     }
 
     public override void Update()
@@ -31,7 +32,7 @@ public class PlayerSwordDownState : PlayerSwordState {
 
         if (animationFrame == 4)
         {
-            player.Game.CollisionManager.collidables.Remove(sword);
+            CollisionManager.Collidables.Remove(sword);
             player.PlayerState = new PlayerFacingDownState(player);
         }
     }

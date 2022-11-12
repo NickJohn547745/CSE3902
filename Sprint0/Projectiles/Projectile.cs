@@ -4,6 +4,7 @@ using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using System;
+using sprint0.Classes;
 
 namespace sprint0.Interfaces; 
 
@@ -15,7 +16,7 @@ public abstract class Projectile : ICollidable {
     protected Vector2 Position { get; set; }
     protected Vector2 initPosition;
     protected float speed;
-    public ICollidable.objectType type { get; set; }
+    public ICollidable.ObjectType type { get; set; }
     public Vector2 Velocity { get; set; }
     public ISprite Sprite { get; set; }
     public bool Collision { get; set; }
@@ -32,7 +33,15 @@ public abstract class Projectile : ICollidable {
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        Collision = obj.type != ICollidable.objectType.Projectile && obj.type != ICollidable.objectType.Enemy;
+        switch (obj.type)
+        {
+            case ICollidable.ObjectType.Door:
+            case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Tile:
+            case ICollidable.ObjectType.Player:
+                Collision = true;   
+                break;
+        }
     }
 
     protected abstract void Behavior(Game1 game);
@@ -46,7 +55,7 @@ public abstract class Projectile : ICollidable {
             Behavior(game);
         }
 
-        if (Collision && game.CollisionManager.collidables.Contains(this)) game.CollisionManager.collidables.Remove(this);
+        if (Collision && CollisionManager.Collidables.Contains(this)) CollisionManager.Collidables.Remove(this);
     }
     
     public virtual void Draw(SpriteBatch spriteBatch)
@@ -54,7 +63,7 @@ public abstract class Projectile : ICollidable {
         Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
     }
 
-    public void Reset(Game1 game)
+    public void Reset()
     {
         // temp
     }

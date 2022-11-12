@@ -47,18 +47,18 @@ public abstract class PlayerFacingState : IPlayerState {
     
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (edge != shield && (obj.type == ICollidable.objectType.Enemy || obj.type == ICollidable.objectType.Projectile))
+        if (edge != shield && (obj.type == ICollidable.ObjectType.Enemy || obj.type == ICollidable.ObjectType.Projectile))
         {
             player.TakeDamage(obj.Damage);
             Knockback();
         }
 
-        if (obj.type == ICollidable.objectType.ItemOneHand)
+        if (obj.type == ICollidable.ObjectType.ItemOneHand)
         {
             player.PlayerState = new PlayerItemPickupState(player, 2);
         }
 
-        if (obj.type == ICollidable.objectType.ItemTwoHands)
+        if (obj.type == ICollidable.ObjectType.ItemTwoHands)
         {
             player.PlayerState = new PlayerItemPickupState(player, 1);
         }

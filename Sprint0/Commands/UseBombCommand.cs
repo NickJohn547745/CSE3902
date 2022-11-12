@@ -8,7 +8,10 @@ public class UseBombCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.UseAbility(AbilityTypes.Bomb);
-        SoundManager.Manager.bombDropSound().Play();
+        if (!game.Paused)
+        { 
+            game.Player.UseAbility(AbilityTypes.Bomb);
+            SoundManager.Manager.bombDropSound().Play();
+        }
     }
 }

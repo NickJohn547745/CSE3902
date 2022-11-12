@@ -7,7 +7,10 @@ public class PlayerTakeDamageCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.TakeDamage(1);
-        SoundManager.Manager.linkDamageSound().Play();
+        if (!game.Paused)
+        {
+            game.Player.TakeDamage(1);
+            SoundManager.Manager.linkDamageSound().Play();
+        }
     }
 }

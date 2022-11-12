@@ -11,7 +11,7 @@ namespace sprint0.Commands
     {
         public void Execute(Game1 game)
         {
-            game.PreviousLevel();
+            if (!game.Paused) game.PreviousLevel();
         }
     }
 }

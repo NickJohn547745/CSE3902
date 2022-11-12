@@ -28,13 +28,9 @@ namespace sprint0.Enemies
             Velocity = Vector2.One;
             delay = BehaviorDelay;
             MaxHealth = 1;
-            Health = MaxHealth;
             Damage = 1;
-            damageDelay = 0;
-            damaged = false;
-            color = Color.White;
-            deadCount = 0;
-            type = ICollidable.objectType.Enemy;
+            
+            InitEnemyFields();
 
             DirectionChoice = new Dictionary<int, Vector2>();
             DirectionChoice.Add(0, new Vector2(0, -1));
