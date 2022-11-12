@@ -15,14 +15,16 @@ public class GameState : IGameState
     public HUD mainHUD { get; set; }
     public Room Room { get; set; }
     public AGameState currentState { get; set; }
+    public SpriteFont Font { get; set; }
 
-    public GameState(Game1 game, HUD hud, IPlayer link, CollisionManager manager, Room room)
+    public GameState(Game1 game, HUD hud, IPlayer link, CollisionManager manager, Room room, SpriteFont font)
     {
         this.game = game;
         mainHUD = hud;
         player = link;
         collisionManager = manager;
         Room = room;
+        Font = font;
         currentState = new GamePlayState(this);
     }
     

@@ -15,6 +15,7 @@ namespace sprint0.Classes
         {
             Collidables = new List<ICollidable>();
             Player = player;
+            Collidables.Add(Player);
         }
 
         private int CompareBounds(ICollidable source1, ICollidable source2)

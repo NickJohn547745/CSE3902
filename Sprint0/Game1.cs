@@ -166,13 +166,11 @@ public class Game1 : Game {
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
         CollisionManager = new CollisionManager(Player);
-        
-        CollisionManager.Collidables.Add(Player);
 
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
         
-        state = new GameState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room);
+        state = new GameState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }
