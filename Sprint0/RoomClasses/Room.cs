@@ -211,9 +211,9 @@ namespace sprint0.RoomClasses
                     roomOffset = new Point(0, 0);
                     transitioning = false;
 
-                    game.gameState.Room = nextRoom;
-                    game.gameState.Room.roomOffset = new Point();
-                    game.gameState.Room.Initialize();
+                    game.state.Room = nextRoom;
+                    game.state.Room.roomOffset = new Point();
+                    game.state.Room.Initialize();
 
                     CollisionManager.Collidables.Add(game.Player);
 

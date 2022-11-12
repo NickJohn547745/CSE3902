@@ -1,33 +1,51 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+
 namespace sprint0.GameStateClasses;
 
 
-public class GamePauseState : GameState
+public class GamePauseState : AGameState
 {
-    
-    public GamePauseState()
+    private float previous;
+    public GamePauseState(GameState state)
     {
-        
+        gameState = state;       
+        gameState.game.Paused = true;
+        Mute();
     }
-    
+
+    private void Mute()
+    {
+        previous = SoundEffect.MasterVolume;
+        SoundEffect.MasterVolume = 0.0f;
+    }
+
+    private void Unmute()
+    {
+        SoundEffect.MasterVolume = previous;
+    }
+
     public override void Update(GameTime gameTime)
     {
         
     }
 
-    public override void PauseGame()
+    public override void TogglePause()
     {
-        game.gameState = new GamePlayState();
+        gameState.game.Paused = false;
+
+        Unmute();
+
+        gameState.game.state = new GamePlayState(gameState);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        mainHUD.Draw(spriteBatch);
+        gameState.mainHUD.Draw(spriteBatch);
 
-        Room.Draw(spriteBatch);
-        
-        collisionManager.Draw(spriteBatch);
+        gameState.Room.Draw(spriteBatch);
+
+        gameState.collisionManager.Draw(spriteBatch);
     }
 }

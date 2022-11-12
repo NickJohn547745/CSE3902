@@ -23,8 +23,9 @@ public class Game1 : Game {
     public List<IController> Controllers { get; set; }
     public List<LevelConfig> LevelList { get; set; }
    
+    public bool Paused { get; set; }
 
-    public IGameState gameState;
+    public IGameState state;
 
     private int startingLevelIndex = 0;
 
@@ -60,7 +61,7 @@ public class Game1 : Game {
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
+        state.Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
     public void NextLevel()
@@ -70,13 +71,13 @@ public class Game1 : Game {
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
+        state.Room = new Room(this, LevelList[currentLevelIndex]);
     }
 
     public void ResetLevel()
     {
         currentLevelIndex = startingLevelIndex;
-        gameState.Room = new Room(this, LevelList[currentLevelIndex]);
+        state.Room = new Room(this, LevelList[currentLevelIndex]);
 
         // Reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
         
@@ -84,6 +85,7 @@ public class Game1 : Game {
 
     protected override void Initialize() {
         // TODO: Add your initialization logic here
+        Paused = false;
         base.Initialize();
     }
 
@@ -115,7 +117,7 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.K, new PreviousLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
-        keyboard.BindCommand(Keys.Escape, new PauseGameCommand(), IController.KeyState.Pressed);
+        keyboard.BindCommand(Keys.Escape, new TogglePauseCommand(), IController.KeyState.Pressed);
         
         // For testing purposes only
         keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
@@ -170,9 +172,7 @@ public class Game1 : Game {
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
         
-        gameState = new GamePlayState();
-        gameState.Initialize(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager);
-        gameState.Room = room;
+        state = new GameState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room);
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -180,7 +180,7 @@ public class Game1 : Game {
     protected override void Update(GameTime gameTime) {
         Controllers.ForEach(controller => controller.Update(this));
 
-        gameState.Update(gameTime);
+        state.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -190,7 +190,7 @@ public class Game1 : Game {
         
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        gameState.Draw(_spriteBatch);
+        state.Draw(_spriteBatch);
 
         base.Draw(gameTime);
 
@@ -200,7 +200,7 @@ public class Game1 : Game {
     public void Reset()
     {
         currentLevelIndex = 0;
-        gameState = new GamePlayState();
+        state.Reset();
         Player.Reset();
     }
 }

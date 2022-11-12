@@ -6,7 +6,11 @@ namespace sprint0.Commands;
 public class PlayerSwordAttackCommand : ICommand {
     public void Execute(Game1 game)
     {
-        game.Player.SwordAttack();
-        SoundManager.Manager.swordSound().Play();
+        if (!game.Paused)
+        {
+            game.Player.SwordAttack();
+            SoundManager.Manager.swordSound().Play();
+
+        }
     }
 }

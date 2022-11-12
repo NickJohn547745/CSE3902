@@ -8,7 +8,10 @@ public class UseWoodenArrowCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.UseAbility(AbilityTypes.WoodenArrow);
-        SoundManager.Manager.arrowBoomerangSound().Play();
+        if (!game.Paused)
+        {
+            game.Player.UseAbility(AbilityTypes.WoodenArrow);
+            SoundManager.Manager.arrowBoomerangSound().Play();
+        }
     }
 }

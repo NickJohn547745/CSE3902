@@ -8,7 +8,10 @@ public class UseFireballCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.UseAbility(AbilityTypes.Fireball);
-        SoundManager.Manager.fireballSound().Play();
+        if (!game.Paused)
+        {
+            game.Player.UseAbility(AbilityTypes.Fireball);
+            SoundManager.Manager.fireballSound().Play();
+        }
     }
 }

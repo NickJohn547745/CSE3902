@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace sprint0.GameStateClasses;
 
-public class GameOverState : GameState
+public class GameOverState : AGameState
 {
     
-    public GameOverState()
+    public GameOverState(GameState state)
     {
-        
+        gameState = state;   
     }
     
     public override void Update(GameTime gameTime)

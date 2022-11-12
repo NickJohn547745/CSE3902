@@ -6,6 +6,6 @@ public class MoveRightCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        game.Player.MoveRight();
+        if (!game.Paused) game.Player.MoveRight();
     }
 }

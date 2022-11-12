@@ -7,32 +7,42 @@ using sprint0.RoomClasses;
 
 namespace sprint0.GameStateClasses;
 
-public abstract class GameState : IGameState
+public class GameState : IGameState
 {
-    protected static Game1 game;
-    protected static IPlayer player;
-    protected static CollisionManager collisionManager;
-    protected static HUD mainHUD;
+    public Game1 game { get; set; }
+    public IPlayer player { get; set; }
+    public CollisionManager collisionManager { get; private set; }
+    public HUD mainHUD { get; set; }
     public Room Room { get; set; }
+    public AGameState currentState { get; set; }
 
-    public void Initialize(Game1 game, HUD hud, IPlayer link, CollisionManager manager)
+    public GameState(Game1 game, HUD hud, IPlayer link, CollisionManager manager, Room room)
     {
-        GameState.game = game;
+        this.game = game;
         mainHUD = hud;
         player = link;
         collisionManager = manager;
+        Room = room;
+        currentState = new GamePlayState(this);
     }
     
-    public abstract void Update(GameTime gameTime);
-    public abstract void Draw(SpriteBatch spriteBatch);
-
-    public virtual void PauseGame()
+    public void Update(GameTime gameTime)
     {
-        
+        currentState.Update(gameTime);
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        currentState.Draw(spriteBatch);
+    }
+
+    public virtual void TogglePause()
+    {
+        currentState.TogglePause();
     }
     
     public void Reset()
     {
-        
+        currentState.Reset();
     }
 }

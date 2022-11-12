@@ -4,9 +4,9 @@ using sprint0.PlayerClasses;
 
 namespace sprint0.Commands; 
 
-public class PauseGameCommand : ICommand {
+public class TogglePauseCommand : ICommand {
     public void Execute(Game1 game)
     {
-        game.gameState.PauseGame();
+        game.state.TogglePause();
     }
 }

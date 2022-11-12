@@ -6,44 +6,44 @@ using Microsoft.Xna.Framework;
 
 namespace sprint0.GameStateClasses;
 
-public class GamePlayState : GameState
+public class GamePlayState : AGameState
 {
 
-    public GamePlayState()
+    public GamePlayState(GameState state)
     {
-        
+        gameState = state;
     }
 
     private void PlayerDeath()
     {
-        if (player.GetHealth() <= 0)
+        if (gameState.player.GetHealth() <= 0)
         {
-            game.ResetLevel();
-            player.Reset();
-            game.gameState = new GameOverState();
+            gameState.game.ResetLevel();
+            gameState.player.Reset();
+            gameState.game.state = new GameOverState(gameState);
         }
     }
 
-    public override void PauseGame()
+    public override void TogglePause()
     {
-        game.gameState = new GamePauseState();
+        gameState.game.state = new GamePauseState(gameState);
     }
 
     public override void Update(GameTime gameTime)
     {
-        collisionManager.Update(gameTime, game);
+        gameState.collisionManager.Update(gameTime, gameState.game);
 
-        mainHUD.Update(new PlayerInventory(), 3);
+        gameState.mainHUD.Update(new PlayerInventory(), 3);
 
         PlayerDeath();
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        mainHUD.Draw(spriteBatch);
+        gameState.mainHUD.Draw(spriteBatch);
 
-        Room.Draw(spriteBatch);
+        gameState.Room.Draw(spriteBatch);
         
-        collisionManager.Draw(spriteBatch);
+        gameState.collisionManager.Draw(spriteBatch);
     }
 }

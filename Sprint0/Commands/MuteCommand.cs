@@ -9,7 +9,10 @@ public class MuteCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        if (SoundEffect.MasterVolume == 1.0f) SoundEffect.MasterVolume = 0.0f;
-        else SoundEffect.MasterVolume = 1.0f;
+        if (!game.Paused)
+        {
+            if (SoundEffect.MasterVolume == 1.0f) SoundEffect.MasterVolume = 0.0f;
+            else SoundEffect.MasterVolume = 1.0f;
+        }
     }
 }

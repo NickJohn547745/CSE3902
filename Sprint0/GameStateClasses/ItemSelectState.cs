@@ -2,15 +2,16 @@
 
 namespace sprint0.GameStateClasses;
 using Microsoft.Xna.Framework;
+using sprint0.Interfaces;
 
-public class ItemSelectState : GameState
+public class ItemSelectState : AGameState
 {
     
-    public ItemSelectState()
+    public ItemSelectState(GameState state)
     {
-        
+        gameState = state;
     }
-    
+
     public override void Update(GameTime gameTime)
     {
         

@@ -6,6 +6,6 @@ public class ResetGameCommand : ICommand
 { 
     public void Execute(Game1 game)
     {
-            game.Reset();
+        if (!game.Paused) game.Reset();
     }
 }
