@@ -117,11 +117,6 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.UseAbility(abilityType);
     }
 
-    public int GetHealth()
-    {
-        return decoratedPlayer.GetHealth();
-    }
-
     public PlayerInventory GetInventory()
     {
         return decoratedPlayer.GetInventory();
