@@ -47,4 +47,27 @@ public class GameState : IGameState
     {
         currentState.Reset();
     }
+
+    public void TransitionState(GameStates newState)
+    {
+        switch (newState)
+        {
+            case GameStates.Pause:
+                currentState = new GamePauseState(this);
+                break;
+            case GameStates.Play:
+                currentState = new GamePlayState(this);
+                break;
+            case GameStates.Inventory:
+                if(currentState.GetType() != typeof(InventoryState))
+                    currentState = new InventoryState(this);
+                else
+                    currentState = new GamePlayState(this);
+                
+                break;
+            default:
+                break;
+        }
+    }
+    
 }

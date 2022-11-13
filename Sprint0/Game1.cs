@@ -118,6 +118,7 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.L, new NextLevelCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.E, new PlayerTakeDamageCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.Escape, new TogglePauseCommand(), IController.KeyState.Pressed);
+        keyboard.BindCommand(Keys.Enter, new InventoryScreenCommand(), IController.KeyState.Pressed);
         
         // For testing purposes only
         keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);

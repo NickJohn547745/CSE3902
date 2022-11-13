@@ -44,6 +44,10 @@ namespace sprint0.Classes
             fireballSpritesheet,
             goriyaProjectileSpritesheet,
             oldManSpritesheet;
+        
+        // Menu Spritesheets
+        private static Texture2D
+            inventorySpritesheet;
 
         // Other Spritesheets
         private static Texture2D
@@ -55,6 +59,7 @@ namespace sprint0.Classes
             rightDoorsSpritesheet,
             bottomDoorsSpritesheet,
             leftDoorsSpritesheet;
+        
 
         private static ContentManager content;
 
@@ -65,6 +70,7 @@ namespace sprint0.Classes
             LoadPlayerTextures();
             LoadItemTextures();
             LoadEnemyTextures();
+            LoadMenuTextures();
             LoadOtherTextures();
         }
         private static void LoadPlayerTextures()
@@ -104,6 +110,12 @@ namespace sprint0.Classes
             fireballSpritesheet = content.Load<Texture2D>(prefix + "fireball");
             goriyaProjectileSpritesheet = content.Load<Texture2D>(prefix + "goriyaprojectile");
             oldManSpritesheet = content.Load<Texture2D>(prefix + "oldMan");
+        }
+
+        private static void LoadMenuTextures()
+        {
+            String prefix = "Spritesheets/Menu/";
+            inventorySpritesheet = content.Load<Texture2D>(prefix + "inventorySpritesheet");
         }
 
         private static void LoadOtherTextures()
@@ -256,6 +268,11 @@ namespace sprint0.Classes
         public static Texture2D GetOldManSpritesheet()
         {
             return oldManSpritesheet;
+        }
+        
+        public static Texture2D GetInventorySpritesheet()
+        {
+            return inventorySpritesheet;
         }
     }
 }

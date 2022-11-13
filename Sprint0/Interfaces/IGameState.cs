@@ -3,6 +3,7 @@ using sprint0.PlayerClasses.Abilities;
 using Microsoft.Xna.Framework;
 using System;
 using sprint0.Classes;
+using sprint0.GameStateClasses;
 using sprint0.RoomClasses;
 
 namespace sprint0.Interfaces; 
@@ -14,4 +15,5 @@ public interface IGameState
     public void Draw(SpriteBatch spriteBatch);
     public void TogglePause();
     public void Reset();
+    public void TransitionState(GameStates newState);
 }
