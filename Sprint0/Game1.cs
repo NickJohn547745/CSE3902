@@ -170,7 +170,7 @@ public class Game1 : Game {
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
         
-        state = new GameState(this, new HUD(this, new PlayerInventory(), Player.GetHealth(), font), Player, CollisionManager, room, font);
+        state = new GameState(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }
