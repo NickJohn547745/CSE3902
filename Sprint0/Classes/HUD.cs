@@ -125,8 +125,8 @@ namespace sprint0.Classes
             float countX = countVector.X;
             float countY = countVector.Y;
 
-            int scaleY = 50;
-            int scaleX = 26;
+            const int scaleY = 50;
+            const int scaleX = 26;
 
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
             spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
@@ -153,7 +153,7 @@ namespace sprint0.Classes
 
             Texture2D itemTextureA = GetItemToDraw(currentAbilityA);
 
-            int offsetY = 45;
+            const int offsetY = 45;
             Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureA, destinationRectangle, Color.White);
 
@@ -169,7 +169,7 @@ namespace sprint0.Classes
 
             Texture2D itemTextureB = GetItemToDraw(currentAbilityB);
 
-            int offsetY = 45;
+            const int offsetY = 45;
             Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
         }
@@ -185,11 +185,11 @@ namespace sprint0.Classes
             spriteBatch.DrawString(Font, "-LIFE-", LifeTextVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
 
-            int offsetX = 35;
-            int offsetY = 50;
+            const int offsetX = 35;
+            const int offsetY = 50;
             Rectangle heartRectangle = new Rectangle(0, 0, 7, 8);
-            int destinationHeight = 30;
-            int destinationWidth = 30;
+            const int destinationHeight = 30;
+            const int destinationWidth = 30;
 
             const int MAXHEALTHINROW = 8;
             int rowCount = 0;
