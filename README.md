@@ -1,6 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: October 23, 2022
+##### Date: November 14, 2022
 
 # Sprint4:
 
@@ -47,3 +47,4 @@
 * Player can shoot an arrow during room transition (fix in transition state refactor
 * Player sometimes disappears when movig between rooms while damaged
 * Room transitions sometimes spawn player in tile
+* Boomerang should be able to fly over "water" tiles in certain rooms
