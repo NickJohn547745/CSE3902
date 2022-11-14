@@ -93,11 +93,11 @@ namespace sprint0.Classes
             currentAbilityA = Inventory.GetCurrentA();
             currentAbilityB = Inventory.GetCurrentB();
 
-            Bombs = Inventory.GetBombs();
+            Bombs = Inventory.BombCount;
 
-            Keys = Inventory.GetKeys();
+            Keys = Inventory.KeyCount;
 
-            Rupees = Inventory.GetRupees();
+            Rupees = Inventory.RupeeCount;
 
             Level = 1;
 

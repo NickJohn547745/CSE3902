@@ -1,36 +1,43 @@
 using System;
 using System.Collections.Generic;
+using sprint0.ItemClasses;
 using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
 public class PlayerInventory {
-    public Dictionary<AbilityTypes, int> AbilityCounts { get;set;}
-
-    public PlayerInventory() {
-        AbilityCounts = new Dictionary<AbilityTypes, int>();
-        AbilityCounts.Add(AbilityTypes.Bomb, 4);
-        AbilityCounts.Add(AbilityTypes.WoodenBoomerang, 1);
-        AbilityCounts.Add(AbilityTypes.MagicalBoomerang, 1);
-        AbilityCounts.Add(AbilityTypes.WoodenArrow, 1);
-        AbilityCounts.Add(AbilityTypes.SilverArrow, 1);
-        AbilityCounts.Add(AbilityTypes.Fireball, 1);
-    }
+    public Dictionary<AbilityTypes, int> AbilityCounts { get; set; }
     
-    public int GetKeys()
-    {
-        return 3;
-        // return AbilityCounts[AbilityTypes.Bomb];
-    }
+    public int SwordTier { get; set; }
+    
+    
+    public int BoomerangTier { get; set; }
+    public int BombCount { get; set; }
+    public int ArrowTier { get; set; }
+    public bool BowUnlocked { get; set; }
+    
+    public int CandleTier { get; set; }
 
-    public int GetRupees()
+    public int RupeeCount { get; set; }
+    public int KeyCount { get; set; }
+    
+    public bool MapUnlocked { get; set; }
+    public bool CompassUnlocked { get; set; }
+    
+    public AbilityTypes CurrentAbility { get; set; }
+
+    public PlayerInventory()
     {
-        return 20;
-        // return rupees;
-    }
-    public int GetBombs()
-    {
-        return AbilityCounts[AbilityTypes.Bomb];
+        BombCount = 4;
+        BoomerangTier = 1;
+        ArrowTier = 1;
+        BowUnlocked = false;
+        CandleTier = 2;
+        RupeeCount = 0;
+        KeyCount = 0;
+        MapUnlocked = false;
+        CompassUnlocked = false;
+        CurrentAbility = AbilityTypes.Bomb;
     }
 
     // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory

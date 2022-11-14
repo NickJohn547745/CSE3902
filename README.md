@@ -26,6 +26,7 @@
 * L - Move to next room
 * Left Click - Move to previous room
 * Right Click - Move to next room
+* B - Cycle Link's ability in Inventory Screen
 
 ### Other controls
 * G - spawn Bow to test item pickup

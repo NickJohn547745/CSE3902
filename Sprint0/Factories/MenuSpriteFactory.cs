@@ -46,4 +46,20 @@ public class MenuSpriteFactory
         List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(604, 137, 8, 16) };
         return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
     }
+    public ISprite ArrowSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(615, 137, 8, 16),new Rectangle(624, 137, 8, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+    public ISprite BowSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(633, 137, 8, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+    
+    public ISprite CandleSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(644, 137, 8, 16),new Rectangle(653, 137, 8, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
 }
