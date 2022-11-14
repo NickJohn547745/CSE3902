@@ -8,6 +8,6 @@ public class SpawnItemPickupCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        if (!game.Paused) CollisionManager.Collidables.Add(new BowPickup());
+        if (!game.Paused) CollisionManager.Collidables.Add(new BowPickup(game.Player));
     }
 }

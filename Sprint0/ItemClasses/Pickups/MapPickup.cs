@@ -9,8 +9,9 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public MapPickup() 
+        public MapPickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.MapSprite();
             Position = new Vector2(300, 300);
@@ -20,6 +21,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.MapUnlocked = true;
                 readyToDelete = true;
             }
         }

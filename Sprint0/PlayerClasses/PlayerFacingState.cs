@@ -52,13 +52,11 @@ public abstract class PlayerFacingState : IPlayerState {
             player.TakeDamage(obj.Damage);
             Knockback();
         }
-
-        if (obj.type == ICollidable.ObjectType.ItemOneHand)
+        else if (obj.type == ICollidable.ObjectType.ItemOneHand)
         {
             player.PlayerState = new PlayerItemPickupState(player, 2);
         }
-
-        if (obj.type == ICollidable.ObjectType.ItemTwoHands)
+        else if (obj.type == ICollidable.ObjectType.ItemTwoHands)
         {
             player.PlayerState = new PlayerItemPickupState(player, 1);
         }

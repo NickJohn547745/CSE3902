@@ -68,4 +68,17 @@ public class MenuSpriteFactory
         List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(258, 112, 256, 88) };
         return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
     }
+    public ISprite MapItemSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(601, 156, 8, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+    
+    public ISprite CompassItemSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(612, 156, 15, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+    
+    
 }

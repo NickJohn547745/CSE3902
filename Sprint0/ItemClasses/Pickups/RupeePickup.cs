@@ -10,8 +10,9 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public RupeePickup() 
+        public RupeePickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.RupeeSprite();
             Position = new Vector2(300, 300);
@@ -21,6 +22,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.RupeeCount++;
                 readyToDelete = true;
             }
         }

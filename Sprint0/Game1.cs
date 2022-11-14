@@ -120,6 +120,8 @@ public class Game1 : Game {
         keyboard.BindCommand(Keys.Escape, new TogglePauseCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.Enter, new InventoryScreenCommand(), IController.KeyState.Pressed);
         keyboard.BindCommand(Keys.B, new CycleAbilityCommand(), IController.KeyState.Pressed);
+        
+        keyboard.BindCommand(Keys.G, new SpawnItemPickupCommand(), IController.KeyState.Pressed);
 
         keyboard.BindCommand(Keys.M, new MuteCommand(), IController.KeyState.Pressed);
 

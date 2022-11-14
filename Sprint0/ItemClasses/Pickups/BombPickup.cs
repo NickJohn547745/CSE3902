@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using sprint0.Classes;
 using sprint0.Factories;
@@ -9,8 +10,9 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public BombPickup() 
+        public BombPickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.BombSprite();
             Position = new Vector2(300, 300);
@@ -20,6 +22,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.BombCount = Math.Min(8, Inventory.BombCount + 4);
                 readyToDelete = true;
             }
         }

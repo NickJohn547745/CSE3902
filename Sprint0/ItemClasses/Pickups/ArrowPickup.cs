@@ -8,8 +8,9 @@ namespace sprint0.ItemClasses.Pickups
     public class ArrowPickup : Item
     {
         private int animationFrames = 0;
-        public ArrowPickup() 
+        public ArrowPickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.ItemOneHand;
             Sprite = ItemSpriteFactory.Instance.ArrowSprite();
             Position = new Vector2(300, 300);
@@ -19,6 +20,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.ArrowTier = 1;
                 Position = Vector2.Subtract(new Vector2(obj.GetHitBox().X, obj.GetHitBox().Y), new Vector2(0, Sprite.GetHeight()));
                 if (animationFrames == 0)
                     animationFrames = 1;

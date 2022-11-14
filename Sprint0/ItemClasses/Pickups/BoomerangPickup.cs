@@ -8,8 +8,9 @@ namespace sprint0.ItemClasses.Pickups
     public class BoomerangPickup : Item
     {
         private bool readyToDelete = false;
-        public BoomerangPickup() 
+        public BoomerangPickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.BoomerangSprite();
             Position = new Vector2(300, 300);
@@ -19,6 +20,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.BoomerangTier = 1;
                 readyToDelete = true;
             }
         }

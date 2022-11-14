@@ -9,8 +9,9 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public KeyPickup() 
+        public KeyPickup(IPlayer player)
         {
+            Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.KeySprite();
             Position = new Vector2(300, 300);
@@ -20,6 +21,7 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.type == ICollidable.ObjectType.Player)
             {
+                Inventory.KeyCount++;
                 readyToDelete = true;
             }
         }

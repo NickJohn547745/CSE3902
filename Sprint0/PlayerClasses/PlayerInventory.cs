@@ -31,7 +31,7 @@ public class PlayerInventory {
         BombCount = 4;
         BoomerangTier = 0;
         ArrowTier = 1;
-        BowUnlocked = true;
+        BowUnlocked = false;
         CandleTier = 2;
         RupeeCount = 0;
         KeyCount = 0;

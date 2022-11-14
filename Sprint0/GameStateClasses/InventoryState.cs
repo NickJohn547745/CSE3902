@@ -13,6 +13,7 @@ public class InventoryState : AGameState
         gameState = state;
         AbilitySelect.Instance.UpdateInventory(gameState.player.GetInventory());
         AbilitySection = AbilitySelect.Instance;
+        DungeonMap.Instance.UpdateInventory(gameState.player.GetInventory());
         MapSection = DungeonMap.Instance;
     }
 
