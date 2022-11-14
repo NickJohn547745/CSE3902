@@ -243,5 +243,10 @@ namespace sprint0.Classes
             DrawItemB(spriteBatch);
             DrawLife(spriteBatch);
         }
+
+        public Point ConvertCoordinates(Point position)
+        {
+            return position;
+        }
     }
 }
