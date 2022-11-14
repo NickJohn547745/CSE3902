@@ -79,8 +79,25 @@ namespace sprint0.FileReaderClasses
                                 string[] enemyData = enemyText.Trim().Split(' ');
                                 List<int> enemyList = enemyData.Select(int.Parse).ToList();
 
-                                LevelConfig.Enemies.Add(enemyList[0], 
-                                    new Tuple<Point, int>(new Point(enemyList[2], enemyList[3]), enemyList[1]));
+                                LevelConfig.Enemies.Add(new Tuple<int, Point, int>(enemyList[0],
+                                    new Point(enemyList[2], enemyList[3]), enemyList[1]));
+                            }
+
+                            break;
+                        }
+                    case "Items":
+                        {
+                            XmlNodeList items = settingNode.ChildNodes;
+
+                            foreach (XmlNode item in items)
+                            {
+                                string itemText = item.InnerText;
+
+                                string[] itemData = itemText.Trim().Split(' ');
+                                List<int> itemList = itemData.Select(int.Parse).ToList();
+
+                                LevelConfig.Items.Add(new Tuple<int, Point>(itemList[0],
+                                    new Point(itemList[1], itemList[2])));
                             }
 
                             break;

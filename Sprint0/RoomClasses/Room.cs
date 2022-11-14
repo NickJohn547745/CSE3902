@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.DoorClasses;
 using sprint0.Enemies;
+using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.TileClasses;
 
@@ -55,7 +56,7 @@ namespace sprint0.RoomClasses
             //        type == ICollidable.ObjectType.Tile || type == ICollidable.ObjectType.Door)
             //        CollisionManager.Collidables.Remove(CollisionManager.Collidables[i]);
             //}
-            
+
             game.CollisionManager.Reset();
 
             CollisionManager.Collidables.Add(new TopLeftWall());
@@ -128,7 +129,8 @@ namespace sprint0.RoomClasses
 
                     nextRoom = new Room(game, destinationLevelConfig);
                     nextRoom.levelConfig = destinationLevelConfig;
-                } else
+                }
+                else
                 {
                     door.HasCollided = false;
                 }
@@ -159,9 +161,14 @@ namespace sprint0.RoomClasses
                     CollisionManager.Collidables.Add(tile);
             }
 
-            foreach (KeyValuePair<int, Tuple<Point, int>> enemy in levelConfig.Enemies)
+            foreach (Tuple<int, Point, int> enemy in levelConfig.Enemies)
             {
-                CollisionManager.Collidables.Add(GetEnemyFromId(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2));
+                CollisionManager.Collidables.Add(GetEnemyFromId(enemy.Item1, enemy.Item2.X, enemy.Item2.Y, enemy.Item3));
+            }
+
+            foreach (Tuple<int, Point> item in levelConfig.Items)
+            {
+                CollisionManager.Collidables.Add(ItemObjectFactory.Instance.CreateItemById(item.Item1, item.Item2.X, item.Item2.Y));
             }
         }
 

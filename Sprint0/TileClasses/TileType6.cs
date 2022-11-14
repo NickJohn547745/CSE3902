@@ -15,7 +15,7 @@ namespace sprint0.TileClasses
         public TileType6(int x, int y)
         {
             type = ICollidable.ObjectType.Tile;
-            IsCollidable = true;
+            IsCollidable = false;
 
             this.SetLocation(x, y);
             this.SetTextureCoords(0, 1);
