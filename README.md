@@ -45,6 +45,6 @@
 * Moving through the top door causes a downwards room transition
 * HUD should be at top of screen (at least it is in the actual game)
 * Player can shoot an arrow during room transition (fix in transition state refactor
-* Player sometimes disappears when movig between rooms while damaged
+* Player sometimes disappears when movig between rooms while damaged (or allow player to move around screen during transition)
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
