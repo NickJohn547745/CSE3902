@@ -31,7 +31,7 @@ namespace sprint0.Enemies
         protected float speed;
         protected int deadCount;
 
-        private bool canMove = true;
+        protected bool canMove = true;
 
         public Vector2 Velocity { get; set; }
         public ISprite Sprite { get; set; }

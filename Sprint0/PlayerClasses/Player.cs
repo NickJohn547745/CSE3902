@@ -53,21 +53,6 @@ public class Player : IPlayer {
         
         if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
         {
-            // switch (edge)
-            // {
-            //    case ICollidable.Edge.Top:
-            //        Position += new Vector2(0, -3);
-            //        break;
-            //    case ICollidable.Edge.Right:
-            //        Position += new Vector2(-3, 0);
-            //        break;
-            //    case ICollidable.Edge.Left:
-            //        Position += new Vector2(3, 0);
-            //        break;
-            //    case ICollidable.Edge.Bottom:
-            //        Position += new Vector2(0, 3);
-            //        break;
-            //}
             CanMove = false;
         }
         PlayerState.Collide(obj, edge);

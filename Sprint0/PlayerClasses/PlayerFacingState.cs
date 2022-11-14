@@ -51,6 +51,7 @@ public abstract class PlayerFacingState : IPlayerState {
         switch (obj.type)
         {
             case ICollidable.ObjectType.Enemy:
+            case ICollidable.ObjectType.Trap:
             case ICollidable.ObjectType.Projectile:
                 if (edge != shield)
                 {

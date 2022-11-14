@@ -12,6 +12,7 @@ using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
 using sprint0.GameStateClasses;
 using sprint0.Sound;
+using sprint0.Enemies;
 
 namespace sprint0;
 
@@ -169,7 +170,10 @@ public class Game1 : Game {
 
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
-        
+
+        // for testing
+        CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 60, Player));
+
         state = new GameState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);

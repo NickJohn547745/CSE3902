@@ -152,5 +152,24 @@ namespace sprint0.Factories
 
             return new BasicSprite(spriteSheet, frameSources, ExplosionDelay, ExplosionScale);
         }
+
+        public ISprite CreateWallMasterSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetWallmasterSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width / 2, spriteSheet.Height));
+            frameSources.Add(new Rectangle(spriteSheet.Width / 2, 0, spriteSheet.Width / 2, spriteSheet.Height));
+
+            return new BasicSprite(spriteSheet, frameSources, KeeseDelay, KeeseScale);
+        }
+
+        public ISprite CreateTrapSprite()
+        {
+            Texture2D spriteSheet = TextureStorage.GetTrapSpritesheet();
+            List<Rectangle> frameSources = new List<Rectangle>();
+            frameSources.Add(new Rectangle(0, 0, spriteSheet.Width, spriteSheet.Height));
+
+            return new BasicSprite(spriteSheet, frameSources, KeeseDelay, KeeseScale);
+        }
     }
 }
