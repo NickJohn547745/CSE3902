@@ -48,3 +48,4 @@
 * Player sometimes disappears when movig between rooms while damaged (or allow player to move around screen during transition)
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
+* Boomerang should return to player, not just initial position
