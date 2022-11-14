@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
@@ -13,7 +14,7 @@ public class AbilitySelect
     
     private ISprite SelectedAbility { get; set; }
     private int SelectedAbilityTier { get; set; }
-    private int cursorPosition { get; set; }
+    private int CursorPosition { get; set; }
     
     private ISprite Boomerang { get; set; }
     private ISprite Bomb { get; set; }
@@ -22,6 +23,8 @@ public class AbilitySelect
     private ISprite Candle { get; set; }
 
     private PlayerInventory Inventory;
+    
+    private List<Vector2> CursorPositions { get; set; }
     
     private static AbilitySelect instance = new AbilitySelect();
     
@@ -34,15 +37,20 @@ public class AbilitySelect
 
     private AbilitySelect()
     {
-        cursorPosition = 1;
+        CursorPosition = 1;
         SelectedAbilityTier = 1;
+        SelectBackground = MenuSpriteFactory.Instance.ItemSelectSprite();
+        SelectionCursor = MenuSpriteFactory.Instance.SelectionCursorSprite();
+        CursorPositions = new List<Vector2>();
+        CursorPositions.Add(new Vector2(SelectionCursor.GetWidth() * 8, SelectionCursor.GetHeight() * 3));
+        CursorPositions.Add(new Vector2(SelectionCursor.GetWidth() * (float)9.5, SelectionCursor.GetHeight() * 3));
+        CursorPositions.Add(new Vector2(SelectionCursor.GetWidth() * 11, SelectionCursor.GetHeight() * 3));
+        CursorPositions.Add(new Vector2(SelectionCursor.GetWidth() * (float)12.5, SelectionCursor.GetHeight() * 3));
     }
 
     public void UpdateInventory(PlayerInventory inventory)
     {
         Inventory = inventory;
-        SelectBackground = MenuSpriteFactory.Instance.ItemSelectSprite();
-        SelectionCursor = MenuSpriteFactory.Instance.SelectionCursorSprite();
 
         if (inventory.BoomerangTier > 0)
         {
@@ -52,6 +60,10 @@ public class AbilitySelect
         if (inventory.BombCount > 0)
         {
             Bomb = MenuSpriteFactory.Instance.BombSprite();
+        }
+        else
+        {
+            Bomb = null;
         }
 
         if (inventory.ArrowTier > 0)
@@ -69,7 +81,36 @@ public class AbilitySelect
             Candle = MenuSpriteFactory.Instance.CandleSprite();
         }
 
-        SelectedAbility = Boomerang;
+        if (SelectedAbility == null)
+        {
+            CursorPosition = 1;
+            if (Boomerang != null)
+            {
+                SelectedAbility = Boomerang;
+                SelectedAbilityTier = Inventory.BoomerangTier;
+            }
+            else if (Bomb != null)
+            {
+                CursorPosition = 2;
+                SelectedAbility = Bomb;
+            }
+            else if (Arrow != null && Bow != null)
+            {
+                CursorPosition = 3;
+                SelectedAbility = Arrow;
+                SelectedAbilityTier = Inventory.ArrowTier;
+            }
+            else if (Candle != null)
+            {
+                CursorPosition = 4;
+                SelectedAbility = Candle;
+                SelectedAbilityTier = Inventory.CandleTier;
+            }
+            else
+            {
+                SelectedAbility = Boomerang;
+            }
+        }
     }
 
     public void Update()
@@ -79,7 +120,7 @@ public class AbilitySelect
     public void Draw(SpriteBatch spriteBatch)
     {
         SelectBackground.Draw(spriteBatch, Vector2.Zero, SpriteEffects.None, Color.White);
-        SelectionCursor.Draw(spriteBatch, new Vector2(SelectionCursor.GetWidth() * 8, SelectionCursor.GetHeight() * 3), SpriteEffects.None, Color.White);
+        SelectionCursor.Draw(spriteBatch, CursorPositions[CursorPosition - 1], SpriteEffects.None, Color.White);
         if (Boomerang != null)
         {
             Boomerang.Draw(spriteBatch, new Vector2(SelectionCursor.GetWidth() * 8 + Boomerang.GetWidth()/2, SelectionCursor.GetHeight() * 3), Inventory.BoomerangTier -1, SpriteEffects.None, Color.White);
@@ -102,12 +143,12 @@ public class AbilitySelect
         bool flag = false;
         while (loops < 4 && !flag)
         {
-            cursorPosition++;
-            if (cursorPosition > 4)
+            CursorPosition++;
+            if (CursorPosition > 4)
             {
-                cursorPosition = 1;
+                CursorPosition = 1;
             }
-            if (cursorPosition == 1 && Inventory.BoomerangTier > 0)
+            if (CursorPosition == 1 && Inventory.BoomerangTier > 0)
             {
                 SelectedAbility = Boomerang;
                 SelectedAbilityTier = Inventory.BoomerangTier;
@@ -117,13 +158,13 @@ public class AbilitySelect
                 else
                     Inventory.CurrentAbility = AbilityTypes.MagicalBoomerang;
             }
-            else if (cursorPosition == 2 && Inventory.BombCount > 0)
+            else if (CursorPosition == 2 && Inventory.BombCount > 0)
             {
                 SelectedAbility = Bomb;
                 flag = true;
                 Inventory.CurrentAbility = AbilityTypes.Bomb;
             }
-            else if (cursorPosition == 3 && Inventory.ArrowTier > 0 && Inventory.BowUnlocked)
+            else if (CursorPosition == 3 && Inventory.ArrowTier > 0 && Inventory.BowUnlocked)
             {
                 SelectedAbility = Arrow;
                 SelectedAbilityTier = Inventory.ArrowTier;
@@ -133,7 +174,7 @@ public class AbilitySelect
                 else
                     Inventory.CurrentAbility = AbilityTypes.SilverArrow;
             }
-            else if (cursorPosition == 4 && Inventory.CandleTier > 0)
+            else if (CursorPosition == 4 && Inventory.CandleTier > 0)
             {
                 SelectedAbility = Candle;
                 SelectedAbilityTier = Inventory.CandleTier;

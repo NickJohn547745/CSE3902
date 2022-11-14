@@ -6,21 +6,25 @@ namespace sprint0.GameStateClasses;
 
 public class InventoryState : AGameState
 {
-    private AbilitySelect abilitySelect { get; set; }
+    private AbilitySelect AbilitySection { get; set; }
+    private DungeonMap MapSection { get; set; }
     public InventoryState(GameState state)
     {
         gameState = state;
         AbilitySelect.Instance.UpdateInventory(gameState.player.GetInventory());
-        abilitySelect = AbilitySelect.Instance;
+        AbilitySection = AbilitySelect.Instance;
+        MapSection = DungeonMap.Instance;
     }
 
     public override void Update(GameTime gameTime)
     {
-        
+        gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth());
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        abilitySelect.Draw(spriteBatch);
+        AbilitySection.Draw(spriteBatch);
+        MapSection.Draw(spriteBatch);
+        gameState.mainHUD.Draw(spriteBatch);
     }
 }

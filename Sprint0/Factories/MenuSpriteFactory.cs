@@ -59,7 +59,13 @@ public class MenuSpriteFactory
     
     public ISprite CandleSprite()
     {
-        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(644, 137, 8, 16),new Rectangle(653, 137, 8, 16) };
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(644, 137, 8, 16), new Rectangle(653, 137, 8, 16) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+
+    public ISprite DungeonMapSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(258, 112, 256, 88) };
         return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
     }
 }
