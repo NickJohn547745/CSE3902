@@ -14,6 +14,7 @@ namespace sprint0.Classes
 {
     public class HUD
     {
+        Vector2 PlayerPosition { get; set; }
         public Game1 Game { get; set; }
         public PlayerInventory Inventory { get; set; }
         public AbilityTypes currentAbilityA { get; set; }
@@ -52,11 +53,11 @@ namespace sprint0.Classes
 
 
         // currentA and currentB may be better implemented in the inventory class. They are just needed to display the equipped items
-        public HUD (Game1 game, PlayerInventory inventory, int currentHealth, SpriteFont font)
+        public HUD (Game1 game, PlayerInventory inventory, int currentHealth, Vector2 position, SpriteFont font)
         {
             Game = game;
             Font = font;
-            Update(inventory, currentHealth);
+            Update(inventory, currentHealth, position);
 
             nextWidth = (float)(.275 * HUDWidth);
 
@@ -84,10 +85,11 @@ namespace sprint0.Classes
            
         }
 
-        public void Update(PlayerInventory inventory, int currentHealth)
+        public void Update(PlayerInventory inventory, int currentHealth, Vector2 position)
         {
             Inventory = inventory;
             Health = currentHealth;
+            PlayerPosition = position;
 
             // currently won't work for things not in AbilityType enum
             currentAbilityA = Inventory.GetCurrentA();
@@ -244,9 +246,21 @@ namespace sprint0.Classes
             DrawLife(spriteBatch);
         }
 
-        public Point ConvertCoordinates(Point position)
+        public Vector2 ConvertCoordinates(Vector2 position)
         {
+            Vector2 MapBounds = Sections["Level"];
+            float MapXMin = MapBounds.X;
+            float MapYMin = MapBounds.Y + 33;
+
+            Vector2 CountBounds = Sections["Count"];
+            float MapXMax = CountBounds.X - 15;
+            float MapYMax = MapBounds.Y;
+
+            float MapWidth = MapXMax - MapXMin;
+            float MapHeight = MapYMax - MapYMin;
+
             return position;
         }
+
     }
 }

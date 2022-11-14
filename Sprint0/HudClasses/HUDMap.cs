@@ -13,7 +13,7 @@ namespace sprint0.HudClasses
 {
     public class HUDMap : IMap
     {
-        public Point PlayerPosition { get; set; }
+        public Vector2 PlayerPosition { get; set; }
         public bool MapFound { get; set; }
         public Game1 game { get; set; }
 
