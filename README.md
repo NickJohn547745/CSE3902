@@ -34,6 +34,23 @@
 * M - mute sound
 * Escape - pause game
 
+### GamePad Controls
+* Left Thumbstick Up - move Link up, make Link face up
+* Left Thumbstick Left - move Link left, make Link face left
+* Left Thumbstick Down - move Link down, make Link face down
+* Left Thumbstick Right - move Link right,make Link face right
+* Y - Use Link’s bomb ability
+* DPad Up- Use Link’s wooden boomerang ability
+* DPad Down - Use Link’s magical boomerang ability
+* DPad Right - Use Link’s wooden arrow ability
+* DPad Left - Use Link’s silver arrow ability
+* B - Use Link’s fireball ability
+* A - make Link attack with sword
+* Right Shoulder - move to next room
+* Left Shoudler - move to previous room
+* Back- quit game
+* Start - reset game
+
 ## Known Bugs
 * Link moves across screen when walking through doors
 * Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
