@@ -50,7 +50,7 @@ namespace sprint0.Enemies
             stunCount++;
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             // change direction 4 times
             if (boomerangTracker % DirectionChange == 0)

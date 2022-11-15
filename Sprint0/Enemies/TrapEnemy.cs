@@ -82,8 +82,7 @@ namespace sprint0.Enemies
 
             if (diff < initSpeed && diff > Proximity)
             {
-                if (speed >= ReduceSpeed);
-                    speed -= Acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (speed >= ReduceSpeed) speed -= Acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
             } else if (diff < Proximity)
             {
                 Position = initPosition;
@@ -91,7 +90,7 @@ namespace sprint0.Enemies
             }     
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             Vector2 playerPos = new Vector2(player.Position.X, player.Position.Y);
 

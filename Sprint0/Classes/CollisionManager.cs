@@ -152,10 +152,10 @@ namespace sprint0.Classes
         /// </summary>
         /// <param name="gameTime">Current <c>GameTime</c> object.</param>
         /// <param name="game">Parent <c>Game1</c> object.</param>
-        public void Update(GameTime gameTime, Game1 game) {
+        public void Update(GameTime gameTime) {
             for (int i = 0; i < Collidables.Count; i++)
             {
-                Collidables[i].Update(gameTime, game);
+                Collidables[i].Update(gameTime);
             }
             DetectCollisions();
         }

@@ -40,7 +40,7 @@ namespace sprint0.Projectiles
             if (Collision) goriya.BoomerangThrown = false;
         }
 
-        protected override void Behavior(Game1 game)
+        protected override void Behavior()
         {
             bool xMax = Math.Abs(Position.X - initPosition.X) >= speed * 2;
             bool yMax = Math.Abs(Position.Y - initPosition.Y) >= speed * 2;

@@ -41,7 +41,7 @@ public class GamePlayState : AGameState
 
     public override void Update(GameTime gameTime)
     {
-        gameState.collisionManager.Update(gameTime, gameState.game);
+        gameState.collisionManager.Update(gameTime);
 
         gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth(), gameState.game.GetLevelIndex());
 

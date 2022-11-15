@@ -34,7 +34,7 @@ namespace sprint0.RoomClasses
             // Not needed
         }
 
-        public void Update(GameTime gameTime, Game1 game)
+        public void Update(GameTime gameTime)
         {
 
         }

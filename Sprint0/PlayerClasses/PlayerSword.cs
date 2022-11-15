@@ -60,7 +60,7 @@ namespace sprint0.PlayerClasses
             }
             return new Rectangle(swordPosition, swordWH); 
         }
-        public void Update(GameTime gameTime, Game1 game)
+        public void Update(GameTime gameTime)
         {
             // nothing
         }

@@ -30,7 +30,7 @@ public class WoodenBoomerang : Ability {
         type = ICollidable.ObjectType.Boomerang;
     }
     
-    public override void Update(GameTime gameTime, Game1 game) {
+    public override void Update(GameTime gameTime) {
         frameCounter++;
         if (frameCounter % 5 == 0) {
             animationFrame++;

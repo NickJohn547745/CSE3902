@@ -22,7 +22,7 @@ public class Bomb : Ability {
         type = ICollidable.ObjectType.Ability;
     }
 
-    public override void Update(GameTime gameTime, Game1 game) {
+    public override void Update(GameTime gameTime) {
         frameCounter++;
         if (frameCounter == 60) {
             animationFrame = 1;

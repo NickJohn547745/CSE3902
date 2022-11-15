@@ -25,7 +25,7 @@ namespace sprint0.ItemClasses.Pickups
             return new Rectangle((int)Position.X, (int)Position.Y, Sprite.GetWidth(), Sprite.GetHeight());
         }
 
-        public virtual void Update(GameTime gameTime, Game1 game)
+        public virtual void Update(GameTime gameTime)
         {
             
         }

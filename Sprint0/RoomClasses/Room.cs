@@ -243,13 +243,15 @@ namespace sprint0.RoomClasses
             }
         }
 
-        public void Update(GameTime gameTime, Game1 game)
+        /*
+         * public void Update(GameTime gameTime)
         {
             foreach (Door door in doorList)
             {
-                door.Update(gameTime, game);
+                door.Update(gameTime);
             }
         }
+         */
 
         private TileType GetTileFromId(int id, int x, int y)
         {

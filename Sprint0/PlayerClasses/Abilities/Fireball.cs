@@ -31,7 +31,7 @@ public class Fireball : Ability {
         sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
     }
 
-    public override void Update(GameTime gameTime, Game1 game) {
+    public override void Update(GameTime gameTime) {
         if (Vector2.Distance(Position, finalPosition) < 5) {
             waitFrames++;
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Sprites;
@@ -38,11 +32,11 @@ namespace sprint0.Enemies
             InitEnemyFields();
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             if (Health < OldManHealth)
             {
-                Position = new Vector2((game.GetWindowWidth() - GetHitBox().Width ) / 2, (game.GetWindowHeight() - GetHitBox().Height ) / 2 - HUDOffset);
+                Position = new Vector2((Game1.WindowWidth - GetHitBox().Width ) / 2, (Game1.WindowHeight - GetHitBox().Height ) / 2 - HUDOffset);
                 Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
                 if (fireBallTracker % FireBallShoot == 0)
                 {

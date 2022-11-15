@@ -63,7 +63,7 @@ public class DamagedPlayer : IPlayer {
         return decoratedPlayer.GetHitBox();
     }
 
-    public void Update(GameTime gameTime, Game1 game) {
+    public void Update(GameTime gameTime) {
         timer--;
         frameCountdown++;
         PreviousPosition = decoratedPlayer.Position; 
@@ -80,7 +80,7 @@ public class DamagedPlayer : IPlayer {
             decoratedPlayer.Velocity = Vector2.Zero;
             RemoveDecorator();
         }
-        decoratedPlayer.Update(gameTime, game);
+        decoratedPlayer.Update(gameTime);
     }
 
     public void Reset()

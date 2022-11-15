@@ -38,7 +38,7 @@ namespace sprint0.Interfaces
 
         public Rectangle GetHitBox();
 
-        public void Update(GameTime gameTime, Game1 game);
+        public void Update(GameTime gameTime);
 
         public void Draw(SpriteBatch spriteBatch);
 

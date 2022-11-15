@@ -32,7 +32,7 @@ namespace sprint0.Enemies
             TakeDamage(1);
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             Random rand = new Random();
             Random rand2 = new Random();

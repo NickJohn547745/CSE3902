@@ -33,7 +33,7 @@ namespace sprint0.Enemies
             InitEnemyFields();
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             Random random = new Random();
             if (random.Next(0, RandBound) != 0) Velocity *= -1;

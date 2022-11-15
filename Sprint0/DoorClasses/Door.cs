@@ -69,7 +69,7 @@ namespace sprint0.DoorClasses
             // Not needed
         }
 
-        public void Update(GameTime gameTime, Game1 game)
+        public void Update(GameTime gameTime)
         {
             
         }
