@@ -47,6 +47,7 @@ namespace sprint0.FileReaderClasses
                                 tileIdArray.Add(trimmedRowArray.Select(int.Parse).ToList());
                             }
 
+
                             LevelConfig.TileIds = tileIdArray;
                             break;
                         }

@@ -3,6 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace sprint0.Interfaces
 {
+    public enum Direction {
+        Up = 0, 
+        Right = 1,
+        Down = 2,
+        Left = 3
+    };
     public interface ICollidable
     {
         public enum Edge {Top, Bottom, Left, Right };
