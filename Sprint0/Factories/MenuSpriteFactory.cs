@@ -80,5 +80,17 @@ public class MenuSpriteFactory
         return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
     }
     
+    public ISprite MapRoomSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(519, 108, 8, 8), new Rectangle(528, 108, 8, 8), new Rectangle(537, 108, 8, 8), new Rectangle(546, 108, 8, 8), new Rectangle(555, 108, 8, 8), new Rectangle(564, 108, 8, 8), new Rectangle(573, 108, 8, 8), new Rectangle(582, 108, 8, 8), new Rectangle(591, 108, 8, 8), new Rectangle(600, 108, 8, 8), new Rectangle(609, 108, 8, 8), new Rectangle(618, 108, 8, 8), new Rectangle(627, 108, 8, 8), new Rectangle(636, 108, 8, 8), new Rectangle(645, 108, 8, 8), new Rectangle(654, 108, 8, 8)};
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 20, MenuScale);
+    }
+    
+    public ISprite PlayerMarkerSprite()
+    {
+        List<Rectangle> frameSource = new List<Rectangle> { new Rectangle(519, 126, 8, 8) };
+        return new BasicSprite(TextureStorage.GetInventorySpritesheet(), frameSource, 1, MenuScale);
+    }
+    
     
 }

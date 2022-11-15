@@ -10,6 +10,7 @@ using sprint0.Classes;
 using sprint0.DoorClasses;
 using sprint0.Enemies;
 using sprint0.Interfaces;
+using sprint0.MenuItems.Inventory;
 using sprint0.TileClasses;
 
 namespace sprint0.RoomClasses
@@ -67,6 +68,7 @@ namespace sprint0.RoomClasses
             CollisionManager.Collidables.Add(new LeftBottomWall());
             CollisionManager.Collidables.Add(new LeftTopWall());
 
+            DungeonMap.Instance.Map[DungeonMap.Instance.CurrentRoom[0], DungeonMap.Instance.CurrentRoom[1]] = 16;
             int rows = levelConfig.TileIds.Count;
 
             for (int y = 0; y < rows; y++)
@@ -94,7 +96,7 @@ namespace sprint0.RoomClasses
                 CollisionManager.Collidables.Add(door);
             }
 
-
+            
             for (int i = 0; i < 4; i++)
             {
                 int currentDestination = levelConfig.Destinations[i];
@@ -214,6 +216,8 @@ namespace sprint0.RoomClasses
                     game.state.Room = nextRoom;
                     game.state.Room.roomOffset = new Point();
                     game.state.Room.Initialize();
+                    
+                    DungeonMap.Instance.AddRoomToMap(dir);
 
                     CollisionManager.Collidables.Add(game.Player);
 
