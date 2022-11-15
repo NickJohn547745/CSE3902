@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using sprint0.Commands;
 using sprint0.Interfaces;
+using sprint0.ItemClasses;
 using System.Collections.Generic;
 
 namespace sprint0.Controllers; 
@@ -9,7 +10,11 @@ namespace sprint0.Controllers;
 public class MouseController : IController {
     private Point mousePosition;
 
+    MouseState previousState = new MouseState();
+    MouseState currentState = new MouseState();
+
     public MouseController() {
+
     }
     public void BindCommand(Keys key, ICommand command, IController.KeyState keyState) {
         
@@ -20,17 +25,17 @@ public class MouseController : IController {
     }
 
     public void Update(Game1 game) {
-        MouseState mouseInfo = Mouse.GetState();
-        mousePosition = new Point(mouseInfo.X, mouseInfo.Y);
+        previousState = currentState;
+        currentState = Mouse.GetState();
 
-        if (mouseInfo.RightButton == ButtonState.Pressed) {
+        mousePosition = new Point(currentState.X, currentState.Y);
+
+        if (currentState.RightButton == ButtonState.Released && previousState.RightButton == ButtonState.Pressed) {
             game.PreviousLevel();
         }
 
-        if (mouseInfo.LeftButton == ButtonState.Pressed) {
+        if (currentState.LeftButton == ButtonState.Released && previousState.LeftButton == ButtonState.Pressed) {
             game.NextLevel();
         }
-        
-
     }
 }
