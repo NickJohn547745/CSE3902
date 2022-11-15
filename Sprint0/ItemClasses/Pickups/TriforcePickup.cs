@@ -8,11 +8,13 @@ namespace sprint0.ItemClasses.Pickups
     public class TriforcePickup : Item
     {
 
+        private const int scale = 3;
+
         private int animationFrames = 0;
         public TriforcePickup() 
         {
             type = ICollidable.ObjectType.ItemTwoHands;
-            Sprite = ItemSpriteFactory.Instance.TriforceSprite();
+            Sprite = ItemSpriteFactory.Instance.TriforceSprite(scale);
             Position = new Vector2(300, 300);
         }
         

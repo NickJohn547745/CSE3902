@@ -24,6 +24,16 @@ public class GamePlayState : AGameState
         }
     }
 
+    private void Win()
+    {
+        if(true)
+        {
+            gameState.game.ResetLevel();
+            gameState.player.Reset();
+            gameState.currentState = new GameWinState(gameState);
+        }
+    }
+
     public override void TogglePause()
     {
         gameState.currentState = new GamePauseState(gameState);
@@ -36,6 +46,8 @@ public class GamePlayState : AGameState
         gameState.mainHUD.Update(new PlayerInventory(), 3);
 
         PlayerDeath();
+
+        // Win();
     }
 
     public override void Draw(SpriteBatch spriteBatch)
