@@ -9,11 +9,11 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private int animationFrames = 0;
-        public TriforcePickup() 
+        public TriforcePickup(int xCoord, int yCoord) 
         {
             type = ICollidable.ObjectType.ItemTwoHands;
             Sprite = ItemSpriteFactory.Instance.TriforceSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge)

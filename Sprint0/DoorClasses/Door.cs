@@ -16,6 +16,7 @@ namespace sprint0.DoorClasses
     public abstract class Door : ICollidable
     {
         public int Damage { get; set; }
+        public Boolean IsCollidable { get; set; }
         public ICollidable.ObjectType type { get; set; }
 
         public Boolean HasCollided { get; set; }
@@ -25,7 +26,7 @@ namespace sprint0.DoorClasses
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            if (obj.type == ICollidable.ObjectType.Player)
+            if (obj.type == ICollidable.ObjectType.Player && (Id == 1 || Id == 4))
                 HasCollided = true;
         }
 
@@ -70,7 +71,7 @@ namespace sprint0.DoorClasses
 
         public void Update(GameTime gameTime, Game1 game)
         {
-
+            
         }
     }
 }

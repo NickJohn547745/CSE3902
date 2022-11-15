@@ -11,9 +11,9 @@ namespace sprint0.ItemClasses
 {
     public class Heart : ItemType
     {
-        public Heart()
+        public Heart(int xCoord, int yCoord)
         {
-            this.SetLocation(750, 360);
+            this.SetLocation(xCoord, yCoord);
             Texture2D texture = TextureStorage.GetHeartSpritesheet();
             this.SetTexture(texture, new Rectangle(0, 0, 7, 8));
         }
