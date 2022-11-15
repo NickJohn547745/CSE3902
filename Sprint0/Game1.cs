@@ -121,7 +121,6 @@ public class Game1 : Game
         gamePad.BindCommand(Buttons.RightShoulder, new NextLevelCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.LeftShoulder, new PreviousLevelCommand(), IController.KeyState.Pressed);
 
-        Player = new Player(this);
 
         GameConfig = new GameConfig();
 
