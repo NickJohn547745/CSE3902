@@ -48,3 +48,4 @@
 * Player can shoot an arrow during room transition (fix in transition state refactor
 * Player sometimes disappears when movig between rooms while damaged
 * Room transitions sometimes spawn player in tile
+* Map in inventory screen does not show correct doorways
