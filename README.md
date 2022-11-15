@@ -63,10 +63,11 @@
 * Moving through the top door causes a downwards room transition
 * HUD should be at top of screen (at least it is in the actual game)
 * Player can shoot an arrow during room transition (fix in transition state refactor
-* Player sometimes disappears when movig between rooms while damaged (or allow player to move around screen during transition)
+* Player sometimes disappears when moving between rooms while damaged (or allow player to move around screen during transition)
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
 * Boomerang should return to player, not just initial position
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
 * Map currently set to always display on HUD instead of when item is found
+* Using the bomb crashes the program
