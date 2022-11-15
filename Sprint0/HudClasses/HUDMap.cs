@@ -113,7 +113,7 @@ namespace sprint0.HudClasses
                 }
             }
 
-            RoomDrawnAt[5][3] = new Tuple<int, Vector2>(10, new Vector2(1, 1));
+            RoomDrawnAt[5][3] = new Tuple<int, Vector2>(13, new Vector2(1, 1));
 
             RoomDrawnAt[4][5] = new Tuple<int, Vector2>(12, new Vector2(1, 1));
             RoomDrawnAt[4][3] = new Tuple<int, Vector2>(9, new Vector2(1, 1));
