@@ -171,7 +171,7 @@ public class Game1 : Game
         // for testing
         CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
 
-        state = new GameStateManager(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room, font);
+        state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }

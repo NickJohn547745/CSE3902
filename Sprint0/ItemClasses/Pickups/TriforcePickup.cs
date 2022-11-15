@@ -14,7 +14,7 @@ namespace sprint0.ItemClasses.Pickups
         public TriforcePickup(int xCoord, int yCoord) 
         {
             type = ICollidable.ObjectType.ItemTwoHands;
-            Sprite = ItemSpriteFactory.Instance.TriforceSprite();
+            Sprite = ItemSpriteFactory.Instance.TriforceSprite(scale);
             Position = new Vector2(xCoord, yCoord);
         }
         
