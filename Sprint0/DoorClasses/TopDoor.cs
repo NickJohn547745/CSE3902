@@ -12,12 +12,13 @@ namespace sprint0.DoorClasses
 {
     public class TopDoor : Door
     {
-        public TopDoor()
+        public TopDoor(int id)
         {
             type = ICollidable.ObjectType.Door;
 
+            Id = id;
             HasCollided = false;
-            TransitionDirection = Direction.UP;
+            TransitionDirection = Direction.Up;
         }
 
         public override Rectangle GetHitBox()

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
 using sprint0.Projectiles;
+using sprint0.Interfaces;
 
 namespace sprint0.Enemies
 {
@@ -17,7 +12,6 @@ namespace sprint0.Enemies
         private const int DirectionChange = 4;
 
         public GoriyaEnemy Goriya { get; set; }
-        public enum Direction { Up, Down, Left, Right};
         public Direction GoriyaDirection { get; private set; }
         public SpriteEffects SpriteEffect { get; private set; }
         public bool BoomerangThrown { get; set; }
