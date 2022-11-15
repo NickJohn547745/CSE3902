@@ -8,12 +8,12 @@ namespace sprint0.ItemClasses.Pickups
     public class ArrowPickup : Item
     {
         private int animationFrames = 0;
-        public ArrowPickup(IPlayer player)
+        public ArrowPickup(int xCoord, int yCoord, IPlayer player) 
         {
             Inventory = player.GetInventory();
             type = ICollidable.ObjectType.ItemOneHand;
             Sprite = ItemSpriteFactory.Instance.ArrowSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 

@@ -9,12 +9,12 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public MapPickup(IPlayer player)
+        public MapPickup(int xCoord, int yCoord, IPlayer player) 
         {
             Inventory = player.GetInventory();
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.MapSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 

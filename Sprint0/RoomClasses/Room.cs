@@ -9,20 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.DoorClasses;
 using sprint0.Enemies;
+using sprint0.Factories;
 using sprint0.Interfaces;
-using sprint0.MenuItems.Inventory;
 using sprint0.TileClasses;
 
 namespace sprint0.RoomClasses
 {
-    public enum Direction
-    {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT
-    }
-
     public class Room
     {
         private Game1 game;
@@ -36,7 +28,7 @@ namespace sprint0.RoomClasses
         public Point roomOffset = new Point();
         private Boolean transitioning = false;
         public Boolean RoomReady { get; set; }
-        private Direction transitionDirection;
+        private Direction transitionDirection = Direction.Left;
 
         private Room nextRoom;
 
@@ -45,20 +37,11 @@ namespace sprint0.RoomClasses
         {
             this.game = game;
             levelConfig = cfg;
-
             RoomReady = false;
+
             bounds = new Rectangle(0, 0, 1280, 880);
 
-            //for (int i = 0; i < CollisionManager.Collidables.Count; i++)
-            //{
-            //    ICollidable.ObjectType type = CollisionManager.Collidables[i].type;
-            //    if (type == ICollidable.ObjectType.Enemy || type == ICollidable.ObjectType.Wall || 
-            //        type == ICollidable.ObjectType.Tile || type == ICollidable.ObjectType.Door)
-            //        CollisionManager.Collidables.Remove(CollisionManager.Collidables[i]);
-            //}
-            
             game.CollisionManager.Reset();
-
             CollisionManager.Collidables.Add(new TopLeftWall());
             CollisionManager.Collidables.Add(new TopRightWall());
             CollisionManager.Collidables.Add(new RightTopWall());
@@ -88,24 +71,74 @@ namespace sprint0.RoomClasses
             for (int i = 0; i < 4; i++)
             {
                 int currentDoorId = levelConfig.DoorIds[i];
+                int currentDestination = levelConfig.Destinations[i];
 
-                Door door = GetDoorFromId(i);
-                door.Id = currentDoorId;
+                Door door = DoorObjectFactory.Instance.CreateDoorById((Direction)i, currentDoorId);
 
                 doorList.Add(door);
-                CollisionManager.Collidables.Add(door);
-            }
-
-            
-            for (int i = 0; i < 4; i++)
-            {
-                int currentDestination = levelConfig.Destinations[i];
 
                 if (currentDestination != -1)
                 {
                     LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
 
                     roomMap.Add((Direction)i, destinationLevelConfig);
+                }
+            }
+        }
+
+        public void Initialize()
+        {
+            foreach (Door door in doorList)
+            {
+                CollisionManager.Collidables.Add(door);
+            }
+            foreach (TileType tile in tileList)
+            {
+                if (tile.IsCollidable)
+                    CollisionManager.Collidables.Add(tile);
+            }
+
+            foreach (Tuple<int, Point, int> enemy in levelConfig.Enemies)
+            {
+                CollisionManager.Collidables.Add(
+                    EnemyObjectFactory.Instance.CreateEnemyById(enemy.Item1, enemy.Item2.X, enemy.Item2.Y, enemy.Item3));
+            }
+
+            foreach (Tuple<int, Point> item in levelConfig.Items)
+            {
+                CollisionManager.Collidables.Add(
+                    ItemObjectFactory.Instance.CreateItemById(item.Item1, item.Item2.X, item.Item2.Y));
+            }
+            RoomReady = true;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            if (RoomReady)
+            {
+                foreach (Door door in doorList)
+                {
+                    if (!transitioning && door.HasCollided)
+                    {
+                        CollisionManager.Collidables.Remove(door);
+                        transitionDirection = door.TransitionDirection;
+                        transitioning = true;
+
+                        if (roomMap.ContainsKey(transitionDirection))
+                        {
+                            LevelConfig destinationLevelConfig = roomMap[transitionDirection];
+
+                            nextRoom = new Room(game, destinationLevelConfig);
+                            nextRoom.levelConfig = destinationLevelConfig;
+                            nextRoom.transitioning = true;
+                        }
+
+                        door.HasCollided = false;
+                    }
+                    else
+                    {
+                        Transition(transitionDirection);
+                    }
                 }
             }
         }
@@ -119,6 +152,7 @@ namespace sprint0.RoomClasses
             {
                 tile.Draw(spriteBatch, roomOffset);
             }
+
             foreach (Door door in doorList)
             {
                 if (door.HasCollided && (door.Id == 1 || door.Id == 4) && !transitioning && RoomReady)
@@ -130,15 +164,13 @@ namespace sprint0.RoomClasses
 
                     nextRoom = new Room(game, destinationLevelConfig);
                     nextRoom.levelConfig = destinationLevelConfig;
-                } else
+                }
+                else
                 {
                     door.HasCollided = false;
                 }
-
                 door.Draw(spriteBatch, roomOffset);
             }
-
-            TryTransition(transitionDirection);
 
             if (nextRoom != null && transitioning)
             {
@@ -151,57 +183,42 @@ namespace sprint0.RoomClasses
 
         }
 
-        public void Initialize()
+        public void Transition(Direction dir)
         {
-            RoomReady = true;
-
-            foreach (TileType tile in tileList)
-            {
-                if (tile.IsCollidable)
-                    CollisionManager.Collidables.Add(tile);
-            }
-
-            foreach (KeyValuePair<int, Tuple<Point, int>> enemy in levelConfig.Enemies)
-            {
-                CollisionManager.Collidables.Add(GetEnemyFromId(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2));
-            }
-        }
-
-        public void TryTransition(Direction dir)
-        {
+            int step = 2;
             if (transitioning && RoomReady)
             {
                 CollisionManager.Collidables.Remove(game.Player);
-                if (dir == Direction.LEFT && roomOffset.X < 1285)
+                if (dir == Direction.Left && roomOffset.X < 1285)
                 {
-                    roomOffset.X += 5;
+                    roomOffset.X += step;
 
                     nextRoom.roomOffset.X = -1280 + roomOffset.X;
                     nextRoom.roomOffset.Y = 0;
 
                     game.Player.Position = new Vector2(1100 - game.Player.GetHitBox().Width, 880 / 2);
                 }
-                else if (dir == Direction.RIGHT && Math.Abs(roomOffset.X) < 1285)
+                else if (dir == Direction.Right && Math.Abs(roomOffset.X) < 1285)
                 {
-                    roomOffset.X -= 5;
+                    roomOffset.X -= step;
 
                     nextRoom.roomOffset.X = 1280 + roomOffset.X;
                     nextRoom.roomOffset.Y = 0;
 
                     game.Player.Position = new Vector2(180 + game.Player.GetHitBox().Width, 880 / 2);
                 }
-                else if (dir == Direction.DOWN && roomOffset.Y < 885)
+                else if (dir == Direction.Down && roomOffset.Y < 885)
                 {
-                    roomOffset.Y += 5;
+                    roomOffset.Y += step;
 
                     nextRoom.roomOffset.X = 0;
                     nextRoom.roomOffset.Y = -880 + roomOffset.Y;
 
                     game.Player.Position = new Vector2(1280 / 2, 180 + game.Player.GetHitBox().Height);
                 }
-                else if (dir == Direction.UP && Math.Abs(roomOffset.Y) < 885)
+                else if (dir == Direction.Up && Math.Abs(roomOffset.Y) < 885)
                 {
-                    roomOffset.Y -= 5;
+                    roomOffset.Y -= step;
 
                     nextRoom.roomOffset.X = 0;
                     nextRoom.roomOffset.Y = 880 + roomOffset.Y;
@@ -214,6 +231,7 @@ namespace sprint0.RoomClasses
                     transitioning = false;
 
                     game.state.Room = nextRoom;
+                    game.state.Room.transitioning = false;
                     game.state.Room.roomOffset = new Point();
                     game.state.Room.Initialize();
                     
@@ -231,70 +249,17 @@ namespace sprint0.RoomClasses
 
         public void Update(GameTime gameTime, Game1 game)
         {
-
+            foreach (Door door in doorList)
+            {
+                door.Update(gameTime, game);
+            }
         }
 
         private TileType GetTileFromId(int id, int x, int y)
         {
-            switch (id)
-            {
-                case 0:
-                    return new TileType1(x, y);
-                case 1:
-                    return new TileType2(x, y);
-                case 2:
-                    return new TileType3(x, y);
-                case 3:
-                    return new TileType4(x, y);
-                case 4:
-                    return new TileType5(x, y);
-                case 5:
-                    return new TileType6(x, y);
-                case 6:
-                    return new TileType7(x, y);
-                case 7:
-                    return new TileType8(x, y);
-                case 8:
-                    return new TileType9(x, y);
-                case 9:
-                    return new TileType10(x, y);
-            }
-            return new TileType1(x, y);
-        }
-        private Door GetDoorFromId(int id)
-        {
-            switch (id)
-            {
-                case 0:
-                    return new TopDoor();
-                case 1:
-                    return new RightDoor();
-                case 2:
-                    return new BottomDoor();
-                case 3:
-                    return new LeftDoor();
-            }
-            return null;
-        }
-        private Enemy GetEnemyFromId(int id, int x, int y, int speed)
-        {
-            Vector2 location = new Vector2(x, y);
-            switch (id)
-            {
-                case 0:
-                    return new AquamentusBoss(location, speed);
-                case 1:
-                    return new GoriyaEnemy(location, speed);
-                case 2:
-                    return new KeeseEnemy(location, speed);
-                case 3:
-                    return new OldManNPC(location);
-                case 4:
-                    return new StalfosEnemy(location, speed);
-                case 5:
-                    return new ZolEnemy(location, speed);
-            }
-            return null;
+            Type tileType = Type.GetType("sprint0.TileClasses.TileType" + (id + 1).ToString());
+            object tileTypeObject = Activator.CreateInstance(tileType, x, y);
+            return (TileType)tileTypeObject;
         }
     }
 }

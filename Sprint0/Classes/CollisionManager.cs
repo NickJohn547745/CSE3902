@@ -6,11 +6,20 @@ using System.Collections.Generic;
 
 namespace sprint0.Classes
 {
+    /// <summary>
+    /// Class <c>CollisionManger</c> stores <c>ICollidable</c> objects and
+    /// notifies them when they collide with each other.
+    /// </summary>
     public class CollisionManager
     {
         public static List<ICollidable> Collidables { get; set; }
         private IPlayer Player;
 
+        /// <summary>
+        /// Constructor <c>ColisionManager</c> instantiates and defines an instance
+        /// with Variables: <c>Collidables</c> and <c>Player</c>.
+        /// </summary>
+        /// <param name="player">Incoming main player object.</param>
         public CollisionManager(IPlayer player)
         {
             Collidables = new List<ICollidable>();
@@ -18,14 +27,24 @@ namespace sprint0.Classes
             Collidables.Add(Player);
         }
 
+        /// <summary>
+        /// Method <c>CompareBounds</c> compares the hitboxes of two <c>ICollidable</c>
+        /// objects and returns their relative comparison.
+        /// </summary>
+        /// <param name="source1">First <c>ICollidable</c> object to compare.</param>
+        /// <param name="source2">Second <c>ICollidable</c> object to compare.</param>
+        /// <returns>The comparison between the hitboxes of the two <c>ICollidable</c> objects.</returns>
         private int CompareBounds(ICollidable source1, ICollidable source2)
         {
             return source1.GetHitBox().X.CompareTo(source2.GetHitBox().X);
         }
 
-        /*
-         * Determine which side of obj is colliding with current; respond accordingly
-        */
+        /// <summary>
+        /// Method <c>CollisionResponse</c> determines which side of <c>ICollidable</c> obj is colliding
+        /// with <c>ICollidable</c> current and responds accordingly.
+        /// </summary>
+        /// <param name="current">Reference <c>ICollidable</c> to compare side collisions to.</param>
+        /// <param name="obj">Main <c>ICollidable</c> object to check sides of.</param>
         private void CollisionResponse(ICollidable current, ICollidable obj)
         {
             int currentLeft = current.GetHitBox().X;
@@ -60,28 +79,50 @@ namespace sprint0.Classes
             obj.Collide(current, objEdge);
         }
 
-        private int RemoveInactive(List<ICollidable> active, int currentX, int j)
+        /// <summary>
+        /// Method <c>RemoveInactive</c> removes items from <c>Collidables</c> that
+        /// are to the left of the sweep line.
+        /// </summary>
+        /// <param name="active">Current <c>List<ICollidable></c> to remove inactive 
+        ///     <c>ICollidable</c>'s from.
+        /// </param>
+        /// <param name="currentX">Current <c>int</c> x-coord of the sweep line.</param>
+        /// <param name="index"><c>int</c> index of the current <c>ICollidable</c>.</param>
+        /// <returns><c>int</c> index of next active <c>ICollidable</c></returns>
+        private int RemoveInactive(List<ICollidable> active, int currentX, int index)
         {
-            while (Collidables[j].GetHitBox().X + Collidables[j].GetHitBox().Width < currentX)
+            Rectangle currentHitBox = Collidables[index].GetHitBox();
+            while (currentHitBox.X + currentHitBox.Width < currentX)
             {
-                active.Remove(Collidables[j]);
-                j++;
+                currentHitBox = Collidables[index].GetHitBox();
+
+                active.Remove(Collidables[index]);
+                index++;
             }
-            return j;
+            return index;
         }
 
-        private void ActiveCollision(List<ICollidable> active, int i)
+        /// <summary>
+        /// Method <c>ActiveCollision</c> notifies each <c>ICollidable</c> object that
+        /// intersects with the given <c>ICollidable</c> in <c>Collidables</c> at <c>index</c>.
+        /// </summary>
+        /// <param name="active"><c>ICollidable</c> List of active <c>ICollidables</c> to check for intersections.</param>
+        /// <param name="index"><c>int</c> index of <c>ICollidable</c> object in <c>Collidables</c> to notify.</param>
+        private void ActiveCollision(List<ICollidable> active, int index)
         {
             foreach (ICollidable obj in active)
             {
-                if (Collidables[i].GetHitBox().Intersects(obj.GetHitBox()))
+                Rectangle hitBox = Collidables[index].GetHitBox();
+                if (hitBox.Intersects(obj.GetHitBox()))
                 {
-                    CollisionResponse(Collidables[i], obj);
+                    CollisionResponse(Collidables[index], obj);
                 }
             }
         }
-
-        // uses sort and sweep algorithm
+        /// <summary>
+        /// Method <c>DetectCollisions</c> uses the sort and sweep method to detect collisions
+        /// and notify objects that have collided.
+        /// </summary>
         private void DetectCollisions()
         {
             // store hit-boxes with X values that overlap with collidable[i]
@@ -104,6 +145,12 @@ namespace sprint0.Classes
             }
         }
 
+        /// <summary>
+        /// Method <c>Update</c> updates each <c>ICollidable</c> object in <c>Collidables</c>
+        /// and checks for collisions via <c>DetectCollisions()</c>.
+        /// </summary>
+        /// <param name="gameTime">Current <c>GameTime</c> object.</param>
+        /// <param name="game">Parent <c>Game1</c> object.</param>
         public void Update(GameTime gameTime, Game1 game) {
             for (int i = 0; i < Collidables.Count; i++)
             {
@@ -112,6 +159,11 @@ namespace sprint0.Classes
             DetectCollisions();
         }
 
+        /// <summary>
+        /// Method <c>Draw</c> draws applicable <c>ICollidable</c> objects in <c>Collidables</c>.
+        /// </summary>
+        /// <param name="spriteBatch"><c>SpriteBatch</c> object to draw <c>ICollidable</c> objects 
+        /// to.</param>
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (ICollidable collidable in Collidables)
@@ -125,6 +177,9 @@ namespace sprint0.Classes
             }
         }
 
+        /// <summary>
+        /// Method <c>Reset</c> re-instantiates <c>this</c> to its default state.
+        /// </summary>
         public void Reset()
         {
             Collidables.Clear();
