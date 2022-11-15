@@ -8,7 +8,7 @@ public class InventoryState : AGameState
 {
     private AbilitySelect AbilitySection { get; set; }
     private DungeonMap MapSection { get; set; }
-    public InventoryState(GameState state)
+    public InventoryState(GameStateManager state)
     {
         gameState = state;
         AbilitySelect.Instance.UpdateInventory(gameState.player.GetInventory());
