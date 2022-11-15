@@ -55,7 +55,6 @@
 * Link moves across screen when walking through doors
 * Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
 * Swapping rooms with mouse can look weird if done quickly
-* Health not currently drawn on HUD
 * HUD values not dynamic
 * Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
