@@ -12,6 +12,7 @@ using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
 using sprint0.GameStateClasses;
 using sprint0.Sound;
+using sprint0.HudClasses;
 
 namespace sprint0;
 
@@ -170,7 +171,7 @@ public class Game1 : Game {
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
         
-        state = new GameState(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), font), Player, CollisionManager, room, font);
+        state = new GameState(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -200,5 +201,10 @@ public class Game1 : Game {
         currentLevelIndex = 0;
         state.Reset();
         Player.Reset();
+    }
+
+    public int GetLevelIndex()
+    {
+        return currentLevelIndex;
     }
 }
