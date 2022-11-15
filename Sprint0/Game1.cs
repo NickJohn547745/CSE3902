@@ -38,7 +38,7 @@ public class Game1 : Game
     private string gameFilePath = "./Content/Data/GameFile.xml";
 
     public IPlayer Player;
-
+    
 
     public Game1()
     {
@@ -86,7 +86,7 @@ public class Game1 : Game
         state.Room = new Room(this, LevelList[currentLevelIndex]);
 
         // Reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
-
+        
     }
 
     protected override void Initialize()

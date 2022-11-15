@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses;
 
 namespace sprint0.ItemClasses.Pickups
 {
@@ -12,6 +13,8 @@ namespace sprint0.ItemClasses.Pickups
 
         public ICollidable.ObjectType type { get; set; }
         public int Damage { get; set; }
+
+        protected PlayerInventory Inventory;
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge) 
         {

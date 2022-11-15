@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.DoorClasses;
-using sprint0.Enemies;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.MenuItems.Inventory;
 using sprint0.TileClasses;
 
 namespace sprint0.RoomClasses
@@ -51,6 +47,7 @@ namespace sprint0.RoomClasses
             CollisionManager.Collidables.Add(new LeftBottomWall());
             CollisionManager.Collidables.Add(new LeftTopWall());
 
+            DungeonMap.Instance.Map[DungeonMap.Instance.CurrentRoom[0], DungeonMap.Instance.CurrentRoom[1]] = 16;
             int rows = levelConfig.TileIds.Count;
 
             for (int y = 0; y < rows; y++)
@@ -106,7 +103,7 @@ namespace sprint0.RoomClasses
             foreach (Tuple<int, Point> item in levelConfig.Items)
             {
                 CollisionManager.Collidables.Add(
-                    ItemObjectFactory.Instance.CreateItemById(item.Item1, item.Item2.X, item.Item2.Y));
+                    ItemObjectFactory.Instance.CreateItemById(item.Item1, item.Item2.X, item.Item2.Y, game.Player));
             }
             RoomReady = true;
         }
@@ -233,6 +230,8 @@ namespace sprint0.RoomClasses
                     game.state.Room.transitioning = false;
                     game.state.Room.roomOffset = new Point();
                     game.state.Room.Initialize();
+                    
+                    DungeonMap.Instance.AddRoomToMap(dir);
 
                     CollisionManager.Collidables.Add(game.Player);
 

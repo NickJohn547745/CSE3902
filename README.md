@@ -26,6 +26,8 @@
 * L - Move to next room
 * Left Click - Move to previous room
 * Right Click - Move to next room
+* B - Cycle Link's ability in Inventory Screen
+* Enter - Toggle Inventory screen
 
 ### Other controls
 * G - spawn Bow to test item pickup
@@ -65,3 +67,4 @@
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
 * Boomerang should return to player, not just initial position
+* Map in inventory screen does not show correct doorways

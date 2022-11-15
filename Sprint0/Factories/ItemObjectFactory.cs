@@ -24,106 +24,106 @@ namespace sprint0.Factories
         {
         }
 
-        public Item CreateArrowPickupObject(int xCoord, int yCoord)
+        public Item CreateArrowPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new ArrowPickup(xCoord, yCoord);
+            return new ArrowPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateBombPickupObject(int xCoord, int yCoord)
+        public Item CreateBombPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new BombPickup(xCoord, yCoord);
+            return new BombPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateBoomerangPickupObject(int xCoord, int yCoord)
+        public Item CreateBoomerangPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new BoomerangPickup(xCoord, yCoord);
+            return new BoomerangPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateBowPickupObject(int xCoord, int yCoord)
+        public Item CreateBowPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new BowPickup(xCoord, yCoord);
+            return new BowPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateClockPickupObject(int xCoord, int yCoord)
+        public Item CreateClockPickupObject(int xCoord, int yCoord, IPlayer player)
         {
             return new ClockPickup(xCoord, yCoord);
         }
 
-        public Item CreateCompassPickupObject(int xCoord, int yCoord)
+        public Item CreateCompassPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new CompassPickup(xCoord, yCoord);
+            return new CompassPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateHeartPickupObject(int xCoord, int yCoord)
+        public Item CreateHeartPickupObject(int xCoord, int yCoord, IPlayer player)
         {
             return new HeartPickup(xCoord, yCoord);
         }
 
-        public Item CreateHeartContainerPickupObject(int xCoord, int yCoord)
+        public Item CreateHeartContainerPickupObject(int xCoord, int yCoord, IPlayer player)
         {
             return new HeartContainerPickup(xCoord, yCoord);
         }
 
-        public Item CreateKeyPickupObject(int xCoord, int yCoord)
+        public Item CreateKeyPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new KeyPickup(xCoord, yCoord);
+            return new KeyPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateMapPickupObject(int xCoord, int yCoord)
+        public Item CreateMapPickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new MapPickup(xCoord, yCoord);
+            return new MapPickup(xCoord, yCoord, player);
         }
 
-        public Item CreateRupeePickupObject(int xCoord, int yCoord)
+        public Item CreateRupeePickupObject(int xCoord, int yCoord, IPlayer player)
         {
-            return new RupeePickup(xCoord, yCoord);
+            return new RupeePickup(xCoord, yCoord, player);
         }
 
-        public Item CreateTriforcePickupObject(int xCoord, int yCoord)
+        public Item CreateTriforcePickupObject(int xCoord, int yCoord, IPlayer player)
         {
             return new TriforcePickup(xCoord, yCoord);
         }
 
-        public Item CreateItemById(int id, int xCoord, int yCoord)
+        public Item CreateItemById(int id, int xCoord, int yCoord, IPlayer player)
         {
             Item returnValue = null;
             switch (id)
             {
                 case 0:
-                    returnValue = CreateArrowPickupObject(xCoord, yCoord);
+                    returnValue = CreateArrowPickupObject(xCoord, yCoord, player);
                     break;
                 case 1:
-                    returnValue = CreateBombPickupObject(xCoord, yCoord);
+                    returnValue = CreateBombPickupObject(xCoord, yCoord, player);
                     break;
                 case 2:
-                    returnValue = CreateBoomerangPickupObject(xCoord, yCoord);
+                    returnValue = CreateBoomerangPickupObject(xCoord, yCoord, player);
                     break;
                 case 3:
-                    returnValue = CreateBowPickupObject(xCoord, yCoord);
+                    returnValue = CreateBowPickupObject(xCoord, yCoord, player);
                     break;
                 case 4:
-                    returnValue = CreateClockPickupObject(xCoord, yCoord);
+                    returnValue = CreateClockPickupObject(xCoord, yCoord, player);
                     break;
                 case 5:
-                    returnValue = CreateCompassPickupObject(xCoord, yCoord);
+                    returnValue = CreateCompassPickupObject(xCoord, yCoord, player);
                     break;
                 case 6:
-                    returnValue = CreateHeartPickupObject(xCoord, yCoord);
+                    returnValue = CreateHeartPickupObject(xCoord, yCoord, player);
                     break;
                 case 7:
-                    returnValue = CreateHeartContainerPickupObject(xCoord, yCoord);
+                    returnValue = CreateHeartContainerPickupObject(xCoord, yCoord, player);
                     break;
                 case 8:
-                    returnValue = CreateKeyPickupObject(xCoord, yCoord);
+                    returnValue = CreateKeyPickupObject(xCoord, yCoord, player);
                     break;
                 case 9:
-                    returnValue = CreateMapPickupObject(xCoord, yCoord);
+                    returnValue = CreateMapPickupObject(xCoord, yCoord, player);
                     break;
                 case 10:
-                    returnValue = CreateRupeePickupObject(xCoord, yCoord);
+                    returnValue = CreateRupeePickupObject(xCoord, yCoord, player);
                     break;
                 case 11:
-                    returnValue = CreateTriforcePickupObject(xCoord, yCoord);
+                    returnValue = CreateTriforcePickupObject(xCoord, yCoord, player);
                     break;
             }
             return returnValue;

@@ -9,6 +9,6 @@ public class SpawnItemPickupCommand : ICommand
 {
     public void Execute(Game1 game)
     {
-        if (!game.Paused) CollisionManager.Collidables.Add(ItemObjectFactory.Instance.CreateBowPickupObject(500, 500));
+        if (!game.Paused) CollisionManager.Collidables.Add(ItemObjectFactory.Instance.CreateBowPickupObject(500, 500, game.Player));
     }
 }

@@ -7,7 +7,7 @@ using sprint0.RoomClasses;
 
 namespace sprint0.GameStateClasses;
 
-public abstract class AGameState : IGameState
+public abstract class AGameState
 {
     
     protected GameState gameState;
