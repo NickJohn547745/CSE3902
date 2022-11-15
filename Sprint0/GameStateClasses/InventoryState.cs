@@ -19,7 +19,7 @@ public class InventoryState : AGameState
 
     public override void Update(GameTime gameTime)
     {
-        gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth());
+        gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth(), gameState.game.GetLevelIndex());
     }
 
     public override void Draw(SpriteBatch spriteBatch)
