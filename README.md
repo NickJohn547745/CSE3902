@@ -69,3 +69,4 @@
 * Boomerang should return to player, not just initial position
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
+* Map currently set to always display on HUD instead of when item is found
