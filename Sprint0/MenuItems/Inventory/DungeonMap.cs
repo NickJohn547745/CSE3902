@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
+using sprint0.Interfaces;
 using sprint0.PlayerClasses;
-using sprint0.RoomClasses;
 
 namespace sprint0.MenuItems.Inventory;
 
@@ -73,16 +73,16 @@ public class DungeonMap
     {
         switch (direction)
         {
-            case Direction.UP:
+            case Direction.Up:
                 CurrentRoom[1] -= 1;
                 break;
-            case Direction.DOWN:
+            case Direction.Down:
                 CurrentRoom[1] += 1;
                 break;
-            case Direction.LEFT:
+            case Direction.Left:
                 CurrentRoom[0] -= 1;
                 break;
-            case Direction.RIGHT:
+            case Direction.Right:
                 CurrentRoom[0] += 1;
                 break;
         }
