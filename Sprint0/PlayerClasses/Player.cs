@@ -50,8 +50,7 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        
-        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
+        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile || obj.type == ICollidable.ObjectType.Door)
         {
             CanMove = false;
         }

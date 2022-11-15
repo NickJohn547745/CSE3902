@@ -1,6 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: October 23, 2022
+##### Date: November 14, 2022
 
 # Sprint4:
 
@@ -32,16 +32,36 @@
 * Q - quit game
 * R - reset the program to its initial state
 * M - mute sound
+* Escape - pause game
+
+### GamePad Controls
+* Left Thumbstick Up - move Link up, make Link face up
+* Left Thumbstick Left - move Link left, make Link face left
+* Left Thumbstick Down - move Link down, make Link face down
+* Left Thumbstick Right - move Link right,make Link face right
+* Y - Use Link’s bomb ability
+* DPad Up- Use Link’s wooden boomerang ability
+* DPad Down - Use Link’s magical boomerang ability
+* DPad Right - Use Link’s wooden arrow ability
+* DPad Left - Use Link’s silver arrow ability
+* B - Use Link’s fireball ability
+* A - make Link attack with sword
+* Right Shoulder - move to next room
+* Left Shoudler - move to previous room
+* Back- quit game
+* Start - reset game
 
 ## Known Bugs
 * Link moves across screen when walking through doors
 * Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
 * Swapping rooms with mouse can look weird if done quickly
-* Health not currently drawn on HUD
 * HUD values not dynamic
 * Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
 * Moving through the top door causes a downwards room transition
 * HUD should be at top of screen (at least it is in the actual game)
-* Player can shoot an arrow during room transition
-* Player sometimes disappears when movig between rooms while damaged
+* Player can shoot an arrow during room transition (fix in transition state refactor
+* Player sometimes disappears when movig between rooms while damaged (or allow player to move around screen during transition)
+* Room transitions sometimes spawn player in tile
+* Boomerang should be able to fly over "water" tiles in certain rooms
+* Boomerang should return to player, not just initial position

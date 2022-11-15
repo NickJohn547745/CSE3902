@@ -12,12 +12,13 @@ namespace sprint0.DoorClasses
 {
     public class LeftDoor : Door
     {
-        public LeftDoor()
+        public LeftDoor(int id)
         {
             type = ICollidable.ObjectType.Door;
 
+            Id = id;
             HasCollided = false;
-            TransitionDirection = Direction.LEFT;
+            TransitionDirection = Direction.Left;
         }
 
         public override Rectangle GetHitBox()

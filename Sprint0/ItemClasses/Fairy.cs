@@ -11,9 +11,9 @@ namespace sprint0.ItemClasses
 {
     public class Fairy : ItemType
     {
-        public Fairy()
+        public Fairy(int xCoord, int yCoord)
         {
-            this.SetLocation(750, 360);
+            this.SetLocation(xCoord, yCoord);
             Texture2D texture = TextureStorage.GetFairySpritesheet();
             this.SetTexture(texture, new Rectangle(0, 0, 8, 16));
         }
