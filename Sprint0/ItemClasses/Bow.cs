@@ -11,9 +11,9 @@ namespace sprint0.ItemClasses
 {
     public class Bow : ItemType
     {
-        public Bow()
+        public Bow(int xCoord, int yCoord)
         {
-            this.SetLocation(750, 360);
+            this.SetLocation(xCoord, yCoord);
             Texture2D texture = TextureStorage.GetBowSpritesheet();
             this.SetTexture(texture, new Rectangle(0, 0, 8, 16));
         }

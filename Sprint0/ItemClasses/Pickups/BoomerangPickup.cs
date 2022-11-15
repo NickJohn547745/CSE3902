@@ -8,11 +8,11 @@ namespace sprint0.ItemClasses.Pickups
     public class BoomerangPickup : Item
     {
         private bool readyToDelete = false;
-        public BoomerangPickup() 
+        public BoomerangPickup(int xCoord, int yCoord) 
         {
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.BoomerangSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 

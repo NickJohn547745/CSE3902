@@ -18,4 +18,14 @@
 	<Setting name="Destinations">
 		5 6 1 7
 	</Setting>
+	<Setting name="Enemies">
+		<Enemy>4 60 375 600</Enemy>
+		<Enemy>4 60 640 450</Enemy>
+		<Enemy>4 60 600 400</Enemy>
+		<Enemy>4 60 640 425</Enemy>
+		<Enemy>4 60 800 300</Enemy>
+	</Setting>
+	<Setting name="Items">
+		<Enemy>8 700 200</Enemy>
+	</Setting>
 </Settings>

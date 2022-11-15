@@ -9,11 +9,11 @@ namespace sprint0.ItemClasses.Pickups
     {
 
         private bool readyToDelete = false;
-        public CompassPickup() 
+        public CompassPickup(int xCoord, int yCoord) 
         {
             type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.CompassSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 

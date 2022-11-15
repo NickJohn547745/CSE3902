@@ -11,9 +11,9 @@ namespace sprint0.ItemClasses
 {
     public class Boomerang : ItemType
     {
-        public Boomerang()
+        public Boomerang(int xCoord, int yCoord)
         {
-            this.SetLocation(750, 360);
+            this.SetLocation(xCoord, yCoord);
             Texture2D texture = TextureStorage.GetBoomerangSpritesheet();
             this.SetTexture(texture, new Rectangle(0, 0, 5, 8));
         }

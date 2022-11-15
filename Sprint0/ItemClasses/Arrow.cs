@@ -6,11 +6,11 @@ namespace sprint0.ItemClasses
 {
     public class Arrow : ItemType
     {
-        public Arrow()
+        public Arrow(int xCoord, int yCoord)
         {
             Texture2D texture = TextureStorage.GetArrowSpritesheet();
 
-            this.SetLocation(750, 360);
+            this.SetLocation(xCoord, yCoord);
             this.SetTexture(texture, new Rectangle(0, 0, 5, 16));
         }
     }
