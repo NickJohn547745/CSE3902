@@ -68,3 +68,4 @@
 * Boomerang should be able to fly over "water" tiles in certain rooms
 * Boomerang should return to player, not just initial position
 * Map in inventory screen does not show correct doorways
+* HUD not synced with some inventory items
