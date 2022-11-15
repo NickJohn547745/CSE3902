@@ -6,6 +6,7 @@ using sprint0.Sprites;
 using sprint0.Interfaces;
 using System.Collections.Generic;
 using sprint0.DoorClasses;
+using sprint0.RoomClasses;
 
 namespace sprint0.Factories
 {

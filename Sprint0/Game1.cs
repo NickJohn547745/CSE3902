@@ -65,6 +65,7 @@ public class Game1 : Game
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
         state.Room = new Room(this, LevelList[currentLevelIndex]);
+        state.Room.Initialize();
     }
 
     public void NextLevel()
@@ -75,6 +76,7 @@ public class Game1 : Game
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
         state.Room = new Room(this, LevelList[currentLevelIndex]);
+        state.Room.Initialize();
     }
 
     public void ResetLevel()

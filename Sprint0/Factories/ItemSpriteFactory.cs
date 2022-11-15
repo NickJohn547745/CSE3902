@@ -8,7 +8,7 @@ using sprint0.Sprites;
 namespace sprint0.Factories
 {
     public class ItemSpriteFactory {
-        private int ItemScale = 3;
+        private int ItemScale = 5;
 
         //private Texture2D itemSpriteSheet;
         // any other textures needed

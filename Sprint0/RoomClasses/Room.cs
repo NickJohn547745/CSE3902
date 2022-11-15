@@ -91,11 +91,22 @@ namespace sprint0.RoomClasses
             {
                 CollisionManager.Collidables.Add(door);
             }
-
-            foreach (KeyValuePair<int, Tuple<Point, int>> enemy in levelConfig.Enemies)
+            foreach (TileType tile in tileList)
             {
-                Enemy enemyObject = EnemyObjectFactory.Instance.CreateEnemyById(enemy.Key, enemy.Value.Item1.X, enemy.Value.Item1.Y, enemy.Value.Item2);
-                CollisionManager.Collidables.Add(enemyObject);
+                if (tile.IsCollidable)
+                    CollisionManager.Collidables.Add(tile);
+            }
+
+            foreach (Tuple<int, Point, int> enemy in levelConfig.Enemies)
+            {
+                CollisionManager.Collidables.Add(
+                    EnemyObjectFactory.Instance.CreateEnemyById(enemy.Item1, enemy.Item2.X, enemy.Item2.Y, enemy.Item3));
+            }
+
+            foreach (Tuple<int, Point> item in levelConfig.Items)
+            {
+                CollisionManager.Collidables.Add(
+                    ItemObjectFactory.Instance.CreateItemById(item.Item1, item.Item2.X, item.Item2.Y));
             }
             RoomReady = true;
         }
@@ -143,6 +154,20 @@ namespace sprint0.RoomClasses
 
             foreach (Door door in doorList)
             {
+                if (door.HasCollided && (door.Id == 1 || door.Id == 4) && !transitioning && RoomReady)
+                {
+                    transitionDirection = door.TransitionDirection;
+                    transitioning = true;
+
+                    LevelConfig destinationLevelConfig = roomMap[door.TransitionDirection];
+
+                    nextRoom = new Room(game, destinationLevelConfig);
+                    nextRoom.levelConfig = destinationLevelConfig;
+                }
+                else
+                {
+                    door.HasCollided = false;
+                }
                 door.Draw(spriteBatch, roomOffset);
             }
 
@@ -160,7 +185,6 @@ namespace sprint0.RoomClasses
         public void Transition(Direction dir)
         {
             int step = 2;
-
             if (transitioning && RoomReady)
             {
                 CollisionManager.Collidables.Remove(game.Player);

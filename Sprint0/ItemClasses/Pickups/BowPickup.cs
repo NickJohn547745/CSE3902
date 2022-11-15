@@ -8,11 +8,11 @@ namespace sprint0.ItemClasses.Pickups
     public class BowPickup : Item
     {
         private int animationFrames = 0;
-        public BowPickup() 
+        public BowPickup(int xCoord, int yCoord) 
         {
             type = ICollidable.ObjectType.ItemOneHand;
             Sprite = ItemSpriteFactory.Instance.BowSprite();
-            Position = new Vector2(300, 300);
+            Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 
