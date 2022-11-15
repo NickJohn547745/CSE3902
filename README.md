@@ -70,4 +70,5 @@
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
 * Map currently set to always display on HUD instead of when item is found
-* Using the bomb crashes the program
+* Using abilities crashes the program (inventory not initialized)
+* Vertical doors spawn you in front of door on opposite side of the room.
