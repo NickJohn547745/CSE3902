@@ -33,7 +33,7 @@ public class GamePlayState : AGameState
     {
         gameState.collisionManager.Update(gameTime, gameState.game);
 
-        gameState.mainHUD.Update(new PlayerInventory(), 3);
+        gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth(), gameState.game.GetLevelIndex());
 
         PlayerDeath();
     }

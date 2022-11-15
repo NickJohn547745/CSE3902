@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Classes;
 using sprint0.PlayerClasses;
 using sprint0.PlayerClasses.Abilities;
 using System;
@@ -10,16 +11,18 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sprint0.Classes
+namespace sprint0.HudClasses
 {
     public class HUD
     {
+        Vector2 PlayerPosition { get; set; }
         public Game1 Game { get; set; }
         public PlayerInventory Inventory { get; set; }
         public AbilityTypes currentAbilityA { get; set; }
         public AbilityTypes currentAbilityB { get; set; }
         public int Health { get; set; }
-        
+        public int CurrentRoom { get; set; }
+
         public int Bombs { get; set; }
 
         // get from game? For now we only have 1 dungeon anyway
@@ -39,9 +42,9 @@ namespace sprint0.Classes
 
         // may want more precise values later. 107 value is buffer for left and right. 33 value is for buffer up and down
         private int HUDX = 107;
-        private int HUDY = 880 + 33;
+        private int HUDY = 880 + 16;
         private int HUDWidth = 1280 - 214;
-        private int HUDHeight = 200 - 66;
+        private int HUDHeight = 200 - 33;
         private Rectangle HUDArea;
 
         float nextWidth;
@@ -52,11 +55,11 @@ namespace sprint0.Classes
 
 
         // currentA and currentB may be better implemented in the inventory class. They are just needed to display the equipped items
-        public HUD (Game1 game, PlayerInventory inventory, int currentHealth, SpriteFont font)
+        public HUD(Game1 game, PlayerInventory inventory, int currentHealth, int roomIndex, SpriteFont font)
         {
             Game = game;
             Font = font;
-            Update(inventory, currentHealth);
+            Update(inventory, currentHealth, roomIndex);
 
             nextWidth = (float)(.275 * HUDWidth);
 
@@ -64,7 +67,7 @@ namespace sprint0.Classes
 
             widthTrack = HUDX + nextWidth;
 
-            nextWidth = (float) (.15 * HUDWidth);
+            nextWidth = (float)(.15 * HUDWidth);
             Sections.Add("Count", new Vector2(widthTrack, HUDY));
 
             widthTrack += nextWidth;
@@ -81,13 +84,14 @@ namespace sprint0.Classes
 
             nextWidth = (float)(.275 * HUDWidth);
             Sections.Add("Life", new Vector2(widthTrack, HUDY));
-           
+
         }
 
-        public void Update(PlayerInventory inventory, int currentHealth)
+        public void Update(PlayerInventory inventory, int currentHealth, int currentRoom)
         {
             Inventory = inventory;
             Health = currentHealth;
+            CurrentRoom = currentRoom;
 
             // currently won't work for things not in AbilityType enum
             currentAbilityA = Inventory.GetCurrentA();
@@ -106,7 +110,7 @@ namespace sprint0.Classes
 
         public void DrawLevelText(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "LEVEL - " + Level.ToString(), Sections["Level"], Color.White);
+            spriteBatch.DrawString(Font, "LEVEL - " + CurrentRoom.ToString(), Sections["Level"], Color.White);
         }
 
         public void DrawMap(SpriteBatch spriteBatch)
@@ -114,7 +118,11 @@ namespace sprint0.Classes
             Vector2 LevelVector = Sections["Level"];
             float levelX = LevelVector.X;
             float levelY = LevelVector.Y;
-            spriteBatch.DrawString(Font, "MAP WILL GO HERE", new Vector2(levelX, levelY + 33), Color.White);
+
+            float yMax = 1080 - 33;
+            HUDMap Map = new HUDMap(Game, Game.state.Room.levelConfig.Id, hasMap, levelX, levelY + 35, Sections["Count"].X, yMax);
+            Map.Draw(spriteBatch);
+            
         }
         public void DrawInventoryItems(SpriteBatch spriteBatch)
         {
@@ -125,8 +133,8 @@ namespace sprint0.Classes
             float countX = countVector.X;
             float countY = countVector.Y;
 
-            int scaleY = 50;
-            int scaleX = 26;
+            const int scaleY = 50;
+            const int scaleX = 26;
 
             spriteBatch.DrawString(Font, "X" + Rupees.ToString(), countVector, Color.White);
             spriteBatch.DrawString(Font, "X" + Keys.ToString(), new Vector2(countX, countY + scaleY), Color.White);
@@ -140,7 +148,7 @@ namespace sprint0.Classes
             spriteBatch.Draw(keyTexture, keyRectangle, Color.White);
 
             Rectangle bombRectangle = new Rectangle((int)countX - scaleX, (int)countY + 2 * scaleY, 24, 30);
-            spriteBatch.Draw(bombTexture,bombRectangle, Color.White);
+            spriteBatch.Draw(bombTexture, bombRectangle, Color.White);
         }
         public void DrawItemA(SpriteBatch spriteBatch)
         {
@@ -153,8 +161,8 @@ namespace sprint0.Classes
 
             Texture2D itemTextureA = GetItemToDraw(currentAbilityA);
 
-            int offsetY = 45;
-            Rectangle destinationRectangle = new Rectangle((int)aX, (int) aY + offsetY, 40, 80);
+            const int offsetY = 45;
+            Rectangle destinationRectangle = new Rectangle((int)aX, (int)aY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureA, destinationRectangle, Color.White);
 
         }
@@ -169,7 +177,7 @@ namespace sprint0.Classes
 
             Texture2D itemTextureB = GetItemToDraw(currentAbilityB);
 
-            int offsetY = 45;
+            const int offsetY = 45;
             Rectangle destinationRectangle = new Rectangle((int)bX, (int)bY + offsetY, 40, 80);
             spriteBatch.Draw(itemTextureB, destinationRectangle, Color.White);
         }
@@ -179,17 +187,17 @@ namespace sprint0.Classes
             float lifeX = lifeVector.X;
             float lifeY = lifeVector.Y;
 
-            float lifeTextX = lifeX + (float).5 * ((float)HUDWidth - lifeX);
+            float lifeTextX = lifeX + (float).5 * (HUDWidth - lifeX);
             Vector2 LifeTextVector = new Vector2(lifeTextX, lifeY);
 
             spriteBatch.DrawString(Font, "-LIFE-", LifeTextVector, Color.Red);
             Texture2D heartTexture = TextureStorage.GetHeartSpritesheet();
 
-            int offsetX = 35;
-            int offsetY = 50;
+            const int offsetX = 35;
+            const int offsetY = 50;
             Rectangle heartRectangle = new Rectangle(0, 0, 7, 8);
-            int destinationHeight = 30;
-            int destinationWidth = 30;
+            const int destinationHeight = 30;
+            const int destinationWidth = 30;
 
             const int MAXHEALTHINROW = 8;
             int rowCount = 0;
@@ -199,8 +207,8 @@ namespace sprint0.Classes
                 {
                     rowCount++;
                 }
-                int drawX = (int)lifeX + (offsetX * (i % MAXHEALTHINROW));
-                int drawY = (int)lifeY + (offsetY * rowCount);
+                int drawX = (int)lifeX + offsetX * (i % MAXHEALTHINROW);
+                int drawY = (int)lifeY + offsetY * rowCount;
                 spriteBatch.Draw(heartTexture, new Rectangle(drawX, drawY, destinationWidth, destinationHeight), heartRectangle, Color.White);
             }
         }
@@ -243,5 +251,22 @@ namespace sprint0.Classes
             DrawItemB(spriteBatch);
             DrawLife(spriteBatch);
         }
+
+        public Vector2 ConvertCoordinates(Vector2 position)
+        {
+            Vector2 MapBounds = Sections["Level"];
+            float MapXMin = MapBounds.X;
+            float MapYMin = MapBounds.Y + 33;
+
+            Vector2 CountBounds = Sections["Count"];
+            float MapXMax = CountBounds.X - 15;
+            float MapYMax = MapBounds.Y;
+
+            float MapWidth = MapXMax - MapXMin;
+            float MapHeight = MapYMax - MapYMin;
+
+            return position;
+        }
+
     }
 }

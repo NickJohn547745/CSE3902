@@ -12,6 +12,7 @@ using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
 using sprint0.GameStateClasses;
 using sprint0.Sound;
+using sprint0.HudClasses;
 using System;
 
 namespace sprint0;
@@ -102,6 +103,26 @@ public class Game1 : Game
         TextureStorage.LoadAllTextures(Content);
         SpriteFont font = Content.Load<SpriteFont>("Arial");
 
+
+        IController gamePad = new GamePadController();
+	
+        gamePad.BindCommand(Buttons.Back, new QuitCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.Start, new ResetGameCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.LeftThumbstickUp, new MoveUpCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.LeftThumbstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.Y, new UseBombCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadUp, new UseWoodenBoomerangCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadDown, new UseMagicalBoomerangCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadRight, new UseWoodenArrowCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.DPadLeft, new UseSilverArrowCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.B, new UseFireballCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.RightShoulder, new NextLevelCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.LeftShoulder, new PreviousLevelCommand(), IController.KeyState.Pressed);
+
+
         GameConfig = new GameConfig();
 
         GameFileReader gameFileReader = new GameFileReader(GameConfig);
@@ -145,8 +166,8 @@ public class Game1 : Game
 
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
-
-        state = new GameState(this, new HUD(this, new PlayerInventory(), 3, font), Player, CollisionManager, room, font);
+        
+        state = new GameState(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -180,5 +201,10 @@ public class Game1 : Game
         currentLevelIndex = 0;
         state.Reset();
         Player.Reset();
+    }
+
+    public int GetLevelIndex()
+    {
+        return currentLevelIndex;
     }
 }
