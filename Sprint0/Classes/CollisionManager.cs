@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using sprint0.Enemies;
 using sprint0.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace sprint0.Classes
         {
             Collidables = new List<ICollidable>();
             Player = player;
-            Collidables.Add(Player);
+            Collidables.Add(Player);         
         }
 
         /// <summary>

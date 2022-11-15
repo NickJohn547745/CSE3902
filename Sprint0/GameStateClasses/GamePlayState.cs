@@ -9,7 +9,7 @@ namespace sprint0.GameStateClasses;
 public class GamePlayState : AGameState
 {
 
-    public GamePlayState(GameState state)
+    public GamePlayState(GameStateManager state)
     {
         gameState = state;
     }
@@ -21,6 +21,16 @@ public class GamePlayState : AGameState
             gameState.game.ResetLevel();
             gameState.player.Reset();
             gameState.currentState = new GameOverState(gameState);
+        }
+    }
+
+    private void Win()
+    {
+        if(true)
+        {
+            gameState.game.ResetLevel();
+            gameState.player.Reset();
+            gameState.currentState = new GameWinState(gameState);
         }
     }
 
@@ -36,6 +46,8 @@ public class GamePlayState : AGameState
         gameState.mainHUD.Update(gameState.player.GetInventory(), gameState.player.GetHealth(), gameState.game.GetLevelIndex());
 
         PlayerDeath();
+
+        // Win();
     }
 
     public override void Draw(SpriteBatch spriteBatch)

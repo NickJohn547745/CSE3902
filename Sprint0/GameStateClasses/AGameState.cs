@@ -10,7 +10,7 @@ namespace sprint0.GameStateClasses;
 public abstract class AGameState
 {
     
-    protected GameState gameState;
+    protected GameStateManager gameState;
 
     public Room Room { get; set; }
 

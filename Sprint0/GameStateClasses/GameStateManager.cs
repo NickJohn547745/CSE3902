@@ -8,7 +8,7 @@ using sprint0.HudClasses;
 
 namespace sprint0.GameStateClasses;
 
-public class GameState : IGameState
+public class GameStateManager : IGameState
 {
     public Game1 game { get; set; }
     public IPlayer player { get; set; }
@@ -18,7 +18,7 @@ public class GameState : IGameState
     public AGameState currentState { get; set; }
     public SpriteFont Font { get; set; }
 
-    public GameState(Game1 game, HUD hud, IPlayer link, CollisionManager manager, Room room, SpriteFont font)
+    public GameStateManager(Game1 game, HUD hud, IPlayer link, CollisionManager manager, Room room, SpriteFont font)
     {
         this.game = game;
         mainHUD = hud;

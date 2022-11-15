@@ -14,6 +14,7 @@ using sprint0.GameStateClasses;
 using sprint0.Sound;
 using sprint0.HudClasses;
 using System;
+using sprint0.Enemies;
 
 namespace sprint0;
 
@@ -166,8 +167,11 @@ public class Game1 : Game
 
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
-        
-        state = new GameState(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
+
+        // for testing
+        CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
+
+        state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
     }

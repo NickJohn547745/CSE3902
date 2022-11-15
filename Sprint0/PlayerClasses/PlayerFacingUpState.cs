@@ -18,7 +18,11 @@ public class PlayerFacingUpState : PlayerFacingState {
 
     public override void MoveUp() {
         currentFrame++;
-        player.Position = Vector2.Add(player.Position, new Vector2(0, -IPlayerState.playerSpeed));
+        if (player.CanMove)
+        {
+            player.PreviousPosition = player.Position;
+            player.Position = Vector2.Add(player.Position, new Vector2(0, -IPlayerState.playerSpeed));
+        }
     }
 
     public override void SwordAttack()

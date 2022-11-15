@@ -26,11 +26,15 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
+    public Vector2 PreviousPosition { get; set; }
+    public bool CanMove { get; set; }
     
     public Player(Game1 game) {
         Game = game;
-        Position = new Vector2(200, 200);
+        Position = new Vector2(175, 175);
         initPosition = Position;
+        PreviousPosition = Position;
+
         Reset();
     }
     
@@ -48,21 +52,7 @@ public class Player : IPlayer {
     {
         if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile || obj.type == ICollidable.ObjectType.Door)
         {
-            switch (edge)
-            {
-                case ICollidable.Edge.Top:
-                    Position += new Vector2(0, -3);
-                    break;
-                case ICollidable.Edge.Right:
-                    Position += new Vector2(-3, 0);
-                    break;
-                case ICollidable.Edge.Left:
-                    Position += new Vector2(3, 0);
-                    break;
-                case ICollidable.Edge.Bottom:
-                    Position += new Vector2(0, 3);
-                    break;
-            }
+            CanMove = false;
         }
         PlayerState.Collide(obj, edge);
     }
@@ -74,6 +64,7 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime, Game1 game) {
         PlayerState.Update();
         AbilityManager.Update(gameTime, game);
+        CanMove = true;
     }
 
     public void Reset()
@@ -82,6 +73,7 @@ public class Player : IPlayer {
         PlayerState = new PlayerFacingUpState(this);
         AbilityManager = new PlayerAbilityManager(this);
         PlayerInventory = new PlayerInventory();
+        CanMove = true;
 
         Health = 6;
         ScaleFactor = 4;

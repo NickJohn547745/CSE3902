@@ -20,6 +20,7 @@ public abstract class PlayerFacingState : IPlayerState {
 
     public virtual void Draw(SpriteBatch spriteBatch, Color color)
     {
+       
         // Fun math to make sure sprite is positioned correctly. Position is the middle point of the outside of Link, so this does some math to center the texture far enough away so that there is no overlap
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
@@ -47,18 +48,24 @@ public abstract class PlayerFacingState : IPlayerState {
     
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (edge != shield && (obj.type == ICollidable.ObjectType.Enemy || obj.type == ICollidable.ObjectType.Projectile))
+        switch (obj.type)
         {
-            player.TakeDamage(obj.Damage);
-            Knockback();
-        }
-        else if (obj.type == ICollidable.ObjectType.ItemOneHand)
-        {
-            player.PlayerState = new PlayerItemPickupState(player, 2);
-        }
-        else if (obj.type == ICollidable.ObjectType.ItemTwoHands)
-        {
-            player.PlayerState = new PlayerItemPickupState(player, 1);
+            case ICollidable.ObjectType.Enemy:
+            case ICollidable.ObjectType.Trap:
+            case ICollidable.ObjectType.Projectile:
+                if (edge != shield)
+                {
+                    player.TakeDamage(obj.Damage);
+                    Knockback();
+                }
+                break;
+            case ICollidable.ObjectType.ItemOneHand:
+                player.PlayerState = new PlayerItemPickupState(player, 2);
+                break;
+            case ICollidable.ObjectType.ItemTwoHands:
+                player.PlayerState = new PlayerItemPickupState(player, 1);
+                break;
+
         }
     }
 
@@ -67,6 +74,8 @@ public abstract class PlayerFacingState : IPlayerState {
             currentFrame = 0;
             animationFrame++;
         }
+
+        if (!player.CanMove) player.Position = player.PreviousPosition;
     }
 
     public virtual void MoveUp() {
