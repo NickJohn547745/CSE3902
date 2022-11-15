@@ -168,18 +168,6 @@ namespace sprint0.Classes
         {
             foreach (ICollidable collidable in Collidables)
             {
-                Rectangle hitbox = collidable.GetHitBox();
-
-                Texture2D rectTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-                rectTexture.SetData(new Color[] { Color.Red });
-
-                spriteBatch.Draw(rectTexture, new Rectangle(hitbox.X, hitbox.Y, hitbox.Width, 5), Color.White);
-                spriteBatch.Draw(rectTexture, new Rectangle(hitbox.X, hitbox.Y + hitbox.Height - 5, hitbox.Width, 5), Color.White);
-
-                spriteBatch.Draw(rectTexture, new Rectangle(hitbox.X, hitbox.Y + 5, 5, hitbox.Height - 10), Color.White);
-                spriteBatch.Draw(rectTexture, new Rectangle(hitbox.X + hitbox.Width - 5, hitbox.Y + 5, 5, hitbox.Height - 10), Color.White);
-
-
                 if (collidable.type != ICollidable.ObjectType.Wall &&
                     collidable.type != ICollidable.ObjectType.Door &&
                     collidable.type != ICollidable.ObjectType.Tile)
