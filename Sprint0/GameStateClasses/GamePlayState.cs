@@ -9,7 +9,7 @@ namespace sprint0.GameStateClasses;
 public class GamePlayState : AGameState
 {
 
-    public GamePlayState(GameState state)
+    public GamePlayState(GameStateManager state)
     {
         gameState = state;
     }

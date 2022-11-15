@@ -7,7 +7,7 @@ using sprint0.Interfaces;
 public class ItemSelectState : AGameState
 {
     
-    public ItemSelectState(GameState state)
+    public ItemSelectState(GameStateManager state)
     {
         gameState = state;
     }

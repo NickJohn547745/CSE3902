@@ -7,8 +7,10 @@ namespace sprint0.Enemies
 {
     public class TrapEnemy : Enemy
     {
-        private const int BehaviorDelay = 20;
-        private const int ReduceSpeed = 5;
+        private const int BehaviorDelay = 15;
+        private const int ReduceSpeed = 3;
+        private const float Acceleration = 20;
+        private const int Proximity = 5;
 
         private IPlayer player;
         private bool ready;
@@ -70,7 +72,7 @@ namespace sprint0.Enemies
             }
         }
 
-        private void ReturnToSpawn()
+        private void ReturnToSpawn(GameTime gameTime)
         {
             float diffX = Position.X - initPosition.X;
             float diffY = Position.Y - initPosition.Y;
@@ -78,13 +80,14 @@ namespace sprint0.Enemies
 
             AdjustDirection(diffX, diffY);
 
-            if (diff < speed)
+            if (diff < initSpeed && diff > Proximity)
             {
-                if (speed >= ReduceSpeed)
-                    speed -= ReduceSpeed;
-            } else if (diff < ReduceSpeed)
+                if (speed >= ReduceSpeed);
+                    speed -= Acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            } else if (diff < Proximity)
             {
                 Position = initPosition;
+                Velocity = Vector2.Zero;
             }     
         }
 
@@ -97,29 +100,36 @@ namespace sprint0.Enemies
             int trapW = GetHitBox().Width;
             int trapH = GetHitBox().Height;
 
-            bool xAlignTop = Position.Y < playerPos.Y && Position.Y + trapH > playerPos.Y;
-            bool xAlignBottom = Position.Y < playerPos.Y + playerH && Position.Y + trapH > playerPos.Y + playerH;
+            bool xAlignTop = initPosition.Y < playerPos.Y && initPosition.Y + trapH > playerPos.Y;
+            bool xAlignBottom = initPosition.Y < playerPos.Y + playerH && initPosition.Y + trapH > playerPos.Y + playerH;
 
-            bool yAlignLeft = Position.X < playerPos.X && Position.X + trapW > playerPos.X;
-            bool yAlignRight = Position.X < playerPos.X + playerW && Position.X + trapW > playerPos.X + playerW;
+            bool yAlignLeft = initPosition.X < playerPos.X && initPosition.X + trapW > playerPos.X;
+            bool yAlignRight = initPosition.X < playerPos.X + playerW && initPosition.X + trapW > playerPos.X + playerW;
 
             if (Position == initPosition && !ready)
             {
                 speed = initSpeed;
                 ready = true;
                 Velocity = Vector2.Zero;
-            } else if (Position != initPosition && !ready)
+            }
+            else if (Position != initPosition && !ready)
             {
-                ReturnToSpawn();
-            } else if (xAlignTop || xAlignBottom)
+                ReturnToSpawn(gameTime);
+            }
+            else if ((xAlignTop || xAlignBottom) && Velocity.Y == 0)
             {
                 Velocity = new Vector2(1, 0);
                 if (Position.X > playerPos.X) Velocity *= -1;
-            } else if (yAlignLeft || yAlignRight)
+            }
+            else if ((yAlignLeft || yAlignRight) && Velocity.X == 0)
             {
                 Velocity = new Vector2(0, 1);
                 if (Position.Y > playerPos.Y) Velocity *= -1;
-            } 
+            }
+            else if (ready && Velocity != Vector2.Zero)
+            {
+                ready = false;
+            }
         }
     }
 }

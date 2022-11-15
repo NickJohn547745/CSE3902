@@ -8,7 +8,7 @@ namespace sprint0.GameStateClasses;
 public class GamePauseState : AGameState
 {
     private float previous;
-    public GamePauseState(GameState state)
+    public GamePauseState(GameStateManager state)
     {
         gameState = state;       
         gameState.game.Paused = true;

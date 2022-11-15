@@ -17,7 +17,7 @@ public class GameOverState : AGameState
 
     private float previous;
 
-    public GameOverState(GameState state)
+    public GameOverState(GameStateManager state)
     {
         gameState = state;
         Mute();

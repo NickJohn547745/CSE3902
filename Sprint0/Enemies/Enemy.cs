@@ -102,7 +102,7 @@ namespace sprint0.Enemies
         
         protected abstract void Behavior(GameTime gameTime, Game1 game);
 
-        public void Update(GameTime gameTime, Game1 game)
+        public virtual void Update(GameTime gameTime, Game1 game)
         {
             DamageControl();
 

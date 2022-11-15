@@ -7,7 +7,7 @@ using sprint0.Interfaces;
 public class GameWinState : AGameState
 {
 
-    public GameWinState(GameState state)
+    public GameWinState(GameStateManager state)
     {
         gameState = state;
     }
