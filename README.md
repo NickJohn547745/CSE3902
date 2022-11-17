@@ -54,9 +54,6 @@
 * Start - reset game
 
 ## Known Bugs
-* Link moves across screen when walking through doors
-* Link gets pushed back when using sword on enemy (could reduce player hitbox or make player invincible in sword animation)
-* Swapping rooms with mouse can look weird if done quickly
 * HUD values not dynamic
 * Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
@@ -66,7 +63,7 @@
 * Player sometimes disappears when moving between rooms while damaged (or allow player to move around screen during transition)
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
-* Boomerang should return to player, not just initial position
+* Boomerang should and other projectiles return to player, not just initial position
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
 * Map currently set to always display on HUD instead of when item is found
