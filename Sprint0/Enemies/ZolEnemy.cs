@@ -41,7 +41,7 @@ namespace sprint0.Enemies
             DirectionChoice.Add(5, Vector2.Zero);
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
             Random rand = new Random();
 

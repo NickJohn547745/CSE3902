@@ -67,7 +67,7 @@ namespace sprint0.TileClasses
             this.Location = new Point(x, y);
         }
 
-        public void Update(GameTime gameTime, Game1 game)
+        public void Update(GameTime gameTime)
         {
             // Empty - Not used
         }

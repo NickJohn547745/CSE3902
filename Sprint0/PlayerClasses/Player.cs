@@ -61,9 +61,9 @@ public class Player : IPlayer {
         PlayerState.Draw(spriteBatch, Color.White);
     }
 
-    public void Update(GameTime gameTime, Game1 game) {
+    public void Update(GameTime gameTime) {
         PlayerState.Update();
-        AbilityManager.Update(gameTime, game);
+        AbilityManager.Update(gameTime);
         CanMove = true;
     }
 

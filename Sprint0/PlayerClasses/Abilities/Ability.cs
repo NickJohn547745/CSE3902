@@ -25,7 +25,7 @@ public abstract class Ability : ICollidable
         return new Rectangle((int)Position.X, (int)Position.Y, sprite.GetWidth(), sprite.GetHeight());
     }
 
-    public abstract void Update(GameTime gameTime, Game1 game);
+    public abstract void Update(GameTime gameTime);
     public virtual void Draw(SpriteBatch spriteBatch)
     {
         sprite.Draw(spriteBatch, Position, animationFrame, SpriteEffects.None, Color.White);

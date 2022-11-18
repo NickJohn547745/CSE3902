@@ -41,8 +41,8 @@ public class GameOverState : AGameState
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        float X = gameState.game.GetWindowWidth() / 2;
-        float Y = gameState.game.GetWindowHeight() / 2;
+        float X = Game1.WindowWidth / 2;
+        float Y = Game1.WindowHeight / 2;
         Vector2 pos = new Vector2(X, Y);
 
         spriteBatch.DrawString(gameState.Font, gameOver, pos, Color.Red, 0f, new Vector2(gameOriginX, gameOriginY), gameScale, SpriteEffects.None, 0f);

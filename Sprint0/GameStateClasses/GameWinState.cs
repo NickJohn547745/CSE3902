@@ -47,8 +47,8 @@ public class GameWinState : AGameState
     {
         spriteBatch.GraphicsDevice.Clear(Color.White);
         
-        float X = gameState.game.GetWindowWidth() / 2;
-        float Y = gameState.game.GetWindowHeight() / 2;
+        float X = Game1.WindowWidth / 2;
+        float Y = Game1.WindowHeight / 2;
         Vector2 pos = new Vector2(X, Y);
 
 

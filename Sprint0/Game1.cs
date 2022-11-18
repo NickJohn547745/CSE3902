@@ -23,6 +23,9 @@ public class Game1 : Game
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public static int WindowWidth { get; private set; }
+    public static int WindowHeight { get; private set; }
+
     public CollisionManager CollisionManager { get; private set; }
     public List<IController> Controllers { get; set; }
     public List<LevelConfig> LevelList { get; set; }
@@ -47,16 +50,6 @@ public class Game1 : Game
 
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-    }
-
-    public int GetWindowWidth()
-    {
-        return _graphics.PreferredBackBufferWidth;
-    }
-
-    public int GetWindowHeight()
-    {
-        return _graphics.PreferredBackBufferHeight;
     }
 
     public void PreviousLevel()
@@ -168,6 +161,9 @@ public class Game1 : Game
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         room.Initialize();
 
+        WindowWidth = _graphics.PreferredBackBufferWidth;
+        WindowHeight = _graphics.PreferredBackBufferHeight;
+
         // for testing
         CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
 
@@ -179,8 +175,6 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         Controllers.ForEach(controller => controller.Update(this));
-
-        state.Room.Update(gameTime);
 
         state.Update(gameTime);
 

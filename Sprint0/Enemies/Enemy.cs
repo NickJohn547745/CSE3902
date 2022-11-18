@@ -100,9 +100,9 @@ namespace sprint0.Enemies
             }
         }
         
-        protected abstract void Behavior(GameTime gameTime, Game1 game);
+        protected abstract void Behavior(GameTime gameTime);
 
-        public virtual void Update(GameTime gameTime, Game1 game)
+        public virtual void Update(GameTime gameTime)
         {
             DamageControl();
 
@@ -113,7 +113,7 @@ namespace sprint0.Enemies
                 // Ex: change direction every delay seconds
                 if (delayCount % delay == 0)
                 {
-                    Behavior(gameTime, game);
+                    Behavior(gameTime);
                 }
 
                 delayCount++;

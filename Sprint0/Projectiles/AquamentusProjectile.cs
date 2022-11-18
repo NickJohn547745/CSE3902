@@ -21,7 +21,7 @@ public class AquamentusProjectile : Projectile {
         type = ICollidable.ObjectType.Projectile;
     }
 
-    protected override void Behavior(Game1 game)
+    protected override void Behavior()
     {
        // no behavior 
     }

@@ -41,7 +41,7 @@ public class SilverArrow : Ability{
         sprite.Draw(spriteBatch, Position, effects, Color.White);
     }
     
-    public override void Update(GameTime gameTime, Game1 game) {
+    public override void Update(GameTime gameTime) {
         Position = Vector2.Add(Position, Velocity);
 
         if (hitFrame > 0)

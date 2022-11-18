@@ -44,7 +44,7 @@ namespace sprint0.Enemies
             }
         }
 
-        protected override void Behavior(GameTime gameTime, Game1 game)
+        protected override void Behavior(GameTime gameTime)
         {
 
         }

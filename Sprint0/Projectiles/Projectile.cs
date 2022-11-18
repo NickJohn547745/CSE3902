@@ -44,15 +44,15 @@ public abstract class Projectile : ICollidable {
         }
     }
 
-    protected abstract void Behavior(Game1 game);
+    protected abstract void Behavior();
 
-    public virtual void Update(GameTime gameTime, Game1 game)
+    public virtual void Update(GameTime gameTime)
     {
         Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         if (gameTime.TotalGameTime.Seconds % delay == 0)
         {
-            Behavior(game);
+            Behavior();
         }
 
         if (Collision && CollisionManager.Collidables.Contains(this)) CollisionManager.Collidables.Remove(this);

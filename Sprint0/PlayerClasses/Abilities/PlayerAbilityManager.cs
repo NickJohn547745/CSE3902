@@ -20,12 +20,11 @@ public class PlayerAbilityManager {
         UsingAbility.Add(AbilityTypes.WoodenArrow, false);
         UsingAbility.Add(AbilityTypes.SilverArrow, false);
         UsingAbility.Add(AbilityTypes.Fireball, false);
-        
+        Game = player.Game;
     }
 
-    public void Update(GameTime gameTime, Game1 game) {
-        if (Game == null)
-            Game = game;
+    public void Update(GameTime gameTime) {
+        
     }
 
     public void UseAbility(AbilityTypes abilityType, Vector2 position, Vector2 velocity) {

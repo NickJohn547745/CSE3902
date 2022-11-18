@@ -31,6 +31,8 @@ public class GameStateManager : IGameState
     
     public void Update(GameTime gameTime)
     {
+        Room.Update(gameTime);
+
         currentState.Update(gameTime);
     }
 
