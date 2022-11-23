@@ -7,23 +7,18 @@ namespace sprint0.GameStateClasses;
 
 public class GamePauseState : AGameState
 {
-    private float previous;
+    private readonly string pause = "Paused";
+    private const float gameScale = 5;
+    private const int gameOriginX = 39;
+    private const int gameOriginY = 35;
+    private Vector2 pos;
+
     public GamePauseState(GameStateManager state)
     {
         gameState = state;       
         gameState.game.Paused = true;
         Mute();
-    }
-
-    private void Mute()
-    {
-        previous = SoundEffect.MasterVolume;
-        SoundEffect.MasterVolume = 0.0f;
-    }
-
-    private void Unmute()
-    {
-        SoundEffect.MasterVolume = previous;
+        pos = new Vector2(Game1.WindowWidth / 2, Game1.WindowHeight / 2);
     }
 
     public override void Update(GameTime gameTime)
@@ -47,5 +42,7 @@ public class GamePauseState : AGameState
         gameState.Room.Draw(spriteBatch);
 
         gameState.collisionManager.Draw(spriteBatch);
+
+        spriteBatch.DrawString(gameState.Font, pause, pos, Color.Red, 0f, new Vector2(gameOriginX, gameOriginY), gameScale, SpriteEffects.None, 0f);
     }
 }

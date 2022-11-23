@@ -15,6 +15,7 @@ using sprint0.Sound;
 using sprint0.HudClasses;
 using System;
 using sprint0.Configs;
+using System.Reflection.Metadata;
 
 namespace sprint0;
 
@@ -35,7 +36,8 @@ public class Game1 : Game
     public bool Paused { get; set; }
 
     public IGameState state;
-
+    
+    // can we remove this since it never changes and is just 0 (doesn't need to be a const even)
     private int startingLevelIndex;
 
     private int currentLevelIndex;
@@ -191,7 +193,8 @@ public class Game1 : Game
 
     public void Reset()
     {
-        currentLevelIndex = 0;
+        // breaks doors when used
+        ResetLevel();
         state.Reset();
         Player.Reset();
     }
