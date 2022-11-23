@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
@@ -10,7 +9,6 @@ namespace sprint0.Enemies
     public class OldManNPC : Enemy
     {
         private const int OldManHealth = 1000;
-        private const int FireBallOffsetY = 30;
         private const float FireBallDirection = (float) 3/4;
         private const int FireBallShoot = 10;
         private const int HUDOffset = 134;
@@ -64,23 +62,6 @@ namespace sprint0.Enemies
         {
             switch (obj.type)
             {
-                case ICollidable.ObjectType.Player:
-                    switch (edge)
-                    {
-                        case ICollidable.Edge.Top:
-                            Position += new Vector2(0, -TileOffset);
-                            break;
-                        case ICollidable.Edge.Right:
-                            Position += new Vector2(-TileOffset, 0);
-                            break;
-                        case ICollidable.Edge.Left:
-                            Position += new Vector2(TileOffset, 0);
-                            break;
-                        case ICollidable.Edge.Bottom:
-                            Position += new Vector2(0, TileOffset);
-                            break;
-                    }
-                    break;
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
                     TakeDamage(obj.Damage);

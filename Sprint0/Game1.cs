@@ -14,12 +14,14 @@ using sprint0.GameStateClasses;
 using sprint0.Sound;
 using sprint0.HudClasses;
 using System;
-using sprint0.Enemies;
+using sprint0.Configs;
 
 namespace sprint0;
 
 public class Game1 : Game
 {
+    private const String Font = "Arial";
+
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -34,7 +36,7 @@ public class Game1 : Game
 
     public IGameState state;
 
-    private int startingLevelIndex = 0;
+    private int startingLevelIndex;
 
     private int currentLevelIndex;
 
@@ -77,16 +79,13 @@ public class Game1 : Game
     public void ResetLevel()
     {
         currentLevelIndex = startingLevelIndex;
-        state.Room = new Room(this, LevelList[currentLevelIndex]);
-
-        // Reset enemy health, dynamic parts of the map, etc. once implemented. May also be done in room class though
-        
+        state.Room = new Room(this, LevelList[currentLevelIndex]);     
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
         Paused = false;
+        startingLevelIndex = 0;
         base.Initialize();
     }
 
@@ -96,7 +95,6 @@ public class Game1 : Game
 
         TextureStorage.LoadAllTextures(Content);
         SpriteFont font = Content.Load<SpriteFont>("Arial");
-
 
         IController gamePad = new GamePadController();
 	
@@ -115,7 +113,6 @@ public class Game1 : Game
         gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightShoulder, new NextLevelCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.LeftShoulder, new PreviousLevelCommand(), IController.KeyState.Pressed);
-
 
         GameConfig = new GameConfig();
 
@@ -148,7 +145,6 @@ public class Game1 : Game
 
         Player = new Player(this);
 
-
         _graphics.PreferredBackBufferWidth = GameConfig.ResolutionWidth;
         _graphics.PreferredBackBufferHeight = GameConfig.ResolutionHeight;
         _graphics.ApplyChanges();
@@ -164,8 +160,7 @@ public class Game1 : Game
         WindowWidth = _graphics.PreferredBackBufferWidth;
         WindowHeight = _graphics.PreferredBackBufferHeight;
 
-        // for testing
-        CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
+        //CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
 
         state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 

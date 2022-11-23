@@ -5,7 +5,7 @@ using sprint0.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace sprint0.Classes
+namespace sprint0
 {
     /// <summary>
     /// Class <c>CollisionManger</c> stores <c>ICollidable</c> objects and
@@ -25,7 +25,7 @@ namespace sprint0.Classes
         {
             Collidables = new List<ICollidable>();
             Player = player;
-            Collidables.Add(Player);         
+            Collidables.Add(Player);
         }
 
         /// <summary>
@@ -152,7 +152,8 @@ namespace sprint0.Classes
         /// </summary>
         /// <param name="gameTime">Current <c>GameTime</c> object.</param>
         /// <param name="game">Parent <c>Game1</c> object.</param>
-        public void Update(GameTime gameTime) {
+        public void Update(GameTime gameTime)
+        {
             for (int i = 0; i < Collidables.Count; i++)
             {
                 Collidables[i].Update(gameTime);

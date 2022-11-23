@@ -9,7 +9,6 @@ using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
 using Microsoft.Xna.Framework.Audio;
-using sprint0.Classes;
 
 namespace sprint0.Enemies
 {

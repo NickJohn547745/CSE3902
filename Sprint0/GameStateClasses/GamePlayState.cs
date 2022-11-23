@@ -24,7 +24,7 @@ public class GamePlayState : AGameState
         }
     }
 
-    private void Win()
+    private void CheckWin()
     {
         if(true)
         {
@@ -47,7 +47,7 @@ public class GamePlayState : AGameState
 
         PlayerDeath();
 
-        // Win();
+        // CheckWin();
     }
 
     public override void Draw(SpriteBatch spriteBatch)

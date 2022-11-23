@@ -1,10 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
 
-namespace sprint0.PlayerClasses; 
+namespace sprint0.PlayerClasses;
 
 public class PlayerSwordUpState : PlayerSwordState {
     public PlayerSwordUpState(Player player) {

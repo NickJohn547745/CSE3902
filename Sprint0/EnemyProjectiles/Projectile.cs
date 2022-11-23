@@ -4,9 +4,8 @@ using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Sprites;
 using System;
-using sprint0.Classes;
 
-namespace sprint0.Interfaces; 
+namespace sprint0.Interfaces;
 
 public abstract class Projectile : ICollidable {
 

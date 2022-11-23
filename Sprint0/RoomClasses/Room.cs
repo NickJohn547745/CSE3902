@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
+using sprint0.Configs;
 using sprint0.DoorClasses;
 using sprint0.Factories;
 using sprint0.Interfaces;

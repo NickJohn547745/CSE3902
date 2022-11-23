@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
-using sprint0.Classes;
 using sprint0.Sound;
 
 namespace sprint0.Enemies
