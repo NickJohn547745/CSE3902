@@ -43,12 +43,9 @@ namespace sprint0.Enemies
 
         protected override void Behavior(GameTime gameTime)
         {
-            Random rand = new Random();
-
             // randomly choose movement direction
             int direction = rand.Next(0, RandBound);
-            if (DirectionChoice.ContainsKey(direction)) Velocity = DirectionChoice[direction];
-            
+            if (DirectionChoice.ContainsKey(direction)) Velocity = DirectionChoice[direction];         
         }
     }
 }

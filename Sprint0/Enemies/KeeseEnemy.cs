@@ -34,12 +34,9 @@ namespace sprint0.Enemies
 
         protected override void Behavior(GameTime gameTime)
         {
-            Random rand = new Random();
-            Random rand2 = new Random();
-
             // randomly choose movement direction
             int x = rand.Next(-1, RandBound) % DirectionChange;
-            int y = rand2.Next(-1, RandBound) % DirectionChange;
+            int y = rand.Next(-1, RandBound) % DirectionChange;
             if (x == 0 && y == 0) x = previous;
             Velocity = new Vector2 (x, y);
         }

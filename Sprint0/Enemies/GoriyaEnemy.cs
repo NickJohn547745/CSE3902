@@ -30,7 +30,7 @@ namespace sprint0.Enemies
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
             boomerangTracker = 1;
-            goriyaStateMachine = new GoriyaStateMachine(this);
+            goriyaStateMachine = new GoriyaStateMachine(this, rand);
             goriyaStateMachine.ChangeDirection();
             MaxHealth = GoriyaHealth;
             Damage = 1;

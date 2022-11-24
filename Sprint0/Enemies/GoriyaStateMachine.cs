@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Projectiles;
 using sprint0.Interfaces;
+using System;
 
 namespace sprint0.Enemies
 {
@@ -18,12 +18,15 @@ namespace sprint0.Enemies
         public GoriyaProjectile Boomerang { get; set; }
         public bool flipped { private get; set; }
 
-        public GoriyaStateMachine(GoriyaEnemy goriya)
+        private Random Rand;
+
+        public GoriyaStateMachine(GoriyaEnemy goriya, Random rand)
         {
             Goriya = goriya;            
             BoomerangThrown = false;
             SpriteEffect = SpriteEffects.None;
             flipped = false;
+            Rand = rand;
         }
 
         private int Flip()
@@ -49,8 +52,7 @@ namespace sprint0.Enemies
         
         public void ChangeDirection()
         {
-                Random rand = new Random();
-                int dir = rand.Next(0, DirectionChange);
+                int dir = Rand.Next(0, DirectionChange);
                 if (flipped) dir = Flip();
                 // randomly choose direction
                 switch (dir)

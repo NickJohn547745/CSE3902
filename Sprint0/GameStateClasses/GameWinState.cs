@@ -16,13 +16,13 @@ public class GameWinState : AGameState
     private const int resetOriginX = 80;
     private const int scale = 15;
     private ISprite triforce;
-    private Vector2 pos;
+    private Vector2 textPos;
 
     public GameWinState(GameStateManager state)
     {
         gameState = state;
         Mute();
-        pos = new Vector2(Game1.WindowWidth / 2, Game1.WindowHeight / 2);
+        textPos = new Vector2(Game1.WindowWidth / 2, Game1.WindowHeight / 2);
         triforce = ItemSpriteFactory.Instance.TriforceSprite(scale);
     }
 
@@ -35,9 +35,9 @@ public class GameWinState : AGameState
     {
         spriteBatch.GraphicsDevice.Clear(Color.White);
         
-        triforce.Draw(spriteBatch, new Vector2(pos.X - triforce.GetWidth() / 2, triforce.GetHeight()), SpriteEffects.None, Color.White);
-        spriteBatch.DrawString(gameState.Font, gameWin, pos, Color.Green, 0f, new Vector2(gameOriginX, gameOriginY), gameScale, SpriteEffects.None, 0f);
-        spriteBatch.DrawString(gameState.Font, reset, pos, Color.DarkGreen, 0f, new Vector2(resetOriginX, 0), resetScale, SpriteEffects.None, 0f);
+        triforce.Draw(spriteBatch, new Vector2(textPos.X - triforce.GetWidth() / 2, triforce.GetHeight()), SpriteEffects.None, Color.White);
+        spriteBatch.DrawString(gameState.Font, gameWin, textPos, Color.Green, 0f, new Vector2(gameOriginX, gameOriginY), gameScale, SpriteEffects.None, 0f);
+        spriteBatch.DrawString(gameState.Font, reset, textPos, Color.DarkGreen, 0f, new Vector2(resetOriginX, 0), resetScale, SpriteEffects.None, 0f);
     }
 
     public override void Reset()

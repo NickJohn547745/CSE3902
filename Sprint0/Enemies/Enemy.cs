@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Sound;
+using System;
 
 namespace sprint0.Enemies
 {
@@ -13,6 +13,8 @@ namespace sprint0.Enemies
         protected const int DeathFrames = 4;
         private const int DamageDelay = 12;
         private const int StunDelay = 80;
+
+        protected readonly Random rand = new();
 
         public int Health { get; set; }
         public int MaxHealth { get; protected set; }
