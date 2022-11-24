@@ -6,7 +6,7 @@ using sprint0.Enemies;
 
 namespace sprint0.Projectiles
 {
-    public class GoriyaProjectile : Projectile
+    public class GoriyaProjectile : PhysicsProjectile
     {
         private const int GoriyaProjSpeed = 100;
         private const int GoriyaProjDelay = 1;

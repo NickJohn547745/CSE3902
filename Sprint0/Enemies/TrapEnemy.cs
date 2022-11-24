@@ -14,21 +14,16 @@ namespace sprint0.Enemies
         private const float Acceleration = 20;
         private const int Proximity = 5;
         private const int TrapHealth = 1;
+        private const int UpperBound = 120;
 
         private IPlayer player;
         private bool ready;
-        private float initSpeed;
 
         public TrapEnemy(Vector2 position, float speed, IPlayer player)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateTrapSprite();
-            this.speed = speed;
-            initSpeed = speed;
-            Velocity = Vector2.Zero;
             delay = BehaviorDelay;
+            Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(TrapHealth, sound);
             Damage = 1;
             this.player = player;
@@ -45,7 +40,7 @@ namespace sprint0.Enemies
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:
                 case ICollidable.ObjectType.Door:
-                    canMove = false;
+                    Physics.Freeze();
                     ready = false;
                     break;
                 case ICollidable.ObjectType.Player:
@@ -58,38 +53,35 @@ namespace sprint0.Enemies
         {
             if (diffX < 0)
             {
-                Velocity = new Vector2(1, Velocity.Y);
+                Physics.ChangeDirection(Direction.Right);
             }
             else if (diffX > 0)
             {
-                Velocity = new Vector2(-1, Velocity.Y);
+                Physics.ChangeDirection(Direction.Left);
             }
-
-            if (diffY < 0)
+            else if (diffY < 0)
             {
-                Velocity = new Vector2(Velocity.X, 1);
+                Physics.ChangeDirection(Direction.Down);
             }
             else if (diffY > 0)
             {
-                Velocity = new Vector2(Velocity.X, -1);
+                Physics.ChangeDirection(Direction.Up);
             }
         }
 
         private void ReturnToSpawn(GameTime gameTime)
         {
-            float diffX = Position.X - initPosition.X;
-            float diffY = Position.Y - initPosition.Y;
-            double diff = Math.Sqrt(diffX * diffX + diffY * diffY);
+            Vector2 diffs = Physics.DifferenceFromStart();
+            double diff = Math.Sqrt(diffs.X * diffs.X + diffs.Y * diffs.Y);
 
-            AdjustDirection(diffX, diffY);
+            AdjustDirection(diffs.X, diffs.Y);
 
-            if (diff < initSpeed && diff > Proximity)
+            if (diff < UpperBound && diff > Proximity)
             {
-                if (speed >= ReduceSpeed) speed -= Acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (Physics.Speed >= ReduceSpeed) Physics.Accelerate(gameTime);
             } else if (diff < Proximity)
             {
-                Position = initPosition;
-                Velocity = Vector2.Zero;
+                Physics.Reset();
             }     
         }
 
@@ -102,33 +94,32 @@ namespace sprint0.Enemies
             int trapW = GetHitBox().Width;
             int trapH = GetHitBox().Height;
 
-            bool xAlignTop = initPosition.Y < playerPos.Y && initPosition.Y + trapH > playerPos.Y;
-            bool xAlignBottom = initPosition.Y < playerPos.Y + playerH && initPosition.Y + trapH > playerPos.Y + playerH;
+            bool xAlignTop = Physics.InitPosition.Y < playerPos.Y && Physics.InitPosition.Y + trapH > playerPos.Y;
+            bool xAlignBottom = Physics.InitPosition.Y < playerPos.Y + playerH && Physics.InitPosition.Y + trapH > playerPos.Y + playerH;
 
-            bool yAlignLeft = initPosition.X < playerPos.X && initPosition.X + trapW > playerPos.X;
-            bool yAlignRight = initPosition.X < playerPos.X + playerW && initPosition.X + trapW > playerPos.X + playerW;
+            bool yAlignLeft = Physics.InitPosition.X < playerPos.X && Physics.InitPosition.X + trapW > playerPos.X;
+            bool yAlignRight = Physics.InitPosition.X < playerPos.X + playerW && Physics.InitPosition.X + trapW > playerPos.X + playerW;
 
-            if (Position == initPosition && !ready)
+            if (Physics.DifferenceFromStart() == Vector2.Zero && !ready)
             {
-                speed = initSpeed;
-                ready = true;
-                Velocity = Vector2.Zero;
+                Physics.Reset();
+                ready = true;               
             }
-            else if (Position != initPosition && !ready)
+            else if (Physics.DifferenceFromStart() != Vector2.Zero && !ready)
             {
                 ReturnToSpawn(gameTime);
             }
-            else if ((xAlignTop || xAlignBottom) && Velocity.Y == 0)
+            else if ((xAlignTop || xAlignBottom) && Physics.CurrentVelocity.Y == 0)
             {
-                Velocity = new Vector2(1, 0);
-                if (Position.X > playerPos.X) Velocity *= -1;
+                Physics.ChangeDirection(Direction.Right);
+                if (Physics.CurrentPosition.X > playerPos.X) Physics.CurrentVelocity *= -1;
             }
-            else if ((yAlignLeft || yAlignRight) && Velocity.X == 0)
+            else if ((yAlignLeft || yAlignRight) && Physics.CurrentVelocity.X == 0)
             {
-                Velocity = new Vector2(0, 1);
-                if (Position.Y > playerPos.Y) Velocity *= -1;
+                Physics.ChangeDirection(Direction.Down);
+                if (Physics.CurrentPosition.Y > playerPos.Y) Physics.CurrentVelocity *= -1;
             }
-            else if (ready && Velocity != Vector2.Zero)
+            else if (ready && Physics.CurrentVelocity != Vector2.Zero)
             {
                 ready = false;
             }

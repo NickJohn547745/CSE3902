@@ -8,7 +8,7 @@ using System;
 
 namespace sprint0.Interfaces;
 
-public abstract class Projectile : ICollidable {
+public abstract class PhysicsProjectile : ICollidable {
 
     public int Damage { get; set; }
     protected float start;

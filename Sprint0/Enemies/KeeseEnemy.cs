@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
@@ -16,21 +15,17 @@ namespace sprint0.Enemies
         private int previous;
         public KeeseEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
-            this.speed = speed;
-            Velocity = Vector2.One;
             delay = BehaviorDelay;
             previous = 1;
+            Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(KeeseHealth, sound);
             Damage = 1;
             
             InitEnemyFields();
         }
 
-        protected override void Stun()
+        protected override void BoomerangBehavior()
         {
             Health.TakeDamage(1);
         }
@@ -41,7 +36,7 @@ namespace sprint0.Enemies
             int x = rand.Next(-1, RandBound) % DirectionChange;
             int y = rand.Next(-1, RandBound) % DirectionChange;
             if (x == 0 && y == 0) x = previous;
-            Velocity = new Vector2 (x, y);
+            Physics.CurrentVelocity = new Vector2 (x, y);
         }
     }
 }

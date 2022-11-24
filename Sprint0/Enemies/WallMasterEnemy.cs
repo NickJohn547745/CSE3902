@@ -13,13 +13,9 @@ namespace sprint0.Enemies
 
         public WallMasterEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateWallMasterSprite();
-            this.speed = speed;
-            Velocity = Vector2.One;
             delay = BehaviorDelay;
+            Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(WallMasterHealth, sound);
             Damage = 1;
             
@@ -37,11 +33,11 @@ namespace sprint0.Enemies
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:
                 case ICollidable.ObjectType.Door:
-                    ReverseDirection();
+                    Physics.ReverseDirection();
                     // canMove = false;
                     break;
                 case ICollidable.ObjectType.Boomerang:
-                    Stun();
+                    //Physics.Stun();
                     break;
             }
         }

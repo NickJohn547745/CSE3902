@@ -3,7 +3,7 @@ using sprint0.Factories;
 
 namespace sprint0.Interfaces; 
 
-public class AquamentusProjectile : Projectile {
+public class AquamentusProjectile : PhysicsProjectile {
 
     private const int FireBallDelay = 1;
     private const int FireBallSpeed = 200;

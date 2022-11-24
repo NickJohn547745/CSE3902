@@ -12,78 +12,57 @@ namespace sprint0.Enemies
         private const int DirectionChange = 4;
 
         public GoriyaEnemy Goriya { get; set; }
-        public Direction GoriyaDirection { get; private set; }
         public SpriteEffects SpriteEffect { get; private set; }
         public bool BoomerangThrown { get; set; }
         public GoriyaProjectile Boomerang { get; set; }
         public bool flipped { private get; set; }
 
-        private Random Rand;
 
-        public GoriyaStateMachine(GoriyaEnemy goriya, Random rand)
+        public GoriyaStateMachine(GoriyaEnemy goriya)
         {
             Goriya = goriya;            
             BoomerangThrown = false;
             SpriteEffect = SpriteEffects.None;
             flipped = false;
-            Rand = rand;
-        }
-
-        private int Flip()
-        {
-            int flip = 0;
-            switch (GoriyaDirection)
-            {
-                case Direction.Up:
-                    // move down
-                    flip = 3;
-                    break;
-                case Direction.Left:
-                    // move right
-                    flip = 2;
-                    break;
-                case Direction.Right:
-                    // move left
-                    flip = 1;
-                    break;
-            }
-            return flip;
         }
         
-        public void ChangeDirection()
+        public void ChangeDirection(Random rand)
         {
-                int dir = Rand.Next(0, DirectionChange);
-                if (flipped) dir = Flip();
+
+            if (flipped)
+            {
+                Goriya.Physics.ReverseDirection();
+            }
+            else
+            {
+                int dir = rand.Next(0, DirectionChange);
+                Goriya.Physics.ChangeDirection((Direction)dir);
+            }
+
                 // randomly choose direction
-                switch (dir)
+                switch (Goriya.Physics.Direction)
                 {
-                    case 0:
+                    case Direction.Up:
                         // move up
-                        GoriyaDirection = Direction.Up;
-                        Goriya.Velocity = new Vector2(0, -1);
                         Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingUpStateSprite();
                         SpriteEffect = SpriteEffects.FlipHorizontally;
                         break;
-                    case 1:
+                    case Direction.Left:
                         // move left
-                        GoriyaDirection = Direction.Left;
-                        Goriya.Velocity = new Vector2(-1, 0);
                         Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
                         SpriteEffect = SpriteEffects.FlipHorizontally;
                         break;
-                    case 2:
+                    case Direction.Right:
                         // move right
-                        GoriyaDirection = Direction.Right;
-                        Goriya.Velocity = new Vector2(1, 0);
                         Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
                         SpriteEffect = SpriteEffects.None;
                         break;
-                    case 3:
+                    case Direction.Down:
                         // move down
-                        GoriyaDirection = Direction.Down;
-                        Goriya.Velocity = new Vector2(0, 1);
                         Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
                         SpriteEffect = SpriteEffects.FlipHorizontally;
+                        break;
+                    default:
                         break;
                 }
 
@@ -92,8 +71,8 @@ namespace sprint0.Enemies
 
         public void ThrowBoomerang()
         {
-            Boomerang = new GoriyaProjectile(Goriya.Position, Goriya.Velocity, this);
-            Goriya.Velocity = Vector2.Zero;
+            Boomerang = new GoriyaProjectile(Goriya.Physics.CurrentPosition, Goriya.Physics.CurrentVelocity, this);
+            Goriya.Physics.CurrentVelocity = Vector2.Zero;
             BoomerangThrown = true;
         }
     }

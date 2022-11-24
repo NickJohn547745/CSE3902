@@ -7,11 +7,12 @@ namespace sprint0.Interfaces
         Up = 0, 
         Right = 1,
         Down = 2,
-        Left = 3
+        Left = 3,
+        None = 4
     };
     public interface ICollidable
     {
-        public enum Edge {Top, Bottom, Left, Right };
+        public enum Edge {Top, Bottom, Left, Right};
         
         public enum ObjectType
         {

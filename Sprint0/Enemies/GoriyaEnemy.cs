@@ -24,30 +24,26 @@ namespace sprint0.Enemies
 
         public GoriyaEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
-            this.speed = speed;
-            Velocity = Vector2.Zero;
             delay = BehaviorDelay;
             boomerangTracker = 1;
-            goriyaStateMachine = new GoriyaStateMachine(this, rand);
-            goriyaStateMachine.ChangeDirection();
+            Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(GoriyaHealth, sound);
+            goriyaStateMachine = new GoriyaStateMachine(this);
+            goriyaStateMachine.ChangeDirection(rand);
             Damage = 1;
             
             InitEnemyFields();
         }
 
-        protected override void ReverseDirection()
+        protected override void WallBehavior()
         {
             goriyaStateMachine.flipped = true;
-
+            Physics.Freeze();
         }
         
-        protected override void Stun()
+        protected override void BoomerangBehavior()
         {
-            stunCount++;
+            Physics.Stun();
         }
 
         protected override void Behavior(GameTime gameTime)
@@ -62,7 +58,7 @@ namespace sprint0.Enemies
             } else if (!goriyaStateMachine.BoomerangThrown)
             {
                 // change direction
-                goriyaStateMachine.ChangeDirection();
+                goriyaStateMachine.ChangeDirection(rand);
                 boomerangTracker++;
             }      
         }
@@ -81,12 +77,12 @@ namespace sprint0.Enemies
         {
             if (Health.Dead())
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Health.Color);
+                Sprite.Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Health.Color);
             }
         }
     }

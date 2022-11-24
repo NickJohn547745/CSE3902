@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
-using sprint0.PlayerClasses;
 using sprint0.Managers;
 
 namespace sprint0.Enemies
@@ -20,11 +18,9 @@ namespace sprint0.Enemies
         
         public OldManNPC(Vector2 position)
         {
-            initPosition = position;
-            Position = position;
             Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
-            Velocity = Vector2.Zero;
             delay = 1;
+            Physics = new PhysicsManager(position, Direction.None, 0);
             Health = new HealthManager(OldManHealth, sound);
             fireBallTracker = 1;
 
@@ -35,7 +31,7 @@ namespace sprint0.Enemies
         {
             if (Health.CurrentHealth < OldManHealth)
             {
-                Position = new Vector2((Game1.WindowWidth - GetHitBox().Width ) / 2, (Game1.WindowHeight - GetHitBox().Height ) / 2 - HUDOffset);
+                Physics.CurrentPosition = new Vector2((Game1.WindowWidth - GetHitBox().Width ) / 2, (Game1.WindowHeight - GetHitBox().Height ) / 2 - HUDOffset);
                 Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
                 if (fireBallTracker % FireBallShoot == 0)
                 {
@@ -52,7 +48,7 @@ namespace sprint0.Enemies
                 if (fireBallTracker % (FireBallShoot * FireBallScale) == 0)
                 {
                     Health.Reset();
-                    Position = initPosition;
+                    Physics.Reset();
                 }
 
                 fireBallTracker++;
