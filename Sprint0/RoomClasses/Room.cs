@@ -7,6 +7,7 @@ using sprint0.Configs;
 using sprint0.DoorClasses;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
 using sprint0.MenuItems.Inventory;
 using sprint0.TileClasses;
 

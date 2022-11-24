@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using sprint0.PlayerClasses;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
+
 namespace sprint0.Enemies
 {
     public class TrapEnemy : Enemy
@@ -11,6 +13,7 @@ namespace sprint0.Enemies
         private const int ReduceSpeed = 3;
         private const float Acceleration = 20;
         private const int Proximity = 5;
+        private const int TrapHealth = 1;
 
         private IPlayer player;
         private bool ready;
@@ -26,7 +29,7 @@ namespace sprint0.Enemies
             initSpeed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
-            MaxHealth = 1;
+            Health = new HealthManager(TrapHealth, sound);
             Damage = 1;
             this.player = player;
             ready = true;

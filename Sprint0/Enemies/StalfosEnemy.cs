@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
-using sprint0.Interfaces;
+using sprint0.Managers;
 
 namespace sprint0.Enemies
 {
@@ -23,7 +23,7 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.Zero;
             delay = BehaviorDelay;
-            MaxHealth = StalfosHealth;
+            Health = new HealthManager(StalfosHealth, sound);
             Damage = 1;
             
             InitEnemyFields();

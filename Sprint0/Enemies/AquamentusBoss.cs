@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
+using sprint0.Managers;
 
 namespace sprint0.Enemies
 {
@@ -26,7 +27,7 @@ namespace sprint0.Enemies
             Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             delay = BehaviorDelay;
             fireBallTracker = 1;
-            MaxHealth = AquamentusHealth;
+            Health = new HealthManager(AquamentusHealth, sound);
             Damage = 1;
             
             InitEnemyFields();

@@ -3,34 +3,33 @@ using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Sound;
+using sprint0.Managers;
 using System;
+using Microsoft.Xna.Framework.Audio;
 
 namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
         protected const int TileOffset = 5;
-        protected const int DeathFrames = 4;
-        private const int DamageDelay = 12;
+        protected const int DeathFrames = 4;       
         private const int StunDelay = 80;
 
         protected readonly Random rand = new();
+        protected readonly SoundEffect sound = SoundManager.Manager.enemyDamageSound();
 
-        public int Health { get; set; }
-        public int MaxHealth { get; protected set; }
+        protected HealthManager Health;
+        protected int deadCount;
+
         public int Damage { get; set; }
         protected int delay;
         private int delayCount;
-        protected int damageCount;
-        protected bool damaged;
         protected int stunCount;
-        protected Color color;
         public ICollidable.ObjectType type { get; set; }
         public Vector2 PreviousPosition { get; set; }
         public Vector2 Position { get; set; }
         protected Vector2 initPosition;
         protected float speed;
-        protected int deadCount;
 
         protected bool canMove = true;
 
@@ -39,24 +38,9 @@ namespace sprint0.Enemies
 
         protected void InitEnemyFields()
         {
-            Health = MaxHealth;
-            damageCount = 0;
-            damaged = false;
             stunCount = 0;
-            color = Color.White;
             deadCount = 0;
             type = ICollidable.ObjectType.Enemy;
-        }
-        
-        protected void TakeDamage(int damage)
-        {
-            if (!damaged && damage > 0)
-            {
-                Health -= damage;
-                damaged = true;
-                color = Color.Red;
-                SoundManager.Manager.enemyDamageSound().Play();
-            }
         }
 
         protected virtual void Stun() {}
@@ -79,19 +63,6 @@ namespace sprint0.Enemies
             }
         }
 
-        private void DamageControl()
-        {
-            if (damaged)
-            {
-                damageCount++;
-                if (damageCount % DamageDelay == 0)
-                {
-                    damaged = false;
-                    color = Color.White;
-                }
-            }
-        }
-
         protected virtual void Death()
         {
             if (deadCount >= DeathFrames)
@@ -105,7 +76,7 @@ namespace sprint0.Enemies
 
         public virtual void Update(GameTime gameTime)
         {
-            DamageControl();
+            Health.UpdateCounters();
 
             if (stunCount % StunDelay == 0)
             {
@@ -134,7 +105,7 @@ namespace sprint0.Enemies
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
-                    TakeDamage(obj.Damage);
+                    Health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:
@@ -156,21 +127,21 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Health <= 0)
+            if (Health.Dead())
             {
                 EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, color);
+                Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Health.Color);
             }
         }
 
         public void Reset()
         {
             Position = initPosition;
-            Health = MaxHealth;
+            Health.Reset();
             deadCount = 0;
         }
     }

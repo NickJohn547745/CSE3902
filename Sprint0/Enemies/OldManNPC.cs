@@ -3,6 +3,7 @@ using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
 using sprint0.PlayerClasses;
+using sprint0.Managers;
 
 namespace sprint0.Enemies
 {
@@ -24,7 +25,7 @@ namespace sprint0.Enemies
             Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
             Velocity = Vector2.Zero;
             delay = 1;
-            MaxHealth = OldManHealth;
+            Health = new HealthManager(OldManHealth, sound);
             fireBallTracker = 1;
 
             InitEnemyFields();
@@ -32,7 +33,7 @@ namespace sprint0.Enemies
 
         protected override void Behavior(GameTime gameTime)
         {
-            if (Health < OldManHealth)
+            if (Health.CurrentHealth < OldManHealth)
             {
                 Position = new Vector2((Game1.WindowWidth - GetHitBox().Width ) / 2, (Game1.WindowHeight - GetHitBox().Height ) / 2 - HUDOffset);
                 Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
@@ -50,41 +51,11 @@ namespace sprint0.Enemies
 
                 if (fireBallTracker % (FireBallShoot * FireBallScale) == 0)
                 {
-                    Health = OldManHealth;
+                    Health.Reset();
                     Position = initPosition;
                 }
 
                 fireBallTracker++;
-            }
-        }
-
-        public override void Collide(ICollidable obj, ICollidable.Edge edge)
-        {
-            switch (obj.type)
-            {
-                case ICollidable.ObjectType.Sword:
-                case ICollidable.ObjectType.Ability:
-                    TakeDamage(obj.Damage);
-                    break;
-                case ICollidable.ObjectType.Wall: 
-                case ICollidable.ObjectType.Door:
-                case ICollidable.ObjectType.Tile:
-                    switch (edge)
-                    {
-                        case ICollidable.Edge.Top:
-                            Position += new Vector2(0, TileOffset);
-                            break;
-                        case ICollidable.Edge.Right:
-                            Position += new Vector2(TileOffset, 0);
-                            break;
-                        case ICollidable.Edge.Left:
-                            Position += new Vector2(-TileOffset, 0);
-                            break;
-                        case ICollidable.Edge.Bottom:
-                            Position += new Vector2(0, -TileOffset);
-                            break;
-                    }
-                    break;
             }
         }
     }

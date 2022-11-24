@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
 using sprint0.RoomClasses;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 

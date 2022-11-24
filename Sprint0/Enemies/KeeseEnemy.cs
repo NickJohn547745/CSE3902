@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
+
 namespace sprint0.Enemies
 {
     public class KeeseEnemy : Enemy
@@ -9,6 +11,7 @@ namespace sprint0.Enemies
         private const int BehaviorDelay = 50;
         private const int DirectionChange = 2;
         private const int RandBound = 2;
+        private const int KeeseHealth = 1;
 
         private int previous;
         public KeeseEnemy(Vector2 position, float speed)
@@ -21,7 +24,7 @@ namespace sprint0.Enemies
             Velocity = Vector2.One;
             delay = BehaviorDelay;
             previous = 1;
-            MaxHealth = 1;
+            Health = new HealthManager(KeeseHealth, sound);
             Damage = 1;
             
             InitEnemyFields();
@@ -29,7 +32,7 @@ namespace sprint0.Enemies
 
         protected override void Stun()
         {
-            TakeDamage(1);
+            Health.TakeDamage(1);
         }
 
         protected override void Behavior(GameTime gameTime)

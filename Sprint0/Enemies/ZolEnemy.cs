@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
+using sprint0.Managers;
 
 namespace sprint0.Enemies
 {
@@ -15,6 +9,7 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int RandBound = 6;
+        private const int ZolHealth = 1;
 
         private Dictionary<int, Vector2> DirectionChoice;
 
@@ -27,9 +22,8 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.One;
             delay = BehaviorDelay;
-            MaxHealth = 1;
             Damage = 1;
-            
+            Health = new HealthManager(ZolHealth, sound);
             InitEnemyFields();
 
             DirectionChoice = new Dictionary<int, Vector2>();

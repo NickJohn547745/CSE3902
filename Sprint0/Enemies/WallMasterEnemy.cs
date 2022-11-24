@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
+
 namespace sprint0.Enemies
 {
     public class WallMasterEnemy : Enemy
@@ -18,7 +20,7 @@ namespace sprint0.Enemies
             this.speed = speed;
             Velocity = Vector2.One;
             delay = BehaviorDelay;
-            MaxHealth = WallMasterHealth;
+            Health = new HealthManager(WallMasterHealth, sound);
             Damage = 1;
             
             InitEnemyFields();
@@ -30,7 +32,7 @@ namespace sprint0.Enemies
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
-                    TakeDamage(obj.Damage);
+                    Health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:

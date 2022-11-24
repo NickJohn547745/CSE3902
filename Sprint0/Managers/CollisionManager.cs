@@ -5,7 +5,7 @@ using sprint0.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace sprint0
+namespace sprint0.Managers
 {
     /// <summary>
     /// Class <c>CollisionManger</c> stores <c>ICollidable</c> objects and

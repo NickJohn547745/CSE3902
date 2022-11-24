@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.PlayerClasses;
 using sprint0.RoomClasses;
 using sprint0.HudClasses;
+using sprint0.Managers;
 
 namespace sprint0.GameStateClasses;
 

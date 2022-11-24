@@ -9,6 +9,7 @@ using sprint0.Interfaces;
 using sprint0.Sprites;
 using sprint0.Factories;
 using Microsoft.Xna.Framework.Audio;
+using sprint0.Managers;
 
 namespace sprint0.Enemies
 {
@@ -32,7 +33,7 @@ namespace sprint0.Enemies
             boomerangTracker = 1;
             goriyaStateMachine = new GoriyaStateMachine(this, rand);
             goriyaStateMachine.ChangeDirection();
-            MaxHealth = GoriyaHealth;
+            Health = new HealthManager(GoriyaHealth, sound);
             Damage = 1;
             
             InitEnemyFields();
@@ -78,14 +79,14 @@ namespace sprint0.Enemies
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Health <= 0)
+            if (Health.Dead())
             {
                 EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, color);
+                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Health.Color);
             }
         }
     }
