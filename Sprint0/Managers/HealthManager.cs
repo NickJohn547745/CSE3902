@@ -36,7 +36,7 @@ namespace sprint0.Managers
 
         public void UpdateCounters()
         {
-                if (damageTimer.UnconditionalUpdate())
+                if (damageTimer.ConditionalUpdate())
                 {
                     Color = Color.White;
                 }    
