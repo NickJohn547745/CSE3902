@@ -1,6 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: November 14, 2022
+##### Date: November 26, 2022
 
 # Sprint4:
 
@@ -69,3 +69,7 @@
 * Map currently set to always display on HUD instead of when item is found
 * Using abilities crashes the program (inventory not initialized)
 * Vertical doors spawn you in front of door on opposite side of the room.
+* Player can move during transition screen (still need to refactor into gameState)
+* Using both WASD and corresponding arrow key allows player to walk through walls/tiles
+* Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)
+* Enemies and player can walk through parts of the bottom right wall
