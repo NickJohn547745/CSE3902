@@ -138,7 +138,7 @@ namespace sprint0.Managers
                 }
                 else
                 {
-                    CurrentPosition = previousPosition;
+                    Speed = previousSpeed;
                 }
             }
             else

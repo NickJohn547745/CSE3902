@@ -56,10 +56,10 @@ namespace sprint0.Enemies
         {
             Health.UpdateCounters();
 
-            Physics.Move(gameTime);
-
             if (Physics.Stunned())
             {
+
+                Physics.Move(gameTime);
 
                 // Ex: change direction every delay seconds
                 if (delayCount % delay == 0)

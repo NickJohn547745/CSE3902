@@ -12,8 +12,7 @@ public class AquamentusProjectile : PhysicsProjectile {
     public AquamentusProjectile(Vector2 position, Vector2 velocity)
     {
         Sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
-        Physics = new PhysicsManager(position, Direction.None, FireBallSpeed);
-        Physics.CurrentVelocity = velocity;
+        Physics = new PhysicsManager(position, velocity, FireBallSpeed);
         delay = FireBallDelay;
         Damage = 1;
         Collision = false;

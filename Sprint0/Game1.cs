@@ -39,7 +39,7 @@ public class Game1 : Game
     public IGameState state;
     
     // can we remove this since it never changes and is just 0 (doesn't need to be a const even)
-    private int startingLevelIndex;
+    //private int startingLevelIndex;
 
     private int currentLevelIndex;
 
@@ -81,14 +81,13 @@ public class Game1 : Game
 
     public void ResetLevel()
     {
-        currentLevelIndex = startingLevelIndex;
+        currentLevelIndex = 0;
         state.Room = new Room(this, LevelList[currentLevelIndex]);     
     }
 
     protected override void Initialize()
     {
         Paused = false;
-        startingLevelIndex = 0;
         base.Initialize();
     }
 
