@@ -25,8 +25,8 @@ namespace sprint0.Enemies
             Physics = new PhysicsManager(position, Direction.Left, speed);
             Health = new HealthManager(AquamentusHealth, sound);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime)

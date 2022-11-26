@@ -20,8 +20,8 @@ namespace sprint0.Enemies
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(StalfosHealth, sound);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void BoomerangBehavior()

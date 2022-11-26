@@ -27,12 +27,6 @@ namespace sprint0.Enemies
         public ICollidable.ObjectType type { get; set; }
         public ISprite Sprite { get; set; }
 
-        protected void InitEnemyFields()
-        {
-            deadCount = 0;
-            type = ICollidable.ObjectType.Enemy;
-        }
-
         protected virtual void BoomerangBehavior() {}
 
         protected virtual void WallBehavior()

@@ -21,8 +21,8 @@ namespace sprint0.Enemies
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(KeeseHealth, sound);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void BoomerangBehavior()

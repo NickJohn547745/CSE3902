@@ -23,8 +23,8 @@ namespace sprint0.Enemies
             Physics = new PhysicsManager(position, Direction.None, 0);
             Health = new HealthManager(OldManHealth, sound);
             fireBallTracker = 1;
-
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime)

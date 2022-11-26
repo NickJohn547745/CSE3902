@@ -28,8 +28,7 @@ namespace sprint0.Enemies
             Damage = 1;
             this.player = player;
             ready = true;
-            
-            InitEnemyFields();
+            deadCount = 0;
             type = ICollidable.ObjectType.Trap;
         }
 

@@ -31,8 +31,8 @@ namespace sprint0.Enemies
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection(rand);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void WallBehavior()
