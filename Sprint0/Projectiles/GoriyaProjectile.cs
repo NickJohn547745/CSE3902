@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Enemies;
+using sprint0.Managers;
 
 namespace sprint0.Projectiles
 {
@@ -12,16 +13,13 @@ namespace sprint0.Projectiles
         private const int GoriyaProjDelay = 1;
 
         private GoriyaStateMachine goriya;
-        private Boolean returnThrow;
+        private bool returnThrow;
         private bool caught;
 
-        public GoriyaProjectile(Vector2 position, Vector2 velocity, GoriyaStateMachine thrower)
+        public GoriyaProjectile(Vector2 position, Direction direction, GoriyaStateMachine thrower)
         {
-            initPosition = position;
-            Position = position;
             Sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
-            Velocity = velocity;
-            speed = GoriyaProjSpeed;
+            Physics = new PhysicsManager(position, direction, GoriyaProjSpeed);
             delay = GoriyaProjDelay;
             goriya = thrower;
             returnThrow = false;
@@ -42,13 +40,14 @@ namespace sprint0.Projectiles
 
         protected override void Behavior()
         {
-            bool xMax = Math.Abs(Position.X - initPosition.X) >= speed * 2;
-            bool yMax = Math.Abs(Position.Y - initPosition.Y) >= speed * 2;
+            Vector2 diff = Physics.DifferenceFromStart();
+            bool xMax = Math.Abs(diff.X) >= Physics.Speed * 2;
+            bool yMax = Math.Abs(diff.Y) >= Physics.Speed * 2;
 
             // reverse velocity after 2 seconds
             if (!returnThrow &&  (xMax || yMax)) 
             {
-                Velocity *= -1;
+                Physics.ReverseDirection();
                 returnThrow = true;
             }
 

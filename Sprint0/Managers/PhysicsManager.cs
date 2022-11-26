@@ -33,6 +33,18 @@ namespace sprint0.Managers
             Reset();
         }
 
+        public PhysicsManager(Vector2 initPos, Vector2 velocity, float speed, float acceleration = 0)
+        {
+            InitPosition = initPos;
+            Direction = Direction.None;
+            initSpeed = speed;
+            this.acceleration = acceleration;
+
+            initVelocity = velocity;
+            CurrentVelocity = velocity;
+            Reset();
+        }
+
         public void Stun()
         {
             stunCount++;

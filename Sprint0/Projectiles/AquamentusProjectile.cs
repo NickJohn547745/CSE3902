@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
+using sprint0.Managers;
 
 namespace sprint0.Interfaces; 
 
@@ -10,11 +11,9 @@ public class AquamentusProjectile : PhysicsProjectile {
 
     public AquamentusProjectile(Vector2 position, Vector2 velocity)
     {
-        initPosition = position;
-        Position = position;
         Sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
-        Velocity = velocity;
-        speed = FireBallSpeed;
+        Physics = new PhysicsManager(position, Direction.None, FireBallSpeed);
+        Physics.CurrentVelocity = velocity;
         delay = FireBallDelay;
         Damage = 1;
         Collision = false;

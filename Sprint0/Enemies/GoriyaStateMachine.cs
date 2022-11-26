@@ -71,7 +71,7 @@ namespace sprint0.Enemies
 
         public void ThrowBoomerang()
         {
-            Boomerang = new GoriyaProjectile(Goriya.Physics.CurrentPosition, Goriya.Physics.CurrentVelocity, this);
+            Boomerang = new GoriyaProjectile(Goriya.Physics.CurrentPosition, Goriya.Physics.Direction, this);
             Goriya.Physics.CurrentVelocity = Vector2.Zero;
             BoomerangThrown = true;
         }
