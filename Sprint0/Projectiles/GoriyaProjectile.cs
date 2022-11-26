@@ -4,6 +4,7 @@ using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Enemies;
 using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Projectiles
 {
@@ -20,7 +21,7 @@ namespace sprint0.Projectiles
         {
             Sprite = ProjectileSpriteFactory.Instance.CreateGoriyaProjectileSprite();
             Physics = new PhysicsManager(position, direction, GoriyaProjSpeed);
-            delay = GoriyaProjDelay;
+            behaviorTimer = new Timer(GoriyaProjDelay);
             goriya = thrower;
             returnThrow = false;
             Damage = 1;

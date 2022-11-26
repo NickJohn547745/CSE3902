@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Managers;
 using System;
+using sprint0.Utility;
 
 namespace sprint0.Interfaces;
 
@@ -9,7 +10,7 @@ public abstract class PhysicsProjectile : ICollidable {
 
     public int Damage { get; set; }
     protected float start;
-    protected int delay;
+    protected Timer behaviorTimer;
     protected PhysicsManager Physics { get; set;}
     public ICollidable.ObjectType type { get; set; }
     public ISprite Sprite { get; set; }
@@ -44,7 +45,7 @@ public abstract class PhysicsProjectile : ICollidable {
     {
         Physics.Move(gameTime);
 
-        if (gameTime.TotalGameTime.Seconds % delay == 0)
+        if (behaviorTimer.UnconditionalUpdate())
         {
             Behavior();
         }

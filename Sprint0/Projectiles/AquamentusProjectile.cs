@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Interfaces; 
 
@@ -13,7 +14,7 @@ public class AquamentusProjectile : PhysicsProjectile {
     {
         Sprite = ProjectileSpriteFactory.Instance.CreateAquamentusProjectileSprite();
         Physics = new PhysicsManager(position, velocity, FireBallSpeed);
-        delay = FireBallDelay;
+        behaviorTimer = new Timer(FireBallDelay);
         Damage = 1;
         Collision = false;
         type = ICollidable.ObjectType.Projectile;
