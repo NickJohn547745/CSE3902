@@ -61,6 +61,7 @@
 * Made single readonly rand for enemies
 * Split classes directory into multiple directories (e.g. managers, configs)
 * Renamed Projectile class to physicsProjectile
+* Implemented timer utility class
 
 ## Known Bugs
 * HUD values not dynamic
