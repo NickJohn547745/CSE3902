@@ -142,7 +142,7 @@ namespace sprint0.Managers
             }     
         }
 
-        public bool Stunned()
+        public bool NotStunned()
         {
             return stunTimer.Status();
         }

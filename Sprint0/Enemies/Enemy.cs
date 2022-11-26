@@ -50,7 +50,7 @@ namespace sprint0.Enemies
         {
             Health.UpdateCounters();
 
-            if (Physics.Stunned())
+            if (Physics.NotStunned())
             {
 
                 Physics.Move(gameTime);
