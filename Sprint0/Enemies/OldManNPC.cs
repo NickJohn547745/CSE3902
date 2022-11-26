@@ -2,6 +2,7 @@
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -19,7 +20,7 @@ namespace sprint0.Enemies
         public OldManNPC(Vector2 position)
         {
             Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
-            delay = 1;
+            behaviorTimer = new Timer(1);
             Physics = new PhysicsManager(position, Direction.None, 0);
             Health = new HealthManager(OldManHealth, sound);
             fireBallTracker = 1;

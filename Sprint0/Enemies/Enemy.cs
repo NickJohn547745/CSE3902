@@ -6,6 +6,7 @@ using sprint0.Sound;
 using sprint0.Managers;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -22,8 +23,7 @@ namespace sprint0.Enemies
         protected int deadCount;
 
         public int Damage { get; set; }
-        protected int delay;
-        private int delayCount;
+        protected Timer behaviorTimer;
         public ICollidable.ObjectType type { get; set; }
         public ISprite Sprite { get; set; }
 
@@ -56,12 +56,10 @@ namespace sprint0.Enemies
                 Physics.Move(gameTime);
 
                 // Ex: change direction every delay seconds
-                if (delayCount % delay == 0)
+                if (behaviorTimer.UnconditionalUpdate())
                 {
                     Behavior(gameTime);
                 }
-
-                delayCount++;
             }
 
             Death();
@@ -110,6 +108,7 @@ namespace sprint0.Enemies
         {
             Physics.Reset();
             Health.Reset();
+            behaviorTimer.Reset();
             deadCount = 0;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using sprint0.PlayerClasses;
+using sprint0.Utility;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
@@ -22,7 +22,7 @@ namespace sprint0.Enemies
         public TrapEnemy(Vector2 position, float speed, IPlayer player)
         {
             Sprite = EnemySpriteFactory.Instance.CreateTrapSprite();
-            delay = BehaviorDelay;
+            behaviorTimer = new Timer(BehaviorDelay);
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(TrapHealth, sound);
             Damage = 1;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
+using sprint0.Utility;
 
 namespace sprint0.Managers
 {
@@ -12,7 +13,7 @@ namespace sprint0.Managers
         private float initSpeed;
         private float acceleration;
         private float previousSpeed;
-        private int stunCount;
+        private Timer stunTimer;
         private Vector2 previousPosition;
         private bool canMove;
         public Direction Direction { get; private set; }
@@ -27,6 +28,7 @@ namespace sprint0.Managers
             Direction = direction;
             initSpeed = speed;
             this.acceleration = acceleration;
+            stunTimer = new Timer(StunDelay);
 
             ChangeDirection(direction);
             initVelocity = CurrentVelocity;
@@ -39,6 +41,7 @@ namespace sprint0.Managers
             Direction = Direction.None;
             initSpeed = speed;
             this.acceleration = acceleration;
+            stunTimer = new Timer(StunDelay);
 
             initVelocity = velocity;
             CurrentVelocity = velocity;
@@ -47,7 +50,7 @@ namespace sprint0.Managers
 
         public void Stun()
         {
-            stunCount++;
+            stunTimer.Start();
         }
 
         public void Freeze()
@@ -107,7 +110,7 @@ namespace sprint0.Managers
 
         public void Move(GameTime gameTime)
         {
-            if (Stunned())
+            if (stunTimer.ConditionalUpdate())
             {
                 if (canMove)
                 {
@@ -119,17 +122,13 @@ namespace sprint0.Managers
                     CurrentPosition = previousPosition;
                 }
             }
-            else
-            {
-                stunCount++;
-            }
 
             canMove = true;
         }
 
         public void Accelerate(GameTime gameTime)
         {
-            if (Stunned())
+            if (stunTimer.ConditionalUpdate())
             {
                 if (canMove)
                 {
@@ -140,16 +139,12 @@ namespace sprint0.Managers
                 {
                     Speed = previousSpeed;
                 }
-            }
-            else
-            {
-                stunCount++;
-            }          
+            }     
         }
 
         public bool Stunned()
         {
-            return stunCount % StunDelay == 0;
+            return stunTimer.Status();
         }
 
         public void Reset()
@@ -159,7 +154,7 @@ namespace sprint0.Managers
             CurrentVelocity = initVelocity;
             Speed = initSpeed;
             previousSpeed = initSpeed;
-            stunCount = 0;
+            stunTimer.Reset();
             canMove = true;
         }
     }

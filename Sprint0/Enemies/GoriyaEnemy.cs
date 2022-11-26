@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -13,12 +14,12 @@ namespace sprint0.Enemies
         private const int GoriyaHealth = 3;
 
         private GoriyaStateMachine goriyaStateMachine;
-        private int boomerangTracker;
+        private Timer boomerangTracker;
 
         public GoriyaEnemy(Vector2 position, float speed)
         {
-            delay = BehaviorDelay;
-            boomerangTracker = 1;
+            behaviorTimer = new Timer(BehaviorDelay);
+            boomerangTracker = new Timer(DirectionChange);
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(GoriyaHealth, sound);
             goriyaStateMachine = new GoriyaStateMachine(this);
@@ -42,17 +43,15 @@ namespace sprint0.Enemies
         protected override void Behavior(GameTime gameTime)
         {
             // change direction 4 times
-            if (boomerangTracker % DirectionChange == 0)
+            if (boomerangTracker.UnconditionalUpdate())
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
                 CollisionManager.Collidables.Add(goriyaStateMachine.Boomerang);
-                boomerangTracker++;
             } else if (!goriyaStateMachine.BoomerangThrown)
             {
                 // change direction
                 goriyaStateMachine.ChangeDirection(rand);
-                boomerangTracker++;
             }      
         }
 

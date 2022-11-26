@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -15,7 +16,7 @@ namespace sprint0.Enemies
         public ZolEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateZolSprite();
-            delay = BehaviorDelay;
+            behaviorTimer = new Timer(BehaviorDelay);
             Damage = 1;
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(ZolHealth, sound);

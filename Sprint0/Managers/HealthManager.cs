@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using sprint0.Sound;
+using sprint0.Utility;
 
 namespace sprint0.Managers
 {
@@ -10,43 +10,36 @@ namespace sprint0.Managers
 
         public int CurrentHealth { get; private set; }
         private int maxHealth;
-        private int damageCount;
+        private Timer damageTimer;
         private SoundEffect damageSound;
-        private bool Damaged;
         public Color Color { get; private set; }
 
         public HealthManager(int maxHealth, SoundEffect sound)
         {
             this.maxHealth = maxHealth;
             CurrentHealth = maxHealth;
-            damageCount = 0;
-            Damaged = false;
+            damageTimer = new Timer(DamageDelay);
             damageSound = sound;
             Color = Color.White;
         }
 
         public void TakeDamage(int damage)
         {
-            if (!Damaged && damage > 0)
+            if (damageTimer.Status() && damage > 0)
             {
                 CurrentHealth -= damage;
-                Damaged = true;
                 Color = Color.Red;
                 damageSound.Play();
+                damageTimer.Start();
             }
         }
 
         public void UpdateCounters()
         {
-            if (Damaged)
-            {
-                damageCount++;
-                if (damageCount % DamageDelay == 0)
+                if (damageTimer.UnconditionalUpdate())
                 {
-                    Damaged = false;
                     Color = Color.White;
-                }
-            }
+                }    
         }
 
         public void Heal(int healing)
@@ -59,6 +52,7 @@ namespace sprint0.Managers
         public void Reset()
         {
             CurrentHealth = maxHealth;
+            damageTimer.Reset();
         }
 
         public bool Dead()
