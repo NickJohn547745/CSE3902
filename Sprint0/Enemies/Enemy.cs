@@ -14,7 +14,7 @@ namespace sprint0.Enemies
         protected const int TileOffset = 5;
         protected const int DeathFrames = 4;       
 
-        protected readonly Random rand = new();
+        protected static Random rand = new();
         protected readonly SoundEffect sound = SoundManager.Manager.enemyDamageSound();
 
         public PhysicsManager Physics { get; protected set; }

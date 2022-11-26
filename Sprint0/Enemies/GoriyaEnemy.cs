@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
-using Microsoft.Xna.Framework.Audio;
 using sprint0.Managers;
 
 namespace sprint0.Enemies
