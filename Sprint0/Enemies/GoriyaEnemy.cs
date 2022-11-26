@@ -43,7 +43,7 @@ namespace sprint0.Enemies
         protected override void Behavior(GameTime gameTime)
         {
             // change direction 4 times
-            if (boomerangTracker.UnconditionalUpdate())
+            if (boomerangTracker.ConditionalUpdate(!goriyaStateMachine.BoomerangThrown || boomerangTracker.Status()))
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();

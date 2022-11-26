@@ -36,6 +36,13 @@ namespace sprint0.Utility
             return result;
         }
 
+        public bool ConditionalUpdate(bool condition)
+        {
+            bool result = Status();
+            if (condition) count++;
+            return result;
+        }
+
         public void Reset()
         {
             count = 0;
