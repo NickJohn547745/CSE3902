@@ -65,21 +65,18 @@
 
 ## Known Bugs
 * HUD values not dynamic
-* Holding WASD + Arrow Key can speed up movement
 * Clicking to change rooms breaks doors
-* Moving through the top door causes a downwards room transition
 * HUD should be at top of screen (at least it is in the actual game)
 * Player can shoot an arrow during room transition (fix in transition state refactor
 * Player sometimes disappears when moving between rooms while damaged (or allow player to move around screen during transition)
 * Room transitions sometimes spawn player in tile
 * Boomerang should be able to fly over "water" tiles in certain rooms
-* Boomerang should and other projectiles return to player, not just initial position
+* Boomerang should return to player, not just initial position
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
 * Map currently set to always display on HUD instead of when item is found
 * Using abilities crashes the program (inventory not initialized)
-* Vertical doors spawn you in front of door on opposite side of the room.
+* Vertical doors spawn you in front of door on opposite side of the room or push you through it.
 * Player can move during transition screen (still need to refactor into gameState)
-* Using both WASD and corresponding arrow key allows player to walk through walls/tiles
 * Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)
-* Enemies and player can walk through parts of the bottom right wall
+* Enemies and player can walk through some walls in some rooms (primarily bottom right, but also sometimes top right)
