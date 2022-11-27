@@ -2,7 +2,7 @@
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
 ##### Date: November 26, 2022
 
-# Sprint4:
+# Sprint5:
 
 ## Controls:
 ### Player controls
