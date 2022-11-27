@@ -58,7 +58,7 @@
 * Implemented healthManager class to reduce enemy fields
 * Made CollidablesList in Collision manager static
 * Removed game1 parameter from ICollidable Update method
-* Made single readonly rand for enemies
+* Made single static rand for enemies
 * Split classes directory into multiple directories (e.g. managers, configs)
 * Renamed Projectile class to physicsProjectile
 * Implemented timer utility class
