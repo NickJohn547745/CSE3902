@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
-using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
 
 namespace sprint0.ItemClasses.Pickups
 {

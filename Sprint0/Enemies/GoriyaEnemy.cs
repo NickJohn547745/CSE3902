@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
-using Microsoft.Xna.Framework.Audio;
-using sprint0.Classes;
+using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -20,50 +14,44 @@ namespace sprint0.Enemies
         private const int GoriyaHealth = 3;
 
         private GoriyaStateMachine goriyaStateMachine;
-        private int boomerangTracker;
+        private Timer boomerangTracker;
 
         public GoriyaEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
-            this.speed = speed;
-            Velocity = Vector2.Zero;
-            delay = BehaviorDelay;
-            boomerangTracker = 1;
+            behaviorTimer = new Timer(BehaviorDelay);
+            boomerangTracker = new Timer(DirectionChange);
+            Physics = new PhysicsManager(position, Direction.None, speed);
+            Health = new HealthManager(GoriyaHealth, sound);
             goriyaStateMachine = new GoriyaStateMachine(this);
-            goriyaStateMachine.ChangeDirection();
-            MaxHealth = GoriyaHealth;
+            goriyaStateMachine.ChangeDirection(rand);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
-        protected override void ReverseDirection()
+        protected override void WallBehavior()
         {
             goriyaStateMachine.flipped = true;
-
+            Physics.Freeze();
         }
         
-        protected override void Stun()
+        protected override void BoomerangBehavior()
         {
-            stunCount++;
+            Physics.Stun();
         }
 
         protected override void Behavior(GameTime gameTime)
         {
             // change direction 4 times
-            if (boomerangTracker % DirectionChange == 0)
+            if (boomerangTracker.ConditionalUpdate(!goriyaStateMachine.BoomerangThrown || boomerangTracker.Status()))
             {
                 // throw boomerang
                 goriyaStateMachine.ThrowBoomerang();
                 CollisionManager.Collidables.Add(goriyaStateMachine.Boomerang);
-                boomerangTracker++;
             } else if (!goriyaStateMachine.BoomerangThrown)
             {
                 // change direction
-                goriyaStateMachine.ChangeDirection();
-                boomerangTracker++;
+                goriyaStateMachine.ChangeDirection(rand);
             }      
         }
 
@@ -79,14 +67,14 @@ namespace sprint0.Enemies
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Health <= 0)
+            if (Health.Dead())
             {
-                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, Color.White);
+                EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Color.White);
                 deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Position, goriyaStateMachine.SpriteEffect, color);
+                Sprite.Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Health.Color);
             }
         }
     }

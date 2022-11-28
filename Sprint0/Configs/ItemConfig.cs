@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
 
-namespace sprint0.Classes
+namespace sprint0.Configs
 {
     public class ItemConfig
     {
@@ -29,7 +29,7 @@ namespace sprint0.Classes
 
         public void Add(IItem item)
         {
-            this.items.Add(item);
+            items.Add(item);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -44,12 +44,12 @@ namespace sprint0.Classes
 
         public void NextItem()
         {
-            currItem = (currItem < (items.Count - 1)) ? currItem++ : 0;
+            currItem = currItem < items.Count - 1 ? currItem++ : 0;
         }
 
         public void PreviousItem()
         {
-            currItem = (currItem > 0) ? currItem-- : (items.Count - 1);
+            currItem = currItem > 0 ? currItem-- : items.Count - 1;
         }
     }
 }

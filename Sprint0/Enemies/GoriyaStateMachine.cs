@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Projectiles;
 using sprint0.Interfaces;
-using sprint0.RoomClasses;
+using System;
 
 namespace sprint0.Enemies
 {
@@ -13,11 +12,11 @@ namespace sprint0.Enemies
         private const int DirectionChange = 4;
 
         public GoriyaEnemy Goriya { get; set; }
-        public Direction GoriyaDirection { get; private set; }
         public SpriteEffects SpriteEffect { get; private set; }
         public bool BoomerangThrown { get; set; }
         public GoriyaProjectile Boomerang { get; set; }
         public bool flipped { private get; set; }
+
 
         public GoriyaStateMachine(GoriyaEnemy goriya)
         {
@@ -26,73 +25,52 @@ namespace sprint0.Enemies
             SpriteEffect = SpriteEffects.None;
             flipped = false;
         }
-
-        private int Flip()
+        
+        public void ChangeDirection(Random rand)
         {
-            int flip = 0;
-            switch (GoriyaDirection)
+
+            if (flipped)
+            {
+                Goriya.Physics.ReverseDirection();
+                flipped = false;
+            }
+            else
+            {
+                int dir = rand.Next(0, DirectionChange);
+                Goriya.Physics.ChangeDirection((Direction)dir);
+            }
+
+            switch (Goriya.Physics.Direction)
             {
                 case Direction.Up:
-                    // move down
-                    flip = 3;
+                    // move up
+                    Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingUpStateSprite();
+                    SpriteEffect = SpriteEffects.FlipHorizontally;
                     break;
                 case Direction.Left:
-                    // move right
-                    flip = 2;
+                    // move left
+                    Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
+                    SpriteEffect = SpriteEffects.FlipHorizontally;
                     break;
                 case Direction.Right:
-                    // move left
-                    flip = 1;
+                    // move right
+                    Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
+                    SpriteEffect = SpriteEffects.None;
+                    break;
+                case Direction.Down:
+                    // move down
+                    Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
+                    SpriteEffect = SpriteEffects.FlipHorizontally;
+                    break;
+                default:
                     break;
             }
-            return flip;
-        }
-        
-        public void ChangeDirection()
-        {
-                Random rand = new Random();
-                int dir = rand.Next(0, DirectionChange);
-                if (flipped) dir = Flip();
-                // randomly choose direction
-                switch (dir)
-                {
-                    case 0:
-                        // move up
-                        GoriyaDirection = Direction.Up;
-                        Goriya.Velocity = new Vector2(0, -1);
-                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingUpStateSprite();
-                        SpriteEffect = SpriteEffects.FlipHorizontally;
-                        break;
-                    case 1:
-                        // move left
-                        GoriyaDirection = Direction.Left;
-                        Goriya.Velocity = new Vector2(-1, 0);
-                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
-                        SpriteEffect = SpriteEffects.FlipHorizontally;
-                        break;
-                    case 2:
-                        // move right
-                        GoriyaDirection = Direction.Right;
-                        Goriya.Velocity = new Vector2(1, 0);
-                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingSideStateSprite();
-                        SpriteEffect = SpriteEffects.None;
-                        break;
-                    case 3:
-                        // move down
-                        GoriyaDirection = Direction.Down;
-                        Goriya.Velocity = new Vector2(0, 1);
-                        Goriya.Sprite = EnemySpriteFactory.Instance.CreateGoriyaFacingDownStateSprite();
-                        SpriteEffect = SpriteEffects.FlipHorizontally;
-                        break;
-                }
-
-                flipped = false;
         }
 
         public void ThrowBoomerang()
         {
-            Boomerang = new GoriyaProjectile(Goriya.Position, Goriya.Velocity, this);
-            Goriya.Velocity = Vector2.Zero;
+            Boomerang = new GoriyaProjectile(Goriya.Physics.CurrentPosition, Goriya.Physics.Direction, this);
+            Goriya.Physics.CurrentVelocity = Vector2.Zero;
             BoomerangThrown = true;
         }
     }

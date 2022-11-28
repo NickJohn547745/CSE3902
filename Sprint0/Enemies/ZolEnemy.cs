@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using sprint0.Interfaces;
-using sprint0.Sprites;
 using sprint0.Factories;
+using sprint0.Interfaces;
+using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -15,40 +11,25 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int RandBound = 6;
-
-        private Dictionary<int, Vector2> DirectionChoice;
+        private const int ZolHealth = 1;
 
         public ZolEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateZolSprite();
-            this.speed = speed;
-            Velocity = Vector2.One;
-            delay = BehaviorDelay;
-            MaxHealth = 1;
+            behaviorTimer = new Timer(BehaviorDelay);
             Damage = 1;
-            
-            InitEnemyFields();
-
-            DirectionChoice = new Dictionary<int, Vector2>();
-            DirectionChoice.Add(0, new Vector2(0, -1));
-            DirectionChoice.Add(1, new Vector2(-1, 0));
-            DirectionChoice.Add(2, new Vector2(1, 0));
-            DirectionChoice.Add(3, new Vector2(0, 1));
-            DirectionChoice.Add(4, Vector2.Zero);
-            DirectionChoice.Add(5, Vector2.Zero);
+            Physics = new PhysicsManager(position, Direction.None, speed);
+            Health = new HealthManager(ZolHealth, sound);
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime)
         {
-            Random rand = new Random();
-
             // randomly choose movement direction
             int direction = rand.Next(0, RandBound);
-            if (DirectionChoice.ContainsKey(direction)) Velocity = DirectionChoice[direction];
-            
+            if (direction == RandBound) direction--;
+            Physics.ChangeDirection((Direction) direction);         
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using sprint0.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Classes;
 using sprint0.PlayerClasses;
 using sprint0.RoomClasses;
 using sprint0.HudClasses;
+using sprint0.Managers;
 
 namespace sprint0.GameStateClasses;
 
@@ -65,8 +65,7 @@ public class GameStateManager : IGameState
                 if(currentState.GetType() != typeof(InventoryState))
                     currentState = new InventoryState(this);
                 else
-                    currentState = new GamePlayState(this);
-                
+                    currentState = new GamePlayState(this);     
                 break;
             default:
                 break;

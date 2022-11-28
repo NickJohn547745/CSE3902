@@ -1,23 +1,18 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
-using sprint0.Interfaces;
-using sprint0.Sprites;
+using sprint0.Managers;
 using System;
-using sprint0.Classes;
+using sprint0.Utility;
 
-namespace sprint0.Interfaces; 
+namespace sprint0.Interfaces;
 
-public abstract class Projectile : ICollidable {
+public abstract class PhysicsProjectile : ICollidable {
 
     public int Damage { get; set; }
     protected float start;
-    protected int delay;
-    protected Vector2 Position { get; set; }
-    protected Vector2 initPosition;
-    protected float speed;
+    protected Timer behaviorTimer;
+    protected PhysicsManager Physics { get; set;}
     public ICollidable.ObjectType type { get; set; }
-    public Vector2 Velocity { get; set; }
     public ISprite Sprite { get; set; }
     public bool Collision { get; set; }
 
@@ -28,7 +23,7 @@ public abstract class Projectile : ICollidable {
 
     public Rectangle GetHitBox()
     {
-        return new Rectangle((int)Position.X, (int)Position.Y, Sprite.GetWidth(), Sprite.GetHeight());
+        return new Rectangle((int)Physics.CurrentPosition.X, (int)Physics.CurrentPosition.Y, Sprite.GetWidth(), Sprite.GetHeight());
     }
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -48,9 +43,9 @@ public abstract class Projectile : ICollidable {
 
     public virtual void Update(GameTime gameTime)
     {
-        Position += speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Physics.Move(gameTime);
 
-        if (gameTime.TotalGameTime.Seconds % delay == 0)
+        if (behaviorTimer.UnconditionalUpdate())
         {
             Behavior();
         }
@@ -60,11 +55,11 @@ public abstract class Projectile : ICollidable {
     
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-        Sprite.Draw(spriteBatch, Position, SpriteEffects.None, Color.White);
+        Sprite.Draw(spriteBatch, Physics.CurrentPosition, SpriteEffects.None, Color.White);
     }
 
     public void Reset()
     {
-        // temp
+        CollisionManager.Collidables.Remove(this);
     }
 }

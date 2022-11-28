@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sprint0.Classes
+namespace sprint0.Configs
 {
     public class LevelConfig
     {
@@ -15,7 +15,7 @@ namespace sprint0.Classes
         public List<int> DoorIds { get; set; }
         public List<int> Destinations { get; set; }
         public List<Tuple<int, Point, int>> Enemies { get; set; }
-        public List<Tuple<int, Point> > Items { get; set; }
+        public List<Tuple<int, Point>> Items { get; set; }
 
         public LevelConfig()
         {

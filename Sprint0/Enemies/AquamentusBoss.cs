@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using sprint0.Classes;
 using sprint0.Interfaces;
 using sprint0.Factories;
+using sprint0.Managers;
+using sprint0.Utility;
 
 namespace sprint0.Enemies
 {
@@ -19,29 +20,25 @@ namespace sprint0.Enemies
 
         public AquamentusBoss(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
-            this.speed = speed;
-            Velocity = new Vector2(1, 0);
             Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
-            delay = BehaviorDelay;
+            behaviorTimer = new Timer(BehaviorDelay);
             fireBallTracker = 1;
-            MaxHealth = AquamentusHealth;
+            Physics = new PhysicsManager(position, Direction.Left, speed);
+            Health = new HealthManager(AquamentusHealth, sound);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void Behavior(GameTime gameTime)
         {
             Random random = new Random();
-            if (random.Next(0, RandBound) != 0) Velocity *= -1;
+            if (random.Next(0, RandBound) != 0) Physics.ReverseDirection();
             
             // shoot fireballs
             if (fireBallTracker % FireBallShoot == 0)
             {
-                Vector2 fireBallSpawn = Position;
+                Vector2 fireBallSpawn = Physics.CurrentPosition;
                 fireBallSpawn.Y += FireBallOffsetY;
                 CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
                 CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));

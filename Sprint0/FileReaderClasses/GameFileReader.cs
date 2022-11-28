@@ -5,8 +5,8 @@ using System.IO;
 using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using sprint0.Classes;
 using sprint0.Commands;
+using sprint0.Configs;
 using sprint0.FileReaderClasses;
 using sprint0.Interfaces;
 

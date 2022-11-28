@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
+using sprint0.Utility;
+
 namespace sprint0.Enemies
 {
     public class WallMasterEnemy : Enemy
@@ -11,17 +14,13 @@ namespace sprint0.Enemies
 
         public WallMasterEnemy(Vector2 position, float speed)
         {
-            initPosition = position;
-            Position = position;
-            PreviousPosition = position;
             Sprite = EnemySpriteFactory.Instance.CreateWallMasterSprite();
-            this.speed = speed;
-            Velocity = Vector2.One;
-            delay = BehaviorDelay;
-            MaxHealth = WallMasterHealth;
+            behaviorTimer = new Timer(BehaviorDelay);
+            Physics = new PhysicsManager(position, Direction.None, speed);
+            Health = new HealthManager(WallMasterHealth, sound);
             Damage = 1;
-            
-            InitEnemyFields();
+            deadCount = 0;
+            type = ICollidable.ObjectType.Enemy;
         }
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -30,16 +29,15 @@ namespace sprint0.Enemies
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
-                    TakeDamage(obj.Damage);
+                    Health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:
                 case ICollidable.ObjectType.Door:
-                    ReverseDirection();
+                    Physics.ReverseDirection();
                     // canMove = false;
                     break;
                 case ICollidable.ObjectType.Boomerang:
-                    Stun();
                     break;
             }
         }

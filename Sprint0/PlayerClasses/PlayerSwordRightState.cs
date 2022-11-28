@@ -1,8 +1,8 @@
-using sprint0.Classes;
 using sprint0.Factories;
 using sprint0.Interfaces;
+using sprint0.Managers;
 
-namespace sprint0.PlayerClasses; 
+namespace sprint0.PlayerClasses;
 
 public class PlayerSwordRightState : PlayerSwordState {
     public PlayerSwordRightState(Player player) {
