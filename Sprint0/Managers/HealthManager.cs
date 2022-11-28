@@ -6,7 +6,7 @@ namespace sprint0.Managers
 {
     public class HealthManager
     {
-        private const int DamageDelay = 14;
+        private const int DamageDelay = 18;
 
         public int CurrentHealth { get; private set; }
         private int maxHealth;
