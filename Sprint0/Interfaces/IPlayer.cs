@@ -12,7 +12,7 @@ public interface IPlayer : ICollidable
     public Vector2 InitVelocity { get; set; }
 
     public int GetHealth();
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage, Edge collideSide);
     public void MoveUp();
     public void MoveDown();
     public void MoveLeft();

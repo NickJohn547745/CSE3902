@@ -12,6 +12,8 @@ namespace sprint0.PlayerClasses;
 
 public class Player : IPlayer {
 
+    private const int MoveBack = 300;
+    
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
@@ -82,8 +84,30 @@ public class Player : IPlayer {
         Velocity = Vector2.Zero;
     }
 
-    public void TakeDamage(int damage) {
+    private void KnockBack(ICollidable.Edge collideSide)
+    {
+        switch (collideSide)
+        {
+            case ICollidable.Edge.Bottom:
+                InitVelocity = new Vector2(0, MoveBack);
+                break;
+            case ICollidable.Edge.Right:
+                InitVelocity = new Vector2(-MoveBack, 0);
+                break;
+            case ICollidable.Edge.Left:
+                InitVelocity = new Vector2(MoveBack, 0);
+                break;
+            case ICollidable.Edge.Top:
+                InitVelocity = new Vector2(0, -MoveBack);
+                break;
+        }
+
+        Velocity = InitVelocity;
+    }
+    
+    public void TakeDamage(int damage, ICollidable.Edge collideSide) {
         Health -= damage;
+        KnockBack(collideSide);
         Game.Player = new DamagedPlayer(this, Game);
         CollisionManager.Collidables.Add(Game.Player);
         CollisionManager.Collidables.Remove(this);

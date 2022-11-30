@@ -89,7 +89,7 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.Reset();
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage, ICollidable.Edge collideSide) {
         // Do nothing since player just took damage
     }
 

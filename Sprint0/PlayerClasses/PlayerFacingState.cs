@@ -5,7 +5,9 @@ using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
-public abstract class PlayerFacingState : IPlayerState {
+public abstract class PlayerFacingState : IPlayerState
+{
+    
     protected const int FramesPerAnimationChange = 5;
     protected Player player;
     protected int animationFrame;
@@ -25,38 +27,18 @@ public abstract class PlayerFacingState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
 
-    private void Knockback()
-    {
-        switch (shield)
-        {
-            case ICollidable.Edge.Top:
-                player.InitVelocity = new Vector2(0, 300);
-                break;
-            case ICollidable.Edge.Right:
-                player.InitVelocity = new Vector2(-300, 0);
-                break;
-            case ICollidable.Edge.Left:
-                player.InitVelocity = new Vector2(300, 0);
-                break;
-            case ICollidable.Edge.Bottom:
-                player.InitVelocity = new Vector2(0, -300);
-                break;
-        }
-
-        player.Velocity = player.InitVelocity;
-    }
-    
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
         switch (obj.type)
         {
             case ICollidable.ObjectType.Enemy:
             case ICollidable.ObjectType.Trap:
+                player.TakeDamage(obj.Damage, edge);
+                break;
             case ICollidable.ObjectType.Projectile:
                 if (edge != shield)
                 {
-                    player.TakeDamage(obj.Damage);
-                    Knockback();
+                    player.TakeDamage(obj.Damage, edge);
                 }
                 break;
             case ICollidable.ObjectType.ItemOneHand:
