@@ -28,7 +28,7 @@ public class PlayerFacingLeftState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            player.PreviousPosition = player.Position;
+            //player.PreviousPosition = player.Position;
             player.Position = Vector2.Add(player.Position, new Vector2(-IPlayerState.playerSpeed, 0));
         }
         else

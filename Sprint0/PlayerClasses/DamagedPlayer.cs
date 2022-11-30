@@ -71,7 +71,7 @@ public class DamagedPlayer : IPlayer {
         if (Math.Abs(decoratedPlayer.Velocity.X) > 5 || Math.Abs(decoratedPlayer.Velocity.Y) > 5)
         {
             decoratedPlayer.Position += decoratedPlayer.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            decoratedPlayer.Velocity += (Vector2.Zero - decoratedPlayer.InitVelocity) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            decoratedPlayer.Velocity -= decoratedPlayer.InitVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         if (frameCountdown > 10)

@@ -56,8 +56,6 @@ public abstract class PlayerFacingState : IPlayerState
             currentFrame = 0;
             animationFrame++;
         }
-
-        if (!player.CanMove) player.Position = player.PreviousPosition;
     }
 
     public virtual void MoveUp() {

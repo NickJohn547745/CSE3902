@@ -13,6 +13,7 @@ namespace sprint0.PlayerClasses;
 public class Player : IPlayer {
 
     private const int MoveBack = 300;
+    private const int TileOffset = 1;
     
     private Vector2 initPosition;
 
@@ -55,6 +56,23 @@ public class Player : IPlayer {
         if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile || obj.type == ICollidable.ObjectType.Door)
         {
             CanMove = false;
+            Rectangle objBounds = obj.GetHitBox();
+            Rectangle playerBounds = GetHitBox();
+            switch (edge)
+            {
+                case ICollidable.Edge.Top:
+                    PreviousPosition = new Vector2(playerBounds.X, objBounds.Y - playerBounds.Height - TileOffset);
+                    break;
+                case ICollidable.Edge.Right:
+                    PreviousPosition = new Vector2(objBounds.X - playerBounds.Width - TileOffset, playerBounds.Y);
+                    break;
+                case ICollidable.Edge.Left:
+                    PreviousPosition = new Vector2(objBounds.X + objBounds.Width + TileOffset, playerBounds.Y);
+                    break;
+                case ICollidable.Edge.Bottom:
+                    PreviousPosition = new Vector2(playerBounds.X, objBounds.Y + objBounds.Height + TileOffset);
+                    break;
+            }
         }
         PlayerState.Collide(obj, edge);
     }
@@ -66,7 +84,8 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime) {
         PlayerState.Update();
         AbilityManager.Update(gameTime);
-        CanMove = true;
+        if (!CanMove) Position = PreviousPosition;
+        //CanMove = true;
     }
 
     public void Reset()
