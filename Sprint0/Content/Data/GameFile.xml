@@ -21,7 +21,6 @@
 		<Tuple>78 PlayerSwordAttackCommand 0</Tuple>
 		<Tuple>75 PreviousLevelCommand 0</Tuple>
 		<Tuple>76 NextLevelCommand 0</Tuple>
-		<Tuple>69 PlayerTakeDamageCommand 0</Tuple>
 		<Tuple>27 TogglePauseCommand 0</Tuple>
 		<Tuple>71 SpawnItemPickupCommand 0</Tuple>
 		<Tuple>77 MuteCommand 0</Tuple>

@@ -1,3 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Arial.spritefont","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2078,37919,0.2885683
-"C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/Spritesheets/Menu/inventorySpritesheet.png","C:/Users/Will/RiderProjects/CSE3902/sprint0/Content/bin/DesktopGL/Content/Spritesheets/Menu/inventorySpritesheet.xnb","TextureProcessor","Texture2DContent",10468,625749,0.1585801
