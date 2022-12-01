@@ -3,10 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.PlayerClasses.Abilities;
-
-using sprint0.RoomClasses;
 using sprint0.Sound;
-using System;
 
 namespace sprint0.PlayerClasses;
 
@@ -14,11 +11,11 @@ public class Player : IPlayer {
 
     private const int MoveBack = 300;
     private const int TileOffset = 1;
-    
+
     private Vector2 initPosition;
 
     public PlayerInventory PlayerInventory;
-    public ICollidable.ObjectType type { get; set; }
+    public ICollidable.ObjectType Type { get; set; }
     public Vector2 Position { get; set; }
     public int Health { get; private set; }
     public int ScaleFactor { get; set; }
@@ -29,14 +26,14 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
-    public Vector2 PreviousPosition { get; set; }
     public bool CanMove { get; set; }
+    public Direction MoveDirection { private get; set;}
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(175, 175);
         initPosition = Position;
-        PreviousPosition = Position;
+        MoveDirection = Direction.None;
 
         Reset();
     }
@@ -45,7 +42,12 @@ public class Player : IPlayer {
     {
         return Health;
     }
-    
+
+    public Direction GetMoveDirection()
+    {
+        return MoveDirection;
+    }
+
     public Rectangle GetHitBox()
     {
         return PlayerState.GetHitBox();
@@ -53,7 +55,7 @@ public class Player : IPlayer {
 
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile || obj.type == ICollidable.ObjectType.Door)
+        if (obj.Type == ICollidable.ObjectType.Wall || obj.Type == ICollidable.ObjectType.Tile || obj.Type == ICollidable.ObjectType.Door)
         {
             CanMove = false;
             Rectangle objBounds = obj.GetHitBox();
@@ -61,16 +63,16 @@ public class Player : IPlayer {
             switch (edge)
             {
                 case ICollidable.Edge.Top:
-                    PreviousPosition = new Vector2(playerBounds.X, objBounds.Y - playerBounds.Height - TileOffset);
+                    Position = new Vector2(playerBounds.X, objBounds.Top - playerBounds.Height - TileOffset);
                     break;
                 case ICollidable.Edge.Right:
-                    PreviousPosition = new Vector2(objBounds.X - playerBounds.Width - TileOffset, playerBounds.Y);
+                    Position = new Vector2(objBounds.X - playerBounds.Width - TileOffset, playerBounds.Y);
                     break;
                 case ICollidable.Edge.Left:
-                    PreviousPosition = new Vector2(objBounds.X + objBounds.Width + TileOffset, playerBounds.Y);
+                    Position = new Vector2(objBounds.Right + TileOffset, playerBounds.Y);
                     break;
                 case ICollidable.Edge.Bottom:
-                    PreviousPosition = new Vector2(playerBounds.X, objBounds.Y + objBounds.Height + TileOffset);
+                    Position = new Vector2(playerBounds.X, objBounds.Bottom + TileOffset);
                     break;
             }
         }
@@ -84,8 +86,6 @@ public class Player : IPlayer {
     public void Update(GameTime gameTime) {
         PlayerState.Update();
         AbilityManager.Update(gameTime);
-        if (!CanMove) Position = PreviousPosition;
-        //CanMove = true;
     }
 
     public void Reset()
@@ -99,7 +99,7 @@ public class Player : IPlayer {
         Health = 6;
         ScaleFactor = 4;
         Damage = 0;
-        type = ICollidable.ObjectType.Player;
+        Type = ICollidable.ObjectType.Player;
         Velocity = Vector2.Zero;
     }
 
@@ -109,15 +109,19 @@ public class Player : IPlayer {
         {
             case ICollidable.Edge.Bottom:
                 InitVelocity = new Vector2(0, MoveBack);
+                MoveDirection = Direction.Up;
                 break;
             case ICollidable.Edge.Right:
                 InitVelocity = new Vector2(-MoveBack, 0);
+                MoveDirection = Direction.Left;
                 break;
             case ICollidable.Edge.Left:
                 InitVelocity = new Vector2(MoveBack, 0);
+                MoveDirection = Direction.Right;
                 break;
             case ICollidable.Edge.Top:
                 InitVelocity = new Vector2(0, -MoveBack);
+                MoveDirection = Direction.Down;
                 break;
         }
 
@@ -134,19 +138,19 @@ public class Player : IPlayer {
     }
 
     public void MoveUp() {
-            PlayerState.MoveUp();
+        PlayerState.MoveUp();
     }
 
     public void MoveDown() {
-            PlayerState.MoveDown();
+        PlayerState.MoveDown();
     }
 
     public void MoveLeft() {
-            PlayerState.MoveLeft();
+        PlayerState.MoveLeft();
     }
 
     public void MoveRight() {
-            PlayerState.MoveRight();
+        PlayerState.MoveRight();
     }
 
     public void SwordAttack() {

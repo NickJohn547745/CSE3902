@@ -17,7 +17,7 @@ public class AquamentusProjectile : PhysicsProjectile {
         behaviorTimer = new Timer(FireBallDelay);
         Damage = 1;
         Collision = false;
-        type = ICollidable.ObjectType.Projectile;
+        Type = ICollidable.ObjectType.Projectile;
     }
 
     protected override void Behavior()

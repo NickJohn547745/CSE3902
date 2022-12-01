@@ -18,7 +18,7 @@ public class DamagedPlayer : IPlayer {
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
     public Vector2 PreviousPosition { get; set; }
-    public ICollidable.ObjectType type { get; set; }
+    public ICollidable.ObjectType Type { get; set; }
 
 
     public int Damage {
@@ -29,7 +29,7 @@ public class DamagedPlayer : IPlayer {
     public DamagedPlayer(Player decoratedPlayer, Game1 game) {
         this.decoratedPlayer = decoratedPlayer;
         Game = game;
-        type = ICollidable.ObjectType.Player;
+        Type = ICollidable.ObjectType.Player;
     }
 
     public int GetHealth()
@@ -52,13 +52,18 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
-        if (obj.type == ICollidable.ObjectType.Wall || obj.type == ICollidable.ObjectType.Tile)
+        if (obj.Type == ICollidable.ObjectType.Wall || obj.Type == ICollidable.ObjectType.Tile)
         {
             decoratedPlayer.Velocity = Vector2.Zero;
             decoratedPlayer.Collide(obj, edge);
         }
     }
-    
+
+    public Direction GetMoveDirection()
+    {
+        return decoratedPlayer.GetMoveDirection();
+    }
+
     public Rectangle GetHitBox() {
         return decoratedPlayer.GetHitBox();
     }

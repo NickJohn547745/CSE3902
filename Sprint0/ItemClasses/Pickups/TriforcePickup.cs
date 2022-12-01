@@ -13,14 +13,14 @@ namespace sprint0.ItemClasses.Pickups
         private int animationFrames = 0;
         public TriforcePickup(int xCoord, int yCoord) 
         {
-            type = ICollidable.ObjectType.ItemTwoHands;
+            Type = ICollidable.ObjectType.ItemTwoHands;
             Sprite = ItemSpriteFactory.Instance.TriforceSprite(scale);
             Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            if (obj.type == ICollidable.ObjectType.Player)
+            if (obj.Type == ICollidable.ObjectType.Player)
             {
                 Position = Vector2.Subtract(new Vector2(obj.GetHitBox().X, obj.GetHitBox().Y), new Vector2((Sprite.GetWidth()-obj.GetHitBox().Width)/2, Sprite.GetHeight()));
                 if (animationFrames == 0)

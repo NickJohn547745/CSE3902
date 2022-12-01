@@ -13,7 +13,7 @@ namespace sprint0.PlayerClasses
         private const int bottomOffset = 7;
         private readonly int[] swordLen = {0, 11, 7, 3};
 
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
         public int Damage { get; set; }
         private Player player;
         private Point swordPosition;
@@ -24,7 +24,7 @@ namespace sprint0.PlayerClasses
         public PlayerSword(Player link, ICollidable.Edge edge)
         {
             Damage = 1;
-            type = ICollidable.ObjectType.Sword;
+            Type = ICollidable.ObjectType.Sword;
             player = link;
             currentFrame = 0;
             Edge = edge;
@@ -34,6 +34,11 @@ namespace sprint0.PlayerClasses
         {
             // nothing
         }
+        public Direction GetMoveDirection()
+        {
+            return player.GetMoveDirection();
+        }
+
         public Rectangle GetHitBox()
         {
             int length = swordLen[currentFrame] * player.ScaleFactor;

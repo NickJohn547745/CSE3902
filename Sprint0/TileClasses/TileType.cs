@@ -19,7 +19,7 @@ namespace sprint0.TileClasses
         private Texture2D texture;
 
         public int Damage { get; set; }
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
         public bool IsCollidable { get; set; }
 
 
@@ -45,9 +45,14 @@ namespace sprint0.TileClasses
 
         public void Collide(ICollidable obj, ICollidable.Edge Edge)
         {
-            // Type type = obj.GetObjectType();
+            // Type Type = obj.GetObjectType();
 
             // Code may be needed if some blocks are pushable / trap tiles
+        }
+
+        public Direction GetMoveDirection()
+        {
+            return Direction.None;
         }
 
         public Rectangle GetHitBox()

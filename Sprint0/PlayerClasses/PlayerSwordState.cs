@@ -53,7 +53,7 @@ public abstract class PlayerSwordState : IPlayerState {
     
     public void Collide(ICollidable obj, Edge edge)
     {
-        //if (obj.type == ObjectType.Enemy || obj.type == ObjectType.Projectile)
+        //if (obj.Type == ObjectType.Enemy || obj.Type == ObjectType.Projectile)
         //{
         //    if (edge == backEdge)
         //    {

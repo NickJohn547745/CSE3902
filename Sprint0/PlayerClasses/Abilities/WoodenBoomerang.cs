@@ -27,7 +27,8 @@ public class WoodenBoomerang : Ability {
         initialPosition = Position;
         Velocity = Vector2.Multiply(velocity, new Vector2((float)6.5));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.08));
-        type = ICollidable.ObjectType.Boomerang;
+        Type = ICollidable.ObjectType.Boomerang;
+        playerDirection = player.GetMoveDirection();
     }
     
     public override void Update(GameTime gameTime) {
@@ -51,7 +52,7 @@ public class WoodenBoomerang : Ability {
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        switch (obj.type)
+        switch (obj.Type)
         {
             case ICollidable.ObjectType.Wall:
             case ICollidable.ObjectType.Tile:

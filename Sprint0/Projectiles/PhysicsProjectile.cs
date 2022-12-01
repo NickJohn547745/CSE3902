@@ -12,13 +12,18 @@ public abstract class PhysicsProjectile : ICollidable {
     protected float start;
     protected Timer behaviorTimer;
     protected PhysicsManager Physics { get; set;}
-    public ICollidable.ObjectType type { get; set; }
+    public ICollidable.ObjectType Type { get; set; }
     public ISprite Sprite { get; set; }
     public bool Collision { get; set; }
 
     public Type GetObjectType()
     {
         return this.GetType().BaseType;
+    }
+
+    public Direction GetMoveDirection()
+    {
+        return Physics.Direction;
     }
 
     public Rectangle GetHitBox()
@@ -28,7 +33,7 @@ public abstract class PhysicsProjectile : ICollidable {
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        switch (obj.type)
+        switch (obj.Type)
         {
             case ICollidable.ObjectType.Door:
             case ICollidable.ObjectType.Wall:

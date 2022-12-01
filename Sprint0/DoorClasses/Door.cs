@@ -10,7 +10,7 @@ namespace sprint0.DoorClasses
     {
         public int Damage { get; set; }
         public Boolean IsCollidable { get; set; }
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
 
         public Boolean HasCollided { get; set; }
         public Direction TransitionDirection { get; set; }
@@ -19,7 +19,7 @@ namespace sprint0.DoorClasses
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            if (obj.type == ICollidable.ObjectType.Player && (Id == 1 || Id == 4))
+            if (obj.Type == ICollidable.ObjectType.Player && (Id == 1 || Id == 4))
                 HasCollided = true;
         }
 
@@ -52,6 +52,11 @@ namespace sprint0.DoorClasses
 
             spriteBatch.Draw(doorTexture, new Rectangle(hitBox.Location + offset, hitBox.Size),
                              sourceRect, Color.White);
+        }
+
+        public Direction GetMoveDirection()
+        {
+            return Direction.None;
         }
 
         public abstract Rectangle GetHitBox();

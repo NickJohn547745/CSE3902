@@ -14,7 +14,7 @@ namespace sprint0.DoorClasses
     {
         public TopDoor(int id)
         {
-            type = ICollidable.ObjectType.Door;
+            Type = ICollidable.ObjectType.Door;
 
             Id = id;
             HasCollided = false;

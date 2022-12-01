@@ -22,7 +22,7 @@ namespace sprint0.Enemies
             Health = new HealthManager(StalfosHealth, sound);
             Damage = 1;
             deadCount = 0;
-            type = ICollidable.ObjectType.Enemy;
+            Type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void BoomerangBehavior()

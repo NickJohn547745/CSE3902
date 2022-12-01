@@ -27,14 +27,14 @@ namespace sprint0.Projectiles
             Damage = 1;
             Collision = false;
             caught = false;
-            type = ICollidable.ObjectType.Projectile;
+            Type = ICollidable.ObjectType.Projectile;
         }
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             caught = returnThrow && obj == goriya.Goriya;
 
-            Collision = caught || (obj.type != ICollidable.ObjectType.Projectile && obj.type != ICollidable.ObjectType.Enemy);
+            Collision = caught || (obj.Type != ICollidable.ObjectType.Projectile && obj.Type != ICollidable.ObjectType.Enemy);
 
             if (Collision) goriya.BoomerangThrown = false;
         }

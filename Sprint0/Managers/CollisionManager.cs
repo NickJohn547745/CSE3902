@@ -40,6 +40,23 @@ namespace sprint0.Managers
             return source1.GetHitBox().X.CompareTo(source2.GetHitBox().X);
         }
 
+        private Vector2 GetDirectionVector(Direction dir)
+        {
+            switch (dir)
+            {
+                case Direction.Up:
+                    return new Vector2(0, -1);
+                case Direction.Down:    
+                    return new Vector2(0, 1);
+                case Direction.Left:
+                    return new Vector2(-1, 0);
+                case Direction.Right:
+                    return new Vector2(1, 0);
+                default:
+                    return Vector2.Zero;
+            }
+        }
+
         /// <summary>
         /// Method <c>CollisionResponse</c> determines which side of <c>ICollidable</c> obj is colliding
         /// with <c>ICollidable</c> current and responds accordingly.
@@ -48,29 +65,39 @@ namespace sprint0.Managers
         /// <param name="obj">Main <c>ICollidable</c> object to check sides of.</param>
         private void CollisionResponse(ICollidable current, ICollidable obj)
         {
-            int currentLeft = current.GetHitBox().X;
-            int currentTop = current.GetHitBox().Y;
-            int objTop = obj.GetHitBox().Y;
-            int currentBottom = current.GetHitBox().Y - current.GetHitBox().Height;
-            int objRight = obj.GetHitBox().X + obj.GetHitBox().Width;
-            int objBottom = obj.GetHitBox().Y - obj.GetHitBox().Height;
+            Point objCenter = obj.GetHitBox().Center;
+            Point currentCenter = current.GetHitBox().Center;
 
             ICollidable.Edge currentEdge = ICollidable.Edge.Left;
             ICollidable.Edge objEdge = ICollidable.Edge.Right;
 
-            // determine which edge it collides with the most
-            int sideOverlap = Math.Abs(objRight - currentLeft);
+            Direction objDir = obj.GetMoveDirection();
+            Direction currentDir = current.GetMoveDirection();  
 
-            // guaranteed to be left side collision with current
+            // guaranteed to be collision with left side of current
             // can't be right since only objects to the left of current are in Active list
+            Vector2 objDirVector = GetDirectionVector(objDir);
+            Vector2 currentDirVector = GetDirectionVector(currentDir);
+            float currentY = current.GetHitBox().Y;
+            float objY = obj.GetHitBox().Y;
+
+            float objDist = currentCenter.Y - objY;
+            float currentDist = objCenter.Y - currentY;
+            float objNextDist = Math.Abs(objDist - objDirVector.Y);
+            float currentNextDist = Math.Abs(currentDist - currentDirVector.Y);
+
+            bool yCollide = objNextDist < Math.Abs(objDist) || currentNextDist < Math.Abs(currentDist);         
+            bool topCollide = yCollide && (objDir == Direction.Up || currentDir == Direction.Down);
+            bool bottomCollide = yCollide && (objDir == Direction.Down || currentDir == Direction.Up);
+
 
             // bottom of obj collide with top of current
-            if (objBottom < currentTop && objTop > currentTop && Math.Abs(objBottom - currentTop) < sideOverlap)
+            if (topCollide)
             {
                 currentEdge = ICollidable.Edge.Top;
                 objEdge = ICollidable.Edge.Bottom;
             }
-            else if (objTop < currentBottom && objBottom < currentBottom && Math.Abs(objTop - currentBottom) < sideOverlap)
+            else if (bottomCollide)
             {
                 currentEdge = ICollidable.Edge.Bottom;
                 objEdge = ICollidable.Edge.Top;
@@ -170,9 +197,9 @@ namespace sprint0.Managers
         {
             foreach (ICollidable collidable in Collidables)
             {
-                if (collidable.type != ICollidable.ObjectType.Wall &&
-                    collidable.type != ICollidable.ObjectType.Door &&
-                    collidable.type != ICollidable.ObjectType.Tile)
+                if (collidable.Type != ICollidable.ObjectType.Wall &&
+                    collidable.Type != ICollidable.ObjectType.Door &&
+                    collidable.Type != ICollidable.ObjectType.Tile)
                 {
                     collidable.Draw(spriteBatch);
                 }

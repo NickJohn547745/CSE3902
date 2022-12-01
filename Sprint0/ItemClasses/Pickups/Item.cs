@@ -11,13 +11,18 @@ namespace sprint0.ItemClasses.Pickups
         
         public ISprite Sprite { get; set; }
 
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
         public int Damage { get; set; }
 
         protected PlayerInventory Inventory;
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge) 
         {
+        }
+
+        public Direction GetMoveDirection()
+        {
+            return Direction.None;
         }
 
         public virtual Rectangle GetHitBox()

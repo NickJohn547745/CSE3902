@@ -13,6 +13,7 @@ public class PlayerFacingDownState : PlayerFacingState {
         sprite = PlayerSpriteFactory.Instance.GetWalkingDownSprite();
         player.Damage = 0;
         shield = ICollidable.Edge.Bottom;
+        player.MoveDirection = Direction.None;
     }
 
     public override void MoveDown() {
@@ -20,13 +21,12 @@ public class PlayerFacingDownState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            //player.PreviousPosition = player.Position;
+            player.MoveDirection = Direction.Down;
             player.Position = Vector2.Add(player.Position, new Vector2(0, IPlayerState.playerSpeed));
-        }
-        else
+        } else
         {
             player.CanMove = true;
-        }    
+        }
     }
 
     public override void SwordAttack()

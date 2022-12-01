@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
 using sprint0.Interfaces;
@@ -14,7 +9,7 @@ namespace sprint0.RoomClasses
     public abstract class Wall : ICollidable
     {
         public int Damage { get; set; }
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
 
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -25,6 +20,11 @@ namespace sprint0.RoomClasses
         public void Draw(SpriteBatch spriteBatch)
         {
 
+        }
+
+        public Direction GetMoveDirection()
+        {
+            return Direction.None;
         }
 
         public abstract Rectangle GetHitBox();

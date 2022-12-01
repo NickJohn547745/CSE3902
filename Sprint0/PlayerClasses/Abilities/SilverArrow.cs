@@ -25,8 +25,9 @@ public class SilverArrow : Ability{
             Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
         }
         Velocity = Vector2.Multiply(velocity, new Vector2(7));
-        type = ICollidable.ObjectType.Ability;
+        Type = ICollidable.ObjectType.Ability;
         Damage = 4;
+        playerDirection = player.GetMoveDirection();
     }
 
     public override void Draw(SpriteBatch spriteBatch) {
@@ -55,7 +56,7 @@ public class SilverArrow : Ability{
     
     public override void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        switch (obj.type) {
+        switch (obj.Type) {
             case ICollidable.ObjectType.Wall:
             case ICollidable.ObjectType.Tile:
             case ICollidable.ObjectType.Enemy:
