@@ -85,9 +85,9 @@ namespace sprint0.Enemies
             }
         }
 
-        public Direction GetMoveDirection()
+        public Vector2 GetVelocity()
         {
-            return Physics.Direction;
+            return Vector2.Zero;
         }
 
         public Rectangle GetHitBox()

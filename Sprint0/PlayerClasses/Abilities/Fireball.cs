@@ -23,7 +23,6 @@ public class Fireball : Ability {
         }
         finalPosition = Vector2.Add(Position, Vector2.Multiply(velocity, new Vector2(128)));
         Type = ICollidable.ObjectType.Ability;
-        playerDirection = player.GetMoveDirection();
     }
 
     //Vector2 normalizedVelocity = Vector2.Normalize(velocity);

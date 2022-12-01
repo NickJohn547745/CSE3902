@@ -30,37 +30,9 @@ public abstract class PlayerSwordState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
 
-    private void Knockback()
-    {
-        switch (swordEdge)
-        {
-            case Edge.Top:
-                player.InitVelocity = new Vector2(0, 300);
-                break;
-            case Edge.Right:
-                player.InitVelocity = new Vector2(-300, 0);
-                break;
-            case Edge.Left:
-                player.InitVelocity = new Vector2(300, 0);
-                break;
-            case Edge.Bottom:
-                player.InitVelocity = new Vector2(0, -300);
-                break;
-        }
-
-        player.Velocity = player.InitVelocity;
-    }
-    
     public void Collide(ICollidable obj, Edge edge)
     {
-        //if (obj.Type == ObjectType.Enemy || obj.Type == ObjectType.Projectile)
-        //{
-        //    if (edge == backEdge)
-        //    {
-        //        player.TakeDamage(obj.Damage);
-        //        Knockback();
-        //    }
-        //}
+  
     }
 
     public abstract void Update();

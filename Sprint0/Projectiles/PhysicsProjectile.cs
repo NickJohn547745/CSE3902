@@ -21,9 +21,9 @@ public abstract class PhysicsProjectile : ICollidable {
         return this.GetType().BaseType;
     }
 
-    public Direction GetMoveDirection()
+    public Vector2 GetVelocity()
     {
-        return Physics.Direction;
+        return Physics.CurrentVelocity;
     }
 
     public Rectangle GetHitBox()

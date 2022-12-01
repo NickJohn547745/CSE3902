@@ -34,9 +34,9 @@ namespace sprint0.PlayerClasses
         {
             // nothing
         }
-        public Direction GetMoveDirection()
+        public Vector2 GetVelocity()
         {
-            return player.GetMoveDirection();
+            return player.Velocity;
         }
 
         public Rectangle GetHitBox()

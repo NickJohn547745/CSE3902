@@ -27,7 +27,6 @@ public class SilverArrow : Ability{
         Velocity = Vector2.Multiply(velocity, new Vector2(7));
         Type = ICollidable.ObjectType.Ability;
         Damage = 4;
-        playerDirection = player.GetMoveDirection();
     }
 
     public override void Draw(SpriteBatch spriteBatch) {

@@ -32,6 +32,11 @@ public class DamagedPlayer : IPlayer {
         Type = ICollidable.ObjectType.Player;
     }
 
+    public bool Damaged()
+    {
+        return true;
+    }
+
     public int GetHealth()
     {
         return decoratedPlayer.Health;
@@ -59,9 +64,9 @@ public class DamagedPlayer : IPlayer {
         }
     }
 
-    public Direction GetMoveDirection()
+    public Vector2 GetVelocity()
     {
-        return decoratedPlayer.GetMoveDirection();
+        return decoratedPlayer.Velocity;
     }
 
     public Rectangle GetHitBox() {

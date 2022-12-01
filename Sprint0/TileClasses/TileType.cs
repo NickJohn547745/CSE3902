@@ -50,9 +50,9 @@ namespace sprint0.TileClasses
             // Code may be needed if some blocks are pushable / trap tiles
         }
 
-        public Direction GetMoveDirection()
+        public Vector2 GetVelocity()
         {
-            return Direction.None;
+            return Vector2.Zero;
         }
 
         public Rectangle GetHitBox()

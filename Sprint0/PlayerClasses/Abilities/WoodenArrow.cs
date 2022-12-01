@@ -25,7 +25,6 @@ public class WoodenArrow : Ability {
         Velocity = Vector2.Multiply(velocity, new Vector2(5));
         Type = ICollidable.ObjectType.Ability;
         Damage = 2;
-        playerDirection = player.GetMoveDirection();
     }
 
     public override void Draw(SpriteBatch spriteBatch) {

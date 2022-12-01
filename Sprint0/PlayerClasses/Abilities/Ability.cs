@@ -14,7 +14,6 @@ public abstract class Ability : ICollidable
     public ISprite sprite { get; set; }
     public Vector2 Position { get; set; }
 
-    protected Direction playerDirection;
     protected int animationFrame;
 
     public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -22,9 +21,9 @@ public abstract class Ability : ICollidable
 
     }
 
-    public Direction GetMoveDirection()
+    public Vector2 GetVelocity()
     {
-        return playerDirection;
+        return Velocity;
     }
 
     public Rectangle GetHitBox()

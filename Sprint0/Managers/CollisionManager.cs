@@ -40,23 +40,6 @@ namespace sprint0.Managers
             return source1.GetHitBox().X.CompareTo(source2.GetHitBox().X);
         }
 
-        private Vector2 GetDirectionVector(Direction dir)
-        {
-            switch (dir)
-            {
-                case Direction.Up:
-                    return new Vector2(0, -1);
-                case Direction.Down:    
-                    return new Vector2(0, 1);
-                case Direction.Left:
-                    return new Vector2(-1, 0);
-                case Direction.Right:
-                    return new Vector2(1, 0);
-                default:
-                    return Vector2.Zero;
-            }
-        }
-
         /// <summary>
         /// Method <c>CollisionResponse</c> determines which side of <c>ICollidable</c> obj is colliding
         /// with <c>ICollidable</c> current and responds accordingly.
@@ -71,24 +54,22 @@ namespace sprint0.Managers
             ICollidable.Edge currentEdge = ICollidable.Edge.Left;
             ICollidable.Edge objEdge = ICollidable.Edge.Right;
 
-            Direction objDir = obj.GetMoveDirection();
-            Direction currentDir = current.GetMoveDirection();  
+            Vector2 objDir = obj.GetVelocity();
+            Vector2 currentDir = current.GetVelocity();  
 
             // guaranteed to be collision with left side of current
             // can't be right since only objects to the left of current are in Active list
-            Vector2 objDirVector = GetDirectionVector(objDir);
-            Vector2 currentDirVector = GetDirectionVector(currentDir);
             float currentY = current.GetHitBox().Y;
             float objY = obj.GetHitBox().Y;
 
             float objDist = currentCenter.Y - objY;
             float currentDist = objCenter.Y - currentY;
-            float objNextDist = Math.Abs(objDist - objDirVector.Y);
-            float currentNextDist = Math.Abs(currentDist - currentDirVector.Y);
+            float objNextDist = Math.Abs(objDist - objDir.Y);
+            float currentNextDist = Math.Abs(currentDist - currentDir.Y);
 
             bool yCollide = objNextDist < Math.Abs(objDist) || currentNextDist < Math.Abs(currentDist);         
-            bool topCollide = yCollide && (objDir == Direction.Up || currentDir == Direction.Down);
-            bool bottomCollide = yCollide && (objDir == Direction.Down || currentDir == Direction.Up);
+            bool topCollide = yCollide && (objDir.Y < 0 || currentDir.Y > 0);
+            bool bottomCollide = yCollide && (objDir.Y > 0 || currentDir.Y < 0);
 
 
             // bottom of obj collide with top of current

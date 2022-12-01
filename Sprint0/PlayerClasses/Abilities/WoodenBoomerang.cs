@@ -28,7 +28,6 @@ public class WoodenBoomerang : Ability {
         Velocity = Vector2.Multiply(velocity, new Vector2((float)6.5));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.08));
         Type = ICollidable.ObjectType.Boomerang;
-        playerDirection = player.GetMoveDirection();
     }
     
     public override void Update(GameTime gameTime) {

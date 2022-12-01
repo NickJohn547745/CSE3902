@@ -20,9 +20,9 @@ namespace sprint0.ItemClasses.Pickups
         {
         }
 
-        public Direction GetMoveDirection()
+        public Vector2 GetVelocity()
         {
-            return Direction.None;
+            return Vector2.Zero;
         }
 
         public virtual Rectangle GetHitBox()

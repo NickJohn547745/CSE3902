@@ -14,15 +14,17 @@ public class PlayerFacingUpState : PlayerFacingState {
         sprite = PlayerSpriteFactory.Instance.GetWalkingUpSprite();
         player.Damage = 0;
         shield = ICollidable.Edge.Top;
-        player.MoveDirection = Direction.None;
+        player.Velocity = Vector2.Zero;
     }
 
     public override void MoveUp() {
         currentFrame++;
         if (player.CanMove)
         {
-            player.MoveDirection = Direction.Up;
-            player.Position = Vector2.Add(player.Position, new Vector2(0, -IPlayerState.playerSpeed));
+            Vector2 move = new Vector2(0, -IPlayerState.playerSpeed);
+            if (!player.Damaged()) player.Velocity = move;
+
+            player.Position += move;
         }
         else
         {

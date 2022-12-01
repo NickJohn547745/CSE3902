@@ -28,7 +28,6 @@ public class MagicalBoomerang : Ability {
         Velocity = Vector2.Multiply(velocity, new Vector2((float)9));
         Acceleration = Vector2.Multiply(Vector2.Normalize(Velocity), new Vector2((float)-0.1));
         Type = ICollidable.ObjectType.Boomerang;
-        playerDirection = player.GetMoveDirection();
     }
     
     public override void Update(GameTime gameTime) {

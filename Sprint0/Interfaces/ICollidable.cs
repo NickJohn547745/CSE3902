@@ -37,7 +37,7 @@ namespace sprint0.Interfaces
 
         public void Collide(ICollidable obj, Edge edge);
 
-        public Direction GetMoveDirection();
+        public Vector2 GetVelocity();
 
         public Rectangle GetHitBox();
 

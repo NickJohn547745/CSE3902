@@ -27,25 +27,35 @@ public class Player : IPlayer {
     public Vector2 Velocity { get; set; }
     public Vector2 InitVelocity { get; set; }
     public bool CanMove { get; set; }
-    public Direction MoveDirection { private get; set;}
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(175, 175);
         initPosition = Position;
-        MoveDirection = Direction.None;
+        Velocity = Vector2.Zero;
 
         Reset();
     }
     
+    public bool Damaged()
+    {
+        if (Game.Player != this)
+        {
+            return Game.Player.Damaged();
+        } else
+        {
+            return false;
+        }
+    }
+
     public int GetHealth()
     {
         return Health;
     }
 
-    public Direction GetMoveDirection()
+    public Vector2 GetVelocity()
     {
-        return MoveDirection;
+        return Velocity;
     }
 
     public Rectangle GetHitBox()
@@ -96,7 +106,7 @@ public class Player : IPlayer {
         PlayerInventory = new PlayerInventory();
         CanMove = true;
 
-        Health = 6;
+        Health = 600;
         ScaleFactor = 4;
         Damage = 0;
         Type = ICollidable.ObjectType.Player;
@@ -109,19 +119,15 @@ public class Player : IPlayer {
         {
             case ICollidable.Edge.Bottom:
                 InitVelocity = new Vector2(0, MoveBack);
-                MoveDirection = Direction.Up;
                 break;
             case ICollidable.Edge.Right:
                 InitVelocity = new Vector2(-MoveBack, 0);
-                MoveDirection = Direction.Left;
                 break;
             case ICollidable.Edge.Left:
                 InitVelocity = new Vector2(MoveBack, 0);
-                MoveDirection = Direction.Right;
                 break;
             case ICollidable.Edge.Top:
                 InitVelocity = new Vector2(0, -MoveBack);
-                MoveDirection = Direction.Down;
                 break;
         }
 
@@ -131,6 +137,7 @@ public class Player : IPlayer {
     public void TakeDamage(int damage, ICollidable.Edge collideSide) {
         Health -= damage;
         KnockBack(collideSide);
+
         Game.Player = new DamagedPlayer(this, Game);
         CollisionManager.Collidables.Add(Game.Player);
         CollisionManager.Collidables.Remove(this);

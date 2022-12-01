@@ -13,7 +13,7 @@ public class PlayerFacingDownState : PlayerFacingState {
         sprite = PlayerSpriteFactory.Instance.GetWalkingDownSprite();
         player.Damage = 0;
         shield = ICollidable.Edge.Bottom;
-        player.MoveDirection = Direction.None;
+        player.Velocity = Vector2.Zero;
     }
 
     public override void MoveDown() {
@@ -21,8 +21,10 @@ public class PlayerFacingDownState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            player.MoveDirection = Direction.Down;
-            player.Position = Vector2.Add(player.Position, new Vector2(0, IPlayerState.playerSpeed));
+            Vector2 move = new Vector2(0, IPlayerState.playerSpeed);
+            if (!player.Damaged()) player.Velocity = move;
+
+            player.Position += move;
         } else
         {
             player.CanMove = true;

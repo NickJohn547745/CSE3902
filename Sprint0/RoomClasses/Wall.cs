@@ -22,9 +22,9 @@ namespace sprint0.RoomClasses
 
         }
 
-        public Direction GetMoveDirection()
+        public Vector2 GetVelocity()
         {
-            return Direction.None;
+            return Vector2.Zero;
         }
 
         public abstract Rectangle GetHitBox();

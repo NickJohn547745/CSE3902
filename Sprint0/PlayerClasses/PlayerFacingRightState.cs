@@ -14,7 +14,7 @@ public class PlayerFacingRightState : PlayerFacingState {
         sprite = PlayerSpriteFactory.Instance.GetWalkingSideSprite();
         player.Damage = 0;
         shield = ICollidable.Edge.Right;
-        player.MoveDirection = Direction.None;
+        player.Velocity = Vector2.Zero;
     }
    
     public override void MoveRight() {
@@ -22,8 +22,10 @@ public class PlayerFacingRightState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            player.MoveDirection = Direction.Right;
-            player.Position = Vector2.Add(player.Position, new Vector2(IPlayerState.playerSpeed, 0));
+            Vector2 move = new Vector2(IPlayerState.playerSpeed, 0);
+            if (!player.Damaged()) player.Velocity = move;
+
+            player.Position += move;
         } else
         {
             player.CanMove = true;
