@@ -19,7 +19,7 @@ namespace sprint0.PlayerClasses
         private Point swordPosition;
         private Point swordWH;
         public int currentFrame { get; set; }
-        private ICollidable.Edge Edge;
+        private ICollidable.Edge Direction;
 
         public PlayerSword(Player link, ICollidable.Edge edge)
         {
@@ -27,7 +27,7 @@ namespace sprint0.PlayerClasses
             Type = ICollidable.ObjectType.Sword;
             player = link;
             currentFrame = 0;
-            Edge = edge;
+            Direction = edge;
         }
 
         public void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -44,7 +44,7 @@ namespace sprint0.PlayerClasses
             int length = swordLen[currentFrame] * player.ScaleFactor;
             int width = swordWidth * player.ScaleFactor;
 
-            switch (Edge)
+            switch (Direction)
             {
                 case ICollidable.Edge.Bottom:
                     swordPosition = new Point((int)player.Position.X + topOffset * player.ScaleFactor, (int)player.Position.Y - (player.PlayerState.sprite.GetHeight(currentFrame) - 64));

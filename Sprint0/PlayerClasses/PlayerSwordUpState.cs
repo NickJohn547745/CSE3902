@@ -19,7 +19,7 @@ public class PlayerSwordUpState : PlayerSwordState {
     }
     public override Rectangle GetHitBox()
     {
-        return new Rectangle((int) player.Position.X, (int) player.Position.Y - (sprite.GetHeight(animationFrame) - 64), sprite.GetWidth(), sprite.GetHeight());
+        return new Rectangle((int) player.Position.X, (int) player.Position.Y , sprite.GetWidth(), sprite.GetHeight() - (sprite.GetHeight(animationFrame) - 64));
     }
 
     public override void Draw(SpriteBatch spriteBatch, Color color)
