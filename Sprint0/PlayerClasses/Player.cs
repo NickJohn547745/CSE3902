@@ -94,7 +94,7 @@ public class Player : IPlayer {
         PlayerInventory = new PlayerInventory();
         CanMove = true;
 
-        Health = 600;
+        Health = 6;
         ScaleFactor = 4;
         Damage = 0;
         Type = ICollidable.ObjectType.Player;
