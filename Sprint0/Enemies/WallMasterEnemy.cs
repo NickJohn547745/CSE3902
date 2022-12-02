@@ -20,12 +20,12 @@ namespace sprint0.Enemies
             Health = new HealthManager(WallMasterHealth, sound);
             Damage = 1;
             deadCount = 0;
-            type = ICollidable.ObjectType.Enemy;
+            Type = ICollidable.ObjectType.Enemy;
         }
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            switch (obj.type)
+            switch (obj.Type)
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:

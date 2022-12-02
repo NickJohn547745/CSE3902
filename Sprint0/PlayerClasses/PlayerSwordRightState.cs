@@ -12,7 +12,6 @@ public class PlayerSwordRightState : PlayerSwordState {
         sprite = PlayerSpriteFactory.Instance.GetSwordSideSprite();
         player.Damage = 0;
         swordEdge = ICollidable.Edge.Right;
-        backEdge = ICollidable.Edge.Left;
         sword = new PlayerSword(this.player, swordEdge);
         CollisionManager.Collidables.Add(sword);
     }

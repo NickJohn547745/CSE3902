@@ -24,7 +24,7 @@ namespace sprint0.Enemies
 
         public int Damage { get; set; }
         protected Timer behaviorTimer;
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
         public ISprite Sprite { get; set; }
 
         protected virtual void BoomerangBehavior() {}
@@ -68,7 +68,7 @@ namespace sprint0.Enemies
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            switch (obj.type)
+            switch (obj.Type)
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
@@ -84,7 +84,11 @@ namespace sprint0.Enemies
                     break;
             }
         }
-        
+
+        public Vector2 GetVelocity()
+        {
+            return Vector2.Zero;
+        }
 
         public Rectangle GetHitBox()
         {

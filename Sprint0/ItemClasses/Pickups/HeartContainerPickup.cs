@@ -11,14 +11,14 @@ namespace sprint0.ItemClasses.Pickups
         private bool readyToDelete = false;
         public HeartContainerPickup(int xCoord, int yCoord) 
         {
-            type = ICollidable.ObjectType.Item;
+            Type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.HeartContainerSprite();
             Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 
         {
-            if (obj.type == ICollidable.ObjectType.Player)
+            if (obj.Type == ICollidable.ObjectType.Player)
             {
                 readyToDelete = true;
             }

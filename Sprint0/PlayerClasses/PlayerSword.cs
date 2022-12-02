@@ -13,7 +13,7 @@ namespace sprint0.PlayerClasses
         private const int bottomOffset = 7;
         private readonly int[] swordLen = {0, 11, 7, 3};
 
-        public ICollidable.ObjectType type { get; set; }
+        public ICollidable.ObjectType Type { get; set; }
         public int Damage { get; set; }
         private Player player;
         private Point swordPosition;
@@ -24,7 +24,7 @@ namespace sprint0.PlayerClasses
         public PlayerSword(Player link, ICollidable.Edge edge)
         {
             Damage = 1;
-            type = ICollidable.ObjectType.Sword;
+            Type = ICollidable.ObjectType.Sword;
             player = link;
             currentFrame = 0;
             Edge = edge;
@@ -34,6 +34,11 @@ namespace sprint0.PlayerClasses
         {
             // nothing
         }
+        public Vector2 GetVelocity()
+        {
+            return player.Velocity;
+        }
+
         public Rectangle GetHitBox()
         {
             int length = swordLen[currentFrame] * player.ScaleFactor;
@@ -41,7 +46,7 @@ namespace sprint0.PlayerClasses
 
             switch (Edge)
             {
-                case ICollidable.Edge.Top:
+                case ICollidable.Edge.Bottom:
                     swordPosition = new Point((int)player.Position.X + topOffset * player.ScaleFactor, (int)player.Position.Y - (player.PlayerState.sprite.GetHeight(currentFrame) - 64));
                     swordWH = new Point(width, length);
                     break;
@@ -53,7 +58,7 @@ namespace sprint0.PlayerClasses
                     swordPosition = new Point((int)player.Position.X - (player.PlayerState.sprite.GetWidth(currentFrame) - 64), (int)player.Position.Y + sideOffset * player.ScaleFactor);
                     swordWH = new Point(length, width);
                     break;
-                case ICollidable.Edge.Bottom:
+                case ICollidable.Edge.Top:
                     swordPosition = new Point((int)player.Position.X + bottomOffset * player.ScaleFactor, (int)player.Position.Y + playerOffset * player.ScaleFactor);
                     swordWH = new Point(width, length);
                     break;

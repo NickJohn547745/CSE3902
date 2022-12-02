@@ -12,14 +12,14 @@ namespace sprint0.ItemClasses.Pickups
         public MapPickup(int xCoord, int yCoord, IPlayer player) 
         {
             Inventory = player.GetInventory();
-            type = ICollidable.ObjectType.Item;
+            Type = ICollidable.ObjectType.Item;
             Sprite = ItemSpriteFactory.Instance.MapSprite();
             Position = new Vector2(xCoord, yCoord);
         }
         
         public override void Collide(ICollidable obj, ICollidable.Edge edge) 
         {
-            if (obj.type == ICollidable.ObjectType.Player)
+            if (obj.Type == ICollidable.ObjectType.Player)
             {
                 Inventory.MapUnlocked = true;
                 readyToDelete = true;

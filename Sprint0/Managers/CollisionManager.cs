@@ -48,32 +48,41 @@ namespace sprint0.Managers
         /// <param name="obj">Main <c>ICollidable</c> object to check sides of.</param>
         private void CollisionResponse(ICollidable current, ICollidable obj)
         {
-            int currentLeft = current.GetHitBox().X;
-            int currentTop = current.GetHitBox().Y;
-            int objTop = obj.GetHitBox().Y;
-            int currentBottom = current.GetHitBox().Y - current.GetHitBox().Height;
-            int objRight = obj.GetHitBox().X + obj.GetHitBox().Width;
-            int objBottom = obj.GetHitBox().Y - obj.GetHitBox().Height;
+            Point objCenter = obj.GetHitBox().Center;
+            Point currentCenter = current.GetHitBox().Center;
 
             ICollidable.Edge currentEdge = ICollidable.Edge.Left;
             ICollidable.Edge objEdge = ICollidable.Edge.Right;
 
-            // determine which edge it collides with the most
-            int sideOverlap = Math.Abs(objRight - currentLeft);
+            Vector2 objDir = obj.GetVelocity();
+            Vector2 currentDir = current.GetVelocity();  
 
-            // guaranteed to be left side collision with current
+            // guaranteed to be collision with left side of current
             // can't be right since only objects to the left of current are in Active list
+            Rectangle currentHit = current.GetHitBox();
+            Rectangle objHit = obj.GetHitBox();
 
-            // bottom of obj collide with top of current
-            if (objBottom < currentTop && objTop > currentTop && Math.Abs(objBottom - currentTop) < sideOverlap)
-            {
-                currentEdge = ICollidable.Edge.Top;
-                objEdge = ICollidable.Edge.Bottom;
-            }
-            else if (objTop < currentBottom && objBottom < currentBottom && Math.Abs(objTop - currentBottom) < sideOverlap)
+            float objDist = currentCenter.Y - objHit.Y;
+            float currentDist = objCenter.Y - currentHit.Y;
+            float objNextDist = Math.Abs(objDist - objDir.Y);
+            float currentNextDist = Math.Abs(currentDist - currentDir.Y);
+
+            bool yCollide = objNextDist < Math.Abs(objDist) || currentNextDist < Math.Abs(currentDist);         
+            bool topCollide = yCollide && (objDir.Y > 0 || currentDir.Y < 0);
+            bool bottomCollide = yCollide && (objDir.Y < 0 || currentDir.Y > 0);
+            bool broke = (objDir.X == 0 && objDir.Y != 0) ^ (currentDir.X == 0 && currentDir.Y != 0) ;
+
+
+            // bottom of current collide with top of object
+            if (topCollide || (broke && objHit.Top < currentHit.Top && objHit.Bottom > currentHit.Top))
             {
                 currentEdge = ICollidable.Edge.Bottom;
                 objEdge = ICollidable.Edge.Top;
+            }
+            else if (bottomCollide || (broke && objHit.Bottom > currentHit.Bottom && objHit.Top < currentHit.Bottom))
+            {
+                currentEdge = ICollidable.Edge.Top;
+                objEdge = ICollidable.Edge.Bottom;
             }
 
             current.Collide(obj, currentEdge);
@@ -170,9 +179,9 @@ namespace sprint0.Managers
         {
             foreach (ICollidable collidable in Collidables)
             {
-                if (collidable.type != ICollidable.ObjectType.Wall &&
-                    collidable.type != ICollidable.ObjectType.Door &&
-                    collidable.type != ICollidable.ObjectType.Tile)
+                if (collidable.Type != ICollidable.ObjectType.Wall &&
+                    collidable.Type != ICollidable.ObjectType.Door &&
+                    collidable.Type != ICollidable.ObjectType.Tile)
                 {
                     collidable.Draw(spriteBatch);
                 }

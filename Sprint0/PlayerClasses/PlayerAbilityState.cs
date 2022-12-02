@@ -24,33 +24,11 @@ public abstract class PlayerAbilityState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, SpriteEffects.None, color);
     }
 
-    private void Knockback()
-    {
-        switch (facing)
-        {
-            case ICollidable.Edge.Top:
-                player.InitVelocity = new Vector2(0, 300);
-                break;
-            case ICollidable.Edge.Right:
-                player.InitVelocity = new Vector2(-300, 0);
-                break;
-            case ICollidable.Edge.Left:
-                player.InitVelocity = new Vector2(300, 0);
-                break;
-            case ICollidable.Edge.Bottom:
-                player.InitVelocity = new Vector2(0, -300);
-                break;
-        }
-
-        player.Velocity = player.InitVelocity;
-    }
-    
     public void Collide(ICollidable obj, ICollidable.Edge edge)
     {
-        if (obj.type is ICollidable.ObjectType.Enemy or ICollidable.ObjectType.Projectile or ICollidable.ObjectType.Trap)
+        if (obj.Type is ICollidable.ObjectType.Enemy or ICollidable.ObjectType.Projectile or ICollidable.ObjectType.Trap)
         {
-            player.TakeDamage(obj.Damage);
-            Knockback();
+            player.TakeDamage(obj.Damage, edge);
         }
     }
 

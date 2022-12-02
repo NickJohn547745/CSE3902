@@ -31,11 +31,13 @@ namespace sprint0.Interfaces
             Trap
         }
         
-        public ObjectType type { get; set; }
+        public ObjectType Type { get; set; }
 
         public int Damage { get; set; }
 
         public void Collide(ICollidable obj, Edge edge);
+
+        public Vector2 GetVelocity();
 
         public Rectangle GetHitBox();
 

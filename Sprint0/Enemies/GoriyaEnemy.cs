@@ -26,7 +26,7 @@ namespace sprint0.Enemies
             goriyaStateMachine.ChangeDirection(rand);
             Damage = 1;
             deadCount = 0;
-            type = ICollidable.ObjectType.Enemy;
+            Type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void WallBehavior()

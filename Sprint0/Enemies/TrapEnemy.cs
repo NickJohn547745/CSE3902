@@ -29,12 +29,12 @@ namespace sprint0.Enemies
             this.player = player;
             ready = true;
             deadCount = 0;
-            type = ICollidable.ObjectType.Trap;
+            Type = ICollidable.ObjectType.Trap;
         }
 
         public override void Collide(ICollidable obj, ICollidable.Edge edge)
         {
-            switch (obj.type)
+            switch (obj.Type)
             {
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:

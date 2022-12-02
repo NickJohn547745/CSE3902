@@ -16,12 +16,12 @@ public abstract class PlayerSwordState : IPlayerState {
     protected int currentFrame = 0;
     protected const int FramesPerAnimationChange = 3;
     protected Edge swordEdge;
-    protected Edge backEdge;
     protected PlayerSword sword;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
     {
+        // need to change player hitbox to account for sword
         return new Rectangle((int) player.Position.X, (int) player.Position.Y, sprite.GetWidth(animationFrame), sprite.GetHeight(animationFrame));
     }
 
@@ -30,37 +30,9 @@ public abstract class PlayerSwordState : IPlayerState {
         sprite.Draw(spriteBatch, player.Position, animationFrame, SpriteEffects.None, color);
     }
 
-    private void Knockback()
-    {
-        switch (swordEdge)
-        {
-            case Edge.Top:
-                player.InitVelocity = new Vector2(0, 300);
-                break;
-            case Edge.Right:
-                player.InitVelocity = new Vector2(-300, 0);
-                break;
-            case Edge.Left:
-                player.InitVelocity = new Vector2(300, 0);
-                break;
-            case Edge.Bottom:
-                player.InitVelocity = new Vector2(0, -300);
-                break;
-        }
-
-        player.Velocity = player.InitVelocity;
-    }
-    
     public void Collide(ICollidable obj, Edge edge)
     {
-        //if (obj.type == ObjectType.Enemy || obj.type == ObjectType.Projectile)
-        //{
-        //    if (edge == backEdge)
-        //    {
-        //        player.TakeDamage(obj.Damage);
-        //        Knockback();
-        //    }
-        //}
+  
     }
 
     public abstract void Update();
