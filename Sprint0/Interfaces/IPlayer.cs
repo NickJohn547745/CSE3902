@@ -9,9 +9,7 @@ public interface IPlayer : ICollidable
 {
     public Vector2 Position { get; set; }
     public Vector2 Velocity { get; set; }
-    public Vector2 InitVelocity { get; set; }
 
-    public bool Damaged();
     public int GetHealth();
     public void TakeDamage(int damage, Edge collideSide);
     public void MoveUp();

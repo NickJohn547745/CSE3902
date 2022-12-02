@@ -13,7 +13,7 @@ public class PlayerFacingUpState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingUpSprite();
         player.Damage = 0;
-        shield = ICollidable.Edge.Top;
+        shield = ICollidable.Edge.Bottom;
         player.Velocity = Vector2.Zero;
     }
 
@@ -21,10 +21,9 @@ public class PlayerFacingUpState : PlayerFacingState {
         currentFrame++;
         if (player.CanMove)
         {
-            Vector2 move = new Vector2(0, -IPlayerState.playerSpeed);
-            if (!player.Damaged()) player.Velocity = move;
+            player.Velocity = new Vector2(0, -IPlayerState.playerSpeed);
 
-            player.Position += move;
+            player.Position += player.Velocity;
         }
         else
         {

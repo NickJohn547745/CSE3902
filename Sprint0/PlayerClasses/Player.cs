@@ -25,7 +25,6 @@ public class Player : IPlayer {
     public PlayerAbilityManager AbilityManager { get; protected set; }
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
-    public Vector2 InitVelocity { get; set; }
     public bool CanMove { get; set; }
     
     public Player(Game1 game) {
@@ -35,17 +34,6 @@ public class Player : IPlayer {
         Velocity = Vector2.Zero;
 
         Reset();
-    }
-    
-    public bool Damaged()
-    {
-        if (Game.Player != this)
-        {
-            return Game.Player.Damaged();
-        } else
-        {
-            return false;
-        }
     }
 
     public int GetHealth()
@@ -93,7 +81,7 @@ public class Player : IPlayer {
         PlayerState.Draw(spriteBatch, Color.White);
     }
 
-    public void Update(GameTime gameTime) {
+    public void Update(GameTime gameTime) {       
         PlayerState.Update();
         AbilityManager.Update(gameTime);
     }
@@ -113,32 +101,32 @@ public class Player : IPlayer {
         Velocity = Vector2.Zero;
     }
 
-    private void KnockBack(ICollidable.Edge collideSide)
+    private Vector2 KnockBack(ICollidable.Edge collideSide)
     {
+        Vector2 initVelocity = Vector2.Zero;
         switch (collideSide)
         {
             case ICollidable.Edge.Bottom:
-                InitVelocity = new Vector2(0, MoveBack);
+                initVelocity = new Vector2(0, MoveBack);
                 break;
             case ICollidable.Edge.Right:
-                InitVelocity = new Vector2(-MoveBack, 0);
+                initVelocity = new Vector2(-MoveBack, 0);
                 break;
             case ICollidable.Edge.Left:
-                InitVelocity = new Vector2(MoveBack, 0);
+                initVelocity = new Vector2(MoveBack, 0);
                 break;
             case ICollidable.Edge.Top:
-                InitVelocity = new Vector2(0, -MoveBack);
+                initVelocity = new Vector2(0, -MoveBack);
                 break;
         }
 
-        Velocity = InitVelocity;
+        return initVelocity;
     }
     
     public void TakeDamage(int damage, ICollidable.Edge collideSide) {
         Health -= damage;
-        KnockBack(collideSide);
-
-        Game.Player = new DamagedPlayer(this, Game);
+      
+        Game.Player = new DamagedPlayer(this, Game, KnockBack(collideSide));
         CollisionManager.Collidables.Add(Game.Player);
         CollisionManager.Collidables.Remove(this);
         SoundManager.Manager.linkDamageSound().Play();

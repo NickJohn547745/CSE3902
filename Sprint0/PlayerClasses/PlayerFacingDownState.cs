@@ -12,7 +12,7 @@ public class PlayerFacingDownState : PlayerFacingState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetWalkingDownSprite();
         player.Damage = 0;
-        shield = ICollidable.Edge.Bottom;
+        shield = ICollidable.Edge.Top;
         player.Velocity = Vector2.Zero;
     }
 
@@ -21,10 +21,9 @@ public class PlayerFacingDownState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            Vector2 move = new Vector2(0, IPlayerState.playerSpeed);
-            if (!player.Damaged()) player.Velocity = move;
+            player.Velocity = new Vector2(0, IPlayerState.playerSpeed);
 
-            player.Position += move;
+            player.Position += player.Velocity;
         } else
         {
             player.CanMove = true;

@@ -46,7 +46,7 @@ namespace sprint0.PlayerClasses
 
             switch (Edge)
             {
-                case ICollidable.Edge.Top:
+                case ICollidable.Edge.Bottom:
                     swordPosition = new Point((int)player.Position.X + topOffset * player.ScaleFactor, (int)player.Position.Y - (player.PlayerState.sprite.GetHeight(currentFrame) - 64));
                     swordWH = new Point(width, length);
                     break;
@@ -58,7 +58,7 @@ namespace sprint0.PlayerClasses
                     swordPosition = new Point((int)player.Position.X - (player.PlayerState.sprite.GetWidth(currentFrame) - 64), (int)player.Position.Y + sideOffset * player.ScaleFactor);
                     swordWH = new Point(length, width);
                     break;
-                case ICollidable.Edge.Bottom:
+                case ICollidable.Edge.Top:
                     swordPosition = new Point((int)player.Position.X + bottomOffset * player.ScaleFactor, (int)player.Position.Y + playerOffset * player.ScaleFactor);
                     swordWH = new Point(width, length);
                     break;

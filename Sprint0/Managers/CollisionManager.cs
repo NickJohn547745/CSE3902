@@ -59,29 +59,30 @@ namespace sprint0.Managers
 
             // guaranteed to be collision with left side of current
             // can't be right since only objects to the left of current are in Active list
-            float currentY = current.GetHitBox().Y;
-            float objY = obj.GetHitBox().Y;
+            Rectangle currentHit = current.GetHitBox();
+            Rectangle objHit = obj.GetHitBox();
 
-            float objDist = currentCenter.Y - objY;
-            float currentDist = objCenter.Y - currentY;
+            float objDist = currentCenter.Y - objHit.Y;
+            float currentDist = objCenter.Y - currentHit.Y;
             float objNextDist = Math.Abs(objDist - objDir.Y);
             float currentNextDist = Math.Abs(currentDist - currentDir.Y);
 
             bool yCollide = objNextDist < Math.Abs(objDist) || currentNextDist < Math.Abs(currentDist);         
-            bool topCollide = yCollide && (objDir.Y < 0 || currentDir.Y > 0);
-            bool bottomCollide = yCollide && (objDir.Y > 0 || currentDir.Y < 0);
+            bool topCollide = yCollide && (objDir.Y > 0 || currentDir.Y < 0);
+            bool bottomCollide = yCollide && (objDir.Y < 0 || currentDir.Y > 0);
+            bool broke = (objDir.X == 0 && objDir.Y != 0) ^ (currentDir.X == 0 && currentDir.Y != 0) ;
 
 
-            // bottom of obj collide with top of current
-            if (topCollide)
-            {
-                currentEdge = ICollidable.Edge.Top;
-                objEdge = ICollidable.Edge.Bottom;
-            }
-            else if (bottomCollide)
+            // bottom of current collide with top of object
+            if (topCollide || (broke && objHit.Top < currentHit.Top && objHit.Bottom > currentHit.Top))
             {
                 currentEdge = ICollidable.Edge.Bottom;
                 objEdge = ICollidable.Edge.Top;
+            }
+            else if (bottomCollide || (broke && objHit.Bottom > currentHit.Bottom && objHit.Top < currentHit.Bottom))
+            {
+                currentEdge = ICollidable.Edge.Top;
+                objEdge = ICollidable.Edge.Bottom;
             }
 
             current.Collide(obj, currentEdge);

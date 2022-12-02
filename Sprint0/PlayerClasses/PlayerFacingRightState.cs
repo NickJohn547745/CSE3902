@@ -22,10 +22,10 @@ public class PlayerFacingRightState : PlayerFacingState {
         
         if (player.CanMove)
         {
-            Vector2 move = new Vector2(IPlayerState.playerSpeed, 0);
-            if (!player.Damaged()) player.Velocity = move;
-
-            player.Position += move;
+            player.Velocity = new Vector2(IPlayerState.playerSpeed, 0);
+               
+            player.Position += player.Velocity;
+            
         } else
         {
             player.CanMove = true;

@@ -29,11 +29,9 @@ public class PlayerFacingLeftState : PlayerFacingState {
         
         if (player.CanMove)
         {
+            player.Velocity = new Vector2(-IPlayerState.playerSpeed, 0);
 
-            Vector2 move = new Vector2(-IPlayerState.playerSpeed, 0);
-            if (!player.Damaged()) player.Velocity = move;
-
-            player.Position += move;
+            player.Position += player.Velocity;
         } else
         {
             player.CanMove = true;

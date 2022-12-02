@@ -13,8 +13,7 @@ public class PlayerSwordUpState : PlayerSwordState {
         currentFrame = 0;
         sprite = PlayerSpriteFactory.Instance.GetSwordUpSprite();
         player.Damage = 0;
-        swordEdge = ICollidable.Edge.Top;
-        backEdge = ICollidable.Edge.Bottom;
+        swordEdge = ICollidable.Edge.Bottom;
         sword = new PlayerSword(this.player, swordEdge);
         CollisionManager.Collidables.Add(sword);
     }

@@ -10,13 +10,16 @@ namespace sprint0.PlayerClasses;
 
 public class DamagedPlayer : IPlayer {
 
+    private const int DamageHalfDone = 5;
+    private const int DamageDone = 10;
+
     public Vector2 Position { get; set; }
     private Player decoratedPlayer;
     private Game1 Game;
     private int timer = 120;
     private int frameCountdown = 0;
     public Vector2 Velocity { get; set; }
-    public Vector2 InitVelocity { get; set; }
+    private Vector2 InitVelocity;
     public Vector2 PreviousPosition { get; set; }
     public ICollidable.ObjectType Type { get; set; }
 
@@ -26,15 +29,12 @@ public class DamagedPlayer : IPlayer {
         set => decoratedPlayer.Damage = value;
     }
 
-    public DamagedPlayer(Player decoratedPlayer, Game1 game) {
+    public DamagedPlayer(Player decoratedPlayer, Game1 game, Vector2 velocity) {
         this.decoratedPlayer = decoratedPlayer;
+        InitVelocity = velocity;
+        Velocity = velocity;
         Game = game;
         Type = ICollidable.ObjectType.Player;
-    }
-
-    public bool Damaged()
-    {
-        return true;
     }
 
     public int GetHealth()
@@ -49,7 +49,7 @@ public class DamagedPlayer : IPlayer {
     }
 
     public void Draw(SpriteBatch spriteBatch) {
-        if(frameCountdown > 5)
+        if(frameCountdown > DamageHalfDone)
             decoratedPlayer.PlayerState.Draw(spriteBatch, Color.Red);
         else {
             decoratedPlayer.PlayerState.Draw(spriteBatch, Color.Tan);
@@ -59,14 +59,14 @@ public class DamagedPlayer : IPlayer {
     public void Collide(ICollidable obj, ICollidable.Edge edge) {
         if (obj.Type == ICollidable.ObjectType.Wall || obj.Type == ICollidable.ObjectType.Tile)
         {
-            decoratedPlayer.Velocity = Vector2.Zero;
+            Velocity = Vector2.Zero;
             decoratedPlayer.Collide(obj, edge);
         }
     }
 
     public Vector2 GetVelocity()
     {
-        return decoratedPlayer.Velocity;
+        return decoratedPlayer.Velocity + Velocity;
     }
 
     public Rectangle GetHitBox() {
@@ -78,16 +78,16 @@ public class DamagedPlayer : IPlayer {
         frameCountdown++;
         PreviousPosition = decoratedPlayer.Position; 
         
-        if (Math.Abs(decoratedPlayer.Velocity.X) > 5 || Math.Abs(decoratedPlayer.Velocity.Y) > 5)
+        if (Math.Abs(Velocity.X) > DamageHalfDone || Math.Abs(Velocity.Y) > DamageHalfDone)
         {
-            decoratedPlayer.Position += decoratedPlayer.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            decoratedPlayer.Velocity -= decoratedPlayer.InitVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            decoratedPlayer.Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Velocity -= InitVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
-        if (frameCountdown > 10)
+        if (frameCountdown > DamageDone)
             frameCountdown = 0;
         if (timer == 0) {
-            decoratedPlayer.Velocity = Vector2.Zero;
+            Velocity = Vector2.Zero;
             RemoveDecorator();
         }
         decoratedPlayer.Update(gameTime);

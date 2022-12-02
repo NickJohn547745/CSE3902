@@ -16,12 +16,12 @@ public abstract class PlayerSwordState : IPlayerState {
     protected int currentFrame = 0;
     protected const int FramesPerAnimationChange = 3;
     protected Edge swordEdge;
-    protected Edge backEdge;
     protected PlayerSword sword;
     public ISprite sprite { get; set; }
 
     public virtual Rectangle GetHitBox()
     {
+        // need to change player hitbox to account for sword
         return new Rectangle((int) player.Position.X, (int) player.Position.Y, sprite.GetWidth(animationFrame), sprite.GetHeight(animationFrame));
     }
 
