@@ -21,12 +21,14 @@ public class PlayerSwordLeftState : PlayerSwordState {
 
     public override Rectangle GetHitBox()
     {
-        return new Rectangle((int) player.Position.X - (sprite.GetWidth(animationFrame) - 64), (int) player.Position.Y, sprite.GetWidth(), sprite.GetHeight());
+        int swordWidth = sword.GetHitBox().Width;
+        return new Rectangle((int) player.Position.X, (int) player.Position.Y, sprite.GetWidth() - swordWidth, sprite.GetHeight());
     }
 
     public override void Draw(SpriteBatch spriteBatch, Color color)
     {
-        sprite.Draw(spriteBatch, new Vector2(player.Position.X - (sprite.GetWidth(animationFrame) - 64), player.Position.Y), animationFrame, SpriteEffects.FlipHorizontally, color);
+        int swordWidth = sword.GetHitBox().Width;
+        sprite.Draw(spriteBatch, new Vector2(player.Position.X - swordWidth, player.Position.Y), animationFrame, SpriteEffects.FlipHorizontally, color);
     }
 
 
