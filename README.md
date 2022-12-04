@@ -54,14 +54,14 @@
 * Start - reset game
 
 ## Refactorings
-* Implemented physicsManager class to reduce enemy fields
-* Implemented healthManager class to reduce enemy fields
-* Made CollidablesList in Collision manager static
-* Removed game1 parameter from ICollidable Update method
-* Made single static rand for enemies
-* Split classes directory into multiple directories (e.g. managers, configs)
-* Renamed Projectile class to physicsProjectile
-* Implemented timer utility class
+* Implemented physicsManager class to reduce enemy fields (Will)
+* Implemented healthManager class to reduce enemy fields (Will)
+* Made CollidablesList in Collision manager static (Will)
+* Removed game1 parameter from ICollidable Update method (Will)
+* Made single static rand for enemies (Will)
+* Split classes directory into multiple directories (e.g. managers, configs) (Will)
+* Renamed Projectile class to physicsProjectile (Will)
+* Implemented timer utility class (Will)
 
 ## Known Bugs
 * HUD values not dynamic
