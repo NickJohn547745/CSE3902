@@ -139,50 +139,54 @@ public class AbilitySelect
 
     public void CycleAbility()
     {
-        int loops = 0;
-        bool flag = false;
-        while (loops < 4 && !flag)
+        if (Inventory != null)
         {
-            CursorPosition++;
-            if (CursorPosition > 4)
+            int loops = 0;
+            bool flag = false;
+            while (loops < 4 && !flag)
             {
-                CursorPosition = 1;
-            }
-            if (CursorPosition == 1 && Inventory.BoomerangTier > 0)
-            {
-                SelectedAbility = Boomerang;
-                SelectedAbilityTier = Inventory.BoomerangTier;
-                flag = true;
-                if (SelectedAbilityTier == 1)
-                    Inventory.CurrentAbility = AbilityTypes.WoodenBoomerang;
-                else
-                    Inventory.CurrentAbility = AbilityTypes.MagicalBoomerang;
-            }
-            else if (CursorPosition == 2 && Inventory.BombCount > 0)
-            {
-                SelectedAbility = Bomb;
-                flag = true;
-                Inventory.CurrentAbility = AbilityTypes.Bomb;
-            }
-            else if (CursorPosition == 3 && Inventory.ArrowTier > 0 && Inventory.BowUnlocked)
-            {
-                SelectedAbility = Arrow;
-                SelectedAbilityTier = Inventory.ArrowTier;
-                flag = true;
-                if (SelectedAbilityTier == 1)
-                    Inventory.CurrentAbility = AbilityTypes.WoodenArrow;
-                else
-                    Inventory.CurrentAbility = AbilityTypes.SilverArrow;
-            }
-            else if (CursorPosition == 4 && Inventory.CandleTier > 0)
-            {
-                SelectedAbility = Candle;
-                SelectedAbilityTier = Inventory.CandleTier;
-                flag = true;
-                Inventory.CurrentAbility = AbilityTypes.Fireball;
-            }
+                CursorPosition++;
+                if (CursorPosition > 4)
+                {
+                    CursorPosition = 1;
+                }
 
-            loops++;
+                if (CursorPosition == 1 && Inventory.BoomerangTier > 0)
+                {
+                    SelectedAbility = Boomerang;
+                    SelectedAbilityTier = Inventory.BoomerangTier;
+                    flag = true;
+                    if (SelectedAbilityTier == 1)
+                        Inventory.CurrentAbility = AbilityTypes.WoodenBoomerang;
+                    else
+                        Inventory.CurrentAbility = AbilityTypes.MagicalBoomerang;
+                }
+                else if (CursorPosition == 2 && Inventory.BombCount > 0)
+                {
+                    SelectedAbility = Bomb;
+                    flag = true;
+                    Inventory.CurrentAbility = AbilityTypes.Bomb;
+                }
+                else if (CursorPosition == 3 && Inventory.ArrowTier > 0 && Inventory.BowUnlocked)
+                {
+                    SelectedAbility = Arrow;
+                    SelectedAbilityTier = Inventory.ArrowTier;
+                    flag = true;
+                    if (SelectedAbilityTier == 1)
+                        Inventory.CurrentAbility = AbilityTypes.WoodenArrow;
+                    else
+                        Inventory.CurrentAbility = AbilityTypes.SilverArrow;
+                }
+                else if (CursorPosition == 4 && Inventory.CandleTier > 0)
+                {
+                    SelectedAbility = Candle;
+                    SelectedAbilityTier = Inventory.CandleTier;
+                    flag = true;
+                    Inventory.CurrentAbility = AbilityTypes.Fireball;
+                }
+
+                loops++;
+            }
         }
     }
 }
