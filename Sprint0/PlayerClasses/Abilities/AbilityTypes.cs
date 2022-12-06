@@ -1,10 +1,9 @@
 namespace sprint0.PlayerClasses.Abilities; 
 
 public enum AbilityTypes {
+    None,
+    Boomerang,
     Bomb,
-    WoodenBoomerang,
-    MagicalBoomerang,
-    WoodenArrow,
-    SilverArrow,
-    Fireball
+    Arrow,
+    Candle
 }

@@ -6,21 +6,37 @@ using sprint0.Managers;
 
 namespace sprint0.PlayerClasses.Abilities;
 
-public class WoodenArrow : Ability {
+public class Arrow : Ability {
 
     private int spriteVersion;
     private int hitFrame;
-    public WoodenArrow(Player player, Vector2 position, Vector2 velocity) {
+    public Arrow(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
-        if (velocity.X == 0) {
-            spriteVersion = 0;
-            sprite = PlayerSpriteFactory.Instance.GetWoodenArrowVerticalSprite();
-            Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+        if (player.PlayerInventory.Abilities[AbilityTypes.Arrow] == 1)
+        {
+            if (velocity.X == 0) {
+                spriteVersion = 0;
+                sprite = PlayerSpriteFactory.Instance.GetWoodenArrowVerticalSprite();
+                Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+            }
+            else {
+                spriteVersion = 1;
+                sprite = PlayerSpriteFactory.Instance.GetWoodenArrowHorizontalSprite();
+                Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+            }
         }
-        else {
-            spriteVersion = 1;
-            sprite = PlayerSpriteFactory.Instance.GetWoodenArrowHorizontalSprite();
-            Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+        else if (player.PlayerInventory.Abilities[AbilityTypes.Arrow] == 2)
+        {
+            if (velocity.X == 0) {
+                spriteVersion = 0;
+                sprite = PlayerSpriteFactory.Instance.GetSilverArrowVerticalSprite();
+                Position = Vector2.Add(position, new Vector2(-sprite.GetWidth()/2, sprite.GetHeight() * (velocity.Y - 1)/2));
+            }
+            else {
+                spriteVersion = 1;
+                sprite = PlayerSpriteFactory.Instance.GetSilverArrowHorizontalSprite();
+                Position = Vector2.Add(position, new Vector2(sprite.GetWidth() * (velocity.X - 1)/2, -sprite.GetHeight()/2));
+            }
         }
         Velocity = Vector2.Multiply(velocity, new Vector2(5));
         Type = ICollidable.ObjectType.Ability;
@@ -47,7 +63,7 @@ public class WoodenArrow : Ability {
 
         if (hitFrame == 5) {
             CollisionManager.Collidables.Remove(this);
-            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.WoodenArrow);
+            player.AbilityManager.ActiveAbility = null;
         }
     }
     

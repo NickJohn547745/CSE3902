@@ -17,7 +17,7 @@ public interface IPlayer : ICollidable
     public void MoveLeft();
     public void MoveRight();
     public void SwordAttack();
-    public void UseAbility(AbilityTypes abilityType);
+    public void UseAbility();
 
     public PlayerInventory GetInventory();
 

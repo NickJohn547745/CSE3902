@@ -1,16 +1,17 @@
-using System;
 using System.Collections.Generic;
-using sprint0.ItemClasses;
 using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.PlayerClasses; 
 
 public class PlayerInventory {
-    public Dictionary<AbilityTypes, int> AbilityCounts { get; set; }
     
+    private const int AbilityCount = 4;
+    
+    public Dictionary<AbilityTypes, int> Abilities { get; set; }
+    public List<AbilityTypes> AbilityPositions = new List<AbilityTypes>() { AbilityTypes.Boomerang, AbilityTypes.Bomb, AbilityTypes.Arrow, AbilityTypes.Candle};
+
     public int SwordTier { get; set; }
-    
-    
+
     public int BoomerangTier { get; set; }
     public int BombCount { get; set; }
     public int ArrowTier { get; set; }
@@ -28,16 +29,23 @@ public class PlayerInventory {
 
     public PlayerInventory()
     {
+        Abilities = new Dictionary<AbilityTypes, int>()
+        {
+            { AbilityTypes.Boomerang, 1 },
+            { AbilityTypes.Bomb, 4 },
+            { AbilityTypes.Arrow, 1 },
+            { AbilityTypes.Candle, 1 }
+        };
         BombCount = 4;
         BoomerangTier = 0;
         ArrowTier = 1;
-        BowUnlocked = false;
+        BowUnlocked = true;
         CandleTier = 2;
         RupeeCount = 0;
         KeyCount = 0;
         MapUnlocked = false;
         CompassUnlocked = false;
-        CurrentAbility = AbilityTypes.Bomb;
+        CurrentAbility = AbilityTypes.Candle;
     }
 
     // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory
@@ -47,6 +55,44 @@ public class PlayerInventory {
     }
     public AbilityTypes GetCurrentB()
     {
-        return AbilityTypes.WoodenBoomerang;
+        return AbilityTypes.Boomerang;
+    }
+
+    public bool UseBomb()
+    {
+        bool result = false;
+        if (BombCount > 0 && CurrentAbility == AbilityTypes.Bomb)
+        {
+            result = true;
+            BombCount--;
+        }
+
+        if (BombCount == 0 && CurrentAbility == AbilityTypes.Bomb)
+        {
+            
+        }
+
+        return result;
+    }
+    
+    public void CycleAbility()
+    {
+        int start = AbilityPositions.IndexOf(CurrentAbility);
+
+        for (int i = 1; i < AbilityCount; i++)
+        {
+            AbilityTypes newAbility = AbilityPositions[(start + i) % AbilityCount];
+            if (Abilities[newAbility] > 0)
+            {
+                if (newAbility != AbilityTypes.Arrow || BowUnlocked)
+                {
+                    CurrentAbility = newAbility;
+                    i = AbilityCount;
+                }
+            }
+        }
+
+
+
     }
 }
