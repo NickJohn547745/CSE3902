@@ -63,7 +63,7 @@ namespace sprint0.ProceduralGeneration
         private void LinkDestinations(RoomVertex current, List<LevelConfig> RoomConfigs)
         {
             // link to main dungeon for start room
-            if (current.Id == 0)
+            if (current.Id == RoomLayoutGenerator.Instance.StartRoomId)
             {
                 RoomConfigs[current.Id].Destinations[(int)Direction.Up] = 0;
                 RoomConfigs[current.Id].DoorIds[(int)Direction.Up] = 1;

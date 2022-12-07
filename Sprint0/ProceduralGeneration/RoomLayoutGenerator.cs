@@ -17,6 +17,7 @@ namespace sprint0.ProceduralGeneration
 
         public int GridHeight { get; private set; }
         public int GridWidth { get; private set; }
+        public int StartRoomId { get; private set; }
 
         private List<RoomVertex> RoomGraph;
         
@@ -32,6 +33,7 @@ namespace sprint0.ProceduralGeneration
         {
             GridHeight = rand.Next(GridMin, GridMax);
             GridWidth = rand.Next(GridMin, GridMax);
+            StartRoomId = (int) Math.Ceiling((double)GridWidth / 2);
         }     
 
 
@@ -78,7 +80,7 @@ namespace sprint0.ProceduralGeneration
             InitializeRoomGraph();
             
             // uses modified Prim's MST algorithm
-            RoomGraph[0].Cost = 0;
+            RoomGraph[StartRoomId].Cost = 0;
 
             PriorityQueue<RoomVertex, int> Out = new PriorityQueue<RoomVertex, int>();
 

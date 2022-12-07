@@ -27,6 +27,7 @@ public class Game1 : Game
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public int DefaultRoomOffset { get; private set; }
     public static int WindowWidth { get; private set; }
     public static int WindowHeight { get; private set; }
 
@@ -150,7 +151,9 @@ public class Game1 : Game
 
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
-        RoomLayoutGenerator.Instance.SetRooms(this, LevelList.Count);
+
+        DefaultRoomOffset = LevelList.Count;
+        RoomLayoutGenerator.Instance.SetRooms(this, DefaultRoomOffset);
         LevelList.AddRange(RoomLayoutGenerator.Instance.ProceduralRooms);
 
         CollisionManager = new CollisionManager(Player);
