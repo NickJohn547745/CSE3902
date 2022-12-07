@@ -13,11 +13,8 @@ namespace sprint0.ProceduralGeneration
         private const int TilesWidth = 12;
         private const int NoDoor = -1;
 
-        private const string Tile0 = "./Content/Data/Tile0.xml";
-        private const string Tile1 = "./Content/Data/Tile1.xml";
-        private const string Tile2 = "./Content/Data/Tile2.xml";
-        private const string Tile3 = "./Content/Data/Tile3.xml";
-        private const string Tile4 = "./Content/Data/Tile4.xml";
+        private const string TilePath = "./Content/Data/Tile";
+        private const string Xml = ".xml";
 
         private readonly Random random;
         private readonly int levelOffset;
@@ -50,53 +47,37 @@ namespace sprint0.ProceduralGeneration
             }
         }
 
-        private void InitializeTiles(LevelConfig cfg)
-        {
-            List<List<int>> tiles = new List<List<int>>();
-            for (int i = 0; i < TilesHeight; i++)
-            {
-                tiles.Add(new List<int>());
-                for (int j = 0; j < TilesWidth; j++)
-                {
-                    tiles[i].Add(0);
-                }
-            }
-            cfg.TileIds = tiles;
-        }
-
         private void GenerateTiles(LevelConfig cfg)
         {
-            //InitializeTiles(cfg);
-
-            string filePath;
             LevelFileReader levelReader = new LevelFileReader(cfg);
 
             // select which preset tile config
-            switch (random.Next(16))
+            switch (random.Next(18))
             {
                 case 0 or 1 or 2:
-                    filePath = Tile1;
                     tileLayout = 1;
                     break;
                 case 4 or 5 or 6:
-                    filePath = Tile2;
                     tileLayout = 2;
                     break;
-                case 7 or 8 or 9 or 10:
-                    filePath = Tile3;
+                case 7 or 8:
                     tileLayout = 3;
                     break;
-                case 11 or 12:
-                    filePath = Tile4;
+                case 9 or 10:
                     tileLayout = 4;
                     break;
+                case 11 or 12:
+                    tileLayout = 5;
+                    break;
+                case 13 or 14 or 15:
+                    tileLayout = 6;
+                    break;
                 default:
-                    filePath = Tile0;
                     tileLayout = 0;
                     break;
             }
 
-            levelReader.LoadFile(filePath);
+            levelReader.LoadFile(TilePath + tileLayout.ToString() + Xml);
         }
 
         private void LinkDestinations(RoomVertex current, List<LevelConfig> RoomConfigs)
