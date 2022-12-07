@@ -63,6 +63,9 @@
 * Renamed Projectile class to physicsProjectile (Will)
 * Implemented timer utility class (Will)
 
+## Sprint 5 Features
+* Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
+
 ## Known Bugs
 * HUD values not dynamic
 * Clicking to change rooms breaks doors
