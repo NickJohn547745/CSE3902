@@ -84,3 +84,4 @@
 * Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)
 * Enemies and player can walk through some walls in some rooms (primarily bottom right, but also sometimes top right)
 * Enemies do not drop items
+* Top doors in procedurally generated have hitbox moved up and to the left
