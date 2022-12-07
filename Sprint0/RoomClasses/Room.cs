@@ -77,7 +77,7 @@ namespace sprint0.RoomClasses
 
                 if (currentDestination != -1)
                 {
-                    LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
+                    LevelConfig destinationLevelConfig = game.LevelList[currentDestination];
 
                     roomMap.Add((Direction)i, destinationLevelConfig);
                 }
@@ -178,7 +178,6 @@ namespace sprint0.RoomClasses
                     nextDoor.Draw(spriteBatch, nextRoom.roomOffset);
                 }
             }
-
         }
 
         public void Transition(Direction dir)
