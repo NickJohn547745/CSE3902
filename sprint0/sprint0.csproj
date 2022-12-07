@@ -40,11 +40,31 @@
         <None Remove="Content\Data\LevelFile_7.xml" />
         <None Remove="Content\Data\LevelFile_8.xml" />
         <None Remove="Content\Data\LevelFile_9.xml" />
+        <None Remove="Content\Data\Tile0.xml" />
+        <None Remove="Content\Data\Tile1.xml" />
+        <None Remove="Content\Data\Tile2.xml" />
+        <None Remove="Content\Data\Tile3.xml" />
+        <None Remove="Content\Data\Tile4.xml" />
         <None Remove="Icon.ico" />
         <None Remove="Icon.bmp" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Content\Data\GameFile.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\Tile2.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\Tile4.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\Tile3.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\Tile1.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\Tile0.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\Data\LevelFile_0.xml">

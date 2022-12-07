@@ -36,8 +36,6 @@ namespace sprint0.ProceduralGeneration
             StartRoomId = (int) Math.Ceiling((double)GridWidth / 2);
         }     
 
-
-        // split room generation into different class?
         private void InitializeRoomGraph()
         {
             RoomGraph = new List<RoomVertex>();
