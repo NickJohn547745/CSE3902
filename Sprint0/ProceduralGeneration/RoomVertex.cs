@@ -33,18 +33,18 @@ namespace sprint0.ProceduralGeneration
             Y = y;
             Cost = StartCost;
             Predecessor = null;
-            Id = X + Y * RoomLayoutGenerator.GridDim;
+            Id = X + Y * RoomLayoutGenerator.Instance.GridWidth;
             AdjacentRoomIds = new Dictionary<int, Direction>();
             InitializeRoomIds();
         }
 
         private void InitializeRoomIds()
         {
-            if (Y > 0) AdjacentRoomIds[Id - RoomLayoutGenerator.GridDim] = Direction.Up;
+            if (Y > 0) AdjacentRoomIds[Id - RoomLayoutGenerator.Instance.GridWidth] = Direction.Up;
 
-            if (X < RoomLayoutGenerator.GridDim - 1) AdjacentRoomIds[Id + 1] = Direction.Right;
+            if (X < RoomLayoutGenerator.Instance.GridWidth - 1) AdjacentRoomIds[Id + 1] = Direction.Right;
 
-            if (Y < RoomLayoutGenerator.GridDim - 1) AdjacentRoomIds[Id + RoomLayoutGenerator.GridDim] = Direction.Down;
+            if (Y < RoomLayoutGenerator.Instance.GridHeight - 1) AdjacentRoomIds[Id + RoomLayoutGenerator.Instance.GridWidth] = Direction.Down;
 
             if (X > 0) AdjacentRoomIds[Id - 1] = Direction.Left;
         }

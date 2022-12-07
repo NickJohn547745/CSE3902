@@ -8,11 +8,15 @@ namespace sprint0.ProceduralGeneration
 {
     public class RoomLayoutGenerator
     {
-        // randomize width and height
-        public const int GridDim = 5;
+        private const int GridMin = 3;
+        private const int GridMax = 8;
+        
         public const int MaxDoors = 4;
 
         private readonly Random rand = new();
+
+        public int GridHeight { get; private set; }
+        public int GridWidth { get; private set; }
 
         private List<RoomVertex> RoomGraph;
         
@@ -26,6 +30,8 @@ namespace sprint0.ProceduralGeneration
 
         private RoomLayoutGenerator() 
         {
+            GridHeight = rand.Next(GridMin, GridMax);
+            GridWidth = rand.Next(GridMin, GridMax);
         }     
 
 
@@ -34,9 +40,9 @@ namespace sprint0.ProceduralGeneration
         {
             RoomGraph = new List<RoomVertex>();
 
-            for (int i = 0; i < GridDim; i++)
+            for (int i = 0; i < GridHeight; i++)
             {
-                for (int j = 0; j < GridDim; j++)
+                for (int j = 0; j < GridWidth; j++)
                 {
                     RoomGraph.Add(new RoomVertex(j, i));
                 }
