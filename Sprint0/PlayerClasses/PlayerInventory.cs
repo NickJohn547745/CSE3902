@@ -11,13 +11,8 @@ public class PlayerInventory {
     public List<AbilityTypes> AbilityPositions = new List<AbilityTypes>() { AbilityTypes.Boomerang, AbilityTypes.Bomb, AbilityTypes.Arrow, AbilityTypes.Candle};
 
     public int SwordTier { get; set; }
-
-    public int BoomerangTier { get; set; }
-    public int BombCount { get; set; }
-    public int ArrowTier { get; set; }
     public bool BowUnlocked { get; set; }
     
-    public int CandleTier { get; set; }
 
     public int RupeeCount { get; set; }
     public int KeyCount { get; set; }
@@ -31,21 +26,17 @@ public class PlayerInventory {
     {
         Abilities = new Dictionary<AbilityTypes, int>()
         {
-            { AbilityTypes.Boomerang, 1 },
-            { AbilityTypes.Bomb, 4 },
-            { AbilityTypes.Arrow, 1 },
-            { AbilityTypes.Candle, 1 }
+            { AbilityTypes.Boomerang, 0 },
+            { AbilityTypes.Bomb, 0 },
+            { AbilityTypes.Arrow, 0 },
+            { AbilityTypes.Candle, 0 }
         };
-        BombCount = 4;
-        BoomerangTier = 0;
-        ArrowTier = 1;
         BowUnlocked = true;
-        CandleTier = 2;
         RupeeCount = 0;
         KeyCount = 0;
         MapUnlocked = false;
         CompassUnlocked = false;
-        CurrentAbility = AbilityTypes.Candle;
+        CurrentAbility = AbilityTypes.None;
     }
 
     // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory
@@ -58,23 +49,20 @@ public class PlayerInventory {
         return AbilityTypes.Boomerang;
     }
 
-    public bool UseBomb()
+    public void UseBomb()
     {
-        bool result = false;
-        if (BombCount > 0 && CurrentAbility == AbilityTypes.Bomb)
-        {
-            result = true;
-            BombCount--;
-        }
+        Abilities[AbilityTypes.Bomb]--;
 
-        if (BombCount == 0 && CurrentAbility == AbilityTypes.Bomb)
+        if (Abilities[AbilityTypes.Bomb] == 0)
         {
-            
+            CycleAbility();
+            if (CurrentAbility == AbilityTypes.Bomb)
+            {
+                CurrentAbility = AbilityTypes.None;
+            }
         }
-
-        return result;
     }
-    
+
     public void CycleAbility()
     {
         int start = AbilityPositions.IndexOf(CurrentAbility);

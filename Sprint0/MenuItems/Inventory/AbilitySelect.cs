@@ -55,7 +55,14 @@ public class AbilitySelect
     public void UpdateInventory(PlayerInventory inventory)
     {
         Inventory = inventory;
-        CursorPosition = Inventory.AbilityPositions.IndexOf(Inventory.CurrentAbility);
+        if (Inventory.CurrentAbility != AbilityTypes.None)
+        {
+            CursorPosition = Inventory.AbilityPositions.IndexOf(Inventory.CurrentAbility);
+        }
+        else
+        {
+            CursorPosition = 0;
+        }
         
     }
 
@@ -90,6 +97,13 @@ public class AbilitySelect
     public void CycleAbility()
     {
         Inventory.CycleAbility();
-        CursorPosition = Inventory.AbilityPositions.IndexOf(Inventory.CurrentAbility);
+        if (Inventory.CurrentAbility != AbilityTypes.None)
+        {
+            CursorPosition = Inventory.AbilityPositions.IndexOf(Inventory.CurrentAbility);
+        }
+        else
+        {
+            CursorPosition = 0;
+        }
     }
 }

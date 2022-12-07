@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.ItemClasses.Pickups
 {
@@ -22,7 +23,9 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.Type == ICollidable.ObjectType.Player)
             {
-                Inventory.BombCount = Math.Min(8, Inventory.BombCount + 4);
+                Inventory.Abilities[AbilityTypes.Bomb] = Math.Min(8, Inventory.Abilities[AbilityTypes.Bomb] + 4);
+                if (Inventory.CurrentAbility == AbilityTypes.None)
+                    Inventory.CurrentAbility = AbilityTypes.Bomb;
                 readyToDelete = true;
             }
         }

@@ -11,7 +11,7 @@ public class PlayerAbilityManager {
         this.player = player;
     }
 
-    public void UseAbility(AbilityTypes abilityType, Vector2 position, Vector2 velocity) {
+    public void UseAbility(Vector2 position, Vector2 velocity) {
 
         switch (player.PlayerInventory.CurrentAbility)
         {

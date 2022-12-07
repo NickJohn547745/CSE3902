@@ -39,7 +39,7 @@ public class PlayerFacingRightState : PlayerFacingState {
 
     public override void UseAbility(AbilityTypes abilityType)
     {
-        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(sprite.GetWidth(), sprite.GetHeight()/2)), new Vector2(1, 0));
+        player.AbilityManager.UseAbility( Vector2.Add(player.Position, new Vector2(sprite.GetWidth(), sprite.GetHeight()/2)), new Vector2(1, 0));
         player.PlayerState = new PlayerAbilityRightState(player);
     }
 }

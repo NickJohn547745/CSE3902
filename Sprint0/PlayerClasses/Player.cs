@@ -152,7 +152,7 @@ public class Player : IPlayer {
     }
 
     public virtual void UseAbility() {
-        if(AbilityManager.ActiveAbility == null)
+        if(AbilityManager.ActiveAbility == null && PlayerInventory.CurrentAbility != AbilityTypes.None)
             PlayerState.UseAbility(PlayerInventory.CurrentAbility);
     }
 

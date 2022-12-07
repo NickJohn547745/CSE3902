@@ -97,7 +97,7 @@ namespace sprint0.HudClasses
             currentAbilityA = Inventory.GetCurrentA();
             currentAbilityB = Inventory.GetCurrentB();
 
-            Bombs = Inventory.BombCount;
+            Bombs = Inventory.Abilities[AbilityTypes.Bomb];
 
             Keys = Inventory.KeyCount;
 

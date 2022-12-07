@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.ItemClasses.Pickups
 {
@@ -20,7 +21,9 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.Type == ICollidable.ObjectType.Player)
             {
-                Inventory.BoomerangTier = 1;
+                Inventory.Abilities[AbilityTypes.Boomerang] = 1;
+                if (Inventory.CurrentAbility == AbilityTypes.None)
+                    Inventory.CurrentAbility = AbilityTypes.Boomerang;
                 readyToDelete = true;
             }
         }
