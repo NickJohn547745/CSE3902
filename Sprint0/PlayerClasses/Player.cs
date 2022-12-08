@@ -26,12 +26,15 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public bool CanMove { get; set; }
+
+    public PlayerWeapons PrimaryWeapon { get; set; }
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(175, 175);
         initPosition = Position;
         Velocity = Vector2.Zero;
+        PrimaryWeapon = PlayerWeapons.Wand;
 
         Reset();
     }
@@ -147,8 +150,8 @@ public class Player : IPlayer {
         PlayerState.MoveRight();
     }
 
-    public void SwordAttack() {
-        PlayerState.SwordAttack();
+    public void PrimaryAttack() {
+        PlayerState.PrimaryAttack();
     }
 
     public virtual void UseAbility() {

@@ -37,9 +37,16 @@ public class PlayerFacingLeftState : PlayerFacingState {
             player.CanMove = true;
         }
     }
-    public override void SwordAttack()
+    public override void PrimaryAttack()
     {
-        player.PlayerState = new PlayerSwordLeftState(player);
+        if (player.PrimaryWeapon == PlayerWeapons.Sword)
+        {
+            player.PlayerState = new PlayerSwordLeftState(player);
+        }
+        else if(player.PrimaryWeapon == PlayerWeapons.Wand)
+        {
+            player.PlayerState = new PlayerWandLeftState(player);
+        }
     }
 
     public override void UseAbility(AbilityTypes abilityType)

@@ -8,13 +8,11 @@ using static sprint0.Interfaces.ICollidable;
 
 namespace sprint0.PlayerClasses; 
 
-public abstract class PlayerSwordState : IPlayerState {
+public abstract class PlayerWandState : IPlayerState {
     protected Player player;
     protected int animationFrame = 0;
     protected int currentFrame = 0;
     protected const int FramesPerAnimationChange = 3;
-    protected Edge swordEdge;
-    protected PlayerSword sword;
     public ISprite sprite { get; set; }
 
     public abstract Rectangle GetHitBox();
@@ -31,7 +29,7 @@ public abstract class PlayerSwordState : IPlayerState {
     public abstract void Update();
 
     public void PrimaryAttack() {
-        // Already in sword attack state
+        // Already in attack state
     }
 
     public void MoveUp() {

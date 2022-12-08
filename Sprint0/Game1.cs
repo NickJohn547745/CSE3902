@@ -105,7 +105,7 @@ public class Game1 : Game
         gamePad.BindCommand(Buttons.LeftThumbstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.LeftThumbstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.Y, new UsePlayerAbilityCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.A, new PlayerPrimaryAttackCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightShoulder, new NextLevelCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.LeftShoulder, new PreviousLevelCommand(), IController.KeyState.Pressed);
 
