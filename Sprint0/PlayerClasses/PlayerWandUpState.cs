@@ -20,7 +20,7 @@ public class PlayerWandUpState : PlayerWandState {
 
     public override Rectangle GetHitBox()
     {
-        return new Rectangle((int)player.Position.X, (int)player.Position.Y, sprite.GetWidth(animationFrame), sprite.GetHeight() - (sprite.GetHeight(animationFrame) - 64));
+        return new Rectangle((int)player.Position.X, (int)player.Position.Y, sprite.GetWidth(animationFrame), sprite.GetHeight(0));
     }
     
     public override void Draw(SpriteBatch spriteBatch, Color color)
