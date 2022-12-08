@@ -2,12 +2,10 @@
 
 <Settings>
 	<Setting name="Enemies">		
-		<Enemy>1 60 225 320</Enemy>
-		<Enemy>1 60 350 200</Enemy>
-		<Enemy>1 60 425 500</Enemy>
+		<Enemy>1 60 225 450</Enemy>
 		<Enemy>1 60 500 425</Enemy>
 		<Enemy>1 60 650 450</Enemy>
-		<Enemy>1 60 750 240</Enemy>		
-		<Enemy>1 60 1000 350</Enemy>
+		<Enemy>1 60 750 400</Enemy>		
+		<Enemy>1 60 1000 450</Enemy>
 	</Setting>
 </Settings>

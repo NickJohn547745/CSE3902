@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Settings>
+	<Setting name="Enemies">
+		<Enemy>4 60 315 240</Enemy>
+		<Enemy>4 60 400 450</Enemy>
+		<Enemy>4 60 900 250</Enemy>
+		<Enemy>4 60 420 220</Enemy>
+		<Enemy>4 60 250 410</Enemy>
+		<Enemy>4 60 970 320</Enemy>
+		<Enemy>4 60 250 500</Enemy>
+		<Enemy>4 60 830 450</Enemy>
+		<Enemy>4 60 500 520</Enemy>
+		<Enemy>4 60 540 275</Enemy>
+		<Enemy>4 60 600 420</Enemy>
+		<Enemy>4 60 750 540</Enemy>
+	</Setting>
+</Settings>

@@ -5,15 +5,18 @@ using sprint0.Configs;
 using sprint0.Interfaces;
 using sprint0.FileReaderClasses;
 using Microsoft.Xna.Framework;
+using System.Reflection.Metadata.Ecma335;
 
 namespace sprint0.ProceduralGeneration
 {
     public class EnemyGenerator
     {
-        private const int PresetMax = 18;
+        private const int TrapId = 6;
+        private const int AquamentusId = 0;
+        private const int MaxId = 6;
 
         private const int OldManId = 3;
-        private const int MaxId = 6;
+        private const int MaxEnemyPreset = 6;
 
         private const string EnemyPath = "./Content/Data/EnemyPresets/Enemy";
         private const string Xml = ".xml";
@@ -24,34 +27,44 @@ namespace sprint0.ProceduralGeneration
             random = rand;
         }
 
-
-
         private int EnemyPreset(int tilePreset)
         {
-            int enemyPreset = 0;
+            List<int> enemyPresets = new List<int>();
+
             switch (tilePreset)
             {
                 case 0:
+                case 4:
+                    for (int i = 0; i < MaxEnemyPreset; i++) enemyPresets.Add(i);
                     break;
                 case 1:
+                    enemyPresets.Add(3);
+                    enemyPresets.Add(4);
                     break;
                 case 2:
+                    enemyPresets.Add(2);
+                    enemyPresets.Add(5);
                     break;
                 case 3:
-                    break;
-                case 4:
+                    enemyPresets.Add(3);
+                    enemyPresets.Add(4);
                     break;
                 case 5:
+                    for (int i = 0; i < MaxEnemyPreset - 1; i++) enemyPresets.Add(i);
                     break;
                 case 6:
+                    enemyPresets.Add(4);
+                    enemyPresets.Add(5);
                     break;
             }
-            return enemyPreset;
+
+            return enemyPresets[random.Next(enemyPresets.Count)];
         }
+
 
         private int GenerateId()
         {
-            int id = -1; 
+            int id = -1;
 
             while (id < 0 || id == OldManId) id = random.Next(1, MaxId);
 
@@ -62,9 +75,12 @@ namespace sprint0.ProceduralGeneration
         {
             for (int i = 0; i < cfg.Enemies.Count; i++)
             {
-                Tuple<int, Point, int> current = cfg.Enemies[i];
-                cfg.Enemies[i] = new Tuple<int, Point, int>(GenerateId(), current.Item2, current.Item3);
-            }
+                if (cfg.Enemies[i].Item1 != AquamentusId && cfg.Enemies[i].Item1 != TrapId)
+                {
+                    Tuple<int, Point, int> current = cfg.Enemies[i];
+                    cfg.Enemies[i] = new Tuple<int, Point, int>(GenerateId(), current.Item2, current.Item3);
+                }
+             }
         }
 
         public void Generate(LevelConfig cfg, int tilePreset)

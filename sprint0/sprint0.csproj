@@ -11,6 +11,13 @@
         <ApplicationIcon>Icon.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
+        <None Remove="Content\Data\EnemyPresets\Enemy0.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy1.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy2.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy3.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy4.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy5.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy6.xml" />
         <None Remove="Content\Data\GameFile.xml" />
         <None Remove="Content\Data\LevelFile_0.xml" />
         <None Remove="Content\Data\LevelFile_1.xml" />
@@ -51,28 +58,49 @@
         <None Remove="Icon.bmp" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Content\Data\EnemyPresets\Enemy4.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy6.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy5.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy3.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy2.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy1.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy0.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\Data\GameFile.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile2.xml">
+      <Content Include="Content\Data\TilePresets\Tile2.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile6.xml">
+      <Content Include="Content\Data\TilePresets\Tile6.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile5.xml">
+      <Content Include="Content\Data\TilePresets\Tile5.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile4.xml">
+      <Content Include="Content\Data\TilePresets\Tile4.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile3.xml">
+      <Content Include="Content\Data\TilePresets\Tile3.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile1.xml">
+      <Content Include="Content\Data\TilePresets\Tile1.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Content\Data\Tile0.xml">
+      <Content Include="Content\Data\TilePresets\Tile0.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\Data\LevelFile_0.xml">
