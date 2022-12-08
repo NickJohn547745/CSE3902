@@ -10,17 +10,14 @@ namespace sprint0.ProceduralGeneration
     {
         private const int GridMin = 3;
         private const int GridMax = 8;
-        
         public const int MaxDoors = 4;
-
         private readonly Random rand = new();
 
         public int GridHeight { get; private set; }
         public int GridWidth { get; private set; }
         public int StartRoomId { get; private set; }
 
-        private List<RoomVertex> RoomGraph;
-        
+        private List<RoomVertex> RoomGraph;     
         public List<LevelConfig> ProceduralRooms { get; private set; }
 
         private static RoomLayoutGenerator instance = new RoomLayoutGenerator();
