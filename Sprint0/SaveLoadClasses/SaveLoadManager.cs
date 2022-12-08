@@ -22,11 +22,22 @@ namespace sprint0.SaveLoadClasses
             {
                 using (BinaryWriter writer = new BinaryWriter(fileStream))
                 {
-                    writer.Write(Game.Player.GetHealth());
-                    writer.Write(Game.Player.Position.X);
-                    writer.Write(Game.Player.Position.Y);
+                    SavePlayer(writer);
+                    SaveRoom(writer);
                 }
             }
+        }
+
+        public void SavePlayer(BinaryWriter writer)
+        {
+            writer.Write(Game.Player.GetHealth());
+            writer.Write(Game.Player.Position.X);
+            writer.Write(Game.Player.Position.Y);
+        }
+        
+        public void SaveRoom(BinaryWriter writer)
+        {
+            writer.Write(Game.state.Room.levelConfig.Id);
         }
 
         public void LoadGame()
@@ -37,11 +48,20 @@ namespace sprint0.SaveLoadClasses
                 {
                     using (BinaryReader reader = new BinaryReader(fileStream))
                     {
-                        Game.Player.SetHealth(reader.ReadInt32());
-                        Game.Player.Position = new Microsoft.Xna.Framework.Vector2(reader.ReadInt32(), reader.ReadInt32());
+                        LoadPlayer(reader);
                     }
                 }
             }
+        }
+
+        public void LoadPlayer(BinaryReader reader)
+        {
+            Game.Player.SetHealth(reader.ReadInt32());
+            Game.Player.Position = new Microsoft.Xna.Framework.Vector2(reader.ReadSingle(), reader.ReadSingle());
+        }
+        public void LoadRoom(BinaryReader reader)
+        {
+            Game.state.Room.levelConfig.Id = reader.ReadInt32();
         }
     }
 }

@@ -171,6 +171,7 @@ public class Game1 : Game
         SoundManager.Manager.LoadContent(Content);
 
         SaveStateManager = new SaveLoadManager(this);
+        SaveStateManager.LoadGame();
     }
 
     protected override void Update(GameTime gameTime)
