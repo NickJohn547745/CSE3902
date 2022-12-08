@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sprint0.RoomClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -49,6 +50,7 @@ namespace sprint0.SaveLoadClasses
                     using (BinaryReader reader = new BinaryReader(fileStream))
                     {
                         LoadPlayer(reader);
+                        LoadRoom(reader);
                     }
                 }
             }
@@ -61,7 +63,8 @@ namespace sprint0.SaveLoadClasses
         }
         public void LoadRoom(BinaryReader reader)
         {
-            Game.state.Room.levelConfig.Id = reader.ReadInt32();
+            int LevelIndex = reader.ReadInt32();
+            Game.state.Room = new Room(Game, Game.LevelList[LevelIndex]);
         }
     }
 }
