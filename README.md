@@ -1,6 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: November 26, 2022
+##### Date: December 7, 2022
 
 # Sprint5:
 
@@ -63,6 +63,9 @@
 * Renamed Projectile class to physicsProjectile (Will)
 * Implemented timer utility class (Will)
 
+## Sprint 5 Features
+* Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
+
 ## Known Bugs
 * HUD values not dynamic
 * Clicking to change rooms breaks doors
@@ -81,3 +84,4 @@
 * Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)
 * Enemies and player can walk through some walls in some rooms (primarily bottom right, but also sometimes top right)
 * Enemies do not drop items
+* Top doors in procedurally generated have hitbox moved up and to the left

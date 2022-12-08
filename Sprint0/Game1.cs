@@ -15,8 +15,8 @@ using sprint0.Sound;
 using sprint0.HudClasses;
 using System;
 using sprint0.Configs;
-using sprint0.Enemies;
 using sprint0.Managers;
+using sprint0.ProceduralGeneration;
 
 namespace sprint0;
 
@@ -27,6 +27,7 @@ public class Game1 : Game
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public int DefaultRoomOffset { get; private set; }
     public static int WindowWidth { get; private set; }
     public static int WindowHeight { get; private set; }
 
@@ -38,9 +39,6 @@ public class Game1 : Game
 
     public IGameState state;
     
-    // can we remove this since it never changes and is just 0 (doesn't need to be a const even)
-    //private int startingLevelIndex;
-
     private int currentLevelIndex;
 
     public GameConfig GameConfig { get; private set; }
@@ -149,6 +147,10 @@ public class Game1 : Game
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
+        DefaultRoomOffset = LevelList.Count;
+        RoomLayoutGenerator.Instance.SetRooms(this, DefaultRoomOffset);
+        LevelList.AddRange(RoomLayoutGenerator.Instance.ProceduralRooms);
+
         CollisionManager = new CollisionManager(Player);
 
         Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
@@ -156,8 +158,6 @@ public class Game1 : Game
 
         WindowWidth = _graphics.PreferredBackBufferWidth;
         WindowHeight = _graphics.PreferredBackBufferHeight;
-
-        //CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
 
         state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
