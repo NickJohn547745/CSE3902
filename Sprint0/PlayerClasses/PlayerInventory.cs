@@ -26,8 +26,8 @@ public class PlayerInventory {
     {
         Abilities = new Dictionary<AbilityTypes, int>()
         {
-            { AbilityTypes.Boomerang, 0 },
-            { AbilityTypes.Bomb, 0 },
+            { AbilityTypes.Boomerang, 2 },
+            { AbilityTypes.Bomb, 6 },
             { AbilityTypes.Arrow, 0 },
             { AbilityTypes.Candle, 0 }
         };
