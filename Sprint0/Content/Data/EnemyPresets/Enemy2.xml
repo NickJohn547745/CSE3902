@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Settings>
+	<Setting name="Enemies">		
+		<Enemy>1 60 225 450</Enemy>
+		<Enemy>1 60 450 300</Enemy>
+		<Enemy>1 60 750 250</Enemy>
+		<Enemy>1 60 850 575</Enemy>
+	</Setting>
+</Settings>
