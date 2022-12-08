@@ -9,12 +9,15 @@ using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.MenuItems.Inventory;
+using sprint0.ProceduralGeneration;
 using sprint0.TileClasses;
 
 namespace sprint0.RoomClasses
 {
     public class Room
     {
+        private const int ProceduralStart = -2;
+        
         private Game1 game;
 
         private List<TileType> tileList = new List<TileType>();
@@ -75,9 +78,14 @@ namespace sprint0.RoomClasses
 
                 doorList.Add(door);
 
-                if (currentDestination != -1)
+                if (currentDestination >= 0)
                 {
-                    LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
+                    LevelConfig destinationLevelConfig = game.LevelList[currentDestination];
+
+                    roomMap.Add((Direction)i, destinationLevelConfig);
+                } else if (currentDestination == ProceduralStart)
+                {
+                    LevelConfig destinationLevelConfig = game.LevelList[RoomLayoutGenerator.Instance.StartRoomId + game.DefaultRoomOffset];
 
                     roomMap.Add((Direction)i, destinationLevelConfig);
                 }
@@ -178,7 +186,6 @@ namespace sprint0.RoomClasses
                     nextDoor.Draw(spriteBatch, nextRoom.roomOffset);
                 }
             }
-
         }
 
         public void Transition(Direction dir)

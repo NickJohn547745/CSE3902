@@ -129,6 +129,7 @@ namespace sprint0.Managers
                 }
             }
         }
+
         /// <summary>
         /// Method <c>DetectCollisions</c> uses the sort and sweep method to detect collisions
         /// and notify objects that have collided.

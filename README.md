@@ -1,6 +1,6 @@
 # CSE3902 Interactive Systems Project
 ##### Authors: Nick Johnson, Will Blanton, Nathan Rogers, Andrew Wilkes, Evan Skripac
-##### Date: November 26, 2022
+##### Date: December 7, 2022
 
 # Sprint5:
 
@@ -56,14 +56,17 @@
 * Start - reset game
 
 ## Refactorings
-* Implemented physicsManager class to reduce enemy fields
-* Implemented healthManager class to reduce enemy fields
-* Made CollidablesList in Collision manager static
-* Removed game1 parameter from ICollidable Update method
-* Made single static rand for enemies
-* Split classes directory into multiple directories (e.g. managers, configs)
-* Renamed Projectile class to physicsProjectile
-* Implemented timer utility class
+* Implemented physicsManager class to reduce enemy fields (Will)
+* Implemented healthManager class to reduce enemy fields (Will)
+* Made CollidablesList in Collision manager static (Will)
+* Removed game1 parameter from ICollidable Update method (Will)
+* Made single static rand for enemies (Will)
+* Split classes directory into multiple directories (e.g. managers, configs) (Will)
+* Renamed Projectile class to physicsProjectile (Will)
+* Implemented timer utility class (Will)
+
+## Sprint 5 Features
+* Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
 
 ## Known Bugs
 * HUD values not dynamic
@@ -82,3 +85,5 @@
 * Player can move during transition screen (still need to refactor into gameState)
 * Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)
 * Enemies and player can walk through some walls in some rooms (primarily bottom right, but also sometimes top right)
+* Enemies do not drop items
+* Top doors in procedurally generated have hitbox moved up and to the left

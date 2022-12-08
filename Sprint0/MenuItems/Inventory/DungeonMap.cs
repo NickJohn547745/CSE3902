@@ -17,7 +17,7 @@ public class DungeonMap
         }
     }
 
-    public int[,] Map { get; set; } = new int[8, 8];
+    public int[,] Map { get; set; } = new int[16, 16];
     public int[] CurrentRoom { get; set; } = new int[2] { 3, 7 };
     
     private ISprite Background { get; set; }
@@ -52,9 +52,9 @@ public class DungeonMap
         if(Inventory.CompassUnlocked)
             CompassItem.Draw(spriteBatch, new Vector2(176,608), SpriteEffects.None, Color.White);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 16; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 16; j++)
             {
                 if (Map[i, j] != 0)
                 {
