@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using sprint0.Managers;
+using sprint0.Sound;
 
 namespace sprint0.PlayerClasses.Abilities;
 
@@ -29,6 +30,8 @@ public class PlayerAbilityManager {
                 ActiveAbility = new Candle(player, position, velocity);
                 break;
         }
+
+        SoundManager.Manager.AbilitySounds(player.PlayerInventory.CurrentAbility);
         if(ActiveAbility != null)
             CollisionManager.Collidables.Add(ActiveAbility);
     }
