@@ -14,9 +14,10 @@
 * Down arrow - move Link down, make Link face down
 * D - move Link right, make Link face right
 * Right arrow - move Link right, make Link face right
-* Z - make Link attack with sword
-* N - make Link attack with sword
+* Z - make Link use his primary attack
+* N - make Link use his primary attack
 * X - make Link use selected ability
+* C - Change Link's primary attack method
 * K - Move to previous room
 * L - Move to next room
 * Left Click - Move to previous room

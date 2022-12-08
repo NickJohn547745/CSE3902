@@ -23,6 +23,11 @@ public class DamagedPlayer : IPlayer {
     public Vector2 PreviousPosition { get; set; }
     public ICollidable.ObjectType Type { get; set; }
 
+    public PlayerWeapons PrimaryWeapon
+    {
+        get => decoratedPlayer.PrimaryWeapon; 
+        set => decoratedPlayer.PrimaryWeapon = value;
+    }
 
     public int Damage {
         get => decoratedPlayer.Damage;

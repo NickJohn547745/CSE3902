@@ -2,6 +2,7 @@ using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
 using Microsoft.Xna.Framework;
+using sprint0.Projectiles;
 
 namespace sprint0.PlayerClasses;
 

@@ -1,10 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Factories;
+using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.Utility;
 
-namespace sprint0.Interfaces; 
+namespace sprint0.Projectiles; 
 
 public class WandProjectile : PhysicsProjectile {
 
@@ -36,7 +37,7 @@ public class WandProjectile : PhysicsProjectile {
         behaviorTimer = new Timer(FireBallDelay);
         Damage = 1;
         Collision = false;
-        Type = ICollidable.ObjectType.WandProjectile;
+        Type = ICollidable.ObjectType.Ability;
     }
 
     protected override void Behavior()
@@ -50,6 +51,7 @@ public class WandProjectile : PhysicsProjectile {
         {
             case ICollidable.ObjectType.Door:
             case ICollidable.ObjectType.Wall:
+            case ICollidable.ObjectType.Enemy:
                 Collision = true;   
                 break;
         }

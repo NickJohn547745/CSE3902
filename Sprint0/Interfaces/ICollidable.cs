@@ -28,8 +28,7 @@ namespace sprint0.Interfaces
             ItemOneHand,
             Boomerang,
             Sword,
-            Trap,
-            WandProjectile
+            Trap
         }
         
         public ObjectType Type { get; set; }
