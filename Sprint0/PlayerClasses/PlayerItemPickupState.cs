@@ -65,7 +65,7 @@ public class PlayerItemPickupState : IPlayerState
         // Can't move while in pickup state
     }
 
-    public void SwordAttack()
+    public void PrimaryAttack()
     {
         // Can't attack while in pickup state
     }

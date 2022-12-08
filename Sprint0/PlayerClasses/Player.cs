@@ -26,12 +26,15 @@ public class Player : IPlayer {
     public int Damage { get; set; }
     public Vector2 Velocity { get; set; }
     public bool CanMove { get; set; }
+
+    public PlayerWeapons PrimaryWeapon { get; set; }
     
     public Player(Game1 game) {
         Game = game;
         Position = new Vector2(175, 175);
         initPosition = Position;
         Velocity = Vector2.Zero;
+        PrimaryWeapon = PlayerWeapons.Wand;
 
         Reset();
     }
@@ -88,7 +91,6 @@ public class Player : IPlayer {
 
     public void Update(GameTime gameTime) {       
         PlayerState.Update();
-        AbilityManager.Update(gameTime);
     }
 
     public void Reset()
@@ -153,18 +155,13 @@ public class Player : IPlayer {
         PlayerState.MoveRight();
     }
 
-    public void SwordAttack() {
-        PlayerState.SwordAttack();
+    public void PrimaryAttack() {
+        PlayerState.PrimaryAttack();
     }
 
-    public virtual void UseAbility(AbilityTypes abilityType) {
-        if (PlayerInventory.AbilityCounts[abilityType] > 0) {
-            if (abilityType == AbilityTypes.Bomb) {
-                PlayerInventory.AbilityCounts[AbilityTypes.Bomb] -= 1;
-            }
-
-            PlayerState.UseAbility(abilityType);
-        }
+    public virtual void UseAbility() {
+        if(AbilityManager.ActiveAbility == null && PlayerInventory.CurrentAbility != AbilityTypes.None)
+            PlayerState.UseAbility(PlayerInventory.CurrentAbility);
     }
 
     public PlayerInventory GetInventory()

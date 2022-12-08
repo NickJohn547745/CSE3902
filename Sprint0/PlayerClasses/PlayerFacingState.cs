@@ -73,7 +73,7 @@ public abstract class PlayerFacingState : IPlayerState
         player.PlayerState = new PlayerFacingRightState(player);
     }
 
-    public abstract void SwordAttack();
+    public abstract void PrimaryAttack();
 
     public abstract void UseAbility(AbilityTypes abilityType);
 }

@@ -35,7 +35,7 @@ public class Bomb : Ability {
         }
         else if (frameCounter == 75) {
             CollisionManager.Collidables.Remove(this);
-            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.Bomb);
+            player.AbilityManager.ActiveAbility = null;
         }
     }
 }

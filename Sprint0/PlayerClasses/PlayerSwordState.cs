@@ -30,7 +30,7 @@ public abstract class PlayerSwordState : IPlayerState {
 
     public abstract void Update();
 
-    public void SwordAttack() {
+    public void PrimaryAttack() {
         // Already in sword attack state
     }
 

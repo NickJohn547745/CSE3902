@@ -17,23 +17,19 @@
 		<Tuple>40 MoveDownCommand 2</Tuple>
 		<Tuple>39 MoveRightCommand 2</Tuple>
 		<Tuple>37 MoveLeftCommand 2</Tuple>
-		<Tuple>90 PlayerSwordAttackCommand 0</Tuple>
-		<Tuple>78 PlayerSwordAttackCommand 0</Tuple>
+		<Tuple>90 PlayerPrimaryAttackCommand 0</Tuple>
+		<Tuple>78 PlayerPrimaryAttackCommand 0</Tuple>
 		<Tuple>75 PreviousLevelCommand 0</Tuple>
 		<Tuple>76 NextLevelCommand 0</Tuple>
 		<Tuple>27 TogglePauseCommand 0</Tuple>
 		<Tuple>71 SpawnItemPickupCommand 0</Tuple>
 		<Tuple>77 MuteCommand 0</Tuple>
-		<Tuple>49 UseBombCommand 0</Tuple>
-		<Tuple>50 UseWoodenBoomerangCommand 0</Tuple>
-		<Tuple>51 UseMagicalBoomerangCommand 0</Tuple>
-		<Tuple>52 UseWoodenArrowCommand 0</Tuple>
-		<Tuple>53 UseSilverArrowCommand 0</Tuple>
-		<Tuple>54 UseFireballCommand 0</Tuple>
+		<Tuple>88 UsePlayerAbilityCommand 0</Tuple>
 		<Tuple>13 InventoryScreenCommand 0</Tuple>
 		<Tuple>66 CycleAbilityCommand 0</Tuple>
 		<Tuple>164 SaveGameCommand 0</Tuple>
 		<Tuple>165 LoadGameCommand 0</Tuple>
+		<Tuple>67 ChangePrimaryWeaponCommand 0</Tuple>
 	</Setting>
 
 	<Setting name="GamePadBinds">
@@ -47,8 +43,8 @@
 		<Tuple>0x2 MoveDownCommand 2</Tuple>
 		<Tuple>0x8 MoveRightCommand 2</Tuple>
 		<Tuple>0x4 MoveLeftCommand 2</Tuple>
-		<Tuple>0x1000 PlayerSwordAttackCommand 0</Tuple>
-		<Tuple>0x200 PlayerSwordAttackCommand 0</Tuple>
+		<Tuple>0x1000 PlayerPrimaryAttackCommand 0</Tuple>
+		<Tuple>0x200 PlayerPrimaryAttackCommand 0</Tuple>
 		<Tuple>0x80 PlayerTakeDamageCommand 0</Tuple>
 	</Setting>
 	

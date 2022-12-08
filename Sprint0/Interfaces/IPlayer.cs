@@ -9,6 +9,8 @@ public interface IPlayer : ICollidable
 {
     public Vector2 Position { get; set; }
     public Vector2 Velocity { get; set; }
+    
+    public PlayerWeapons PrimaryWeapon { get; set; }
 
     public int GetHealth();
     public void SetHealth(int hp);
@@ -17,8 +19,8 @@ public interface IPlayer : ICollidable
     public void MoveDown();
     public void MoveLeft();
     public void MoveRight();
-    public void SwordAttack();
-    public void UseAbility(AbilityTypes abilityType);
+    public void PrimaryAttack();
+    public void UseAbility();
 
     public PlayerInventory GetInventory();
 
