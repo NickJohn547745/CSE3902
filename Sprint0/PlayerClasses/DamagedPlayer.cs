@@ -123,8 +123,8 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.SwordAttack();
     }
 
-    public void UseAbility(AbilityTypes abilityType) {
-        decoratedPlayer.UseAbility(abilityType);
+    public void UseAbility() {
+        decoratedPlayer.UseAbility();
     }
 
     public PlayerInventory GetInventory()

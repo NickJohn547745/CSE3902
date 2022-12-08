@@ -16,12 +16,7 @@
 * Right arrow - move Link right, make Link face right
 * Z - make Link attack with sword
 * N - make Link attack with sword
-* 1 - Use Link’s bomb ability
-* 2 - Use Link’s wooden boomerang ability
-* 3 - Use Link’s magical boomerang ability
-* 4 - Use Link’s wooden arrow ability
-* 5 - Use Link’s silver arrow ability
-* 6 - Use Link’s fireball ability
+* X - make Link use selected ability
 * K - Move to previous room
 * L - Move to next room
 * Left Click - Move to previous room
@@ -41,12 +36,7 @@
 * Left Thumbstick Left - move Link left, make Link face left
 * Left Thumbstick Down - move Link down, make Link face down
 * Left Thumbstick Right - move Link right,make Link face right
-* Y - Use Link’s bomb ability
-* DPad Up- Use Link’s wooden boomerang ability
-* DPad Down - Use Link’s magical boomerang ability
-* DPad Right - Use Link’s wooden arrow ability
-* DPad Left - Use Link’s silver arrow ability
-* B - Use Link’s fireball ability
+* Y - Use Link’s secondary ability
 * A - make Link attack with sword
 * Right Shoulder - move to next room
 * Left Shoudler - move to previous room
@@ -62,6 +52,8 @@
 * Split classes directory into multiple directories (e.g. managers, configs) (Will)
 * Renamed Projectile class to physicsProjectile (Will)
 * Implemented timer utility class (Will)
+* Refactored abilities with multiple tiers into single class (Nathan)
+* Changed inventory to use dictionary to keep track of ability unlocks (Nathan)
 
 ## Sprint 5 Features
 * Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
@@ -78,7 +70,6 @@
 * Map in inventory screen does not show correct doorways
 * HUD not synced with some inventory items
 * Map currently set to always display on HUD instead of when item is found
-* Using abilities crashes the program (inventory not initialized)
 * Vertical doors spawn you in front of door on opposite side of the room or push you through it.
 * Player can move during transition screen (still need to refactor into gameState)
 * Cannot currently distinguish between types of doors. Need to add classes for door types (e.g. locked door, bomb door)

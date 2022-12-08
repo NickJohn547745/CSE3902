@@ -97,7 +97,7 @@ namespace sprint0.HudClasses
             currentAbilityA = Inventory.GetCurrentA();
             currentAbilityB = Inventory.GetCurrentB();
 
-            Bombs = Inventory.BombCount;
+            Bombs = Inventory.Abilities[AbilityTypes.Bomb];
 
             Keys = Inventory.KeyCount;
 
@@ -221,19 +221,13 @@ namespace sprint0.HudClasses
                 case AbilityTypes.Bomb:
                     FinalTexture = TextureStorage.GetBombSpritesheet();
                     break;
-                case AbilityTypes.WoodenBoomerang:
+                case AbilityTypes.Boomerang:
                     FinalTexture = TextureStorage.GetBoomerangSpritesheet();
                     break;
-                case AbilityTypes.MagicalBoomerang:
-                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.WoodenArrow:
+                case AbilityTypes.Arrow:
                     FinalTexture = TextureStorage.GetArrowSpritesheet();
                     break;
-                case AbilityTypes.SilverArrow:
-                    FinalTexture = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.Fireball:
+                case AbilityTypes.Candle:
                     FinalTexture = TextureStorage.GetFireballSpritesheet();
                     break;
                 default:

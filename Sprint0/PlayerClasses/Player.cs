@@ -83,7 +83,6 @@ public class Player : IPlayer {
 
     public void Update(GameTime gameTime) {       
         PlayerState.Update();
-        AbilityManager.Update(gameTime);
     }
 
     public void Reset()
@@ -152,14 +151,9 @@ public class Player : IPlayer {
         PlayerState.SwordAttack();
     }
 
-    public virtual void UseAbility(AbilityTypes abilityType) {
-        if (PlayerInventory.AbilityCounts[abilityType] > 0) {
-            if (abilityType == AbilityTypes.Bomb) {
-                PlayerInventory.AbilityCounts[AbilityTypes.Bomb] -= 1;
-            }
-
-            PlayerState.UseAbility(abilityType);
-        }
+    public virtual void UseAbility() {
+        if(AbilityManager.ActiveAbility == null && PlayerInventory.CurrentAbility != AbilityTypes.None)
+            PlayerState.UseAbility(PlayerInventory.CurrentAbility);
     }
 
     public PlayerInventory GetInventory()
