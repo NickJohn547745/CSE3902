@@ -16,6 +16,7 @@ using sprint0.HudClasses;
 using System;
 using sprint0.Configs;
 using sprint0.Managers;
+using sprint0.SaveLoadClasses;
 using sprint0.ProceduralGeneration;
 
 namespace sprint0;
@@ -24,7 +25,7 @@ public class Game1 : Game
 {
     private const String Font = "Arial";
 
-
+   
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public int DefaultRoomOffset { get; private set; }
@@ -35,6 +36,7 @@ public class Game1 : Game
     public List<IController> Controllers { get; set; }
     public List<LevelConfig> LevelList { get; set; }
 
+    public SaveLoadManager SaveStateManager { get; set; }
     public bool Paused { get; set; }
 
     public IGameState state;
@@ -162,6 +164,9 @@ public class Game1 : Game
         state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
 
         SoundManager.Manager.LoadContent(Content);
+
+        SaveStateManager = new SaveLoadManager(this);
+        SaveStateManager.LoadGame();
     }
 
     protected override void Update(GameTime gameTime)

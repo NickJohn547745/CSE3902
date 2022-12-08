@@ -13,6 +13,7 @@ public interface IPlayer : ICollidable
     public PlayerWeapons PrimaryWeapon { get; set; }
 
     public int GetHealth();
+    public void SetHealth(int hp);
     public void TakeDamage(int damage, Edge collideSide);
     public void MoveUp();
     public void MoveDown();

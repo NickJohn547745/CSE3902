@@ -15,7 +15,6 @@ namespace sprint0.HudClasses
 {
     public class HUD
     {
-        Vector2 PlayerPosition { get; set; }
         public Game1 Game { get; set; }
         public PlayerInventory Inventory { get; set; }
         public AbilityTypes currentAbilityA { get; set; }

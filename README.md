@@ -24,6 +24,8 @@
 * Right Click - Move to next room
 * B - Cycle Link's ability in Inventory Screen
 * Enter - Toggle Inventory screen
+* Left Alt - Save Game
+* Right Alt - Load Game
 
 ### Other controls
 * G - spawn Bow to test item pickup
