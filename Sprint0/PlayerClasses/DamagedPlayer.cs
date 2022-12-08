@@ -42,6 +42,11 @@ public class DamagedPlayer : IPlayer {
         return decoratedPlayer.Health;
     }
 
+    public void SetHealth(int hp)
+    {
+        decoratedPlayer.SetHealth(hp);
+    }
+
     void RemoveDecorator() {
         Game.Player = decoratedPlayer;
         CollisionManager.Collidables.Add(Game.Player);

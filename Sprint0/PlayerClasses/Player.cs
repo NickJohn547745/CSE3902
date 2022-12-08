@@ -41,6 +41,11 @@ public class Player : IPlayer {
         return Health;
     }
 
+    public void SetHealth(int hp)
+    {
+        Health = hp;
+    }
+
     public Vector2 GetVelocity()
     {
         return Velocity;

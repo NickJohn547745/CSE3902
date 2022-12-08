@@ -32,6 +32,8 @@
 		<Tuple>54 UseFireballCommand 0</Tuple>
 		<Tuple>13 InventoryScreenCommand 0</Tuple>
 		<Tuple>66 CycleAbilityCommand 0</Tuple>
+		<Tuple>164 SaveGameCommand 0</Tuple>
+		<Tuple>165 LoadGameCommand 0</Tuple>
 	</Setting>
 
 	<Setting name="GamePadBinds">
