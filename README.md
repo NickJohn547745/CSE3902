@@ -59,8 +59,6 @@
 * Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
 
 ## Known Bugs
-* HUD values not dynamic
-* Clicking to change rooms breaks doors
 * HUD should be at top of screen (at least it is in the actual game)
 * Player can shoot an arrow during room transition (fix in transition state refactor
 * Player sometimes disappears when moving between rooms while damaged (or allow player to move around screen during transition)
@@ -76,3 +74,4 @@
 * Enemies and player can walk through some walls in some rooms (primarily bottom right, but also sometimes top right)
 * Enemies do not drop items
 * Top doors in procedurally generated have hitbox moved up and to the left
+* Room does not save/load correctly
