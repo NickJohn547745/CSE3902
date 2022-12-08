@@ -2,9 +2,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Managers;
 using System;
+using sprint0.Interfaces;
 using sprint0.Utility;
 
-namespace sprint0.Interfaces;
+namespace sprint0.Projectiles;
 
 public abstract class PhysicsProjectile : ICollidable {
 

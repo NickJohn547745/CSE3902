@@ -48,7 +48,7 @@ public abstract class PlayerAbilityState : IPlayerState {
         // Can't move while using ability
     }
 
-    public void SwordAttack() {
+    public void PrimaryAttack() {
         // Can't attack while using ability
     }
 

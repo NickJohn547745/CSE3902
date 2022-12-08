@@ -1,9 +1,10 @@
 using Microsoft.Xna.Framework;
 using sprint0.Factories;
+using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.Utility;
 
-namespace sprint0.Interfaces; 
+namespace sprint0.Projectiles; 
 
 public class AquamentusProjectile : PhysicsProjectile {
 

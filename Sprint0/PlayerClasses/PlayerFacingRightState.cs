@@ -32,9 +32,16 @@ public class PlayerFacingRightState : PlayerFacingState {
         }
 
     }
-    public override void SwordAttack()
+    public override void PrimaryAttack()
     {
-        player.PlayerState = new PlayerSwordRightState(player);
+        if (player.PrimaryWeapon == PlayerWeapons.Sword)
+        {
+            player.PlayerState = new PlayerSwordRightState(player);
+        }
+        else if(player.PrimaryWeapon == PlayerWeapons.Wand)
+        {
+            player.PlayerState = new PlayerWandRightState(player);
+        }
     }
 
     public override void UseAbility(AbilityTypes abilityType)

@@ -18,6 +18,6 @@ public interface IPlayerState {
     void MoveDown();
     void MoveLeft();
     void MoveRight();
-    void SwordAttack();
+    void PrimaryAttack();
     void UseAbility(AbilityTypes abilityType);
 }
