@@ -4,14 +4,13 @@ using sprint0.Sound;
 
 namespace sprint0.Commands;
 
-public class UseFireballCommand : ICommand
+public class UsePlayerAbilityCommand : ICommand
 {
     public void Execute(Game1 game)
     {
         if (!game.Paused)
         {
-            game.Player.UseAbility(AbilityTypes.Fireball);
-            SoundManager.Manager.fireballSound().Play();
+            game.Player.UseAbility();
         }
     }
 }

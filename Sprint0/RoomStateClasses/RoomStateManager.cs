@@ -84,7 +84,7 @@ public class RoomStateManager : IRoomState
         {
             int currentDestination = levelConfig.Destinations[i];
 
-            if (currentDestination != -1)
+            if (currentDestination >= 0)
             {
                 LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
 

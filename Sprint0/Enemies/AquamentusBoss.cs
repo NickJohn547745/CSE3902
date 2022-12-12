@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Interfaces;
 using sprint0.Factories;
 using sprint0.Managers;
+using sprint0.Projectiles;
 using sprint0.Utility;
 
 namespace sprint0.Enemies

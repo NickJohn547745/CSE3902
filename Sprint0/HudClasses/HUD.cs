@@ -15,7 +15,6 @@ namespace sprint0.HudClasses
 {
     public class HUD
     {
-        Vector2 PlayerPosition { get; set; }
         public Game1 Game { get; set; }
         public PlayerInventory Inventory { get; set; }
         public AbilityTypes currentAbilityA { get; set; }
@@ -97,7 +96,7 @@ namespace sprint0.HudClasses
             currentAbilityA = Inventory.GetCurrentA();
             currentAbilityB = Inventory.GetCurrentB();
 
-            Bombs = Inventory.BombCount;
+            Bombs = Inventory.Abilities[AbilityTypes.Bomb];
 
             Keys = Inventory.KeyCount;
 
@@ -221,19 +220,13 @@ namespace sprint0.HudClasses
                 case AbilityTypes.Bomb:
                     FinalTexture = TextureStorage.GetBombSpritesheet();
                     break;
-                case AbilityTypes.WoodenBoomerang:
+                case AbilityTypes.Boomerang:
                     FinalTexture = TextureStorage.GetBoomerangSpritesheet();
                     break;
-                case AbilityTypes.MagicalBoomerang:
-                    FinalTexture = TextureStorage.GetBoomerangSpritesheet();
-                    break;
-                case AbilityTypes.WoodenArrow:
+                case AbilityTypes.Arrow:
                     FinalTexture = TextureStorage.GetArrowSpritesheet();
                     break;
-                case AbilityTypes.SilverArrow:
-                    FinalTexture = TextureStorage.GetArrowSpritesheet();
-                    break;
-                case AbilityTypes.Fireball:
+                case AbilityTypes.Candle:
                     FinalTexture = TextureStorage.GetFireballSpritesheet();
                     break;
                 default:

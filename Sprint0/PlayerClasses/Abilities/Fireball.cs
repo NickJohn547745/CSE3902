@@ -7,11 +7,11 @@ using sprint0.RoomClasses;
 
 namespace sprint0.PlayerClasses.Abilities;
 
-public class Fireball : Ability {
+public class Candle : Ability {
     private Vector2 finalPosition;
     private int waitFrames;
 
-    public Fireball(Player player, Vector2 position, Vector2 velocity) {
+    public Candle(Player player, Vector2 position, Vector2 velocity) {
         this.player = player;
         Velocity = Vector2.Multiply(velocity, new Vector2(4));
         sprite = PlayerSpriteFactory.Instance.GetFireballSprite();
@@ -41,7 +41,7 @@ public class Fireball : Ability {
 
         if (waitFrames == 20) {
             CollisionManager.Collidables.Remove(this);
-            player.AbilityManager.RemoveCurrentAbility(AbilityTypes.Fireball);
+            player.AbilityManager.ActiveAbility = null;
         }
     }
     

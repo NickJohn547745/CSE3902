@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.ItemClasses.Pickups
 {
@@ -20,7 +21,9 @@ namespace sprint0.ItemClasses.Pickups
         {
             if (obj.Type == ICollidable.ObjectType.Player)
             {
-                Inventory.ArrowTier = 1;
+                Inventory.Abilities[AbilityTypes.Arrow] = 1;
+                if (Inventory.CurrentAbility == AbilityTypes.None && Inventory.BowUnlocked)
+                    Inventory.CurrentAbility = AbilityTypes.Arrow;
                 Position = Vector2.Subtract(new Vector2(obj.GetHitBox().X, obj.GetHitBox().Y), new Vector2(0, Sprite.GetHeight()));
                 if (animationFrames == 0)
                     animationFrames = 1;

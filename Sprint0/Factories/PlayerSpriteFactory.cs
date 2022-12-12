@@ -171,4 +171,55 @@ public class PlayerSpriteFactory
         List<Rectangle> frameSource = new List<Rectangle> {new Rectangle(118, 187, 8, 16)};
         return new BasicSprite(playerSpriteSheet, frameSource, AbilityDelay, AbilityScale);
     }
+    
+    public ISprite GetWandDownSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(280, 47, 16, 16),
+            new Rectangle(297, 47, 16, 27),
+            new Rectangle(314, 47, 16, 23),
+            new Rectangle(331, 47, 16, 19)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, SwordDelay, PlayerScale);
+    }
+    
+    public ISprite GetWandUpSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(280, 109, 16, 16),
+            new Rectangle(297, 97, 16, 28),
+            new Rectangle(314, 98, 16, 27),
+            new Rectangle(331, 106, 16, 19)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, Vector2.Zero, SwordDelay, PlayerScale);
+    }
+    
+    public ISprite GetWandSideSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(280, 77, 16, 16),
+            new Rectangle(297, 77, 27, 16),
+            new Rectangle(325, 77, 23, 16),
+            new Rectangle(349, 77, 19, 16)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, SwordDelay, PlayerScale);
+    }
+    
+    public ISprite GetWandProjectileVerticalSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(171, 154, 16, 16),
+            new Rectangle(187, 154, 16, 16),
+            new Rectangle(205, 154, 16, 16),
+            new Rectangle(222, 154, 16, 16)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, 6, PlayerScale);
+    }
+    public ISprite GetWandProjectileHorizontalSprite() {
+        List<Rectangle> frameSources = new List<Rectangle> {
+            new Rectangle(239, 154, 16, 16),
+            new Rectangle(256, 154, 16, 16),
+            new Rectangle(273, 154, 16, 16),
+            new Rectangle(290, 154, 16, 16)
+        };
+        return new BasicSprite(playerSpriteSheet, frameSources, 5, PlayerScale);
+    }
+    
+    
 }

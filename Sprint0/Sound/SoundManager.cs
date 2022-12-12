@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using sprint0.PlayerClasses.Abilities;
 
 namespace sprint0.Sound
 {
@@ -92,25 +93,28 @@ namespace sprint0.Sound
         {
             return enemyDead;
         }
-        public SoundEffect arrowBoomerangSound()
+
+        public void AbilitySounds(AbilityTypes type)
         {
-            return arrowBoomerang;
-        }
-        public SoundEffect bombDropSound()
-        {
-            return bombDrop;
+            switch (type)
+            {
+                case AbilityTypes.Arrow:
+                    arrowBoomerang.Play();
+                    break;
+                case AbilityTypes.Boomerang:
+                    arrowBoomerang.Play();
+                    break;
+                case AbilityTypes.Bomb:
+                    bombDrop.Play();
+                    break;
+                case AbilityTypes.Candle:
+                    candle.Play();
+                    break;
+            }
         }
         public SoundEffect bombBlowUpSound()
         {
             return bombBlowUp;
-        }
-        public SoundEffect candleSound()
-        {
-            return candle;
-        }
-        public SoundEffect fireballSound()
-        {
-            return fireball;
         }
     }
 }

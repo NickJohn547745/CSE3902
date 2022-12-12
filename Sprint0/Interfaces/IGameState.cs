@@ -10,6 +10,7 @@ namespace sprint0.Interfaces;
 
 public interface IGameState
 {
+    public AGameState currentState { get; set; }
     public IRoomState RoomState { get; set; }
     public void Update(GameTime gameTime);
     public void Draw(SpriteBatch spriteBatch);

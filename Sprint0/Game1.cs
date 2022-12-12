@@ -14,9 +14,10 @@ using sprint0.Sound;
 using sprint0.HudClasses;
 using System;
 using sprint0.Configs;
-using sprint0.Enemies;
 using sprint0.Managers;
 using sprint0.RoomStateClasses;
+using sprint0.SaveLoadClasses;
+using sprint0.ProceduralGeneration;
 
 namespace sprint0;
 
@@ -24,9 +25,10 @@ public class Game1 : Game
 {
     private const String Font = "Arial";
 
-
+   
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    public int DefaultRoomOffset { get; private set; }
     public static int WindowWidth { get; private set; }
     public static int WindowHeight { get; private set; }
 
@@ -34,14 +36,12 @@ public class Game1 : Game
     public List<IController> Controllers { get; set; }
     public List<LevelConfig> LevelList { get; set; }
 
+    public SaveLoadManager SaveStateManager { get; set; }
     public bool Paused { get; set; }
 
     public IGameState gameState;
     public IRoomState roomState;
     
-    // can we remove this since it never changes and is just 0 (doesn't need to be a const even)
-    //private int startingLevelIndex;
-
     private int currentLevelIndex;
 
     public GameConfig GameConfig { get; private set; }
@@ -105,13 +105,8 @@ public class Game1 : Game
         gamePad.BindCommand(Buttons.LeftThumbstickDown, new MoveDownCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.LeftThumbstickRight, new MoveRightCommand(), IController.KeyState.KeyDown);
         gamePad.BindCommand(Buttons.LeftThumbstickLeft, new MoveLeftCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.Y, new UseBombCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.DPadUp, new UseWoodenBoomerangCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.DPadDown, new UseMagicalBoomerangCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.DPadRight, new UseWoodenArrowCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.DPadLeft, new UseSilverArrowCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.B, new UseFireballCommand(), IController.KeyState.KeyDown);
-        gamePad.BindCommand(Buttons.A, new PlayerSwordAttackCommand(), IController.KeyState.Pressed);
+        gamePad.BindCommand(Buttons.Y, new UsePlayerAbilityCommand(), IController.KeyState.KeyDown);
+        gamePad.BindCommand(Buttons.A, new PlayerPrimaryAttackCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.RightShoulder, new NextLevelCommand(), IController.KeyState.Pressed);
         gamePad.BindCommand(Buttons.LeftShoulder, new PreviousLevelCommand(), IController.KeyState.Pressed);
 
@@ -153,6 +148,10 @@ public class Game1 : Game
         LevelList = new List<LevelConfig>();
         LevelList = GameConfig.LevelConfigs.Values.ToList<LevelConfig>();
 
+        DefaultRoomOffset = LevelList.Count;
+        RoomLayoutGenerator.Instance.SetRooms(this, DefaultRoomOffset);
+        LevelList.AddRange(RoomLayoutGenerator.Instance.ProceduralRooms);
+
         CollisionManager = new CollisionManager(Player);
 
         roomState = new RoomStateManager(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
@@ -166,6 +165,9 @@ public class Game1 : Game
         gameState = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, roomState, font);
 
         SoundManager.Manager.LoadContent(Content);
+
+        SaveStateManager = new SaveLoadManager(this);
+        SaveStateManager.LoadGame();
     }
 
     protected override void Update(GameTime gameTime)

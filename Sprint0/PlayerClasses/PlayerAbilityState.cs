@@ -1,9 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses.Abilities;
-using System;
 
 namespace sprint0.PlayerClasses; 
 
@@ -50,7 +48,7 @@ public abstract class PlayerAbilityState : IPlayerState {
         // Can't move while using ability
     }
 
-    public void SwordAttack() {
+    public void PrimaryAttack() {
         // Can't attack while using ability
     }
 

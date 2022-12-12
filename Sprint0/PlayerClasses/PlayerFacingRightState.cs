@@ -32,14 +32,21 @@ public class PlayerFacingRightState : PlayerFacingState {
         }
 
     }
-    public override void SwordAttack()
+    public override void PrimaryAttack()
     {
-        player.PlayerState = new PlayerSwordRightState(player);
+        if (player.PrimaryWeapon == PlayerWeapons.Sword)
+        {
+            player.PlayerState = new PlayerSwordRightState(player);
+        }
+        else if(player.PrimaryWeapon == PlayerWeapons.Wand)
+        {
+            player.PlayerState = new PlayerWandRightState(player);
+        }
     }
 
     public override void UseAbility(AbilityTypes abilityType)
     {
-        player.AbilityManager.UseAbility(abilityType, Vector2.Add(player.Position, new Vector2(sprite.GetWidth(), sprite.GetHeight()/2)), new Vector2(1, 0));
+        player.AbilityManager.UseAbility( Vector2.Add(player.Position, new Vector2(sprite.GetWidth(), sprite.GetHeight()/2)), new Vector2(1, 0));
         player.PlayerState = new PlayerAbilityRightState(player);
     }
 }
