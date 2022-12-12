@@ -46,5 +46,7 @@ namespace sprint0.Interfaces
         public void Draw(SpriteBatch spriteBatch);
 
         public void Reset();
+        public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat);
+
     }
 }

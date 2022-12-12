@@ -108,6 +108,23 @@ public class Player : IPlayer {
         Velocity = Vector2.Zero;
     }
 
+    //overloaded reset method for cheat codes, will only be called if a cheat code is entered
+    public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+    {
+        Position = initPosition;
+        PlayerState = new PlayerFacingUpState(this);
+        AbilityManager = new PlayerAbilityManager(this);
+        PlayerInventory = new PlayerInventory(bombCheat, rupeeCheat, mapCheat, compassCheat);
+        CanMove = true;
+
+        if (healthCheat) Health = 10;
+        else Health = 6;
+        ScaleFactor = 4;
+        Damage = 0;
+        Type = ICollidable.ObjectType.Player;
+        Velocity = Vector2.Zero;
+    }
+
     private Vector2 KnockBack(ICollidable.Edge collideSide)
     {
         Vector2 initVelocity = Vector2.Zero;

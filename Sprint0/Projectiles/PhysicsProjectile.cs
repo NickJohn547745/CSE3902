@@ -68,4 +68,8 @@ public abstract class PhysicsProjectile : ICollidable {
     {
         CollisionManager.Collidables.Remove(this);
     }
+    public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+    {
+
+    }
 }

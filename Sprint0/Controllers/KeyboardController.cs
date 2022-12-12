@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using sprint0.Interfaces;
 using sprint0.Utility;
@@ -15,6 +16,11 @@ public class KeyboardController : IController {
     private KeyboardState previousState;
     private (Keys key, ICommand command) previousCommand;
     private Timer keySwitchTracker;
+    public bool healthCheat = false;
+    private bool bombCheat = false;
+    private bool rupeeCheat = false;
+    private bool mapCheat = false;
+    private bool compassCheat = false;
 
     public KeyboardController() {
         keyMappings = new Dictionary<Keys, (ICommand command, IController.KeyState keyState)>();
@@ -60,6 +66,33 @@ public class KeyboardController : IController {
         currentState = Keyboard.GetState();
         
         Keys[] pressedKeys = currentState.GetPressedKeys();
+
+        //cheat code functionality, bool values updates when code is entered and overloaded reset method is called
+        if (pressedKeys.Contains(Keys.I) & pressedKeys.Contains(Keys.V) & pressedKeys.Contains(Keys.Y))
+        {
+            healthCheat = true;
+            game.Player.Reset(healthCheat, bombCheat, rupeeCheat, mapCheat, compassCheat);
+        }
+        if (pressedKeys.Contains(Keys.H) & pressedKeys.Contains(Keys.U) & pressedKeys.Contains(Keys.T))
+        {
+            bombCheat = true;
+            game.Player.Reset(healthCheat, bombCheat, rupeeCheat, mapCheat, compassCheat);
+        }
+        if (pressedKeys.Contains(Keys.P) & pressedKeys.Contains(Keys.I) & pressedKeys.Contains(Keys.E))
+        {
+            rupeeCheat = true;
+            game.Player.Reset(healthCheat, bombCheat, rupeeCheat, mapCheat, compassCheat);
+        }
+        if (pressedKeys.Contains(Keys.T) & pressedKeys.Contains(Keys.O) & pressedKeys.Contains(Keys.P))
+        {
+            mapCheat = true;
+            game.Player.Reset(healthCheat, bombCheat, rupeeCheat, mapCheat, compassCheat);
+        }
+        if (pressedKeys.Contains(Keys.U) & pressedKeys.Contains(Keys.T) & pressedKeys.Contains(Keys.E))
+        {
+            compassCheat = true;
+            game.Player.Reset(healthCheat, bombCheat, rupeeCheat, mapCheat, compassCheat);
+        }
 
         // add timer to allow for switching between controls
         if (pressedKeys.Length == 0)

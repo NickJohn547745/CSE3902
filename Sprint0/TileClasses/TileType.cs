@@ -81,5 +81,9 @@ namespace sprint0.TileClasses
         {
             // Empty - Not used
         }
+        public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+        {
+
+        }
     }
 }

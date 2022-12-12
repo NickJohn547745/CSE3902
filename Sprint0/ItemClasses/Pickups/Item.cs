@@ -43,5 +43,10 @@ namespace sprint0.ItemClasses.Pickups
         public void Reset() {
             
         }
+
+        public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+        {
+
+        }
     }
 }

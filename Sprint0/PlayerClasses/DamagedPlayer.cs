@@ -109,6 +109,11 @@ public class DamagedPlayer : IPlayer {
         decoratedPlayer.Reset();
     }
 
+    public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+    {
+
+    }
+
     public void TakeDamage(int damage, ICollidable.Edge collideSide) {
         // Do nothing since player just took damage
     }
