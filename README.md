@@ -34,6 +34,13 @@
 * M - mute sound
 * Escape - pause game
 
+### Cheat Codes
+* IVY - Health boost
+* HUT - Extra bombs
+* PIE - Extra rupees
+* TOP - Unlocks the map
+* UTE - Unlocks the compass
+
 ### GamePad Controls
 * Left Thumbstick Up - move Link up, make Link face up
 * Left Thumbstick Left - move Link left, make Link face left
@@ -60,6 +67,7 @@
 
 ## Sprint 5 Features
 * Procedural room generation - Enter the procedurally generated area through the bottom door in the spawn room.
+* Cheat codes - Unlock by pressing the keys specified in the Cheat Codes section simultaneously
 
 ## Known Bugs
 * HUD should be at top of screen (at least it is in the actual game)
