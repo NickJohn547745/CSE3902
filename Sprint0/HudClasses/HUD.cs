@@ -120,7 +120,7 @@ namespace sprint0.HudClasses
             float levelY = LevelVector.Y;
 
             float yMax = 1080 - 33;
-            HUDMap Map = new HUDMap(Game, Game.state.Room.levelConfig.Id, hasMap, levelX, levelY + 35, Sections["Count"].X, yMax);
+            HUDMap Map = new HUDMap(Game, Game.roomState.levelConfig.Id, hasMap, levelX, levelY + 35, Sections["Count"].X, yMax);
             Map.Draw(spriteBatch);
             
         }
@@ -242,8 +242,16 @@ namespace sprint0.HudClasses
             }
             return FinalTexture;
         }
+        public void DrawHUDBackground(SpriteBatch spriteBatch)
+        {
+            Texture2D _texture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            _texture.SetData(new Color[] { Color.Black });
+            spriteBatch.Draw(_texture, new Rectangle(0, 880, 1280, 200), Color.Black);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            DrawHUDBackground(spriteBatch);
             DrawLevelText(spriteBatch);
             DrawMap(spriteBatch);
             DrawInventoryItems(spriteBatch);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Classes;
@@ -20,7 +21,10 @@ namespace sprint0.DoorClasses
         public void Collide(ICollidable obj, ICollidable.Edge edge)
         {
             if (obj.Type == ICollidable.ObjectType.Player && (Id == 1 || Id == 4))
+            { 
                 HasCollided = true;
+                Debug.WriteLine("PreCOLLLLL");
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

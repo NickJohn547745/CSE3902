@@ -9,9 +9,10 @@ using sprint0.Factories;
 using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.MenuItems.Inventory;
+using sprint0.RoomClasses;
 using sprint0.TileClasses;
 
-namespace sprint0.RoomClasses
+namespace sprint0.RoomStateClasses
 {
     public class Room
     {
@@ -24,8 +25,8 @@ namespace sprint0.RoomClasses
         private Rectangle bounds = new Rectangle();
 
         public Point roomOffset = new Point();
-        private Boolean transitioning = false;
-        public Boolean RoomReady { get; set; }
+        private bool transitioning = false;
+        public bool RoomReady { get; set; }
         private Direction transitionDirection = Direction.Left;
 
         private Room nextRoom;
@@ -50,38 +51,8 @@ namespace sprint0.RoomClasses
             CollisionManager.Collidables.Add(new LeftTopWall());
 
             DungeonMap.Instance.Map[DungeonMap.Instance.CurrentRoom[0], DungeonMap.Instance.CurrentRoom[1]] = 16;
-            int rows = levelConfig.TileIds.Count;
+            
 
-            for (int y = 0; y < rows; y++)
-            {
-                int columns = levelConfig.TileIds[y].Count;
-                for (int x = 0; x < columns; x++)
-                {
-                    int currentTileId = levelConfig.TileIds[y][x];
-
-                    TileType tile = GetTileFromId(currentTileId, 160 + x * 80, 160 + y * 80);
-                    tileList.Add(tile);
-                    if (tile.IsCollidable)
-                        CollisionManager.Collidables.Add(tile);
-                }
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                int currentDoorId = levelConfig.DoorIds[i];
-                int currentDestination = levelConfig.Destinations[i];
-
-                Door door = DoorObjectFactory.Instance.CreateDoorById((Direction)i, currentDoorId);
-
-                doorList.Add(door);
-
-                if (currentDestination != -1)
-                {
-                    LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
-
-                    roomMap.Add((Direction)i, destinationLevelConfig);
-                }
-            }
         }
 
         public void Initialize()
@@ -232,7 +203,7 @@ namespace sprint0.RoomClasses
                     game.state.Room.transitioning = false;
                     game.state.Room.roomOffset = new Point();
                     game.state.Room.Initialize();
-                    
+
                     DungeonMap.Instance.AddRoomToMap(dir);
 
                     CollisionManager.Collidables.Add(game.Player);
@@ -245,21 +216,5 @@ namespace sprint0.RoomClasses
             }
         }
 
-        /*
-         * public void Update(GameTime gameTime)
-        {
-            foreach (Door door in doorList)
-            {
-                door.Update(gameTime);
-            }
-        }
-         */
-
-        private TileType GetTileFromId(int id, int x, int y)
-        {
-            Type tileType = Type.GetType("sprint0.TileClasses.TileType" + (id + 1).ToString());
-            object tileTypeObject = Activator.CreateInstance(tileType, x, y);
-            return (TileType)tileTypeObject;
-        }
     }
 }

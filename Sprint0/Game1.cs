@@ -8,7 +8,6 @@ using sprint0.Commands;
 using sprint0.Controllers;
 using sprint0.Interfaces;
 using sprint0.PlayerClasses;
-using sprint0.RoomClasses;
 using sprint0.FileReaderClasses;
 using sprint0.GameStateClasses;
 using sprint0.Sound;
@@ -17,6 +16,7 @@ using System;
 using sprint0.Configs;
 using sprint0.Enemies;
 using sprint0.Managers;
+using sprint0.RoomStateClasses;
 
 namespace sprint0;
 
@@ -36,7 +36,8 @@ public class Game1 : Game
 
     public bool Paused { get; set; }
 
-    public IGameState state;
+    public IGameState gameState;
+    public IRoomState roomState;
     
     // can we remove this since it never changes and is just 0 (doesn't need to be a const even)
     //private int startingLevelIndex;
@@ -64,8 +65,7 @@ public class Game1 : Game
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        state.Room = new Room(this, LevelList[currentLevelIndex]);
-        state.Room.Initialize();
+        gameState.RoomState = new RoomStateManager(this, LevelList[currentLevelIndex]);
     }
 
     public void NextLevel()
@@ -75,14 +75,13 @@ public class Game1 : Game
         int remainder = (currentLevelIndex % LevelList.Count);
         currentLevelIndex = (remainder < 0) ? (LevelList.Count + remainder) : remainder;
 
-        state.Room = new Room(this, LevelList[currentLevelIndex]);
-        state.Room.Initialize();
+        gameState.RoomState = new RoomStateManager(this, LevelList[currentLevelIndex]);
     }
 
     public void ResetLevel()
     {
         currentLevelIndex = 0;
-        state.Room = new Room(this, LevelList[currentLevelIndex]);     
+        gameState.RoomState = new RoomStateManager(this, LevelList[currentLevelIndex]);     
     }
 
     protected override void Initialize()
@@ -156,15 +155,15 @@ public class Game1 : Game
 
         CollisionManager = new CollisionManager(Player);
 
-        Room room = new Room(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
-        room.Initialize();
+        roomState = new RoomStateManager(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
+        roomState.Initialize();
 
         WindowWidth = _graphics.PreferredBackBufferWidth;
         WindowHeight = _graphics.PreferredBackBufferHeight;
 
         //CollisionManager.Collidables.Add(new TrapEnemy(new Vector2(375, 350), 120, Player));
 
-        state = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, room, font);
+        gameState = new GameStateManager(this, new HUD(this, Player.GetInventory(), Player.GetHealth(), currentLevelIndex, font), Player, CollisionManager, roomState, font);
 
         SoundManager.Manager.LoadContent(Content);
     }
@@ -173,7 +172,7 @@ public class Game1 : Game
     {
         Controllers.ForEach(controller => controller.Update(this));
 
-        state.Update(gameTime);
+        gameState.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -184,7 +183,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        state.Draw(_spriteBatch);
+        gameState.Draw(_spriteBatch);
 
         base.Draw(gameTime);
 
@@ -195,7 +194,7 @@ public class Game1 : Game
     {
         // breaks doors when used
         ResetLevel();
-        state.Reset();
+        gameState.Reset();
         Player.Reset();
     }
 
