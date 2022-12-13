@@ -12,17 +12,18 @@ namespace sprint0.Enemies
         private const int DirectionChange = 2;
         private const int RandBound = 2;
         private const int KeeseHealth = 1;
+        private const int KeeseDamage = 1;
 
         private int previous;
         public KeeseEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateKeeseSprite();
             behaviorTimer = new Timer(BehaviorDelay);
+            deathTimer = new Timer(DeathFrames);
             previous = 1;
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(KeeseHealth, sound);
-            Damage = 1;
-            deadCount = 0;
+            Damage = KeeseDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 

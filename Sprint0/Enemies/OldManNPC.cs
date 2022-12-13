@@ -13,18 +13,21 @@ namespace sprint0.Enemies
         private const float FireBallDirection = (float) 3/4;
         private const int FireBallShoot = 10;
         private const int HUDOffset = 134;
-        private const int FireBallScale = 50;
+        private const int FireBallEnd = 500;
         private const int HitBoxOffset = 20;
 
-        private int fireBallTracker;
+        private Timer fireBallTracker;
+        private Timer fireBallStop;
         
         public OldManNPC(Vector2 position)
         {
             Sprite = EnemySpriteFactory.Instance.CreateOldManNPCSprite();
             behaviorTimer = new Timer(1);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, 0);
             Health = new HealthManager(OldManHealth, sound);
-            fireBallTracker = 1;
+            fireBallTracker = new Timer(FireBallShoot);
+            fireBallStop = new Timer(FireBallEnd);
             deadCount = 0;
             Type = ICollidable.ObjectType.Enemy;
         }
@@ -35,7 +38,7 @@ namespace sprint0.Enemies
             {
                 Physics.CurrentPosition = new Vector2((Game1.WindowWidth - GetHitBox().Width ) / 2, (Game1.WindowHeight - GetHitBox().Height ) / 2 - HUDOffset);
                 Vector2 fireBallSpawn = new Vector2(GetHitBox().Center.X - HitBoxOffset, GetHitBox().Center.Y - HitBoxOffset);
-                if (fireBallTracker % FireBallShoot == 0)
+                if (fireBallTracker.UnconditionalUpdate() && fireBallTracker.HasStarted())
                 {
                     CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, FireBallDirection)));
                     CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
@@ -47,13 +50,13 @@ namespace sprint0.Enemies
                     CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(0, -1)));
                 }
 
-                if (fireBallTracker % (FireBallShoot * FireBallScale) == 0)
+                if (fireBallStop.UnconditionalUpdate() && fireBallStop.HasStarted())
                 {
                     Health.Reset();
                     Physics.Reset();
+                    fireBallStop.Reset();
+                    fireBallTracker.Reset();
                 }
-
-                fireBallTracker++;
             }
         }
     }

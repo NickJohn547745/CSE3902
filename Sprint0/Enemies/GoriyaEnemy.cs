@@ -12,6 +12,7 @@ namespace sprint0.Enemies
         private const int BehaviorDelay = 70;
         private const int DirectionChange = 4;
         private const int GoriyaHealth = 3;
+        private const int GoriyaDamage = 1;
 
         private GoriyaStateMachine goriyaStateMachine;
         private Timer boomerangTracker;
@@ -20,12 +21,12 @@ namespace sprint0.Enemies
         {
             behaviorTimer = new Timer(BehaviorDelay);
             boomerangTracker = new Timer(DirectionChange);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(GoriyaHealth, sound);
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection(rand);
-            Damage = 1;
-            deadCount = 0;
+            Damage = GoriyaDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 

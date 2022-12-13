@@ -12,8 +12,7 @@ namespace sprint0.Enemies
 {
     public abstract class Enemy : ICollidable
     {
-        protected const int TileOffset = 5;
-        protected const int DeathFrames = 4;       
+        protected const int DeathFrames = 5;       
 
         protected static Random rand = new();
         protected readonly SoundEffect sound = SoundManager.Manager.enemyDamageSound();
@@ -24,6 +23,7 @@ namespace sprint0.Enemies
 
         public int Damage { get; set; }
         protected Timer behaviorTimer;
+        protected Timer deathTimer;
         public ICollidable.ObjectType Type { get; set; }
         public ISprite Sprite { get; set; }
 
@@ -37,7 +37,7 @@ namespace sprint0.Enemies
 
         protected virtual void Death()
         {
-            if (deadCount >= DeathFrames)
+            if (deathTimer.Status() && deathTimer.HasStarted())
             {
                 CollisionManager.Collidables.Remove(this);
                 SoundManager.Manager.enemyDeadSound().Play();
@@ -52,7 +52,6 @@ namespace sprint0.Enemies
 
             if (Physics.NotStunned())
             {
-
                 Physics.Move(gameTime);
 
                 // Ex: change direction every delay seconds
@@ -63,7 +62,6 @@ namespace sprint0.Enemies
             }
 
             Death();
-            
         }
 
         public virtual void Collide(ICollidable obj, ICollidable.Edge edge)
@@ -71,6 +69,7 @@ namespace sprint0.Enemies
             switch (obj.Type)
             {
                 case ICollidable.ObjectType.Sword:
+                case ICollidable.ObjectType.Bomb:
                 case ICollidable.ObjectType.Ability:
                     Health.TakeDamage(obj.Damage);
                     break;
@@ -87,7 +86,7 @@ namespace sprint0.Enemies
 
         public Vector2 GetVelocity()
         {
-            return Vector2.Zero;
+            return Physics.CurrentVelocity;
         }
 
         public Rectangle GetHitBox()
@@ -97,10 +96,9 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Health.Dead())
+            if (!deathTimer.ConditionalUpdate(Health.Dead()))
             {
                 EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Physics.CurrentPosition, SpriteEffects.None, Color.White);
-                deadCount++;
             }
             else
             {
@@ -113,7 +111,7 @@ namespace sprint0.Enemies
             Physics.Reset();
             Health.Reset();
             behaviorTimer.Reset();
-            deadCount = 0;
+            deathTimer.Reset();
         }
     }
 }

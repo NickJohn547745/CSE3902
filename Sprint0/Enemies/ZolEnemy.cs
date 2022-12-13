@@ -12,15 +12,16 @@ namespace sprint0.Enemies
         private const int BehaviorDelay = 50;
         private const int RandBound = 6;
         private const int ZolHealth = 1;
+        private const int ZolDamage = 1;
 
         public ZolEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateZolSprite();
             behaviorTimer = new Timer(BehaviorDelay);
-            Damage = 1;
+            deathTimer = new Timer(DeathFrames);
+            Damage = ZolDamage;
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(ZolHealth, sound);
-            deadCount = 0;
             Type = ICollidable.ObjectType.Enemy;
         }
 

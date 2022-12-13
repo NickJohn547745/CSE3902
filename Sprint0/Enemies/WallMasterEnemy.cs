@@ -11,15 +11,16 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int WallMasterHealth = 3;
+        private const int WallMasterDamage = 1;
 
         public WallMasterEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateWallMasterSprite();
             behaviorTimer = new Timer(BehaviorDelay);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(WallMasterHealth, sound);
-            Damage = 1;
-            deadCount = 0;
+            Damage = WallMasterDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 

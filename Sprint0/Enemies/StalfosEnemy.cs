@@ -13,15 +13,16 @@ namespace sprint0.Enemies
         private const int BehaviorDelay = 50;
         private const int RandBound = 4;
         private const int StalfosHealth = 2;
+        private const int StalfosDamage = 1;
         
         public StalfosEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateStalfosSprite();
             behaviorTimer = new Timer(BehaviorDelay);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
             Health = new HealthManager(StalfosHealth, sound);
-            Damage = 1;
-            deadCount = 0;
+            Damage = StalfosDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 

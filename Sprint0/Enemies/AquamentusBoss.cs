@@ -16,18 +16,19 @@ namespace sprint0.Enemies
         private const float FireBallDirection = (float) 2/3;
         private const int RandBound = 3;
         private const int AquamentusHealth= 6;
+        private const int AquamentusDamage = 1;
 
-        private int fireBallTracker;
+        private Timer fireBallTracker;
 
         public AquamentusBoss(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateAquamentusSprite();
             behaviorTimer = new Timer(BehaviorDelay);
-            fireBallTracker = 1;
+            deathTimer = new Timer(DeathFrames);
+            fireBallTracker = new Timer(FireBallShoot);
             Physics = new PhysicsManager(position, Direction.Left, speed);
             Health = new HealthManager(AquamentusHealth, sound);
-            Damage = 1;
-            deadCount = 0;
+            Damage = AquamentusDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 
@@ -37,7 +38,7 @@ namespace sprint0.Enemies
             if (random.Next(0, RandBound) != 0) Physics.ReverseDirection();
             
             // shoot fireballs
-            if (fireBallTracker % FireBallShoot == 0)
+            if (fireBallTracker.UnconditionalUpdate())
             {
                 Vector2 fireBallSpawn = Physics.CurrentPosition;
                 fireBallSpawn.Y += FireBallOffsetY;
@@ -45,7 +46,6 @@ namespace sprint0.Enemies
                 CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, 0)));
                 CollisionManager.Collidables.Add(new AquamentusProjectile(fireBallSpawn, new Vector2(-1, -FireBallDirection))); 
             }
-            fireBallTracker++;
         }
     }
 }

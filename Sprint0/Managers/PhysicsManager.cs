@@ -21,7 +21,6 @@ namespace sprint0.Managers
         public Vector2 CurrentVelocity { get; set; }
         public Vector2 CurrentPosition { get; set; }
 
-
         public PhysicsManager(Vector2 initPos, Direction direction, float speed, float acceleration = 0)
         {
             InitPosition = initPos;
@@ -96,8 +95,6 @@ namespace sprint0.Managers
                     break;
                 case Direction.Down:
                     Direction = Direction.Up;
-                    break;
-                default:
                     break;
             }
             CurrentVelocity *= -1;
