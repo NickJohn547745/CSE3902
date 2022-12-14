@@ -41,4 +41,9 @@ public abstract class Ability : ICollidable
     {
      
     }
+
+    public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+    {
+
+    }
 }

@@ -67,6 +67,11 @@ namespace sprint0.DoorClasses
             // Not needed
         }
 
+        public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+        {
+
+        }
+
         public void Update(GameTime gameTime)
         {
             

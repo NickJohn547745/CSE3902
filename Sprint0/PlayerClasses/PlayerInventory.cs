@@ -39,6 +39,46 @@ public class PlayerInventory {
         CurrentAbility = AbilityTypes.None;
     }
 
+    //inventory overload, only called if cheat code is valid
+    //updates items based on if cheat code has been entered
+    public PlayerInventory(bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+    {
+        if (bombCheat)
+        {
+            Abilities = new Dictionary<AbilityTypes, int>()
+            {
+                { AbilityTypes.Boomerang, 2 },
+                { AbilityTypes.Bomb, 50 },
+                { AbilityTypes.Arrow, 0 },
+                { AbilityTypes.Candle, 0 }
+            };
+        } else
+        {
+            Abilities = new Dictionary<AbilityTypes, int>()
+            {
+                { AbilityTypes.Boomerang, 2 },
+                { AbilityTypes.Bomb, 6 },
+                { AbilityTypes.Arrow, 0 },
+                { AbilityTypes.Candle, 0 }
+            };
+        }
+        
+        BowUnlocked = true;
+
+        if (rupeeCheat) RupeeCount = 10;
+        else RupeeCount = 0;
+
+        KeyCount = 0;
+
+        if (mapCheat) MapUnlocked = true;
+        else MapUnlocked = false;
+
+        if (compassCheat) CompassUnlocked = true;
+        else CompassUnlocked = false;
+
+        CurrentAbility = AbilityTypes.None;
+    }
+
     // Will definitely be expanded upon later, not all things are included in AbilityTypes and/or Inventory
     public AbilityTypes GetCurrentA()
     {

@@ -115,5 +115,10 @@ namespace sprint0.Enemies
             behaviorTimer.Reset();
             deadCount = 0;
         }
+
+        public void Reset(bool healthCheat, bool bombCheat, bool rupeeCheat, bool mapCheat, bool compassCheat)
+        {
+
+        }
     }
 }
