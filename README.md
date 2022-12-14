@@ -86,3 +86,4 @@
 * Enemies do not drop items
 * Top doors in procedurally generated have hitbox moved up and to the left
 * Room does not save/load correctly
+* Wand projectile does not collide with tiles
