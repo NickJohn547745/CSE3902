@@ -21,7 +21,7 @@ namespace sprint0.Enemies
             behaviorTimer = new Timer(BehaviorDelay);
             deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(StalfosHealth, sound);
+            health = new HealthManager(StalfosHealth, sound);
             Damage = StalfosDamage;
             Type = ICollidable.ObjectType.Enemy;
         }

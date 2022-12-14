@@ -22,14 +22,14 @@ namespace sprint0.Enemies
             deathTimer = new Timer(DeathFrames);
             previous = 1;
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(KeeseHealth, sound);
+            health = new HealthManager(KeeseHealth, sound);
             Damage = KeeseDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 
         protected override void BoomerangBehavior()
         {
-            Health.TakeDamage(1);
+            health.TakeDamage(1);
         }
 
         protected override void Behavior(GameTime gameTime)

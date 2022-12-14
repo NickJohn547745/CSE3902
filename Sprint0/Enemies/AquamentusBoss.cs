@@ -27,7 +27,7 @@ namespace sprint0.Enemies
             deathTimer = new Timer(DeathFrames);
             fireBallTracker = new Timer(FireBallShoot);
             Physics = new PhysicsManager(position, Direction.Left, speed);
-            Health = new HealthManager(AquamentusHealth, sound);
+            health = new HealthManager(AquamentusHealth, sound);
             Damage = AquamentusDamage;
             Type = ICollidable.ObjectType.Enemy;
         }

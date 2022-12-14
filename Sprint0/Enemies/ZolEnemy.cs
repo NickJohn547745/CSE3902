@@ -21,7 +21,7 @@ namespace sprint0.Enemies
             deathTimer = new Timer(DeathFrames);
             Damage = ZolDamage;
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(ZolHealth, sound);
+            health = new HealthManager(ZolHealth, sound);
             Type = ICollidable.ObjectType.Enemy;
         }
 

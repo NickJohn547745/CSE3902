@@ -19,7 +19,7 @@ namespace sprint0.Enemies
             behaviorTimer = new Timer(BehaviorDelay);
             deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(WallMasterHealth, sound);
+            health = new HealthManager(WallMasterHealth, sound);
             Damage = WallMasterDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
@@ -30,7 +30,7 @@ namespace sprint0.Enemies
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
-                    Health.TakeDamage(obj.Damage);
+                    health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:

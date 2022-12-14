@@ -18,8 +18,7 @@ namespace sprint0.Enemies
         protected readonly SoundEffect sound = SoundManager.Manager.enemyDamageSound();
 
         public PhysicsManager Physics { get; protected set; }
-        protected HealthManager Health;
-        protected int deadCount;
+        protected HealthManager health;
 
         public int Damage { get; set; }
         protected Timer behaviorTimer;
@@ -48,7 +47,7 @@ namespace sprint0.Enemies
 
         public virtual void Update(GameTime gameTime)
         {
-            Health.UpdateCounters();
+            health.UpdateCounters();
 
             if (Physics.NotStunned())
             {
@@ -71,7 +70,7 @@ namespace sprint0.Enemies
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Bomb:
                 case ICollidable.ObjectType.Ability:
-                    Health.TakeDamage(obj.Damage);
+                    health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:
@@ -96,20 +95,20 @@ namespace sprint0.Enemies
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (!deathTimer.ConditionalUpdate(Health.Dead()))
+            if (!deathTimer.ConditionalUpdate(health.Dead()))
             {
                 EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Physics.CurrentPosition, SpriteEffects.None, Color.White);
             }
             else
             {
-                Sprite.Draw(spriteBatch, Physics.CurrentPosition, SpriteEffects.None, Health.Color);
+                Sprite.Draw(spriteBatch, Physics.CurrentPosition, SpriteEffects.None, health.Color);
             }
         }
 
         public void Reset()
         {
             Physics.Reset();
-            Health.Reset();
+            health.Reset();
             behaviorTimer.Reset();
             deathTimer.Reset();
         }

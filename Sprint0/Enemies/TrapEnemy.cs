@@ -25,7 +25,7 @@ namespace sprint0.Enemies
             behaviorTimer = new Timer(BehaviorDelay);
             deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(TrapHealth, sound);
+            health = new HealthManager(TrapHealth, sound);
             Damage = TrapDamage;
             this.player = player;
             ready = true;
