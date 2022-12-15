@@ -2,6 +2,7 @@
 using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Managers;
+using sprint0.PlayerClasses;
 using sprint0.RoomClasses;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace sprint0.SaveLoadClasses
     public class SaveLoadManager
     {
         public Game1 Game { get; set; }
-        public List<ICollidable> enemyList { get; set; } = new List<ICollidable>();
+        public List<ICollidable> SavedEnemyList { get; set; } = new List<ICollidable>();
 
         const int Aquamentus = 1;
         const int Goriya = 2;
@@ -32,7 +33,7 @@ namespace sprint0.SaveLoadClasses
             Game = game;
         }
 
-        public void SaveGame()
+        public void UpdateEnemyList()
         {
             List<ICollidable> collidableList = CollisionManager.Collidables;
 
@@ -41,23 +42,28 @@ namespace sprint0.SaveLoadClasses
 
                 if (collidable.Type == ICollidable.ObjectType.Enemy)
                 {
-                    enemyList.Add(collidable);
+                    SavedEnemyList.Add(collidable);
                 }
             }
+        }
+
+        public void SaveGame()
+        {
+            UpdateEnemyList();
             using (FileStream fileStream = new FileStream("Save1.sav", FileMode.Create))
             {
                 using (BinaryWriter writer = new BinaryWriter(fileStream))
                 {
                     SavePlayer(writer);
                     SaveRoom(writer);
-                    SaveEnemies(writer, enemyList);
+                    SaveEnemies(writer);
                 }
             }
         }
 
-        public void SaveEnemies(BinaryWriter writer, List<ICollidable> enemyList)
+        public void SaveEnemies(BinaryWriter writer)
         {
-            foreach(ICollidable enemy in enemyList)
+            foreach(ICollidable enemy in SavedEnemyList)
             {
                 // save x position
                 writer.Write(enemy.GetHitBox().X);
@@ -65,7 +71,7 @@ namespace sprint0.SaveLoadClasses
                 writer.Write(enemy.GetHitBox().Y);
                 // save speed
                 Vector2 Velocity = enemy.GetVelocity();
-                float speed = (float)Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
+                float speed = (float) Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
                 writer.Write(speed);
 
                 // save enemy type
@@ -138,7 +144,14 @@ namespace sprint0.SaveLoadClasses
 
         public void LoadEnemies(BinaryReader reader)
         {
-            foreach (ICollidable enemy in enemyList)
+            // temp list
+            List<ICollidable> tempList = new List<ICollidable>();
+            foreach(ICollidable enemy in SavedEnemyList)
+            {
+                tempList.Add(enemy);
+            }
+
+            foreach (ICollidable enemy in tempList)
             {
                 // get x and y position
                 int x = reader.ReadInt32();
@@ -184,14 +197,14 @@ namespace sprint0.SaveLoadClasses
                     default:
                         break;
                 }
-
+                
             }
         }
 
         public void LoadPlayer(BinaryReader reader)
         {
             Game.Player.SetHealth(reader.ReadInt32());
-            Game.Player.Position = new Microsoft.Xna.Framework.Vector2(reader.ReadSingle(), reader.ReadSingle());
+            Game.Player.Position = new Vector2(reader.ReadSingle(), reader.ReadSingle());
         }
         public void LoadRoom(BinaryReader reader)
         {
