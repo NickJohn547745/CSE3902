@@ -6,6 +6,6 @@ namespace sprint0.Commands;
 public class InventoryScreenCommand : ICommand {
     public void Execute(Game1 game)
     {
-        game.state.TransitionState(GameStates.Inventory);
+        game.gameState.TransitionState(GameStates.Inventory);
     }
 }

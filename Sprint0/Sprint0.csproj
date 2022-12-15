@@ -12,6 +12,12 @@
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Content\Data\EnemyPresets\Enemy0.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy1.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy2.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy3.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy4.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy5.xml" />
+        <None Remove="Content\Data\EnemyPresets\Enemy6.xml" />
         <None Remove="Content\Data\GameFile.xml" />
         <None Remove="Content\Data\LevelFile_0.xml" />
         <None Remove="Content\Data\LevelFile_1.xml" />
@@ -52,6 +58,24 @@
         <None Remove="Icon.bmp" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Content\Data\EnemyPresets\Enemy4.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy6.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy5.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy3.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy2.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Data\EnemyPresets\Enemy1.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\Data\EnemyPresets\Enemy0.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

@@ -49,10 +49,10 @@ public class GamePlayState : AGameState
 
     public override void Draw(SpriteBatch spriteBatch)
     {
+        gameState.RoomState.Draw(spriteBatch);
+
         gameState.mainHUD.Draw(spriteBatch);
 
-        gameState.Room.Draw(spriteBatch);
-        
         gameState.collisionManager.Draw(spriteBatch);
     }
 }

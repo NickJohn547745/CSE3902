@@ -39,7 +39,7 @@ public class GamePauseState : AGameState
     {
         gameState.mainHUD.Draw(spriteBatch);
 
-        gameState.Room.Draw(spriteBatch);
+        gameState.RoomState.Draw(spriteBatch);
 
         gameState.collisionManager.Draw(spriteBatch);
 

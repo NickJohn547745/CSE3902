@@ -16,10 +16,10 @@ namespace sprint0.DoorClasses
         public BottomDoor(int id)
         {
             Type = ICollidable.ObjectType.Door;
-
-            Id = id;
+            
             HasCollided = false;
             TransitionDirection = Direction.Down;
+            Id = id;
         }
 
         public override Rectangle GetHitBox()

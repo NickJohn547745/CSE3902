@@ -37,7 +37,7 @@ namespace sprint0.SaveLoadClasses
         
         public void SaveRoom(BinaryWriter writer)
         {
-            writer.Write(Game.state.Room.levelConfig.Id);
+            writer.Write(Game.roomState.levelConfig.Id);
         }
 
         public void LoadGame()
@@ -61,7 +61,7 @@ namespace sprint0.SaveLoadClasses
         }
         public void LoadRoom(BinaryReader reader)
         {
-            Game.state.Room.levelConfig.Id = reader.ReadInt32();
+            Game.roomState.levelConfig.Id = reader.ReadInt32();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace sprint0.Commands;
 public class CycleAbilityCommand : ICommand {
     public void Execute(Game1 game)
     {
-        if(game.state.currentState.GetType() == typeof(InventoryState))
+        if(game.gameState.currentState.GetType() == typeof(InventoryState))
             AbilitySelect.Instance.CycleAbility();
     }
 }
