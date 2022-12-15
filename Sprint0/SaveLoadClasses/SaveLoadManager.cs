@@ -157,24 +157,31 @@ namespace sprint0.SaveLoadClasses
                         break;
                     case Goriya:
                         // spawn Goriya enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new GoriyaEnemy(enemyVector, speed));
                         break;
                     case Keese:
                         // spawn Keese enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new KeeseEnemy(enemyVector, speed));
                         break;
                     case OldMan:
                         // spawn OldMan enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new OldManNPC(enemyVector));
                         break;
                     case Stalfos:
                         // spawn Stalfos enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new StalfosEnemy(enemyVector, speed));
                         break;
                     case Trap:
                         // spawn Trap enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new TrapEnemy(enemyVector, speed, Game.Player));
                         break;
                     case WallMaster:
                         // spawn WallMaster enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new WallMasterEnemy(enemyVector, speed));
                         break;
                     case Zol:
                         // spawn Zol enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new ZolEnemy(enemyVector, speed));
                         break;
                     default:
                         break;
