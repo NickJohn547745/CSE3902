@@ -89,7 +89,7 @@ public class RoomStateManager : IRoomState
             {
                 LevelConfig destinationLevelConfig;
                 if (currentDestination >= 0)
-                    destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
+                    destinationLevelConfig = game.LevelList[currentDestination];
                 else
                     destinationLevelConfig = game.LevelList[RoomLayoutGenerator.Instance.StartRoomId + game.DefaultRoomOffset];
 
