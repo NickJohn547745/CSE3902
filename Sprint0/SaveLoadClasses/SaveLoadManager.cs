@@ -203,6 +203,7 @@ namespace sprint0.SaveLoadClasses
 
         public void LoadPlayer(BinaryReader reader)
         {
+            CollisionManager.Collidables.Add(Game.Player);
             Game.Player.SetHealth(reader.ReadInt32());
             Game.Player.Position = new Vector2(reader.ReadSingle(), reader.ReadSingle());
         }
