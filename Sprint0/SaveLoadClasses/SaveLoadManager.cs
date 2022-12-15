@@ -16,8 +16,7 @@ namespace sprint0.SaveLoadClasses
     public class SaveLoadManager
     {
         public Game1 Game { get; set; }
-
-        public int EnemyCount;
+        public List<ICollidable> enemyList { get; set; } = new List<ICollidable>();
 
         const int Aquamentus = 1;
         const int Goriya = 2;
@@ -36,7 +35,6 @@ namespace sprint0.SaveLoadClasses
         public void SaveGame()
         {
             List<ICollidable> collidableList = CollisionManager.Collidables;
-            List<ICollidable> enemyList = new List<ICollidable>();
 
             foreach (ICollidable collidable in collidableList)
             {
@@ -44,7 +42,6 @@ namespace sprint0.SaveLoadClasses
                 if (collidable.Type == ICollidable.ObjectType.Enemy)
                 {
                     enemyList.Add(collidable);
-                    EnemyCount++;
                 }
             }
             using (FileStream fileStream = new FileStream("Save1.sav", FileMode.Create))
@@ -133,6 +130,7 @@ namespace sprint0.SaveLoadClasses
                     {
                         LoadPlayer(reader);
                         LoadRoom(reader);
+                        LoadEnemies(reader);
                     }
                 }
             }
@@ -140,7 +138,7 @@ namespace sprint0.SaveLoadClasses
 
         public void LoadEnemies(BinaryReader reader)
         {
-            for (int i = 0; i < EnemyCount; i++)
+            foreach (ICollidable enemy in enemyList)
             {
                 // get x and y position
                 int x = reader.ReadInt32();
