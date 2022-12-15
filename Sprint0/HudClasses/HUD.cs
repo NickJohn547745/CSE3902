@@ -24,7 +24,6 @@ namespace sprint0.HudClasses
 
         public int Bombs { get; set; }
 
-        // get from game? For now we only have 1 dungeon anyway
         public int Level { get; set; }
 
         // Will get from inventory class when implemented
@@ -59,31 +58,40 @@ namespace sprint0.HudClasses
             Game = game;
             Font = font;
             Update(inventory, currentHealth, roomIndex);
+            AssignWidths();
+        }
 
-            nextWidth = (float)(.275 * HUDWidth);
+        private void AssignWidths()
+        {
+            float LevelWidth = .275f;
+            float ItemCountWidth = .15f;
+            float AbilityBWidth = .15f;
+            float AbilityAWidth = .15f;
+            float LifeWidth = .275f;
+
+            nextWidth = (float)(LevelWidth * HUDWidth);
 
             Sections.Add("Level", new Vector2(HUDX, HUDY));
 
             widthTrack = HUDX + nextWidth;
 
-            nextWidth = (float)(.15 * HUDWidth);
+            nextWidth = (float)(ItemCountWidth * HUDWidth);
             Sections.Add("Count", new Vector2(widthTrack, HUDY));
 
             widthTrack += nextWidth;
 
-            nextWidth = (float)(.15 * HUDWidth);
+            nextWidth = (float)(AbilityBWidth * HUDWidth);
             Sections.Add("B", new Vector2(widthTrack, HUDY));
 
             widthTrack += nextWidth;
 
-            nextWidth = (float)(.15 * HUDWidth);
+            nextWidth = (float)(AbilityAWidth * HUDWidth);
             Sections.Add("A", new Vector2(widthTrack, HUDY));
 
             widthTrack += nextWidth;
 
-            nextWidth = (float)(.275 * HUDWidth);
+            nextWidth = (float)(LifeWidth * HUDWidth);
             Sections.Add("Life", new Vector2(widthTrack, HUDY));
-
         }
 
         public void Update(PlayerInventory inventory, int currentHealth, int currentRoom)
