@@ -13,7 +13,7 @@
 	</Setting>
 
 	<Setting name="DoorIds">
-		1 1 0 1
+		1 1 1 1
 	</Setting>
 	<Setting name="Destinations">
 		1 2 -2 3

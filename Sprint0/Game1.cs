@@ -81,7 +81,8 @@ public class Game1 : Game
     public void ResetLevel()
     {
         currentLevelIndex = 0;
-        gameState.RoomState = new RoomStateManager(this, LevelList[currentLevelIndex]);     
+        gameState.RoomState = new RoomStateManager(this, LevelList[currentLevelIndex]);
+        gameState.RoomState.Initialize();
     }
 
     protected override void Initialize()

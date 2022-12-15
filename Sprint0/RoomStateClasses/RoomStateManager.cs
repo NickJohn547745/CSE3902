@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using sprint0.Factories;
 using System;
 using System.Diagnostics;
+using sprint0.ProceduralGeneration;
 
 namespace sprint0.RoomStateClasses;
 
@@ -84,9 +85,16 @@ public class RoomStateManager : IRoomState
         {
             int currentDestination = levelConfig.Destinations[i];
 
-            if (currentDestination >= 0)
+            if (currentDestination != -1)
             {
-                LevelConfig destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
+                LevelConfig destinationLevelConfig;
+                if (currentDestination >= 0)
+                    destinationLevelConfig = game.GameConfig.LevelConfigs[currentDestination];
+                else
+                    destinationLevelConfig = game.LevelList[RoomLayoutGenerator.Instance.StartRoomId + game.DefaultRoomOffset];
+
+                int test = RoomLayoutGenerator.Instance.StartRoomId;
+                int test2 = game.DefaultRoomOffset;
 
                 switch ((Direction)i)
                 {
