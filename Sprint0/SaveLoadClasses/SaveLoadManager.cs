@@ -1,4 +1,5 @@
-﻿using sprint0.Enemies;
+﻿using Microsoft.Xna.Framework;
+using sprint0.Enemies;
 using sprint0.Interfaces;
 using sprint0.Managers;
 using sprint0.RoomClasses;
@@ -61,6 +62,16 @@ namespace sprint0.SaveLoadClasses
         {
             foreach(ICollidable enemy in enemyList)
             {
+                // save x position
+                writer.Write(enemy.GetHitBox().X);
+                // save y position
+                writer.Write(enemy.GetHitBox().Y);
+                // save speed
+                Vector2 Velocity = enemy.GetVelocity();
+                float speed = (float)Math.Sqrt(Math.Pow(Velocity.X, 2) + Math.Pow(Velocity.Y, 2));
+                writer.Write(speed);
+
+                // save enemy type
                 if (enemy.GetType() == typeof(AquamentusBoss))
                 {
                     // enemy type
@@ -131,10 +142,18 @@ namespace sprint0.SaveLoadClasses
         {
             for (int i = 0; i < EnemyCount; i++)
             {
+                // get x and y position
+                int x = reader.ReadInt32();
+                int y = reader.ReadInt32();
+                float speed = reader.ReadSingle();
+
+                Vector2 enemyVector = new Vector2(x, y);
+
                 switch (reader.ReadInt32())
-                {
+                {            
                     case Aquamentus:
                         // spawn Aquamentus enemy, add to collidable list
+                        CollisionManager.Collidables.Add(new AquamentusBoss(enemyVector, speed));
                         break;
                     case Goriya:
                         // spawn Goriya enemy, add to collidable list
