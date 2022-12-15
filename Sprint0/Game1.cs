@@ -41,7 +41,7 @@ public class Game1 : Game
 
     public IGameState state;
     
-    private int currentLevelIndex;
+    public int currentLevelIndex;
 
     public GameConfig GameConfig { get; private set; }
     private string gameFilePath = "./Content/Data/GameFile.xml";
