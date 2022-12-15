@@ -12,6 +12,7 @@ namespace sprint0.Enemies
         private const int BehaviorDelay = 70;
         private const int DirectionChange = 4;
         private const int GoriyaHealth = 3;
+        private const int GoriyaDamage = 1;
 
         private GoriyaStateMachine goriyaStateMachine;
         private Timer boomerangTracker;
@@ -20,12 +21,12 @@ namespace sprint0.Enemies
         {
             behaviorTimer = new Timer(BehaviorDelay);
             boomerangTracker = new Timer(DirectionChange);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(GoriyaHealth, sound);
+            health = new HealthManager(GoriyaHealth, sound);
             goriyaStateMachine = new GoriyaStateMachine(this);
             goriyaStateMachine.ChangeDirection(rand);
-            Damage = 1;
-            deadCount = 0;
+            Damage = GoriyaDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 
@@ -57,7 +58,7 @@ namespace sprint0.Enemies
 
         protected override void Death()
         {
-            if (deadCount >= DeathFrames)
+            if (deathTimer.Status() && deathTimer.HasStarted())
             {
                 CollisionManager.Collidables.Remove(this);
                 CollisionManager.Collidables.Remove(goriyaStateMachine.Boomerang);
@@ -67,14 +68,13 @@ namespace sprint0.Enemies
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Health.Dead())
+            if (!deathTimer.ConditionalUpdate(health.Dead()))
             {
                 EnemySpriteFactory.Instance.CreateEnemyExplosionSprite().Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Color.White);
-                deadCount++;
             }
             else
             {
-                Sprite.Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, Health.Color);
+                Sprite.Draw(spriteBatch, Physics.CurrentPosition, goriyaStateMachine.SpriteEffect, health.Color);
             }
         }
     }

@@ -11,15 +11,16 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 50;
         private const int WallMasterHealth = 3;
+        private const int WallMasterDamage = 1;
 
         public WallMasterEnemy(Vector2 position, float speed)
         {
             Sprite = EnemySpriteFactory.Instance.CreateWallMasterSprite();
             behaviorTimer = new Timer(BehaviorDelay);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(WallMasterHealth, sound);
-            Damage = 1;
-            deadCount = 0;
+            health = new HealthManager(WallMasterHealth, sound);
+            Damage = WallMasterDamage;
             Type = ICollidable.ObjectType.Enemy;
         }
 
@@ -29,7 +30,7 @@ namespace sprint0.Enemies
             {
                 case ICollidable.ObjectType.Sword:
                 case ICollidable.ObjectType.Ability:
-                    Health.TakeDamage(obj.Damage);
+                    health.TakeDamage(obj.Damage);
                     break;
                 case ICollidable.ObjectType.Wall:
                 case ICollidable.ObjectType.Tile:

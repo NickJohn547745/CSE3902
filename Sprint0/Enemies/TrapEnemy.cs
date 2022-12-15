@@ -11,10 +11,10 @@ namespace sprint0.Enemies
     {
         private const int BehaviorDelay = 15;
         private const int ReduceSpeed = 3;
-        private const float Acceleration = 20;
         private const int Proximity = 5;
         private const int TrapHealth = 1;
         private const int UpperBound = 120;
+        private const int TrapDamage = 1;
 
         private IPlayer player;
         private bool ready;
@@ -23,12 +23,12 @@ namespace sprint0.Enemies
         {
             Sprite = EnemySpriteFactory.Instance.CreateTrapSprite();
             behaviorTimer = new Timer(BehaviorDelay);
+            deathTimer = new Timer(DeathFrames);
             Physics = new PhysicsManager(position, Direction.None, speed);
-            Health = new HealthManager(TrapHealth, sound);
-            Damage = 1;
+            health = new HealthManager(TrapHealth, sound);
+            Damage = TrapDamage;
             this.player = player;
             ready = true;
-            deadCount = 0;
             Type = ICollidable.ObjectType.Trap;
         }
 
