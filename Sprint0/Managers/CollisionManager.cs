@@ -2,8 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using sprint0.Enemies;
 using sprint0.Interfaces;
+using sprint0.PlayerClasses;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Text.RegularExpressions;
+using Color = Microsoft.Xna.Framework.Color;
+using Point = Microsoft.Xna.Framework.Point;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace sprint0.Managers
 {
@@ -16,6 +22,9 @@ namespace sprint0.Managers
         public static List<ICollidable> Collidables { get; set; }
         private IPlayer Player;
 
+        public bool DebugMode = false;
+        private static Texture2D DebugTexture;
+
         /// <summary>
         /// Constructor <c>ColisionManager</c> instantiates and defines an instance
         /// with Variables: <c>Collidables</c> and <c>Player</c>.
@@ -27,6 +36,7 @@ namespace sprint0.Managers
             Player = player;
             Collidables.Add(Player);
         }
+    public SpriteFont DebugFont { get; set; }
 
         /// <summary>
         /// Method <c>CompareBounds</c> compares the hitboxes of two <c>ICollidable</c>
@@ -184,7 +194,30 @@ namespace sprint0.Managers
                     collidable.Type != ICollidable.ObjectType.Door &&
                     collidable.Type != ICollidable.ObjectType.Tile)
                 {
-                    collidable.Draw(spriteBatch);
+                    collidable.Draw(spriteBatch); 
+                }
+                if (DebugMode == true)
+                {
+                    if (DebugTexture == null)
+                    {
+                        DebugTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+                        DebugTexture.SetData<Color>(new Color[] { Color.White });
+                    }
+
+                    Rectangle hitBox = collidable.GetHitBox();
+                    int lineWidth = 2;
+                    Color color = Color.Red;
+
+                    spriteBatch.Draw(DebugTexture, new Rectangle(hitBox.X, hitBox.Y, lineWidth, hitBox.Height + lineWidth), color);
+                    spriteBatch.Draw(DebugTexture, new Rectangle(hitBox.X, hitBox.Y, hitBox.Width + lineWidth, lineWidth), color);
+                    spriteBatch.Draw(DebugTexture, new Rectangle(hitBox.X + hitBox.Width, hitBox.Y, lineWidth, hitBox.Height + lineWidth), color);
+                    spriteBatch.Draw(DebugTexture, new Rectangle(hitBox.X, hitBox.Y + hitBox.Height, hitBox.Width + lineWidth, lineWidth), color);
+
+                    if (collidable.Type == ICollidable.ObjectType.Player)
+                    {
+                        IPlayer player = (IPlayer)collidable;
+                        spriteBatch.DrawString(DebugFont, player.Position.ToString(), new Vector2(900, 1000), Color.White);
+                    }
                 }
             }
         }

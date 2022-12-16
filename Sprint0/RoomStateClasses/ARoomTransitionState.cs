@@ -64,6 +64,5 @@ public abstract class ARoomTransitionState : ARoomState
 
         roomState.game.gameState.RoomState = nextRoomStateManager;
 
-        CollisionManager.Collidables.Add(roomState.game.Player);
     }
 }

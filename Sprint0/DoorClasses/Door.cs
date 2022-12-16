@@ -23,7 +23,8 @@ namespace sprint0.DoorClasses
             if (obj.Type == ICollidable.ObjectType.Player && (Id == 1 || Id == 4))
             { 
                 HasCollided = true;
-                Debug.WriteLine("PreCOLLLLL");
+                String playerPos = ((IPlayer)obj).Position.ToString();
+                Debug.WriteLine("PlayerPos: " + playerPos);
             }
         }
 

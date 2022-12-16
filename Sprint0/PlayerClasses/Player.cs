@@ -31,7 +31,7 @@ public class Player : IPlayer {
     
     public Player(Game1 game) {
         Game = game;
-        Position = new Vector2(175, 175);
+        Position = new Vector2(607, 406);
         initPosition = Position;
         Velocity = Vector2.Zero;
         PrimaryWeapon = PlayerWeapons.Wand;

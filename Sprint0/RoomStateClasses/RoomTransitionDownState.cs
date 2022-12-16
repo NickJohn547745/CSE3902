@@ -40,8 +40,6 @@ public class RoomTransitionDownState : ARoomTransitionState
                 roomOffset.Y -= transitionStep;
 
                 nextRoomState.roomOffset.Y = 880 + roomOffset.Y;
-
-                roomState.game.Player.Position = new Vector2(1280 / 2, 180 + roomState.game.Player.GetHitBox().Height);
             }
            }
         else
@@ -51,8 +49,10 @@ public class RoomTransitionDownState : ARoomTransitionState
                 roomState = nextRoomStateManager;
                 roomState.currentState = new RoomIdleState(nextRoomStateManager);
                 roomState.game.gameState.RoomState = roomState;
+                roomState.game.Player.Position = new Vector2(607, 167);
 
                 DungeonMap.Instance.AddRoomToMap(Direction.Down);
+                CollisionManager.Collidables.Add(roomState.game.Player);
             }
             else
             {

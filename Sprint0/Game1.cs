@@ -154,6 +154,8 @@ public class Game1 : Game
         LevelList.AddRange(RoomLayoutGenerator.Instance.ProceduralRooms);
 
         CollisionManager = new CollisionManager(Player);
+        CollisionManager.DebugFont = font;
+        CollisionManager.DebugMode = false;
 
         roomState = new RoomStateManager(this, GameConfig.LevelConfigs[GameConfig.StartLevelId]);
         roomState.Initialize();

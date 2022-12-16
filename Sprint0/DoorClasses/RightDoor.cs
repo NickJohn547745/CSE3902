@@ -23,7 +23,7 @@ namespace sprint0.DoorClasses
 
         public override Rectangle GetHitBox()
         {
-            return new Rectangle(1120, 360, 5 * 32, 5 * 32);
+            return new Rectangle(1120, 360, 160, 160);
         }
         public override Type GetObjectType()
         {

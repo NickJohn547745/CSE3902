@@ -39,8 +39,6 @@ public class RoomTransitionRightState : ARoomTransitionState
                 roomOffset.X -= transitionStep;
 
                 nextRoomState.roomOffset.X = 1280 + roomOffset.X;
-
-                roomState.game.Player.Position = new Vector2(180 + roomState.game.Player.GetHitBox().Width, 880 / 2);
             }
         } else
         {
@@ -49,6 +47,7 @@ public class RoomTransitionRightState : ARoomTransitionState
                 roomState = nextRoomStateManager;
                 roomState.currentState = new RoomIdleState(nextRoomStateManager);
                 roomState.game.gameState.RoomState = roomState;
+                roomState.game.Player.Position = new Vector2(166, 406);
 
                 DungeonMap.Instance.AddRoomToMap(Direction.Right);
             }

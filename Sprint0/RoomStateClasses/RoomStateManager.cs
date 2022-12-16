@@ -93,9 +93,6 @@ public class RoomStateManager : IRoomState
                 else
                     destinationLevelConfig = game.LevelList[RoomLayoutGenerator.Instance.StartRoomId + game.DefaultRoomOffset];
 
-                int test = RoomLayoutGenerator.Instance.StartRoomId;
-                int test2 = game.DefaultRoomOffset;
-
                 switch ((Direction)i)
                 {
                     case Direction.Up:
